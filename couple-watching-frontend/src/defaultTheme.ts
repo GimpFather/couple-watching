@@ -18,7 +18,7 @@ export const defaultTheme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: "Poppins",
+		fontFamily: "outfit",
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,
