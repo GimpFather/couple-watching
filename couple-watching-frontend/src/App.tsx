@@ -60,7 +60,7 @@ function App() {
 									margin: "auto",
 									borderRadius: 4,
 									backgroundColor: "secondary.main",
-									border: "3px solid #A5D2A6",
+									border: "3px solid #010101",
 								}}
 							>
 								<CardContent>
@@ -77,7 +77,7 @@ function App() {
 								style={{
 									maxWidth: 300,
 									borderRadius: "16px",
-									border: "3px solid #A5D2A6",
+									border: "3px solid #010101",
 								}}
 							/>
 						</Stack>
