@@ -1,5 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router";
+import { motion } from "motion/react";
 
 type AppBarLinkProps = {
    icon: React.ReactElement;
@@ -14,7 +15,7 @@ const AppBarLink = ({ icon, filledIcon, url, caption }: AppBarLinkProps) => {
 
    return (
       <Link to={url} style={{ color: "inherit", textDecoration: "inherit" }}>
-         <Stack alignItems="center">
+         <Stack alignItems="center" component={motion.div} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             {isActive ? filledIcon : icon}
             <Typography variant="body1" color="green">
                {caption}
