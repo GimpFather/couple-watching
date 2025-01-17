@@ -1,24 +1,25 @@
 import { createTheme } from "@mui/material";
+import '@fontsource/outfit';
 
 export const defaultTheme = createTheme({
 	palette: {
 		primary: {
-			main: "#010101",
+			main: "#1A5F24",
 		},
 		secondary: {
-			main: "#D9D9D9",
-			light: "#999999",
+			main: "#348D5B",
 		},
 		background: {
-			default: "#F3F5F7",
+			default: "#181413",
+			paper: "#262626"
 		},
 		common: {
-			black: "#010101",
-			white: "#FFFFFF",
+			black: "#050D06",
+			white: "#F9F9F9",
 		},
 	},
 	typography: {
-		fontFamily: "outfit",
+		fontFamily: `'Outfit', sans-serif`,
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,

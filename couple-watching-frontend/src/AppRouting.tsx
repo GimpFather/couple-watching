@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 import ExamplePage from "./pages/Example/ExamplePage";
 import DefaultLayout from "./components/Layout/DefaultLayout";
+import WatchlistPage from "./pages/Watchlist/WatchlistPage";
 
 const AppRouting = () => {
    return (
@@ -10,6 +11,7 @@ const AppRouting = () => {
             <Route index element={<DashboardPage />} />
             <Route path="example" element={<ExamplePage />} />
             <Route path="add-movie" element={<ExamplePage />} />
+            <Route path="watchlist" element={<WatchlistPage />} />
          </Route>
       </Routes>
    );
