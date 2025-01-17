@@ -2,13 +2,13 @@ import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "
 import { Movie } from "../../types/Watchlist.types";
 import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { motion } from "motion/react";
 
 interface WatchlistTableProps {
    data: Movie[];
 }
 
 const WatchlistTable = ({ data }: WatchlistTableProps) => {
-   console.log(data);
    const columnHelper = createColumnHelper<Movie>();
 
    const columns = [
@@ -44,7 +44,7 @@ const WatchlistTable = ({ data }: WatchlistTableProps) => {
    });
 
    return (
-      <TableContainer sx={{ width: "100%" }}>
+      <TableContainer sx={{ width: "100%" }} component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
          <Table size="small">
             <TableHead>
                {watchlistTable.getHeaderGroups().map((headerGroup) => (

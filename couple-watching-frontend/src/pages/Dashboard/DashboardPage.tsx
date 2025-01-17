@@ -1,9 +1,7 @@
+import PageTitle from "../../components/Layout/PageTitle";
+
 const DashboardPage = () => {
-   return (
-      <div>
-         <p>test</p>
-      </div>
-   );
+   return <PageTitle title="Dashboard" subtitle="This is a dashboard page, that will allow you to see your stats." />;
 };
 
 export default DashboardPage;
