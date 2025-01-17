@@ -1,14 +1,13 @@
 import { Outlet } from "react-router";
 import Navbar from "./Navbar";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Container } from "@mui/material";
 
 const DefaultLayout = () => {
-   const { breakpoints } = useTheme();
-   const isMobile = useMediaQuery(breakpoints.down("sm"));
-   console.log(isMobile);
    return (
       <>
-         <Outlet />
+         <Container maxWidth="xl" sx={{ paddingY: 2 }}>
+            <Outlet />
+         </Container>
          <Navbar />
       </>
    );
