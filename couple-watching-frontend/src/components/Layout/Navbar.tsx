@@ -12,7 +12,7 @@ const Navbar = () => {
       //TODO: Fix the padding in the box
       //The padding in the box is added due to problem with the fixed AppBar
       <Box sx={{ paddingTop: "80px" }}>
-         <AppBar position="fixed" sx={{ top: "auto", bottom: 0 }}>
+         <AppBar elevation={24} position="fixed" sx={{ top: "auto", bottom: 0 }}>
             <Stack
                direction="row"
                justifyContent="space-around"
