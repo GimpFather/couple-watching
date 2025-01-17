@@ -3,5 +3,8 @@ export type Movie = {
    productionYear: string;
    genre: string[];
    imdbReview: number;
-   cover?: string;
+   duration: number;
+   director: string;
+   plot: string;
+   cover: string;
 };
