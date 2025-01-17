@@ -1,9 +1,8 @@
-import { Grid2 as Grid, Card, Stack, CardMedia, CardContent, Typography, Tooltip, IconButton } from "@mui/material";
+import { Grid2 as Grid, Card, Stack, CardMedia, CardContent, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { Movie } from "../../types/Watchlist.types";
+import MovieActions from "./MovieActions";
 
 type WatchlistListProps = {
    data: Movie[];
@@ -44,18 +43,7 @@ const WatchlistList = ({ data }: WatchlistListProps) => {
                            sx={{ paddingBottom: 3 }}
                         >
                            <Typography variant="h6">{movie.title}</Typography>
-                           <Stack direction="row" spacing={1}>
-                              <Tooltip title="Mark as watched!" arrow>
-                                 <IconButton sx={{ padding: 0 }} color="primary">
-                                    <CheckCircleOutlineIcon />
-                                 </IconButton>
-                              </Tooltip>
-                              <Tooltip title="Delete from watchlist." arrow>
-                                 <IconButton sx={{ padding: 0 }} color="secondary">
-                                    <HighlightOffIcon />
-                                 </IconButton>
-                              </Tooltip>
-                           </Stack>
+                           <MovieActions />
                         </Stack>
                         <Stack spacing={1}>
                            <Stack direction="row" spacing={1}>

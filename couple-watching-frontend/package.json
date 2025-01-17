@@ -26,7 +26,8 @@
 		"react-dom": "^18.3.1",
 		"react-hook-form": "^7.54.2",
 		"react-lazy-load-image-component": "^1.6.3",
-		"react-router": "^7.1.1"
+		"react-router": "^7.1.1",
+		"react-toastify": "^11.0.3"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.17.0",
