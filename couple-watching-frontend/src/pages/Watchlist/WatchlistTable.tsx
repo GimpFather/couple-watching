@@ -1,8 +1,8 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { Movie } from "../../types/Watchlist.types";
-import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { motion } from "motion/react";
+import MovieActions from "./MovieActions";
 
 interface WatchlistTableProps {
    data: Movie[];
@@ -14,26 +14,30 @@ const WatchlistTable = ({ data }: WatchlistTableProps) => {
    const columns = [
       columnHelper.accessor("title", {
          cell: (info) => (
-            <Stack direction="row" spacing={2} alignItems="center">
-               <LazyLoadImage
-                  src={info.row.original.cover}
-                  alt={info.row.original.title}
-                  height={100}
-                  effect="blur"
-                  style={{ borderRadius: "4px" }}
-               />
-               <Typography variant="body1">{`${info.row.original.title} (${info.row.original.productionYear})`}</Typography>
-            </Stack>
+            <Typography variant="body1">{`${info.row.original.title} (${info.row.original.productionYear})`}</Typography>
          ),
          header: "Movie",
       }),
       columnHelper.accessor("genre", {
-         cell: (info) => info.getValue(),
+         cell: (info) => info.getValue().join(", "),
          header: "Genre",
+      }),
+      columnHelper.accessor("director", {
+         cell: (info) => info.getValue(),
+         header: "Director",
+      }),
+      columnHelper.accessor("duration", {
+         cell: (info) => `${info.getValue()} minutes`,
+         header: "Duration",
       }),
       columnHelper.accessor("imdbReview", {
          cell: (info) => info.getValue(),
          header: "IMDB Review",
+      }),
+      columnHelper.display({
+         id: "actions",
+         header: "Actions",
+         cell: () => <MovieActions />,
       }),
    ];
 
