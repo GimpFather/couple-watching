@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router";
 import AppRouting from "./AppRouting.tsx";
 import "./assets/styles.css";
 import { ToastContainer } from "react-toastify";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const queryClient = new QueryClient();
 
@@ -15,19 +17,21 @@ createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={queryClient}>
          <BrowserRouter>
             <ThemeProvider theme={defaultTheme}>
-               <CssBaseline>
-                  <ToastContainer
-                     position="top-center"
-                     autoClose={5000}
-                     hideProgressBar={false}
-                     closeOnClick
-                     pauseOnFocusLoss
-                     draggable
-                     pauseOnHover
-                     theme="light"
-                  />
-                  <AppRouting />
-               </CssBaseline>
+               <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <CssBaseline>
+                     <ToastContainer
+                        position="top-center"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        closeOnClick
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                     />
+                     <AppRouting />
+                  </CssBaseline>
+               </LocalizationProvider>
             </ThemeProvider>
          </BrowserRouter>
       </QueryClientProvider>
