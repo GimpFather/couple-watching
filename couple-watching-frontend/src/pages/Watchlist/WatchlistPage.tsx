@@ -12,7 +12,7 @@ const WatchlistPage = () => {
       <Stack spacing={4}>
          <PageTitle
             title="Watchlist"
-            subtitle="This is a watchlist page, that will allow you to see what you wanna watch."
+            subtitle="🍿 Your personalized watchlist: everything you want to watch in one place."
          />
          <Filters control={control} watch={watch} />
          {watch("coolMode") ? (
