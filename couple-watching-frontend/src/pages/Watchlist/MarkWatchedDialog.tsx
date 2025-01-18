@@ -18,6 +18,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { MarkMovieWatchedInputs } from "../../types/Inputs.types";
 import dayjs from "dayjs";
 import StarRating from "../../components/Watchlist/StarRating";
+import TagsSection from "../../components/Watchlist/TagsSection";
 
 interface AddProductDialogProps {
    open: boolean;
@@ -25,7 +26,9 @@ interface AddProductDialogProps {
 }
 
 const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
-   const { control, handleSubmit, watch } = useForm<MarkMovieWatchedInputs>();
+   const { control, handleSubmit, watch } = useForm<MarkMovieWatchedInputs>({
+      defaultValues: { rating: 5, watchedDate: new Date(), tags: {} },
+   });
 
    const notify = () =>
       toast(
@@ -81,13 +84,30 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                         />
                      </Grid>
                      <Grid size={12}>
-                        <Controller
-                           name="rating"
-                           control={control}
-                           render={({ field }) => (
-                              <StarRating value={field.value} handleRate={(value: number) => field.onChange(value)} />
-                           )}
-                        />
+                        <Stack spacing={1}>
+                           <Typography variant="body1">
+                              How was it? Rate the vibes and let us know your thoughts! ⭐🎬
+                           </Typography>
+                           <Controller
+                              name="rating"
+                              control={control}
+                              render={({ field }) => (
+                                 <StarRating
+                                    value={field.value}
+                                    handleRate={(value: number) => field.onChange(value)}
+                                 />
+                              )}
+                           />
+                        </Stack>
+                     </Grid>
+                     <Grid size={12}>
+                        <Stack spacing={1}>
+                           <Typography variant="body1">
+                              Let’s add some tags together! 🏷️ They’re optional, but with them, your dashboard gets even
+                              cooler with fun stats! 📈🔥
+                           </Typography>
+                           <TagsSection watch={watch} control={control} />
+                        </Stack>
                      </Grid>
                   </Grid>
                </Stack>
@@ -114,7 +134,7 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                   onClick={onClose}
                >
                   <Typography variant="body2" sx={{ textTransform: "initial" }}>
-                     Fuck go back
+                     Close
                   </Typography>
                </Button>
             </DialogActions>

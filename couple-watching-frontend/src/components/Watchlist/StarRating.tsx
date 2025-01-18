@@ -46,8 +46,8 @@ const StarRating = ({ value, handleRate }: StarRatingProps) => {
                <Tooltip key={index} title={handleTooltipText(starValue)} placement="bottom" arrow>
                   <motion.svg
                      viewBox="0 0 24 24"
-                     width="32"
-                     height="32"
+                     width="24"
+                     height="24"
                      initial={{ scale: 1, fill: palette.common.white }}
                      animate={{
                         fill: starValue <= (hover || value) ? palette.primary.main : palette.common.white,
