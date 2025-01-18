@@ -30,7 +30,7 @@ const WatchlistList = ({ data }: WatchlistListProps) => {
                         <LazyLoadImage
                            src={movie.cover}
                            alt={movie.title}
-                           height={200}
+                           width={150}
                            effect="blur"
                            style={{ borderLeft: "4px" }}
                         />
@@ -81,3 +81,4 @@ const WatchlistList = ({ data }: WatchlistListProps) => {
 };
 
 export default WatchlistList;
+
