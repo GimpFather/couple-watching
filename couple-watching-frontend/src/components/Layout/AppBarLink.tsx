@@ -1,6 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router";
 import { motion } from "motion/react";
+import { FormattedMessage } from "react-intl";
 
 type AppBarLinkProps = {
    icon: React.ReactElement;
@@ -18,7 +19,7 @@ const AppBarLink = ({ icon, filledIcon, url, caption }: AppBarLinkProps) => {
          <Stack alignItems="center" component={motion.div} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             {isActive ? filledIcon : icon}
             <Typography color={isActive ? "primary.main" : "textPrimary"} variant="body1">
-               {caption}
+               <FormattedMessage id={caption} />
             </Typography>
          </Stack>
       </Link>

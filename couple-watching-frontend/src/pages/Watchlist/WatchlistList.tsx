@@ -4,12 +4,16 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Movie } from "../../types/Watchlist.types";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import { FormattedMessage } from "react-intl";
+import React from "react";
+import MarkWatchedDialog from "./MarkWatchedDialog";
 
 type WatchlistListProps = {
    data: Movie[];
 };
 
 const WatchlistList = ({ data }: WatchlistListProps) => {
+   const [openMarkWatchedDialog, setOpenMarkWatchedDialog] = React.useState<boolean>(false);
    const { palette } = useTheme();
    return (
       <Grid container spacing={2}>
@@ -57,13 +61,13 @@ const WatchlistList = ({ data }: WatchlistListProps) => {
                         </Box>
                         <Stack spacing={1} direction="row">
                            <Button
-                              type="submit"
+                              onClick={() => setOpenMarkWatchedDialog(true)}
                               variant="contained"
                               startIcon={<AddCircleOutlineOutlinedIcon />}
                               sx={{ borderRadius: 2, paddingX: 2 }}
                            >
                               <Typography variant="body2" sx={{ textTransform: "initial" }}>
-                                 Mark as watched
+                                 <FormattedMessage id="WATCHLIST.DIALOG.ACTION.PRIMARY" />
                               </Typography>
                            </Button>
                            <Button
@@ -72,7 +76,7 @@ const WatchlistList = ({ data }: WatchlistListProps) => {
                               sx={{ borderRadius: 2, paddingX: 2 }}
                            >
                               <Typography color="secondary" variant="body2" sx={{ textTransform: "initial" }}>
-                                 Delete
+                                 <FormattedMessage id="WATCHLIST.DIALOG.ACTION.SECONDARY" />
                               </Typography>
                            </Button>
                         </Stack>
@@ -81,6 +85,7 @@ const WatchlistList = ({ data }: WatchlistListProps) => {
                </Card>
             </Grid>
          ))}
+         <MarkWatchedDialog open={openMarkWatchedDialog} onClose={() => setOpenMarkWatchedDialog(false)} />
       </Grid>
    );
 };

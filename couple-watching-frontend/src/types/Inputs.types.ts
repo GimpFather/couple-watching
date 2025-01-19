@@ -14,6 +14,6 @@ export type MovieTags = {
    isSad?: boolean;
    isSnoby?: boolean;
    isLiterallyMe?: boolean;
-   isShityAsFuck?: boolean;
+   isCertifiedShit?: boolean;
    isGay?: boolean;
 };

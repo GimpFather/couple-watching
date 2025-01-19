@@ -18,7 +18,7 @@ const TagsSection = ({ control, watch }: TagSecionProps) => {
                <TagChip
                   handleClick={() => field.onChange(!field.value)}
                   value={!!watch("tags.isHorny")}
-                  caption={"Horny"}
+                  caption="TAGS.HORNY"
                   emoji="🥵"
                />
             )}
@@ -30,7 +30,7 @@ const TagsSection = ({ control, watch }: TagSecionProps) => {
                <TagChip
                   handleClick={() => field.onChange(!field.value)}
                   value={!!watch("tags.isSnoby")}
-                  caption={"Snoby"}
+                  caption="TAGS.SNOBBY"
                   emoji="🍷"
                />
             )}
@@ -42,7 +42,7 @@ const TagsSection = ({ control, watch }: TagSecionProps) => {
                <TagChip
                   handleClick={() => field.onChange(!field.value)}
                   value={!!watch("tags.isSad")}
-                  caption={"Sad"}
+                  caption="TAGS.SAD"
                   emoji="😟"
                />
             )}
@@ -54,7 +54,7 @@ const TagsSection = ({ control, watch }: TagSecionProps) => {
                <TagChip
                   handleClick={() => field.onChange(!field.value)}
                   value={!!watch("tags.isLiterallyMe")}
-                  caption={"Is Literally Me"}
+                  caption="TAGS.IS_LITERALLY_ME"
                   emoji="😎"
                />
             )}
@@ -66,19 +66,19 @@ const TagsSection = ({ control, watch }: TagSecionProps) => {
                <TagChip
                   handleClick={() => field.onChange(!field.value)}
                   value={!!watch("tags.isGay")}
-                  caption={"PRIDE"}
+                  caption="TAGS.IS_GAY"
                   emoji="🏳️‍🌈"
                />
             )}
          />
          <Controller
-            name="tags.isShityAsFuck"
+            name="tags.isCertifiedShit"
             control={control}
             render={({ field }) => (
                <TagChip
                   handleClick={() => field.onChange(!field.value)}
-                  value={!!watch("tags.isShityAsFuck")}
-                  caption={"Certified Shit"}
+                  value={!!watch("tags.isCertifiedShit")}
+                  caption="TAGS.CERTIFIED_SHIT"
                   emoji="💩"
                />
             )}

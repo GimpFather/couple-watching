@@ -1,5 +1,6 @@
 import { Stack, Typography, useTheme } from "@mui/material";
 import { motion } from "motion/react";
+import { FormattedMessage } from "react-intl";
 
 type TagChipProps = {
    caption: string;
@@ -34,7 +35,9 @@ const TagChip = ({ caption, emoji, value, handleClick }: TagChipProps) => {
          }}
       >
          {emoji && <Typography>{emoji}</Typography>}
-         <Typography variant="body1">{caption}</Typography>
+         <Typography variant="body1">
+            <FormattedMessage id={caption} />
+         </Typography>
       </Stack>
    );
 };

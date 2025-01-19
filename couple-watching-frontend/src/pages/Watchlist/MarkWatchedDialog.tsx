@@ -20,6 +20,7 @@ import { MarkMovieWatchedInputs } from "../../types/Inputs.types";
 import dayjs from "dayjs";
 import StarRating from "../../components/Watchlist/StarRating";
 import TagsSection from "../../components/Watchlist/TagsSection";
+import { FormattedMessage } from "react-intl";
 
 interface AddProductDialogProps {
    open: boolean;
@@ -43,14 +44,15 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
       <Dialog open={open} onClose={onClose} PaperProps={{ sx: { borderRadius: 4 } }}>
          <form onSubmit={handleSubmit(onSubmit)}>
             <DialogTitle>
-               <Typography variant="h4">Great Watch! Now What? ✨</Typography>
+               <Typography variant="h4">
+                  <FormattedMessage id="WATCHLIST.DIALOG.MARK.TITLE" />
+               </Typography>
             </DialogTitle>
             <DialogContent>
                <Stack spacing={2}>
                   <DialogContentText>
                      <Typography variant="body1" color="textPrimary">
-                        Awesome! You've ticked that movie off your watchlist! 🌟 Let’s rate it and spill the tea—what
-                        did you think? 🎬✨
+                        <FormattedMessage id="WATCHLIST.DIALOG.MARK.SUBTITLE" />
                      </Typography>
                   </DialogContentText>
                   <Grid container spacing={2}>
@@ -66,7 +68,7 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                                  onChange={(date) => field.onChange(date)}
                                  defaultValue={dayjs(new Date())}
                                  format="DD/MM/YYYY"
-                                 label="Watched date"
+                                 label={<FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.WATCHED_DATE.LABEL" />}
                                  slots={{ openPickerIcon: EventAvailableIcon }}
                                  slotProps={{
                                     openPickerIcon: {
@@ -87,7 +89,7 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                      <Grid size={12}>
                         <Stack spacing={1}>
                            <Typography variant="body1">
-                              How was it? Rate the vibes and let us know your thoughts! ⭐🎬
+                              <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.RATING.LABEL" />
                            </Typography>
                            <Controller
                               name="rating"
@@ -107,8 +109,7 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                      <Grid size={12}>
                         <Stack spacing={1}>
                            <Typography variant="body1">
-                              Let’s add some tags together! 🏷️ They’re optional, but with them, your dashboard gets even
-                              cooler with fun stats! 📈🔥
+                              <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.TAGS.LABEL" />
                            </Typography>
                            <TagsSection watch={watch} control={control} />
                         </Stack>
@@ -128,7 +129,7 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                   }}
                >
                   <Typography variant="body2" sx={{ textTransform: "initial" }}>
-                     Mark as watched
+                     <FormattedMessage id="WATCHLIST.DIALOG.ACTION.PRIMARY" />
                   </Typography>
                </Button>
                <Button
@@ -138,7 +139,7 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                   onClick={onClose}
                >
                   <Typography variant="body2" sx={{ textTransform: "initial" }}>
-                     Close
+                     <FormattedMessage id="WATCHLIST.DIALOG.ACTION.SECONDARY" />
                   </Typography>
                </Button>
             </DialogActions>

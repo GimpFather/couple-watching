@@ -1,5 +1,5 @@
 import { Card, Stack } from "@mui/material";
-import { WATCHLIST_STATIC_DATA } from "../../assets/WATCHLIST_STATIC_DATA";
+import { WATCHLIST_STATIC_DATA } from "../../constants/WATCHLIST_STATIC_DATA";
 import PageTitle from "../../components/Layout/PageTitle";
 import WatchlistTable from "./WatchlistTable";
 import { useForm } from "react-hook-form";
@@ -10,10 +10,7 @@ const WatchlistPage = () => {
    const { control, watch } = useForm();
    return (
       <Stack spacing={4}>
-         <PageTitle
-            title="Watchlist"
-            subtitle="🍿 Your personalized watchlist: everything you want to watch in one place."
-         />
+         <PageTitle title="WATCHLIST.HEADER" subtitle="WATCHLIST.SUBTITLE" />
          <Filters control={control} watch={watch} />
          {watch("coolMode") ? (
             <WatchlistList data={WATCHLIST_STATIC_DATA} />
