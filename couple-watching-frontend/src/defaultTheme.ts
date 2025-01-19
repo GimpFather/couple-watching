@@ -37,6 +37,7 @@ export const defaultTheme = createTheme({
             root: {
                "& fieldset": {
                   borderColor: palette.common.white,
+                  borderRadius: 16,
                },
             },
          },
@@ -45,6 +46,13 @@ export const defaultTheme = createTheme({
          styleOverrides: {
             root: {
                color: palette.common.white,
+            },
+         },
+      },
+      MuiButton: {
+         styleOverrides: {
+            root: {
+               borderRadius: 16,
             },
          },
       },
