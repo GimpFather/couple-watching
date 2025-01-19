@@ -3,6 +3,7 @@ import { Movie } from "../../types/Watchlist.types";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import MovieActions from "./MovieActions";
+import { useIntl } from "react-intl";
 
 interface WatchlistTableProps {
    data: Movie[];
@@ -10,33 +11,34 @@ interface WatchlistTableProps {
 
 const WatchlistTable = ({ data }: WatchlistTableProps) => {
    const columnHelper = createColumnHelper<Movie>();
+   const { formatMessage } = useIntl();
 
    const columns = [
       columnHelper.accessor("title", {
          cell: (info) => (
             <Typography variant="body1">{`${info.row.original.title} (${info.row.original.productionYear})`}</Typography>
          ),
-         header: "Movie",
+         header: formatMessage({ id: "WATCHLIST.TABLE.HEADER.MOVIE" }),
       }),
       columnHelper.accessor("genre", {
          cell: (info) => info.getValue().join(", "),
-         header: "Genre",
+         header: formatMessage({ id: "WATCHLIST.TABLE.HEADER.GENRE" }),
       }),
       columnHelper.accessor("director", {
          cell: (info) => info.getValue(),
-         header: "Director",
+         header: formatMessage({ id: "WATCHLIST.TABLE.HEADER.DIRECTOR" }),
       }),
       columnHelper.accessor("duration", {
-         cell: (info) => `${info.getValue()} minutes`,
-         header: "Duration",
+         cell: (info) => formatMessage({ id: "WATCHLIST.TABLE.CELL.DURATION.MINUTES" }, { minutes: info.getValue() }),
+         header: formatMessage({ id: "WATCHLIST.TABLE.HEADER.DURATION" }),
       }),
       columnHelper.accessor("imdbReview", {
          cell: (info) => info.getValue(),
-         header: "IMDB Review",
+         header: formatMessage({ id: "WATCHLIST.TABLE.HEADER.IMDB_REVIEW" }),
       }),
       columnHelper.display({
          id: "actions",
-         header: "Actions",
+         header: formatMessage({ id: "WATCHLIST.TABLE.HEADER.ACTIONS" }),
          cell: () => <MovieActions />,
       }),
    ];

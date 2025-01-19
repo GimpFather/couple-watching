@@ -2,6 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import { Control, Controller, FieldValues, UseFormWatch } from "react-hook-form";
 import CustomSwitch from "../General/CustomSwitch";
+import { FormattedMessage } from "react-intl";
 
 type CoolNerdModeProps = {
    control: Control<FieldValues, unknown>;
@@ -23,14 +24,16 @@ const CoolNerdMode = ({ control, watch }: CoolNerdModeProps) => {
          <Stack spacing={1}>
             <Typography variant="body1">
                <Typography component="span" display="inline" color="primary.main">
-                  The Nerd Mode
-               </Typography>{" "}
-               and{" "}
+                  <FormattedMessage id="FILTERS.NERD_COOL_MODE.TITLE.NERD" />
+               </Typography>
+               <FormattedMessage id="FILTERS.NERD_COOL_MODE.TITLE.AND" />
                <Typography component="span" display="inline" color="secondary.main">
-                  The Cool Mode
+                  <FormattedMessage id="FILTERS.NERD_COOL_MODE.TITLE.COOL" />
                </Typography>
             </Typography>
-            <Typography variant="body2">Choose the way, you gonna see the list.</Typography>
+            <Typography variant="body2">
+               <FormattedMessage id="FILTERS.NERD_COOL_MODE.TITLE.SUBTITLE" />
+            </Typography>
          </Stack>
          <Controller
             name="coolMode"
