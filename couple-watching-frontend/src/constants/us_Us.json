@@ -10,6 +10,7 @@
    "FILTERS.NERD_COOL_MODE.TITLE.AND": " and ",
    "FILTERS.NERD_COOL_MODE.TITLE.COOL": "The Cool Mode",
    "FILTERS.NERD_COOL_MODE.TITLE.SUBTITLE": "Choose the way, you gonna see the list.",
+   "FILTERS.SEARCHBAR.LABEL": "Search for the movie via title 👀",
    "WATCHLIST.TABLE.HEADER.MOVIE": "Movie",
    "WATCHLIST.TABLE.HEADER.GENRE": "Genre",
    "WATCHLIST.TABLE.HEADER.DIRECTOR": "Director",
@@ -29,5 +30,5 @@
    "TAGS.IS_GAY": "PRIDE",
    "TAGS.CERTIFIED_SHIT": "Certified Shit",
    "WATCHLIST.DIALOG.ACTION.PRIMARY": "Mark as watched",
-   "WATCHLIST.DIALOG.ACTION.SECONDARY": "Delete"
+   "WATCHLIST.DIALOG.ACTION.SECONDARY": "Exit"
 }

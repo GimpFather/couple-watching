@@ -10,8 +10,6 @@ import {
    Stack,
    Typography,
 } from "@mui/material";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { toast } from "react-toastify";
 import { DatePicker } from "@mui/x-date-pickers";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
@@ -21,6 +19,8 @@ import dayjs from "dayjs";
 import StarRating from "../../components/Watchlist/StarRating";
 import TagsSection from "../../components/Watchlist/TagsSection";
 import { FormattedMessage } from "react-intl";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 interface AddProductDialogProps {
    open: boolean;
@@ -121,8 +121,8 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                <Button
                   type="submit"
                   variant="contained"
-                  startIcon={<AddCircleOutlineOutlinedIcon />}
-                  sx={{ borderRadius: 2, paddingX: 2 }}
+                  startIcon={<CheckCircleOutlineIcon />}
+                  sx={{ paddingX: 2 }}
                   onClick={() => {
                      notify();
                      onClose();
@@ -134,8 +134,9 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                </Button>
                <Button
                   variant="text"
-                  startIcon={<CancelOutlinedIcon />}
-                  sx={{ borderRadius: 2, paddingX: 2 }}
+                  color="secondary"
+                  startIcon={<ExitToAppIcon />}
+                  sx={{ paddingX: 2 }}
                   onClick={onClose}
                >
                   <Typography variant="body2" sx={{ textTransform: "initial" }}>

@@ -17,3 +17,8 @@ export type MovieTags = {
    isCertifiedShit?: boolean;
    isGay?: boolean;
 };
+
+export type WatchlistFiltersInput = {
+   coolMode?: boolean;
+   search?: string;
+};
