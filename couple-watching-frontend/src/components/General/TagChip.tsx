@@ -2,14 +2,13 @@ import { Stack, Typography, useTheme } from "@mui/material";
 import { motion } from "motion/react";
 
 type TagChipProps = {
-   background: string;
    caption: string;
    handleClick: () => void;
    value: boolean;
    emoji?: string;
 };
 
-const TagChip = ({ background, caption, emoji, value, handleClick }: TagChipProps) => {
+const TagChip = ({ caption, emoji, value, handleClick }: TagChipProps) => {
    const { palette } = useTheme();
    return (
       <Stack
@@ -22,13 +21,13 @@ const TagChip = ({ background, caption, emoji, value, handleClick }: TagChipProp
          whileTap={{ scale: 0.9 }}
          animate={{
             opacity: value ? 1 : 0.3,
-            borderColor: value ? palette.background.default : palette.background.paper,
+            borderColor: value ? palette.primary.main : palette.background.default,
          }}
          onClick={() => handleClick()}
          sx={{
             paddingY: 1,
             paddingX: 2,
-            background: background,
+            background: palette.background.paper,
             width: "fit-content",
             borderRadius: 4,
             border: "3px solid",

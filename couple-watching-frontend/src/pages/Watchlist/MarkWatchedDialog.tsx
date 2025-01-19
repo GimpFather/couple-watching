@@ -5,6 +5,7 @@ import {
    DialogContent,
    DialogContentText,
    DialogTitle,
+   Divider,
    Grid2 as Grid,
    Stack,
    Typography,
@@ -100,6 +101,9 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                            />
                         </Stack>
                      </Grid>
+                     <Divider
+                        sx={{ width: "100%", border: "1px solid", borderRadius: 4, borderColor: "common.white" }}
+                     />
                      <Grid size={12}>
                         <Stack spacing={1}>
                            <Typography variant="body1">
