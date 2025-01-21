@@ -2,7 +2,7 @@ import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "
 import { Movie } from "../../types/Watchlist.types";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { motion } from "motion/react";
-import MovieActions from "./MovieActions";
+import MovieActions from "../../components/Watchlist/MovieActions";
 import { useIntl } from "react-intl";
 
 interface WatchlistTableProps {

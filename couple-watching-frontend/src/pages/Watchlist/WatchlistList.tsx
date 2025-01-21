@@ -6,7 +6,7 @@ import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOu
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { FormattedMessage } from "react-intl";
 import React from "react";
-import MarkWatchedDialog from "./MarkWatchedDialog";
+import MarkWatchedDialog from "../../components/Watchlist/MarkWatchedDialog";
 
 type WatchlistListProps = {
    data: Movie[];
