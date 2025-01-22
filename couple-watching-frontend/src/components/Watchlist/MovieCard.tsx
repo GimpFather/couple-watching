@@ -4,6 +4,9 @@ import { Movie } from "../../types/Watchlist.types";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import SyncIcon from "@mui/icons-material/Sync";
 import React from "react";
+import StarIcon from "../General/CustomIcons/StarIcon";
+import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 
 type MovieCardProps = {
    data: Movie;
@@ -17,7 +20,7 @@ const MovieCard = ({ data, buttonAction }: MovieCardProps) => {
       <Box
          sx={{
             perspective: "1000px",
-            width: 375,
+            width: 350,
             height: 500,
          }}
       >
@@ -39,7 +42,7 @@ const MovieCard = ({ data, buttonAction }: MovieCardProps) => {
                   position: "absolute",
                   backfaceVisibility: "hidden",
                   padding: 2,
-                  width: 375,
+                  width: 350,
                   height: 500,
                   borderRadius: 4,
                   overflow: "hidden",
@@ -54,7 +57,7 @@ const MovieCard = ({ data, buttonAction }: MovieCardProps) => {
                   <SyncIcon
                      component={motion.svg}
                      onClick={() => setFlipped((prev) => !prev)}
-                     whileHover={{ scale: 1.1, rotate: 180 }}
+                     whileHover={{ scale: 1.05, rotate: 180 }}
                      whileTap={{ scale: 0.9, rotate: 360 }}
                      transition={{ duration: 1, type: "spring" }}
                      sx={{
@@ -77,16 +80,26 @@ const MovieCard = ({ data, buttonAction }: MovieCardProps) => {
                               <Typography variant="body1">#{genre}</Typography>
                            ))}
                         </Stack>
-                        <Button
+                        <Stack
                            onClick={() => buttonAction()}
-                           variant="contained"
-                           startIcon={<AddCircleOutlineOutlinedIcon />}
-                           sx={{ borderRadius: 2, paddingX: 2, alignSelf: "center" }}
+                           component={motion.div}
+                           whileHover={{ scale: 1.05 }}
+                           whileTap={{ scale: 0.9 }}
+                           direction="row"
+                           justifyContent="center"
+                           spacing={1}
+                           sx={{
+                              padding: 1,
+                              backgroundColor: "primary.main",
+                              borderRadius: 4,
+                              color: "common.white",
+                              width: "fit-content",
+                              alignSelf: "center",
+                           }}
                         >
-                           <Typography variant="body2" sx={{ textTransform: "initial" }}>
-                              Mark as watched
-                           </Typography>
-                        </Button>
+                           <BookmarkAddedIcon />
+                           <Typography>Mark as watched</Typography>
+                        </Stack>
                      </Stack>
                   </Stack>
                </Stack>
@@ -96,7 +109,7 @@ const MovieCard = ({ data, buttonAction }: MovieCardProps) => {
                   position: "absolute",
                   backfaceVisibility: "hidden",
                   padding: 2,
-                  width: 375,
+                  width: 350,
                   height: 500,
                   borderRadius: 4,
                   backgroundColor: "background.paper",
@@ -106,47 +119,91 @@ const MovieCard = ({ data, buttonAction }: MovieCardProps) => {
                }}
             >
                <Stack justifyContent="space-between" sx={{ height: "100%" }}>
-                  <Stack justifyContent="space-between" sx={{ height: "100%" }}>
-                     <Stack spacing={1}>
-                        <Typography color="primary" variant="h5" sx={{ fontWeight: "bold" }}>
+                  <Stack spacing={1}>
+                     <Stack direction="row" alignItems="baseline" justifyContent="space-between" spacing={1}>
+                        <Typography color="primary" variant="h4" sx={{ fontWeight: "bold" }}>
                            {data.title}
                         </Typography>
-                        <Stack direction="row" spacing={1}>
-                           {data.genre.map((genre) => (
-                              <Typography variant="body1">#{genre}</Typography>
-                           ))}
-                        </Stack>
-                        <Typography variant="body1">{data.plot}</Typography>
-                        <Typography>Duration: {data.duration} minutes</Typography>
-                        <Typography>Director: {data.director}</Typography>
-                        <Typography>IMDB Review: {data.imdbReview}</Typography>
-                     </Stack>
-                     <Stack direction="row" justifyContent="space-between">
-                        <SyncIcon
-                           component={motion.svg}
-                           onClick={() => setFlipped((prev) => !prev)}
-                           whileHover={{ scale: 1.1, rotate: 180 }}
-                           whileTap={{ scale: 0.9, rotate: 360 }}
-                           transition={{ duration: 1, type: "spring" }}
+                        <Stack
+                           direction="row"
+                           alignItems="center"
                            sx={{
-                              backgroundColor: "primary.main",
-                              color: "background.paper",
                               padding: 1,
-                              fontSize: 40,
-                              borderRadius: "50%",
-                              outline: "none",
+                              backgroundColor: "primary.main",
+                              borderRadius: 4,
                            }}
-                        />
-                        <Button
-                           onClick={() => buttonAction()}
-                           variant="contained"
-                           startIcon={<AddCircleOutlineOutlinedIcon />}
-                           sx={{ borderRadius: 2, paddingX: 2, alignSelf: "center" }}
                         >
-                           <Typography variant="body2" sx={{ textTransform: "initial" }}>
-                              Mark as watched
+                           <motion.svg viewBox="0 0 24 24" width="18" height="18" style={{ fill: "#262626" }}>
+                              <StarIcon />
+                           </motion.svg>
+                           <Typography color="background.paper" variant="body2" sx={{ paddingLeft: 0.5 }}>
+                              <Typography color="background.paper" variant="body2" fontWeight={600} component="span">
+                                 {data.imdbReview}
+                              </Typography>
+                              /10
                            </Typography>
-                        </Button>
+                        </Stack>
+                     </Stack>
+                     <Typography>
+                        {data.director} ({data.productionYear})
+                     </Typography>
+                     <Typography variant="body1">{data.plot}</Typography>
+                     <Stack alignItems="center" direction="row" spacing={1}>
+                        {data.genre.map((genre) => (
+                           <Typography variant="body1">#{genre}</Typography>
+                        ))}
+                     </Stack>
+                  </Stack>
+                  <Stack direction="row" justifyContent="space-between">
+                     <SyncIcon
+                        component={motion.svg}
+                        onClick={() => setFlipped((prev) => !prev)}
+                        whileHover={{ scale: 1.05, rotate: 180 }}
+                        whileTap={{ scale: 0.9, rotate: 360 }}
+                        transition={{ duration: 1, type: "spring" }}
+                        sx={{
+                           backgroundColor: "primary.main",
+                           color: "background.paper",
+                           padding: 1,
+                           fontSize: 40,
+                           borderRadius: "50%",
+                           outline: "none",
+                        }}
+                     />
+                     <Stack
+                        onClick={() => buttonAction()}
+                        component={motion.div}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.9 }}
+                        direction="row"
+                        spacing={1}
+                        alignItems="center"
+                        sx={{
+                           padding: 1,
+                           backgroundColor: "primary.main",
+                           borderRadius: 4,
+                           color: "background.paper",
+                        }}
+                     >
+                        <BookmarkAddedIcon />
+                        <Typography>Mark as watched</Typography>
+                     </Stack>
+                     <Stack
+                        component={motion.div}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.9 }}
+                        direction="row"
+                        spacing={1}
+                        alignItems="center"
+                        sx={{
+                           padding: 1,
+                           backgroundColor: "primary.main",
+                           borderRadius: 4,
+                           color: "background.paper",
+                        }}
+                     >
+                        <BookmarkRemoveIcon />
+                        <Typography>Delete</Typography>
                      </Stack>
                   </Stack>
                </Stack>
