@@ -1,7 +1,6 @@
-import { Card, Stack, Typography, Button, Box } from "@mui/material";
+import { Card, Stack, Typography, Box } from "@mui/material";
 import { motion } from "motion/react";
 import { Movie } from "../../types/Watchlist.types";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import SyncIcon from "@mui/icons-material/Sync";
 import React from "react";
 import StarIcon from "../General/CustomIcons/StarIcon";
