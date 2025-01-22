@@ -36,5 +36,7 @@
    "START.SUBTITLE.SPAN": "Couple’s Ultimate Manager",
    "START.DESC": "Couple’s Ultimate Manager: the ultimate tool for duos who do! 🎬💑 Make movie watchlists, track places you wanna visit, and keep tabs on all your shared dreams and schemes. Basically, it’s your relationship’s new BFF. 👫✨",
    "START.BUTTON.PRIMARY": "Join the Fun! 🎉",
-   "START.BUTTON.SECONDARY": "Just Login 💕"
+   "START.BUTTON.SECONDARY": "Just Login 💕",
+   "WATCHLIST.CARD.BUTTON.PRIMARY": "Mark as watched",
+   "WATCHLIST.CARD.BUTTON.SECONDARY": "Delete"
 }
