@@ -14,7 +14,7 @@ const CustomSwitch = ({ condition, handleOnChange }: CustomSwitch) => {
          onClick={() => handleOnChange()}
          sx={{
             padding: 1,
-            backgroundColor: "#fff",
+            backgroundColor: palette.common.white,
             borderRadius: 4,
             width: 44,
             height: 24,
