@@ -27,11 +27,11 @@ const CoolNerdMode = ({ control, watch }: CoolNerdModeProps) => {
          <Stack spacing={1}>
             <Typography variant="body1">
                <Typography component="span" display="inline" color="primary.main">
-                  <FormattedMessage id="FILTERS.NERD_COOL_MODE.TITLE.NERD" />
+                  <FormattedMessage id="FILTERS.NERD_COOL_MODE.TITLE.COOL" />
                </Typography>
                <FormattedMessage id="FILTERS.NERD_COOL_MODE.TITLE.AND" />
                <Typography component="span" display="inline" color="secondary.main">
-                  <FormattedMessage id="FILTERS.NERD_COOL_MODE.TITLE.COOL" />
+                  <FormattedMessage id="FILTERS.NERD_COOL_MODE.TITLE.NERD" />
                </Typography>
             </Typography>
             <Typography variant="body2">
@@ -39,10 +39,13 @@ const CoolNerdMode = ({ control, watch }: CoolNerdModeProps) => {
             </Typography>
          </Stack>
          <Controller
-            name="coolMode"
+            name="watchlistMode"
             control={control}
             render={({ field }) => (
-               <CustomSwitch condition={!!watch("coolMode")} handleOnChange={() => field.onChange(!field.value)} />
+               <CustomSwitch
+                  condition={watch("watchlistMode") === "nerd"}
+                  handleOnChange={() => field.onChange(watch("watchlistMode") === "nerd" ? "cool" : "nerd")}
+               />
             )}
          />
       </Stack>

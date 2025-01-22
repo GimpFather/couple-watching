@@ -8,14 +8,14 @@ import { WatchlistFiltersInput } from "../../types/Inputs.types";
 import { useGetWatchlistMovies } from "../../api/hooks/watchlist";
 
 const WatchlistPage = () => {
-   const { control, watch } = useForm<WatchlistFiltersInput>();
+   const { control, watch } = useForm<WatchlistFiltersInput>({ defaultValues: { watchlistMode: "cool" } });
    const { data } = useGetWatchlistMovies();
 
    return (
       <Stack spacing={4}>
          <PageTitle title="WATCHLIST.HEADER" subtitle="WATCHLIST.SUBTITLE" />
          <Filters control={control} watch={watch} />
-         {watch("coolMode") ? (
+         {watch("watchlistMode") === "cool" ? (
             <>{data && <WatchlistList data={data} />}</>
          ) : (
             <Card variant="outlined" sx={{ borderRadius: 2, border: "2px solid", borderColor: "primary.main" }}>
