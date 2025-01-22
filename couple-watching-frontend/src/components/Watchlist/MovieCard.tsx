@@ -24,7 +24,13 @@ const MovieCard = ({ data, buttonAction }: MovieCardProps) => {
          }}
       >
          <motion.div
+            initial={{
+               opacity: 0,
+               y: 100,
+            }}
             animate={{
+               opacity: 1,
+               y: 0,
                rotateY: flipped ? 180 : 0,
             }}
             transition={{
