@@ -19,6 +19,6 @@ export type MovieTags = {
 };
 
 export type WatchlistFiltersInput = {
-   coolMode?: boolean;
+   watchlistMode?: "cool" | "nerd";
    search?: string;
 };
