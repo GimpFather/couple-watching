@@ -9,17 +9,19 @@ import { useGetWatchlistMovies } from "../../api/hooks/watchlist";
 
 const WatchlistPage = () => {
    const { control, watch } = useForm<WatchlistFiltersInput>({ defaultValues: { watchlistMode: "cool" } });
+   const { watchlistMode, search } = watch();
    const { data } = useGetWatchlistMovies();
+   const filteredData = data?.filter((movie) => movie.title.toLowerCase().includes(search?.toLowerCase() || ""));
 
    return (
       <Stack spacing={4}>
          <PageTitle title="WATCHLIST.HEADER" subtitle="WATCHLIST.SUBTITLE" />
          <Filters control={control} watch={watch} />
-         {watch("watchlistMode") === "cool" ? (
-            <>{data && <WatchlistList data={data} />}</>
+         {watchlistMode === "cool" ? (
+            <>{filteredData && <WatchlistList data={filteredData} />}</>
          ) : (
             <Card variant="outlined" sx={{ borderRadius: 2, border: "2px solid", borderColor: "primary.main" }}>
-               {data && <WatchlistTable data={data} />}
+               {filteredData && <WatchlistTable data={filteredData} />}
             </Card>
          )}
       </Stack>
