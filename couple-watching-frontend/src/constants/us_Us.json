@@ -38,5 +38,12 @@
    "START.BUTTON.PRIMARY": "Join the Fun! 🎉",
    "START.BUTTON.SECONDARY": "Just Login 💕",
    "WATCHLIST.CARD.BUTTON.PRIMARY": "Mark as watched",
-   "WATCHLIST.CARD.BUTTON.SECONDARY": "Delete"
+   "WATCHLIST.CARD.BUTTON.SECONDARY": "Delete",
+   "WATCHLIST.EMPTY_STATE.TITLE.FILTER": "Uh-oh! We couldn’t find that one...",
+   "WATCHLIST.EMPTY_STATE.SUBTITLE.FILTER": "We couldn’t find anything like X in your watchlist. Maybe it’s time to add it yourself? 🎥✨",
+   "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.CLEAR_FILTERS": "Clear search",
+   "WATCHLIST.EMPTY_STATE.BUTTON.SECONDARY.ADD_MOVIE": "New watchlist movie",
+   "WATCHLIST.EMPTY_STATE.TITLE.NO_DATA": "Empty and Ready!",
+   "WATCHLIST.EMPTY_STATE.SUBTITLE.NO_DATA": "Your watchlist is lonely... Time to fill it with some wild choices! 🎥",
+   "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.ADD_MOVIE": "Add a new watchlist movie"
 }
