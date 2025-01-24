@@ -37,12 +37,20 @@ export const defaultTheme = createTheme({
             root: {
                "& fieldset": {
                   borderColor: palette.common.white,
-                  borderRadius: 16,
+                  border: "2px solid",
+                  borderRadius: "16px",
                },
             },
          },
       },
       MuiFormLabel: {
+         styleOverrides: {
+            root: {
+               color: palette.common.white,
+            },
+         },
+      },
+      MuiInputAdornment: {
          styleOverrides: {
             root: {
                color: palette.common.white,

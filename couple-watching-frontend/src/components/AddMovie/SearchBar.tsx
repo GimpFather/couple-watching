@@ -32,7 +32,7 @@ const SearchBar = ({ control }: SearchBarProps) => {
                      input: {
                         startAdornment: (
                            <InputAdornment position="start">
-                              <SearchIcon sx={{ color: "common.white" }} />
+                              <SearchIcon />
                            </InputAdornment>
                         ),
                      },
