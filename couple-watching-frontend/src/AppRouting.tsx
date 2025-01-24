@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
-import ExamplePage from "./pages/Example/ExamplePage";
+import ExamplePage from "./pages/AddMovie/AddMovie";
 import DefaultLayout from "./components/Layout/DefaultLayout";
 import WatchlistPage from "./pages/Watchlist/WatchlistPage";
 import StarterPage from "./pages/Starter/StarterPage";
