@@ -1,5 +1,5 @@
 import { Search } from "@mui/icons-material";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Grid2 as Grid, Stack, Typography } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SearchMovieInputs } from "../../types/Inputs.types";
 import { useGetMovieDetails } from "../../api/hooks/movies";
@@ -11,23 +11,24 @@ import MovieCard from "../../components/AddMovie/MovieCard";
 
 function ExamplePage() {
    const { control, handleSubmit, watch } = useForm<SearchMovieInputs>({
-      defaultValues: { title: "Fight Club", type: "movie" },
+      defaultValues: { title: "", type: "movie" },
    });
-   const { title, type } = watch();
-   const { data: movieDetails } = useGetMovieDetails({ title: title, type: type });
+
+   const { type, title } = watch();
+   const { data: movieDetails, refetch } = useGetMovieDetails({ title, type });
 
    const onSubmit: SubmitHandler<SearchMovieInputs> = () => {
-      console.log(movieDetails);
+      refetch();
    };
 
    return (
       <Stack spacing={4}>
          <PageTitle title="Add the movie" subtitle="Search for the movie you want to add to your watchlist." />
          <form onSubmit={handleSubmit(onSubmit)}>
-            <Stack sx={{ backgroundColor: "background.paper", borderRadius: 4, padding: 1 }}>
+            <Stack sx={{ backgroundColor: "background.paper", borderRadius: 4, padding: 2 }}>
                <SearchBar control={control} />
                <TypeSelector watch={watch} control={control} />
-               <Box sx={{ padding: 2 }}>
+               <Box sx={{ padding: 2, maxWidth: "375px" }}>
                   <CustomIconButton
                      text={<Typography>Search</Typography>}
                      icon={<Search />}
@@ -37,13 +38,11 @@ function ExamplePage() {
             </Stack>
          </form>
          {movieDetails && (
-            <>
+            <Grid container spacing={2}>
                {movieDetails.map((movie) => (
-                  <Stack key={movie.id} alignItems="center" spacing={2}>
-                     <MovieCard title={movie.title} cover={movie.cover} />
-                  </Stack>
+                  <MovieCard title={movie.title} cover={movie.cover} />
                ))}
-            </>
+            </Grid>
          )}
       </Stack>
    );

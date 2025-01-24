@@ -17,11 +17,12 @@ const PickerButton = ({ handleOnClick, isSelected, caption }: PickerButtonProps)
          whileTap={{ scale: 0.95 }}
          onClick={() => handleOnClick()}
          direction="row"
+         spacing={2}
          justifyContent="space-between"
          alignItems="center"
          sx={{
             padding: 2,
-            width: "100%",
+            width: "160px",
             borderRadius: 4,
             backgroundColor: "background.paper",
             cursor: "pointer",
