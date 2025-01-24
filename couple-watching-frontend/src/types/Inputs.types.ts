@@ -1,5 +1,6 @@
 export type SearchMovieInputs = {
    title: string;
+   type: "movie" | "series";
 };
 
 export type MarkMovieWatchedInputs = {
