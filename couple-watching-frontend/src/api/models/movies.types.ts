@@ -1,6 +1,21 @@
 export interface MovieDetails {
-	title: string;
-	plot: string;
-	poster: string;
-	year: string;
+   id: string;
+   title: string;
+   productionYear: string;
+   plot: string;
+   cover: string;
+}
+
+export interface MovieDetailsCapital {
+   Title: string;
+   Plot: string;
+   Poster: string;
+   Year: string;
+   imdbId: string;
+}
+
+export interface MovieDetailsResponse {
+   Search: MovieDetailsCapital[];
+   Response: string;
+   totalResults: string;
 }

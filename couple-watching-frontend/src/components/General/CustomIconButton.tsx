@@ -14,7 +14,7 @@ const CustomIconButton = ({ handleOnClick, icon, text, dark, selected }: CustomI
       <Stack
          onClick={() => handleOnClick()}
          component={motion.div}
-         whileHover={selected ? {} : { scale: 1.1 }}
+         whileHover={selected ? {} : { scale: 1.05 }}
          whileTap={selected ? {} : { scale: 0.9 }}
          direction="row"
          spacing={1}
