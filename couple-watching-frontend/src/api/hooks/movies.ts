@@ -9,4 +9,5 @@ export const useGetMovieDetails = ({ title, type }: { title: string; type: "movi
    useQuery({
       queryKey: [MoviesQueryKeys.GET_DETAILS, title],
       queryFn: () => GetMovieDetails({ title, type }),
+      enabled: false,
    });
