@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 type CustomIconButtonProps = {
    handleOnClick: () => void;
-   icon: React.ReactNode;
+   icon?: React.ReactNode;
    text: React.ReactNode;
    dark?: boolean;
    selected?: boolean;
@@ -31,7 +31,7 @@ const CustomIconButton = ({ handleOnClick, icon, text, dark, selected }: CustomI
             color: dark ? "background.paper" : selected ? "primary.main" : "common.white",
          }}
       >
-         {icon}
+         {icon && icon}
          {text}
       </Stack>
    );

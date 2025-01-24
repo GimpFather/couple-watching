@@ -11,7 +11,6 @@ const AppRouting = () => {
          <Route path="hello" element={<StarterPage />} />
          <Route element={<DefaultLayout />}>
             <Route index element={<DashboardPage />} />
-            <Route path="example" element={<ExamplePage />} />
             <Route path="add-movie" element={<ExamplePage />} />
             <Route path="watchlist" element={<WatchlistPage />} />
          </Route>
