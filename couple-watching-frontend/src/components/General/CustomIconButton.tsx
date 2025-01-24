@@ -6,23 +6,29 @@ type CustomIconButtonProps = {
    icon: React.ReactNode;
    text: React.ReactNode;
    dark?: boolean;
+   selected?: boolean;
 };
 
-const CustomIconButton = ({ handleOnClick, icon, text, dark }: CustomIconButtonProps) => {
+const CustomIconButton = ({ handleOnClick, icon, text, dark, selected }: CustomIconButtonProps) => {
    return (
       <Stack
          onClick={() => handleOnClick()}
          component={motion.div}
-         whileHover={{ scale: 1.05 }}
-         whileTap={{ scale: 0.9 }}
+         whileHover={selected ? {} : { scale: 1.1 }}
+         whileTap={selected ? {} : { scale: 0.9 }}
          direction="row"
          spacing={1}
          alignItems="center"
          sx={{
             padding: 1,
-            backgroundColor: "primary.main",
+            backgroundColor: selected ? "background.common" : "primary.main",
             borderRadius: 4,
-            color: dark ? "background.paper" : "common.white",
+            cursor: selected ? "default" : "pointer",
+            ...(selected && {
+               border: "2px solid",
+               borderColor: "primary.main",
+            }),
+            color: dark ? "background.paper" : selected ? "primary.main" : "common.white",
          }}
       >
          {icon}
