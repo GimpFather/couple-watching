@@ -41,7 +41,7 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
    const onSubmit: SubmitHandler<MarkMovieWatchedInputs> = (data) => console.log(data);
 
    return (
-      <Dialog open={open} onClose={onClose} PaperProps={{ sx: { borderRadius: 4 } }}>
+      <Dialog open={open} onClose={onClose}>
          <form onSubmit={handleSubmit(onSubmit)}>
             <DialogTitle>
                <Typography variant="h4">

@@ -1,4 +1,4 @@
-import { Card, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
 import WatchlistTable from "./WatchlistTable";
 import { useForm } from "react-hook-form";
@@ -7,11 +7,13 @@ import WatchlistList from "./WatchlistList";
 import { WatchlistFiltersInput } from "../../types/Inputs.types";
 import { useGetWatchlistMovies } from "../../api/hooks/watchlist";
 import WatchlistSkeleton from "../../components/Watchlist/WatchlistSkeleton";
+import InfoSection from "../../components/General/InfoSection";
+import { useNavigate } from "react-router";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
-import InfoSection from "../../components/General/InfoSection";
 
 const WatchlistPage = () => {
+   const navigate = useNavigate();
    const { control, watch, setValue } = useForm<WatchlistFiltersInput>({ defaultValues: { watchlistMode: "cool" } });
    const { watchlistMode, search } = watch();
    const { data, isLoading } = useGetWatchlistMovies();
@@ -27,35 +29,30 @@ const WatchlistPage = () => {
             <>
                {data && data.length ? (
                   <>
-                     {watchlistMode === "cool" ? (
+                     {filteredData && filteredData.length ? (
                         <>
-                           {filteredData?.length ? (
+                           {watchlistMode === "cool" ? (
                               <WatchlistList data={filteredData} />
                            ) : (
-                              <InfoSection
-                                 title="WATCHLIST.EMPTY_STATE.TITLE.FILTER"
-                                 subtitle="WATCHLIST.EMPTY_STATE.SUBTITLE.FILTER"
-                                 emoji="😔"
-                                 primaryButton={{
-                                    icon: <ClearAllIcon />,
-                                    caption: "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.CLEAR_FILTERS",
-                                    action: () => setValue("search", ""),
-                                 }}
-                                 secondaryButton={{
-                                    icon: <LibraryAddIcon />,
-                                    caption: "WATCHLIST.EMPTY_STATE.BUTTON.SECONDARY.ADD_MOVIE",
-                                    action: () => alert("Add movie to watchlist"),
-                                 }}
-                              />
+                              <WatchlistTable data={filteredData} />
                            )}
                         </>
                      ) : (
-                        <Card
-                           variant="outlined"
-                           sx={{ borderRadius: 2, border: "2px solid", borderColor: "primary.main" }}
-                        >
-                           {filteredData && <WatchlistTable data={filteredData} />}
-                        </Card>
+                        <InfoSection
+                           title="WATCHLIST.EMPTY_STATE.TITLE.FILTER"
+                           subtitle="WATCHLIST.EMPTY_STATE.SUBTITLE.FILTER"
+                           emoji="😔"
+                           primaryButton={{
+                              icon: <ClearAllIcon />,
+                              caption: "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.CLEAR_FILTERS",
+                              action: () => setValue("search", ""),
+                           }}
+                           secondaryButton={{
+                              icon: <LibraryAddIcon />,
+                              caption: "WATCHLIST.EMPTY_STATE.BUTTON.SECONDARY.ADD_MOVIE",
+                              action: () => navigate("/add-movie"),
+                           }}
+                        />
                      )}
                   </>
                ) : (
@@ -66,7 +63,7 @@ const WatchlistPage = () => {
                      primaryButton={{
                         icon: <LibraryAddIcon />,
                         caption: "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.ADD_MOVIE",
-                        action: () => alert("Add movie to watchlist"),
+                        action: () => navigate("/add-movie"),
                      }}
                   />
                )}

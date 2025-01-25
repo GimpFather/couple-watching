@@ -1,6 +1,6 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { Movie } from "../../types/Watchlist.types";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import MovieActions from "../../components/Watchlist/MovieActions";
 import { useIntl } from "react-intl";
@@ -50,45 +50,52 @@ const WatchlistTable = ({ data }: WatchlistTableProps) => {
    });
 
    return (
-      <TableContainer sx={{ width: "100%" }} component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-         <Table size="small">
-            <TableHead>
-               {watchlistTable.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id}>
-                     {headerGroup.headers.map((header) => (
-                        <TableCell
-                           key={header.id}
-                           sx={{
-                              width: header.getSize(),
-                              fontWeight: 600,
-                              color: "primary.main",
-                              borderBottom: "2px solid",
-                              borderColor: "primary.main",
-                           }}
-                        >
-                           <Typography variant="h6">
-                              {header.isPlaceholder
-                                 ? null
-                                 : flexRender(header.column.columnDef.header, header.getContext())}
-                           </Typography>
-                        </TableCell>
-                     ))}
-                  </TableRow>
-               ))}
-            </TableHead>
-            <TableBody>
-               {watchlistTable.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id} sx={{ "&:last-child td": { borderBottom: 0 } }}>
-                     {row.getVisibleCells().map((cell) => (
-                        <TableCell sx={{ borderBottom: "2px solid", borderColor: "primary.main" }} key={cell.id}>
-                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </TableCell>
-                     ))}
-                  </TableRow>
-               ))}
-            </TableBody>
-         </Table>
-      </TableContainer>
+      <Card sx={{ borderRadius: 4, border: "2px solid", borderColor: "primary.main" }}>
+         <TableContainer
+            sx={{ width: "100%" }}
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+         >
+            <Table size="small">
+               <TableHead>
+                  {watchlistTable.getHeaderGroups().map((headerGroup) => (
+                     <TableRow key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => (
+                           <TableCell
+                              key={header.id}
+                              sx={{
+                                 width: header.getSize(),
+                                 fontWeight: 600,
+                                 color: "primary.main",
+                                 borderBottom: "2px solid",
+                                 borderColor: "primary.main",
+                              }}
+                           >
+                              <Typography variant="h6">
+                                 {header.isPlaceholder
+                                    ? null
+                                    : flexRender(header.column.columnDef.header, header.getContext())}
+                              </Typography>
+                           </TableCell>
+                        ))}
+                     </TableRow>
+                  ))}
+               </TableHead>
+               <TableBody>
+                  {watchlistTable.getRowModel().rows.map((row) => (
+                     <TableRow key={row.id} sx={{ "&:last-child td": { borderBottom: 0 } }}>
+                        {row.getVisibleCells().map((cell) => (
+                           <TableCell sx={{ borderBottom: "2px solid", borderColor: "primary.main" }} key={cell.id}>
+                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                           </TableCell>
+                        ))}
+                     </TableRow>
+                  ))}
+               </TableBody>
+            </Table>
+         </TableContainer>
+      </Card>
    );
 };
 
