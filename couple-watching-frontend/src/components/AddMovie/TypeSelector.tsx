@@ -12,14 +12,7 @@ type TypeSelectorProps = {
 
 const TypeSelector = ({ control, watch }: TypeSelectorProps) => {
    return (
-      <Stack
-         direction="row"
-         sx={{ padding: 2 }}
-         spacing={2}
-         component={motion.div}
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
-      >
+      <Stack direction="row" spacing={2} component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
          <Controller
             control={control}
             name="type"

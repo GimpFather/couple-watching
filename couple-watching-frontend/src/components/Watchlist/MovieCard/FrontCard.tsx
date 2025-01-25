@@ -39,8 +39,8 @@ const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) =
                      {movie.title}
                   </Typography>
                   <Stack direction="row" justifyContent="center" spacing={1}>
-                     {movie.genre.map((genre: string) => (
-                        <Typography>#{genre}</Typography>
+                     {movie.genre.map((genre: string, index) => (
+                        <Typography key={index}>#{genre}</Typography>
                      ))}
                   </Stack>
                   <Box sx={{ width: "fit-content", alignSelf: "center" }}>

@@ -64,7 +64,7 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
                         <Typography color="background.paper" variant="body2" fontWeight={600} component="span">
                            {movie.imdbReview}
                         </Typography>
-                        /10
+                        <FormattedMessage id="WATCHLIST.CARD.BACK_CARD.RATE.SLASH_TEN" />
                      </Typography>
                   </Stack>
                </Stack>
@@ -84,8 +84,10 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
                   {movie.plot}
                </Typography>
                <Stack alignItems="center" direction="row" spacing={1}>
-                  {movie.genre.map((genre) => (
-                     <Typography variant="body1">#{genre}</Typography>
+                  {movie.genre.map((genre, index) => (
+                     <Typography key={index} variant="body1">
+                        #{genre}
+                     </Typography>
                   ))}
                </Stack>
             </Stack>

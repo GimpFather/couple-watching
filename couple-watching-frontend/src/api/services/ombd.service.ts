@@ -12,6 +12,10 @@ export const GetSearchForMovies = async ({ title, type }: OMDbSearchParameters) 
    const result = await axiosOMDBInstance.get<MovieSearchResponse>("", {
       params: { s: title, type: type },
    });
+
+   if (result.data.Response === "False") {
+      throw new Error(result.data.Error);
+   }
    const transformedData: MovieSearchDetails[] = result.data.Search.map((item: MovieSearchCapital) => ({
       ...item,
       id: item.imdbId,

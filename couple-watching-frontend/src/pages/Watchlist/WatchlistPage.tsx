@@ -6,10 +6,10 @@ import Filters from "../../components/Watchlist/Filters";
 import WatchlistList from "./WatchlistList";
 import { WatchlistFiltersInput } from "../../types/Inputs.types";
 import { useGetWatchlistMovies } from "../../api/hooks/watchlist";
-import WatchlistEmptyState from "../../components/Watchlist/WatchlistEmptyState";
 import WatchlistSkeleton from "../../components/Watchlist/WatchlistSkeleton";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
+import InfoSection from "../../components/General/InfoSection";
 
 const WatchlistPage = () => {
    const { control, watch, setValue } = useForm<WatchlistFiltersInput>({ defaultValues: { watchlistMode: "cool" } });
@@ -32,7 +32,7 @@ const WatchlistPage = () => {
                            {filteredData?.length ? (
                               <WatchlistList data={filteredData} />
                            ) : (
-                              <WatchlistEmptyState
+                              <InfoSection
                                  title="WATCHLIST.EMPTY_STATE.TITLE.FILTER"
                                  subtitle="WATCHLIST.EMPTY_STATE.SUBTITLE.FILTER"
                                  emoji="😔"
@@ -59,7 +59,7 @@ const WatchlistPage = () => {
                      )}
                   </>
                ) : (
-                  <WatchlistEmptyState
+                  <InfoSection
                      title="WATCHLIST.EMPTY_STATE.TITLE.NO_DATA"
                      subtitle="WATCHLIST.EMPTY_STATE.SUBTITLE.NO_DATA"
                      emoji="🍿"

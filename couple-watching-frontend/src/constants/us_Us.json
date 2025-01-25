@@ -10,7 +10,7 @@
    "FILTERS.NERD_COOL_MODE.TITLE.AND": " and ",
    "FILTERS.NERD_COOL_MODE.TITLE.COOL": "The Cool Mode",
    "FILTERS.NERD_COOL_MODE.TITLE.SUBTITLE": "Choose the way, you gonna see the list.",
-   "FILTERS.SEARCHBAR.LABEL": "Search for the movie via title 👀",
+   "FILTERS.SEARCHBAR.LABEL": "Search for the movie or series via title 👀",
    "WATCHLIST.TABLE.HEADER.MOVIE": "Movie",
    "WATCHLIST.TABLE.HEADER.GENRE": "Genre",
    "WATCHLIST.TABLE.HEADER.DIRECTOR": "Director",
@@ -48,8 +48,14 @@
    "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.ADD_MOVIE": "Add a new watchlist movie",
    "ADD_MOVIE.HEADER": "Add Movie",
    "ADD_MOVIE.SUBTITLE": "🎞️ Search for a gem to keep your watchlist sizzling hot! 🔥 Time to Expand the List!",
-   "ADD_MOVIE.SEARCHBAR.LABEL": "Search for the movie or series via title 👀",
+   "ADD_MOVIE.SEARCHBAR.LABEL": "Search for the movie or series via title and just smash enter 👀",
    "ADD_MOVIE.TYPE.SERIES" : "Series",
    "ADD_MOVIE.TYPE.MOVIE" : "Movie",
-   "ADD_MOVIE.SEARCH": "Search"
+   "ADD_MOVIE.SEARCH": "Search",
+   "ADD_MOVIE.ERROR.NOT_FOUND": "Movie not found",
+   "ADD_MOVIE.ERROR_SUBTITLE.NOT_FOUND": "Oooops! We couldn’t find any movie matching your search. Maybe try again with a different title?",
+   "ADD_MOVIE.TOO_MANY_RESULTS": "Too many results!",
+   "ADD_MOVIE.TOO_MANY_RESULTS_SUBTITLE": "The search results are a bit overwhelming. Narrow down your search by adding more details, and you'll find exactly what you're looking for!",
+   "WATCHLIST.CARD.BACK_CARD.RATE.SLASH_TEN": "/10",
+   "ADD_MOVIE.SEARCHBAR.ENTER": "Enter"
 }
