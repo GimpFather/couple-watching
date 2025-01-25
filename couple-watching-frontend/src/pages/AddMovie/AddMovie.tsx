@@ -1,4 +1,4 @@
-import { Grid2 as Grid, Stack, Typography } from "@mui/material";
+import { Grid2 as Grid, Stack } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SearchMovieInputs } from "../../types/Inputs.types";
 import { useGetSearchForMovies } from "../../api/hooks/movies";
@@ -8,6 +8,7 @@ import TypeSelector from "../../components/AddMovie/TypeSelector";
 import MovieCard from "../../components/AddMovie/MovieCard";
 import SearchErrorSection from "../../components/AddMovie/SearchErrorSection";
 import React from "react";
+import Loading from "../../components/General/Loading";
 
 function ExamplePage() {
    const { control, handleSubmit, watch } = useForm<SearchMovieInputs>({
@@ -45,21 +46,27 @@ function ExamplePage() {
                sx={{ backgroundColor: "background.paper", borderRadius: 4, padding: 2 }}
             >
                <Grid size={{ xs: 12, md: "grow" }}>
-                  <SearchBar control={control} />
+                  <SearchBar control={control} handleSubmit={() => refetch()} />
                </Grid>
                <Grid size={{ xs: 12, md: "auto" }}>
                   <TypeSelector watch={watch} control={control} />
                </Grid>
             </Grid>
          </form>
-         {isLoading && <Typography>Loading...</Typography>}
-         {error && <SearchErrorSection response={error?.message} />}
-         {movieDetails && (
-            <Grid container spacing={2}>
-               {movieDetails.map((movie) => (
-                  <MovieCard title={movie.title} cover={movie.cover} />
-               ))}
-            </Grid>
+         {isLoading ? (
+            <Loading />
+         ) : error ? (
+            <SearchErrorSection response={error?.message} />
+         ) : (
+            <>
+               {movieDetails && (
+                  <Grid container spacing={2}>
+                     {movieDetails.map((movie) => (
+                        <MovieCard title={movie.title} cover={movie.cover} />
+                     ))}
+                  </Grid>
+               )}
+            </>
          )}
       </Stack>
    );
