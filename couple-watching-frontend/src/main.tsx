@@ -11,6 +11,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { IntlProvider } from "react-intl";
 import us_US from "./constants/us_Us.json";
+import dayjs from "dayjs";
+import updateLocale from "dayjs/plugin/updateLocale";
+
+dayjs.extend(updateLocale);
+dayjs.updateLocale("en", {
+   weekStart: 1,
+});
 
 const queryClient = new QueryClient();
 
