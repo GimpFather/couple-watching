@@ -1,9 +1,10 @@
-import { InputAdornment, Stack, TextField } from "@mui/material";
+import { InputAdornment, Stack, TextField, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import SearchIcon from "@mui/icons-material/Search";
 import { Control, Controller } from "react-hook-form";
 import { FormattedMessage } from "react-intl";
 import { SearchMovieInputs } from "../../types/Inputs.types";
+import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 
 type SearchBarProps = {
    control: Control<SearchMovieInputs, unknown>;
@@ -16,7 +17,7 @@ const SearchBar = ({ control }: SearchBarProps) => {
          direction="row"
          alignItems="center"
          justifyContent="space-between"
-         sx={{ padding: 2, width: "100%", backgroundColor: "background.paper", borderRadius: 4 }}
+         sx={{ backgroundColor: "background.paper", borderRadius: 4 }}
          component={motion.div}
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
@@ -27,6 +28,11 @@ const SearchBar = ({ control }: SearchBarProps) => {
             render={({ field }) => (
                <TextField
                   {...field}
+                  onKeyDown={(e) => {
+                     if (e.key === "Enter") {
+                        field.onChange(e);
+                     }
+                  }}
                   label={<FormattedMessage id="ADD_MOVIE.SEARCHBAR.LABEL" />}
                   slotProps={{
                      input: {
@@ -34,6 +40,19 @@ const SearchBar = ({ control }: SearchBarProps) => {
                            <InputAdornment position="start">
                               <SearchIcon />
                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                           <Stack
+                              direction="row"
+                              alignItems="center"
+                              spacing={1}
+                              sx={{ border: "2px solid", borderRadius: 2, paddingX: 1, marginLeft: 1 }}
+                           >
+                              <KeyboardReturnIcon />
+                              <Typography variant="body2">
+                                 <FormattedMessage id="ADD_MOVIE.SEARCHBAR.ENTER" />
+                              </Typography>
+                           </Stack>
                         ),
                      },
                   }}

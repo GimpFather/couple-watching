@@ -18,6 +18,7 @@ export interface MovieSearchResponse {
    Search: MovieSearchCapital[];
    Response: string;
    totalResults: string;
+   Error?: string;
 }
 
 export type OMDbSearchParameters = {

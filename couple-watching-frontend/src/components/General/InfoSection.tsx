@@ -1,9 +1,9 @@
 import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
-import CustomIconButton from "../General/CustomIconButton";
+import CustomIconButton from "./CustomIconButton";
 import { motion } from "motion/react";
 import { FormattedMessage } from "react-intl";
 
-type WatchlistEmptyStateProps = {
+type InfoSectionProps = {
    title: string;
    subtitle: string;
    emoji: string;
@@ -19,7 +19,7 @@ type WatchlistEmptyStateProps = {
    };
 };
 
-const WatchlistEmptyState = ({ title, subtitle, emoji, primaryButton, secondaryButton }: WatchlistEmptyStateProps) => {
+const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }: InfoSectionProps) => {
    const { breakpoints } = useTheme();
    const isMobile = useMediaQuery(breakpoints.down("sm"));
    return (
@@ -68,4 +68,4 @@ const WatchlistEmptyState = ({ title, subtitle, emoji, primaryButton, secondaryB
    );
 };
 
-export default WatchlistEmptyState;
+export default InfoSection;
