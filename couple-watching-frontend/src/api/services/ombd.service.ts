@@ -18,7 +18,7 @@ export const GetSearchForMovies = async ({ title, type }: OMDbSearchParameters) 
    }
    const transformedData: MovieSearchDetails[] = result.data.Search.map((item: MovieSearchCapital) => ({
       ...item,
-      id: item.imdbId,
+      id: item.imdbID,
       title: item.Title,
       plot: item.Plot,
       cover: item.Poster,

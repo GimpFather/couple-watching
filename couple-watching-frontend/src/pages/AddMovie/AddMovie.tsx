@@ -72,8 +72,8 @@ function ExamplePage() {
             <>
                {movieDetails && movieDetails.length !== 0 && (
                   <Grid container spacing={2}>
-                     {movieDetails.map((movie) => (
-                        <MovieCard title={movie.title} cover={movie.cover} />
+                     {movieDetails.map((movie, index) => (
+                        <MovieCard key={index} movie={movie} />
                      ))}
                   </Grid>
                )}
