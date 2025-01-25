@@ -1,6 +1,6 @@
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { Movie } from "../../types/Watchlist.types";
+import { Movie, WatchedMovie } from "../../types/Watchlist.types";
 
 export const GetWatchlistMovies = async (): Promise<Movie[]> => {
    const querySnapshot = await getDocs(collection(db, "watchlist"));
@@ -14,5 +14,10 @@ export const GetWatchlistMovies = async (): Promise<Movie[]> => {
 
 export const PostMovieToWatchlist = async (movie: Movie) => {
    const docRef = doc(db, "watchlist", movie.id);
+   await setDoc(docRef, movie);
+};
+
+export const PostMovieAsWatched = async (movie: WatchedMovie) => {
+   const docRef = doc(db, "watched", movie.id);
    await setDoc(docRef, movie);
 };

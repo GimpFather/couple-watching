@@ -1,14 +1,12 @@
 import {
-   Button,
    Dialog,
    DialogActions,
    DialogContent,
    DialogContentText,
    DialogTitle,
-   Divider,
-   Grid2 as Grid,
    Stack,
    Typography,
+   useTheme,
 } from "@mui/material";
 import { toast } from "react-toastify";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -21,6 +19,7 @@ import TagsSection from "./TagsSection";
 import { FormattedMessage } from "react-intl";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import CustomIconButton from "../General/CustomIconButton";
 
 interface AddProductDialogProps {
    open: boolean;
@@ -28,16 +27,12 @@ interface AddProductDialogProps {
 }
 
 const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
+   const { palette } = useTheme();
    const { control, handleSubmit, watch } = useForm<MarkMovieWatchedInputs>({
       defaultValues: { rating: 5, watchedDate: new Date(), tags: {} },
    });
 
-   const notify = () =>
-      toast(
-         `Nice! That film is officially watched. 🎉 You watched it ${dayjs(watch("watchedDate")).format(
-            "DD-MM-YYYY"
-         )}, and you rate it by ${watch("rating")}!`
-      );
+   const notify = () => toast("Nice! That film is officially watched. 🎉");
    const onSubmit: SubmitHandler<MarkMovieWatchedInputs> = (data) => console.log(data);
 
    return (
@@ -55,94 +50,97 @@ const MarkWatchedDialog = ({ open, onClose }: AddProductDialogProps) => {
                         <FormattedMessage id="WATCHLIST.DIALOG.MARK.SUBTITLE" />
                      </Typography>
                   </DialogContentText>
-                  <Grid container spacing={2}>
-                     <Grid size={12}>
+                  <Stack spacing={2}>
+                     <Controller
+                        name="watchedDate"
+                        control={control}
+                        render={({ field }) => (
+                           <DatePicker
+                              sx={{ width: "100%" }}
+                              name={field.name}
+                              value={dayjs(field.value)}
+                              onChange={(date) => field.onChange(date)}
+                              defaultValue={dayjs(new Date())}
+                              format="DD/MM/YYYY"
+                              label={<FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.WATCHED_DATE.LABEL" />}
+                              slots={{ openPickerIcon: EventAvailableIcon }}
+                              slotProps={{
+                                 openPickerIcon: {
+                                    sx: { color: palette.common.white },
+                                 },
+                                 inputAdornment: {
+                                    position: "end",
+                                 },
+                                 textField: {
+                                    variant: "outlined",
+                                    color: "primary",
+                                 },
+                                 leftArrowIcon: {
+                                    sx: { color: palette.common.white },
+                                 },
+                                 rightArrowIcon: {
+                                    sx: { color: palette.common.white },
+                                 },
+                                 switchViewIcon: {
+                                    sx: { color: palette.common.white },
+                                 },
+                                 layout: {
+                                    sx: {
+                                       "& .MuiDayCalendar-weekDayLabel": {
+                                          color: palette.primary.main,
+                                       },
+                                    },
+                                 },
+                              }}
+                           />
+                        )}
+                     />
+                     <Stack spacing={1}>
+                        <Typography variant="body1">
+                           <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.RATING.LABEL" />
+                        </Typography>
                         <Controller
-                           name="watchedDate"
+                           name="rating"
                            control={control}
                            render={({ field }) => (
-                              <DatePicker
-                                 sx={{ width: "100%" }}
-                                 name={field.name}
-                                 value={dayjs(field.value)}
-                                 onChange={(date) => field.onChange(date)}
-                                 defaultValue={dayjs(new Date())}
-                                 format="DD/MM/YYYY"
-                                 label={<FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.WATCHED_DATE.LABEL" />}
-                                 slots={{ openPickerIcon: EventAvailableIcon }}
-                                 slotProps={{
-                                    openPickerIcon: {
-                                       sx: { color: "#fff" },
-                                    },
-                                    inputAdornment: {
-                                       position: "end",
-                                    },
-                                    textField: {
-                                       variant: "outlined",
-                                       color: "primary",
-                                    },
-                                 }}
-                              />
+                              <StarRating value={field.value} handleRate={(value: number) => field.onChange(value)} />
                            )}
                         />
-                     </Grid>
-                     <Grid size={12}>
-                        <Stack spacing={1}>
-                           <Typography variant="body1">
-                              <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.RATING.LABEL" />
-                           </Typography>
-                           <Controller
-                              name="rating"
-                              control={control}
-                              render={({ field }) => (
-                                 <StarRating
-                                    value={field.value}
-                                    handleRate={(value: number) => field.onChange(value)}
-                                 />
-                              )}
-                           />
-                        </Stack>
-                     </Grid>
-                     <Divider
-                        sx={{ width: "100%", border: "1px solid", borderRadius: 4, borderColor: "common.white" }}
-                     />
-                     <Grid size={12}>
-                        <Stack spacing={1}>
-                           <Typography variant="body1">
-                              <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.TAGS.LABEL" />
-                           </Typography>
-                           <TagsSection watch={watch} control={control} />
-                        </Stack>
-                     </Grid>
-                  </Grid>
+                     </Stack>
+                     <Stack spacing={1.25}>
+                        <Typography variant="body1">
+                           <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.TAGS.LABEL" />
+                        </Typography>
+                        <TagsSection watch={watch} control={control} />
+                     </Stack>
+                  </Stack>
                </Stack>
             </DialogContent>
             <DialogActions sx={{ padding: 2 }}>
-               <Button
-                  type="submit"
-                  variant="contained"
-                  startIcon={<CheckCircleOutlineIcon />}
-                  sx={{ paddingX: 2 }}
-                  onClick={() => {
+               <CustomIconButton
+                  handleOnClick={() => {
                      notify();
                      onClose();
                   }}
-               >
-                  <Typography variant="body2" sx={{ textTransform: "initial" }}>
-                     <FormattedMessage id="WATCHLIST.DIALOG.ACTION.PRIMARY" />
-                  </Typography>
-               </Button>
-               <Button
-                  variant="text"
-                  color="secondary"
-                  startIcon={<ExitToAppIcon />}
-                  sx={{ paddingX: 2 }}
-                  onClick={onClose}
-               >
-                  <Typography variant="body2" sx={{ textTransform: "initial" }}>
-                     <FormattedMessage id="WATCHLIST.DIALOG.ACTION.SECONDARY" />
-                  </Typography>
-               </Button>
+                  icon={<CheckCircleOutlineIcon />}
+                  text={
+                     <Typography>
+                        <FormattedMessage id="WATCHLIST.DIALOG.ACTION.PRIMARY" />
+                     </Typography>
+                  }
+               />
+               <CustomIconButton
+                  dark
+                  handleOnClick={() => {
+                     onClose();
+                  }}
+                  icon={<ExitToAppIcon />}
+                  text={
+                     <Typography>
+                        <FormattedMessage id="WATCHLIST.DIALOG.ACTION.SECONDARY" />
+                     </Typography>
+                  }
+               />
             </DialogActions>
          </form>
       </Dialog>

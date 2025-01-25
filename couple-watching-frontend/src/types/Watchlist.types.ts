@@ -1,3 +1,5 @@
+import { MovieTags } from "./Inputs.types";
+
 export type Movie = {
    id: string;
    title: string;
@@ -8,4 +10,10 @@ export type Movie = {
    director: string;
    plot: string;
    cover: string;
+};
+
+export type WatchedMovie = Movie & {
+   watchedDate: Date;
+   rating: number;
+   tags?: MovieTags;
 };
