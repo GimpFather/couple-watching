@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { Control, Controller, UseFormWatch } from "react-hook-form";
 import { SearchMovieInputs } from "../../types/Inputs.types";
 import PickerButton from "../General/PickerButton";
+import { FormattedMessage } from "react-intl";
 
 type TypeSelectorProps = {
    control: Control<SearchMovieInputs, unknown>;
@@ -26,7 +27,7 @@ const TypeSelector = ({ control, watch }: TypeSelectorProps) => {
                <PickerButton
                   handleOnClick={() => field.onChange("movie")}
                   isSelected={watch("type") === "movie"}
-                  caption={"Movie"}
+                  caption={<FormattedMessage id="ADD_MOVIE.TYPE.MOVIE" />}
                />
             )}
          />
@@ -37,7 +38,7 @@ const TypeSelector = ({ control, watch }: TypeSelectorProps) => {
                <PickerButton
                   handleOnClick={() => field.onChange("series")}
                   isSelected={watch("type") === "series"}
-                  caption="Series"
+                  caption={<FormattedMessage id="ADD_MOVIE.TYPE.SERIES" />}
                />
             )}
          />

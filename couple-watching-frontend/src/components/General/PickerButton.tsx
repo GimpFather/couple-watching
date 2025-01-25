@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 type PickerButtonProps = {
    handleOnClick: () => void;
    isSelected: boolean;
-   caption: string;
+   caption: React.ReactNode;
 };
 
 const PickerButton = ({ handleOnClick, isSelected, caption }: PickerButtonProps) => {
