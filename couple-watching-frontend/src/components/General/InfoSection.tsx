@@ -40,30 +40,32 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
                <FormattedMessage id={subtitle} />
             </Typography>
          </Stack>
-         <Stack direction={isMobile ? "column" : "row"} spacing={2}>
-            {primaryButton && (
-               <CustomIconButton
-                  handleOnClick={() => primaryButton.action()}
-                  icon={primaryButton.icon}
-                  text={
-                     <Typography>
-                        <FormattedMessage id={primaryButton.caption} />
-                     </Typography>
-                  }
-               />
-            )}
-            {secondaryButton && (
-               <CustomIconButton
-                  handleOnClick={() => secondaryButton.action()}
-                  icon={secondaryButton.icon}
-                  text={
-                     <Typography>
-                        <FormattedMessage id={secondaryButton.caption} />
-                     </Typography>
-                  }
-               />
-            )}
-         </Stack>
+         {(primaryButton || secondaryButton) && (
+            <Stack direction={isMobile ? "column" : "row"} spacing={2}>
+               {primaryButton && (
+                  <CustomIconButton
+                     handleOnClick={() => primaryButton.action()}
+                     icon={primaryButton.icon}
+                     text={
+                        <Typography>
+                           <FormattedMessage id={primaryButton.caption} />
+                        </Typography>
+                     }
+                  />
+               )}
+               {secondaryButton && (
+                  <CustomIconButton
+                     handleOnClick={() => secondaryButton.action()}
+                     icon={secondaryButton.icon}
+                     text={
+                        <Typography>
+                           <FormattedMessage id={secondaryButton.caption} />
+                        </Typography>
+                     }
+                  />
+               )}
+            </Stack>
+         )}
       </Stack>
    );
 };

@@ -57,5 +57,11 @@
    "ADD_MOVIE.TOO_MANY_RESULTS": "Too many results!",
    "ADD_MOVIE.TOO_MANY_RESULTS_SUBTITLE": "The search results are a bit overwhelming. Narrow down your search by adding more details, and you'll find exactly what you're looking for!",
    "WATCHLIST.CARD.BACK_CARD.RATE.SLASH_TEN": "/10",
-   "ADD_MOVIE.SEARCHBAR.ENTER": "Enter"
+   "ADD_MOVIE.SEARCHBAR.ENTER": "Enter",
+   "ADD_MOVIE.HEADER.SHY": "Feeling shy?",
+   "ADD_MOVIE.SUBTITLE.SHY": "Don’t worry! I’ll wait :) Whenever you’re ready!",
+   "ADD_MOVIE.HEADER.THINKING": "Still thinking?",
+   "ADD_MOVIE.SUBTITLE.THINKING": "Take your time! I'm here for you :)",
+   "ADD_MOVIE.HEADER.LOOKING": "I'm watching you bitch.",
+   "ADD_MOVIE.SUBTITLE.LOOKING": "This better be good, or I'm shutting this down."
 }
