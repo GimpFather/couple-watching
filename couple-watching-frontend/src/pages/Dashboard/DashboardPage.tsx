@@ -1,7 +1,8 @@
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
 import { motion } from "motion/react";
 import { Link } from "react-router";
+import Loading from "../../components/General/Loading";
 
 const DashboardPage = () => {
    return (
@@ -19,6 +20,8 @@ const DashboardPage = () => {
                <Button variant="contained">Przejdź do strony startowej</Button>
             </Link>
          </Stack>
+         <Typography variant="h4">Look at this cool loading</Typography>
+         <Loading />
       </Stack>
    );
 };

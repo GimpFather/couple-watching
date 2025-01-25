@@ -6,7 +6,7 @@ import { FormattedMessage } from "react-intl";
 type InfoSectionProps = {
    title: string;
    subtitle: string;
-   emoji: string;
+   emoji: string | React.ReactNode;
    primaryButton?: {
       caption: string;
       icon: React.ReactNode;
