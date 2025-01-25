@@ -1,6 +1,6 @@
 {
    "NAVBAR.DASHBOARD": "Dashboard",
-   "NAVBAR.ADD_THE_MOVIE": "Add the movie",
+   "NAVBAR.ADD_THE_MOVIE": "Add movie",
    "NAVBAR.WATCHLIST": "Watchlist",
    "DASHBOARD.HEADER": "Dashboard",
    "DASHBOARD.SUBTITLE": "🎥 Welcome to Your Watchlist Dashboard! 📊 Keep track of your stats and discover your next binge-worthy favorites!",
@@ -45,5 +45,11 @@
    "WATCHLIST.EMPTY_STATE.BUTTON.SECONDARY.ADD_MOVIE": "New watchlist movie",
    "WATCHLIST.EMPTY_STATE.TITLE.NO_DATA": "Empty and Ready!",
    "WATCHLIST.EMPTY_STATE.SUBTITLE.NO_DATA": "Your watchlist is lonely... Time to fill it with some wild choices! 🎥",
-   "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.ADD_MOVIE": "Add a new watchlist movie"
+   "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.ADD_MOVIE": "Add a new watchlist movie",
+   "ADD_MOVIE.HEADER": "Add Movie",
+   "ADD_MOVIE.SUBTITLE": "🎞️ Search for a gem to keep your watchlist sizzling hot! 🔥 Time to Expand the List!",
+   "ADD_MOVIE.SEARCHBAR.LABEL": "Search for the movie or series via title 👀",
+   "ADD_MOVIE.TYPE.SERIES" : "Series",
+   "ADD_MOVIE.TYPE.MOVIE" : "Movie",
+   "ADD_MOVIE.SEARCH": "Search"
 }

@@ -8,6 +8,7 @@ import SearchBar from "../../components/AddMovie/SearchBar";
 import TypeSelector from "../../components/AddMovie/TypeSelector";
 import CustomIconButton from "../../components/General/CustomIconButton";
 import MovieCard from "../../components/AddMovie/MovieCard";
+import { FormattedMessage } from "react-intl";
 
 function ExamplePage() {
    const { control, handleSubmit, watch } = useForm<SearchMovieInputs>({
@@ -23,14 +24,18 @@ function ExamplePage() {
 
    return (
       <Stack spacing={4}>
-         <PageTitle title="Add the movie" subtitle="Search for the movie you want to add to your watchlist." />
+         <PageTitle title="ADD_MOVIE.HEADER" subtitle="ADD_MOVIE.SUBTITLE" />
          <form onSubmit={handleSubmit(onSubmit)}>
             <Stack sx={{ backgroundColor: "background.paper", borderRadius: 4, padding: 2 }}>
                <SearchBar control={control} />
                <TypeSelector watch={watch} control={control} />
                <Box sx={{ padding: 2, maxWidth: "375px" }}>
                   <CustomIconButton
-                     text={<Typography>Search</Typography>}
+                     text={
+                        <Typography>
+                           <FormattedMessage id="ADD_MOVIE.SEARCH" />
+                        </Typography>
+                     }
                      icon={<Search />}
                      handleOnClick={handleSubmit(onSubmit)}
                   />

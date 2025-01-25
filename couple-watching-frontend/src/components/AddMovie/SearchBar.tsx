@@ -27,7 +27,7 @@ const SearchBar = ({ control }: SearchBarProps) => {
             render={({ field }) => (
                <TextField
                   {...field}
-                  label={<FormattedMessage id="FILTERS.SEARCHBAR.LABEL" />}
+                  label={<FormattedMessage id="ADD_MOVIE.SEARCHBAR.LABEL" />}
                   slotProps={{
                      input: {
                         startAdornment: (
