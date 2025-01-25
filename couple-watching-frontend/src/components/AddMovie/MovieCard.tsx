@@ -1,6 +1,6 @@
 import { Box, Card, Stack, Typography } from "@mui/material";
 import CustomIconButton from "../General/CustomIconButton";
-import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 type MovieCard = {
    title: string;
@@ -24,14 +24,14 @@ const MovieCard = ({ title, cover }: MovieCard) => {
          }}
       >
          <Stack justifyContent="flex-end" sx={{ height: "100%" }}>
-            <Stack spacing={1}>
+            <Stack spacing={2}>
                <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "center" }}>
                   {title}
                </Typography>
                <Box sx={{ width: "fit-content", alignSelf: "center" }}>
                   <CustomIconButton
                      handleOnClick={() => console.log("test")}
-                     icon={<BookmarkAddedIcon />}
+                     icon={<AddCircleIcon />}
                      text={<Typography>Add to watchlist</Typography>}
                   />
                </Box>

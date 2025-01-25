@@ -2,7 +2,7 @@ import { Search } from "@mui/icons-material";
 import { Box, Grid2 as Grid, Stack, Typography } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SearchMovieInputs } from "../../types/Inputs.types";
-import { useGetMovieDetails } from "../../api/hooks/movies";
+import { useGetSearchForMovies } from "../../api/hooks/movies";
 import PageTitle from "../../components/Layout/PageTitle";
 import SearchBar from "../../components/AddMovie/SearchBar";
 import TypeSelector from "../../components/AddMovie/TypeSelector";
@@ -15,7 +15,7 @@ function ExamplePage() {
    });
 
    const { type, title } = watch();
-   const { data: movieDetails, refetch } = useGetMovieDetails({ title, type });
+   const { data: movieDetails, refetch } = useGetSearchForMovies({ title, type });
 
    const onSubmit: SubmitHandler<SearchMovieInputs> = () => {
       refetch();
