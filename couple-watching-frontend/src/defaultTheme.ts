@@ -57,5 +57,10 @@ export const defaultTheme = createTheme({
             },
          },
       },
+      MuiTextField: {
+         defaultProps: {
+            autoComplete: "off",
+         },
+      },
    },
 });
