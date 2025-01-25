@@ -62,5 +62,12 @@ export const defaultTheme = createTheme({
             autoComplete: "off",
          },
       },
+      MuiDialog: {
+         styleOverrides: {
+            paper: {
+               borderRadius: "16px",
+            },
+         },
+      },
    },
 });

@@ -63,5 +63,6 @@
    "ADD_MOVIE.HEADER.THINKING": "Still thinking?",
    "ADD_MOVIE.SUBTITLE.THINKING": "Take your time! I'm here for you :)",
    "ADD_MOVIE.HEADER.LOOKING": "I'm watching you bitch.",
-   "ADD_MOVIE.SUBTITLE.LOOKING": "This better be good, or I'm shutting this down."
+   "ADD_MOVIE.SUBTITLE.LOOKING": "This better be good, or I'm shutting this down.",
+   "WATCHLIST.DIALOG.ADD_TO_WATCHLIST.SUBTITLE": "Add it to your watchlist and let's make it a date! 😉🍿 We’re not here for boring choices, honey."
 }

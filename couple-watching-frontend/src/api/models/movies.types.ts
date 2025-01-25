@@ -11,7 +11,7 @@ export interface MovieSearchCapital {
    Plot: string;
    Poster: string;
    Year: string;
-   imdbId: string;
+   imdbID: string;
 }
 
 export interface MovieSearchResponse {
