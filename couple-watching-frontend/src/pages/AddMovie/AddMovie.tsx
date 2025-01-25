@@ -9,8 +9,14 @@ import MovieCard from "../../components/AddMovie/MovieCard";
 import SearchErrorSection from "../../components/AddMovie/SearchErrorSection";
 import React from "react";
 import Loading from "../../components/General/Loading";
+import InfoSection from "../../components/General/InfoSection";
+import { ADD_MOVIE_PLACEHOLDERS } from "../../constants/ADD_MOVIE_PLACEHOLDERS";
+import { random } from "lodash";
 
 function ExamplePage() {
+   const [placeholderCaptions, setPlaceholderCaptions] = React.useState(
+      ADD_MOVIE_PLACEHOLDERS[random(0, ADD_MOVIE_PLACEHOLDERS.length - 1)]
+   );
    const { control, handleSubmit, watch } = useForm<SearchMovieInputs>({
       defaultValues: { title: "", type: "movie" },
    });
@@ -35,6 +41,11 @@ function ExamplePage() {
       };
    }, [handleSubmit, onSubmit]);
 
+   React.useEffect(() => {
+      const randomCaption = ADD_MOVIE_PLACEHOLDERS[random(0, ADD_MOVIE_PLACEHOLDERS.length - 1)];
+      setPlaceholderCaptions(randomCaption);
+   }, []);
+
    return (
       <Stack spacing={4}>
          <PageTitle title="ADD_MOVIE.HEADER" subtitle="ADD_MOVIE.SUBTITLE" />
@@ -57,9 +68,9 @@ function ExamplePage() {
             <Loading />
          ) : error ? (
             <SearchErrorSection response={error?.message} />
-         ) : (
+         ) : movieDetails ? (
             <>
-               {movieDetails && (
+               {movieDetails && movieDetails.length !== 0 && (
                   <Grid container spacing={2}>
                      {movieDetails.map((movie) => (
                         <MovieCard title={movie.title} cover={movie.cover} />
@@ -67,6 +78,12 @@ function ExamplePage() {
                   </Grid>
                )}
             </>
+         ) : (
+            <InfoSection
+               title={placeholderCaptions.title}
+               subtitle={placeholderCaptions.subtitle}
+               emoji={placeholderCaptions.emoji}
+            />
          )}
       </Stack>
    );
