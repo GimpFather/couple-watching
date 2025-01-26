@@ -19,6 +19,7 @@ import Button from "../General/Button";
 import { ADD_MOVIE_SUBTITLE } from "../../constants/ADD_MOVIE_SUBTITLE";
 import RatingChip from "../General/Chips/RatingChip";
 import DurationChip from "../General/Chips/DurationChip";
+import AddToWatchlistNoDataDialog from "./AddToWatchlistNoDataDialog";
 
 type AddToWatchlistDialogProps = {
    open: boolean;
@@ -69,39 +70,45 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
             <AddToWatchlistDialogSkeleton />
          ) : (
             <>
-               <DialogTitle component="div">
-                  <Typography variant="h4" color="primary.main" fontWeight={800}>
-                     {data?.title} ({data?.year})
-                  </Typography>
-               </DialogTitle>
-               <DialogContent>
-                  <Stack spacing={2}>
-                     <DialogContentText component="div">
-                        <Typography color="textPrimary">{subtitle}</Typography>
-                     </DialogContentText>
-                     <Stack direction="row" spacing={2} alignItems="center">
-                        <RatingChip rate={data?.imdbRating ?? ""} />
-                        <DurationChip duration={data?.runtime ?? ""} />
-                     </Stack>
-                     <Typography>{data?.plot}</Typography>
-                     <Typography>{data?.genre}</Typography>
-                  </Stack>
-               </DialogContent>
-               <DialogActions sx={{ padding: 2 }}>
-                  <Stack
-                     spacing={2}
-                     direction={isMobile ? "column" : "row"}
-                     justifyContent="flex-end"
-                     sx={{ width: "100%" }}
-                  >
-                     <Button startIcon={<AddCircleIcon />} onClick={() => handleMutate()} dark>
-                        <FormattedMessage id="ADD_MOVIE.DIALOG.BUTTON.PRIMARY" />
-                     </Button>
-                     <Button variant="outlined" startIcon={<ExitToAppIcon />} onClick={() => onClose()}>
-                        <FormattedMessage id="ADD_MOVIE.DIALOG.BUTTON.SECONDARY" />
-                     </Button>
-                  </Stack>
-               </DialogActions>
+               {data ? (
+                  <>
+                     <DialogTitle component="div">
+                        <Typography variant="h4" color="primary.main" fontWeight={800}>
+                           {data.title} ({data.year})
+                        </Typography>
+                     </DialogTitle>
+                     <DialogContent>
+                        <Stack spacing={2}>
+                           <DialogContentText component="div">
+                              <Typography color="textPrimary">{subtitle}</Typography>
+                           </DialogContentText>
+                           <Stack direction="row" spacing={2} alignItems="center">
+                              <RatingChip rate={data.imdbRating} />
+                              <DurationChip duration={data.runtime} />
+                           </Stack>
+                           <Typography>{data.plot}</Typography>
+                           <Typography>{data.genre}</Typography>
+                        </Stack>
+                     </DialogContent>
+                     <DialogActions sx={{ padding: 2 }}>
+                        <Stack
+                           spacing={2}
+                           direction={isMobile ? "column" : "row"}
+                           justifyContent="flex-end"
+                           sx={{ width: "100%" }}
+                        >
+                           <Button startIcon={<AddCircleIcon />} onClick={() => handleMutate()} dark>
+                              <FormattedMessage id="ADD_MOVIE.DIALOG.BUTTON.PRIMARY" />
+                           </Button>
+                           <Button variant="outlined" startIcon={<ExitToAppIcon />} onClick={() => onClose()}>
+                              <FormattedMessage id="ADD_MOVIE.DIALOG.BUTTON.SECONDARY" />
+                           </Button>
+                        </Stack>
+                     </DialogActions>
+                  </>
+               ) : (
+                  <AddToWatchlistNoDataDialog onClose={() => onClose()} />
+               )}
             </>
          )}
       </Dialog>
