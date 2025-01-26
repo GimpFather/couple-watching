@@ -2,6 +2,7 @@ import {
    Dialog,
    DialogActions,
    DialogContent,
+   DialogContentText,
    DialogTitle,
    Stack,
    Typography,
@@ -18,6 +19,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { toast } from "react-toastify";
 import AddToWatchlistDialogSkeleton from "./AddToWatchlistDialogSkeleton";
 import Button from "../General/Button";
+import { ADD_MOVIE_SUBTITLE } from "../../constants/ADD_MOVIE_SUBTITLE";
 
 type AddToWatchlistDialogProps = {
    open: boolean;
@@ -29,6 +31,10 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
    const { breakpoints, palette } = useTheme();
    const { data, isLoading } = useGetMovieDetails({ imdbId: id });
    const { mutate } = usePostToWatchlist();
+   const parsedRating = parseFloat(data?.imdbRating && data.imdbRating !== "N/A" ? data.imdbRating : "0").toPrecision(
+      1
+   );
+   const subtitle = ADD_MOVIE_SUBTITLE[parseInt(parsedRating)];
 
    const isMobile = useMediaQuery(breakpoints.down("sm"));
 
@@ -64,11 +70,16 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
             <AddToWatchlistDialogSkeleton />
          ) : (
             <>
-               <DialogTitle component="h5" color="primary.main" fontWeight={800}>
-                  {data?.title} ({data?.year})
+               <DialogTitle component="div">
+                  <Typography variant="h4" color="primary.main" fontWeight={800}>
+                     {data?.title} ({data?.year})
+                  </Typography>
                </DialogTitle>
                <DialogContent>
                   <Stack spacing={2}>
+                     <DialogContentText component="div">
+                        <Typography color="textPrimary">{subtitle}</Typography>
+                     </DialogContentText>
                      <Stack direction="row" spacing={2} alignItems="center">
                         <Stack
                            direction="row"
