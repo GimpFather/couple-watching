@@ -13,6 +13,7 @@ import { IntlProvider } from "react-intl";
 import en_EN from "./constants/en_EN.json";
 import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
+import { AuthProvider } from "./context/AuthProvider.tsx";
 
 dayjs.extend(updateLocale);
 dayjs.updateLocale("en", {
@@ -28,19 +29,21 @@ createRoot(document.getElementById("root")!).render(
             <ThemeProvider theme={defaultTheme}>
                <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <IntlProvider messages={en_EN} locale="en">
-                     <CssBaseline>
-                        <ToastContainer
-                           position="top-center"
-                           autoClose={5000}
-                           hideProgressBar={false}
-                           closeOnClick
-                           pauseOnFocusLoss
-                           draggable
-                           pauseOnHover
-                           theme="light"
-                        />
-                        <AppRouting />
-                     </CssBaseline>
+                     <AuthProvider>
+                        <CssBaseline>
+                           <ToastContainer
+                              position="top-center"
+                              autoClose={5000}
+                              hideProgressBar={false}
+                              closeOnClick
+                              pauseOnFocusLoss
+                              draggable
+                              pauseOnHover
+                              theme="light"
+                           />
+                           <AppRouting />
+                        </CssBaseline>
+                     </AuthProvider>
                   </IntlProvider>
                </LocalizationProvider>
             </ThemeProvider>

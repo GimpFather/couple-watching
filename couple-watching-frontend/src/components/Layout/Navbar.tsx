@@ -33,7 +33,7 @@ const Navbar = () => {
                <AppBarLink
                   icon={<DashboardOutlinedIcon sx={{ color: "common.white" }} />}
                   filledIcon={<DashboardIcon sx={{ color: "primary.main" }} />}
-                  url={"/"}
+                  url={"/dashboard"}
                   caption={"NAVBAR.DASHBOARD"}
                />
             </Stack>
