@@ -13,13 +13,12 @@ import { FormattedMessage } from "react-intl";
 import { useGetMovieDetails, usePostToWatchlist } from "../../api/hooks/movies";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { motion } from "motion/react";
-import StarIcon from "../General/CustomIcons/StarIcon";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { toast } from "react-toastify";
 import AddToWatchlistDialogSkeleton from "./AddToWatchlistDialogSkeleton";
 import Button from "../General/Button";
 import { ADD_MOVIE_SUBTITLE } from "../../constants/ADD_MOVIE_SUBTITLE";
+import RatingChip from "../General/Chips/RatingChip";
+import DurationChip from "../General/Chips/DurationChip";
 
 type AddToWatchlistDialogProps = {
    open: boolean;
@@ -28,7 +27,7 @@ type AddToWatchlistDialogProps = {
 };
 
 const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) => {
-   const { breakpoints, palette } = useTheme();
+   const { breakpoints } = useTheme();
    const { data, isLoading } = useGetMovieDetails({ imdbId: id });
    const { mutate } = usePostToWatchlist();
    const parsedRating = parseFloat(data?.imdbRating && data.imdbRating !== "N/A" ? data.imdbRating : "0").toPrecision(
@@ -50,8 +49,8 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
                cover: data.poster,
                plot: data.plot,
                director: data.director,
+               duration: data.runtime,
                imdbReview: Number(data.imdbRating),
-               duration: Number(data.runtime),
                genre: data.genre.split(", "),
             },
             {
@@ -81,48 +80,8 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
                         <Typography color="textPrimary">{subtitle}</Typography>
                      </DialogContentText>
                      <Stack direction="row" spacing={2} alignItems="center">
-                        <Stack
-                           direction="row"
-                           alignItems="center"
-                           sx={{
-                              padding: 1,
-                              backgroundColor: "primary.main",
-                              borderRadius: 4,
-                              width: "fit-content",
-                           }}
-                        >
-                           <motion.svg
-                              viewBox="0 0 24 24"
-                              width="18"
-                              height="18"
-                              style={{ fill: palette.background.paper }}
-                           >
-                              <StarIcon />
-                           </motion.svg>
-                           <Typography color="background.paper" variant="body2" sx={{ paddingLeft: 0.5 }}>
-                              <Typography color="background.paper" variant="body2" fontWeight={600} component="span">
-                                 {data?.imdbRating}
-                              </Typography>
-                              <FormattedMessage id="WATCHLIST.CARD.BACK_CARD.RATE.SLASH_TEN" />
-                           </Typography>
-                        </Stack>
-                        <Stack
-                           direction="row"
-                           alignItems="center"
-                           sx={{
-                              padding: 1,
-                              backgroundColor: "primary.main",
-                              borderRadius: 4,
-                              width: "fit-content",
-                           }}
-                        >
-                           <AccessTimeIcon sx={{ color: palette.background.paper, width: 18, height: 18 }} />
-                           <Typography color="background.paper" variant="body2" sx={{ paddingLeft: 0.5 }}>
-                              <Typography color="background.paper" variant="body2" fontWeight={600} component="span">
-                                 {data?.runtime}
-                              </Typography>
-                           </Typography>
-                        </Stack>
+                        <RatingChip rate={data?.imdbRating ?? ""} />
+                        <DurationChip duration={data?.runtime ?? ""} />
                      </Stack>
                      <Typography>{data?.plot}</Typography>
                      <Typography>{data?.genre}</Typography>

@@ -84,7 +84,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
       <Dialog open={open} onClose={onClose}>
          <DialogTitle component="div">
             <Typography variant="h4" color="primary.main" fontWeight={800}>
-               {data.title} ({data.productionYear})
+               {data.title}
             </Typography>
          </DialogTitle>
          <DialogContent>

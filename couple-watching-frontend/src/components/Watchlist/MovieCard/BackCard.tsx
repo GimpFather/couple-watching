@@ -1,7 +1,5 @@
-import { Card, Stack, Typography, useTheme } from "@mui/material";
+import { Card, Stack, Typography } from "@mui/material";
 import { Movie } from "../../../types/Watchlist.types";
-import { motion } from "motion/react";
-import StarIcon from "../../General/CustomIcons/StarIcon";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 import FlipIcon from "./FlipIcon";
@@ -10,6 +8,8 @@ import { useDeleteMovieFromWatchlist } from "../../../api/hooks/movies";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import Button from "../../General/Button";
+import RatingChip from "../../General/Chips/RatingChip";
+import DurationChip from "../../General/Chips/DurationChip";
 
 type BackCardProps = {
    movie: Movie;
@@ -18,7 +18,6 @@ type BackCardProps = {
 };
 
 const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => {
-   const { palette } = useTheme();
    const queryClient = useQueryClient();
    const { mutate: deleteMutate } = useDeleteMovieFromWatchlist();
 
@@ -53,41 +52,24 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
          }}
       >
          <Stack justifyContent="space-between" sx={{ height: "100%" }}>
-            <Stack spacing={1}>
-               <Stack direction="row" alignItems="baseline" justifyContent="space-between" spacing={1}>
-                  <Typography
-                     color="primary"
-                     variant="h4"
-                     sx={{
-                        fontWeight: "bold",
-                        display: "-webkit-box",
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                        WebkitLineClamp: 3,
-                        textOverflow: "ellipsis",
-                     }}
-                  >
-                     {movie.title}
-                  </Typography>
-                  <Stack
-                     direction="row"
-                     alignItems="center"
-                     sx={{
-                        padding: 1,
-                        backgroundColor: "primary.main",
-                        borderRadius: 4,
-                     }}
-                  >
-                     <motion.svg viewBox="0 0 24 24" width="18" height="18" style={{ fill: palette.background.paper }}>
-                        <StarIcon />
-                     </motion.svg>
-                     <Typography color="background.paper" variant="body2" sx={{ paddingLeft: 0.5 }}>
-                        <Typography color="background.paper" variant="body2" fontWeight={600} component="span">
-                           {movie.imdbReview}
-                        </Typography>
-                        <FormattedMessage id="WATCHLIST.CARD.BACK_CARD.RATE.SLASH_TEN" />
-                     </Typography>
-                  </Stack>
+            <Stack spacing={2}>
+               <Typography
+                  color="primary"
+                  variant="h4"
+                  sx={{
+                     fontWeight: "bold",
+                     display: "-webkit-box",
+                     WebkitBoxOrient: "vertical",
+                     overflow: "hidden",
+                     WebkitLineClamp: 3,
+                     textOverflow: "ellipsis",
+                  }}
+               >
+                  {movie.title}
+               </Typography>
+               <Stack spacing={1} direction="row">
+                  <RatingChip rate={movie.imdbReview} />
+                  <DurationChip duration={movie.duration} />
                </Stack>
                <Typography>
                   {movie.director} ({movie.productionYear})
