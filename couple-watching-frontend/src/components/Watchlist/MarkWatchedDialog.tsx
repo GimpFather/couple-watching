@@ -36,7 +36,15 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
    const { mutate: markAsWatchedMutate } = usePostMovieAsWatched();
    const { mutate: deleteMutate } = useDeleteMovieFromWatchlist();
    const { control, watch } = useForm<MarkMovieWatchedInputs>({
-      defaultValues: { rating: 5, watchedDate: new Date(), tags: {} },
+      defaultValues: {
+         rating: {
+            ratingPersonOne: 4,
+            ratingPersonTwo: 6,
+            finalRating: 5,
+         },
+         watchedDate: new Date(),
+         tags: {},
+      },
    });
    const { rating, watchedDate, tags } = watch();
 
@@ -48,7 +56,11 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
          {
             ...data,
             watchedDate: dayjs(watchedDate).format("DD/MM/YYYY"),
-            rating,
+            rating: {
+               ratingPersonOne: rating.ratingPersonOne,
+               ratingPersonTwo: rating.ratingPersonTwo,
+               finalRating: (rating.ratingPersonOne + rating.ratingPersonTwo) / 2,
+            },
             tags: {
                isHorny: !!tags?.isHorny,
                isSad: !!tags?.isSad,
@@ -143,8 +155,17 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                      <Typography variant="body1">
                         <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.RATING.LABEL" />
                      </Typography>
+                     <Typography variant="body2">Person One opinion</Typography>
                      <Controller
-                        name="rating"
+                        name="rating.ratingPersonOne"
+                        control={control}
+                        render={({ field }) => (
+                           <StarRating value={field.value} handleRate={(value: number) => field.onChange(value)} />
+                        )}
+                     />
+                     <Typography variant="body2">Person Two opinion</Typography>
+                     <Controller
+                        name="rating.ratingPersonTwo"
                         control={control}
                         render={({ field }) => (
                            <StarRating value={field.value} handleRate={(value: number) => field.onChange(value)} />
