@@ -5,6 +5,7 @@ import AddToWatchlistDialog from "./AddToWatchlistDialog";
 import React from "react";
 import Button from "../General/Button";
 import { FormattedMessage } from "react-intl";
+import { motion } from "motion/react";
 
 type MovieCard = {
    movie: MovieSearchDetails;
@@ -15,6 +16,15 @@ const MovieCard = ({ movie }: MovieCard) => {
    return (
       <>
          <Card
+            component={motion.div}
+            initial={{
+               opacity: 0,
+               y: 100,
+            }}
+            animate={{
+               opacity: 1,
+               y: 0,
+            }}
             sx={{
                padding: 2,
                width: 350,

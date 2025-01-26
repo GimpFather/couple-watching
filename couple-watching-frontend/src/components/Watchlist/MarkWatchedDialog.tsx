@@ -82,15 +82,15 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
 
    return (
       <Dialog open={open} onClose={onClose}>
-         <DialogTitle>
-            <Typography variant="h4">
-               <FormattedMessage id="WATCHLIST.DIALOG.MARK.TITLE" />
+         <DialogTitle component="div">
+            <Typography variant="h4" color="primary.main" fontWeight={800}>
+               {data.title} ({data.productionYear})
             </Typography>
          </DialogTitle>
          <DialogContent>
             <Stack spacing={2}>
-               <DialogContentText>
-                  <Typography variant="body1" color="textPrimary">
+               <DialogContentText component="div" sx={{ paddingBottom: 1 }}>
+                  <Typography color="textPrimary">
                      <FormattedMessage id="WATCHLIST.DIALOG.MARK.SUBTITLE" />
                   </Typography>
                </DialogContentText>
