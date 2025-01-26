@@ -69,7 +69,7 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
                </Typography>
                <Stack spacing={1} direction="row">
                   <RatingChip rate={movie.imdbReview} />
-                  <DurationChip duration={movie.duration} />
+                  <DurationChip duration={`${movie.duration} min`} />
                </Stack>
                <Typography>
                   {movie.director} ({movie.productionYear})
