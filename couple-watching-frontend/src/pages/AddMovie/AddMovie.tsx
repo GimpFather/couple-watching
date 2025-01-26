@@ -65,18 +65,16 @@ function ExamplePage() {
             </Grid>
          </form>
          {isLoading ? (
-            <Loading />
+            <Loading isLoading />
          ) : error ? (
             <SearchErrorSection response={error?.message} />
-         ) : movieDetails ? (
+         ) : movieDetails && movieDetails.length !== 0 ? (
             <>
-               {movieDetails && movieDetails.length !== 0 && (
-                  <Grid container spacing={2}>
-                     {movieDetails.map((movie, index) => (
-                        <MovieCard key={index} movie={movie} />
-                     ))}
-                  </Grid>
-               )}
+               <Grid container spacing={2}>
+                  {movieDetails.map((movie, index) => (
+                     <MovieCard key={index} movie={movie} />
+                  ))}
+               </Grid>
             </>
          ) : (
             <InfoSection

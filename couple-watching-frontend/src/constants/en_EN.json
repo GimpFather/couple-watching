@@ -73,5 +73,7 @@
    "START.AUTH_CARD.LOGIN.FIELD.EMAIL.LABEL": "Email",
    "START.AUTH_CARD.LOGIN.FIELD.PASSWORD.LABEL": "Password",
    "START.AUTH_CARD.LOGIN.BUTTON.PRIMARY": "Sign in",
-   "START.AUTH_CARD.LOGIN.NOT_A_MEMBER_YET": "Not yet a member? Make an account!"
+   "START.AUTH_CARD.LOGIN.NOT_A_MEMBER_YET": "Not yet a member? Make an account!",
+   "LOADING.TITLE": "Loading",
+   "LOADING.SUBTITLE": "Just gimme a moment, sir!"
 }
