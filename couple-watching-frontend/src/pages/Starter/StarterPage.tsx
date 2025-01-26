@@ -2,10 +2,10 @@ import { Grid2 as Grid, Stack, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import { FormattedMessage } from "react-intl";
 import AuthorizationCard from "../../components/Starter/AuthorizationCard";
-import CustomIconButton from "../../components/General/CustomIconButton";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import LoginIcon from "@mui/icons-material/Login";
 import React from "react";
+import Button from "../../components/General/Button";
 
 const StarterPage = () => {
    const [path, setPath] = React.useState<"signIn" | "register">("signIn");
@@ -70,18 +70,12 @@ const StarterPage = () => {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 1, delay: 1.5, type: "spring" }}
                >
-                  <CustomIconButton
-                     handleOnClick={() => handleCardFlip("register")}
-                     icon={<AppRegistrationIcon />}
-                     text={<Typography>Let's get started!</Typography>}
-                     selected={path === "register"}
-                  />
-                  <CustomIconButton
-                     handleOnClick={() => handleCardFlip("signIn")}
-                     icon={<LoginIcon />}
-                     text={<Typography>Login to your account</Typography>}
-                     selected={path === "signIn"}
-                  />
+                  <Button startIcon={<AppRegistrationIcon />} onClick={() => handleCardFlip("register")}>
+                     <FormattedMessage id="START.BUTTON.PRIMARY" />
+                  </Button>
+                  <Button startIcon={<LoginIcon />} onClick={() => handleCardFlip("signIn")}>
+                     <FormattedMessage id="START.BUTTON.SECONDARY" />
+                  </Button>
                </Stack>
             </Stack>
          </Grid>

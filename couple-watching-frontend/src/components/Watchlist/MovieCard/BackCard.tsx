@@ -5,11 +5,11 @@ import StarIcon from "../../General/CustomIcons/StarIcon";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 import FlipIcon from "./FlipIcon";
-import CustomIconButton from "../../General/CustomIconButton";
 import { FormattedMessage } from "react-intl";
 import { useDeleteMovieFromWatchlist } from "../../../api/hooks/movies";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
+import Button from "../../General/Button";
 
 type BackCardProps = {
    movie: Movie;
@@ -114,26 +114,12 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
             </Stack>
             <Stack direction="row" justifyContent="space-between">
                <FlipIcon handleClick={() => handleFlip()} dark />
-               <CustomIconButton
-                  handleOnClick={() => handleMarkAsWatched()}
-                  icon={<BookmarkAddedIcon />}
-                  text={
-                     <Typography>
-                        <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
-                     </Typography>
-                  }
-                  dark
-               />
-               <CustomIconButton
-                  handleOnClick={() => handleDeleteMovie()}
-                  icon={<BookmarkRemoveIcon />}
-                  text={
-                     <Typography>
-                        <FormattedMessage id="WATCHLIST.CARD.BUTTON.SECONDARY" />
-                     </Typography>
-                  }
-                  dark
-               />
+               <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()} dark>
+                  <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
+               </Button>
+               <Button startIcon={<BookmarkRemoveIcon />} onClick={() => handleDeleteMovie()} dark>
+                  <FormattedMessage id="WATCHLIST.CARD.BUTTON.SECONDARY" />
+               </Button>
             </Stack>
          </Stack>
       </Card>

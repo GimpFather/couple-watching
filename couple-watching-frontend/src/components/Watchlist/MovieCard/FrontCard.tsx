@@ -2,8 +2,8 @@ import { Box, Card, Stack, Typography } from "@mui/material";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { Movie } from "../../../types/Watchlist.types";
 import FlipIcon from "./FlipIcon";
-import CustomIconButton from "../../General/CustomIconButton";
 import { FormattedMessage } from "react-intl";
+import Button from "../../General/Button";
 
 type FrontCardProps = {
    movie: Movie;
@@ -44,15 +44,9 @@ const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) =
                      ))}
                   </Stack>
                   <Box sx={{ width: "fit-content", alignSelf: "center" }}>
-                     <CustomIconButton
-                        handleOnClick={() => handleMarkAsWatched()}
-                        icon={<BookmarkAddedIcon />}
-                        text={
-                           <Typography>
-                              <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
-                           </Typography>
-                        }
-                     />
+                     <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()}>
+                        <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
+                     </Button>
                   </Box>
                </Stack>
             </Stack>
