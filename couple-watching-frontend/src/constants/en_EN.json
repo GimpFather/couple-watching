@@ -76,5 +76,10 @@
    "START.AUTH_CARD.LOGIN.NOT_A_MEMBER_YET": "Not yet a member? Make an account!",
    "LOADING.TITLE": "Loading",
    "LOADING.SUBTITLE": "Just gimme a moment, sir!",
-   "CHIP.RATE.SLASH_TEN": "{rating}/10"
+   "CHIP.RATE.SLASH_TEN": "{rating}/10",
+   "ADD_MOVIE.DIALOG.NO_DATA.TITLE": "Sorry mate, there is a problem. :(",
+   "ADD_MOVIE.DIALOG.NO_DATA.DESC": "It sucks to show you this, but we couldn't find the data you're looking for. Maybe it's our fault, maybe it's API. Who knows? We can't controll everything, right?",
+   "ADD_MOVIE.DIALOG.NO_DATA.BUTTON.DESC.PART_TWO": "Let's try again later, shall we?",
+   "ADD_MOVIE.DIALOG.NO_DATA.BUTTON.PRIMARY":"Yeah, shit happens. Let's go back.",
+   "ADD_MOVIE.DIALOG.NO_DATA.BUTTON.SECONDARY": "No."
 }
