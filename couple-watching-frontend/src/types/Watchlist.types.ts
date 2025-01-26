@@ -13,7 +13,7 @@ export type Movie = {
 };
 
 export type WatchedMovie = Movie & {
-   watchedDate: Date;
+   watchedDate: string;
    rating: number;
    tags?: MovieTags;
 };
