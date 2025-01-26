@@ -49,7 +49,7 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
                cover: data.poster,
                plot: data.plot,
                director: data.director,
-               duration: data.runtime,
+               duration: data.runtime.replace(" min", ""),
                imdbReview: Number(data.imdbRating),
                genre: data.genre.split(", "),
             },
