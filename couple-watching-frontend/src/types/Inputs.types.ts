@@ -6,7 +6,6 @@ export type SearchMovieInputs = {
 export type MarkMovieWatchedInputs = {
    watchedDate: Date;
    rating: number;
-   opinion?: string;
    tags?: MovieTags;
 };
 

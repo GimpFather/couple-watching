@@ -14,9 +14,15 @@ const WatchlistList = ({ data }: WatchlistListProps) => {
    return (
       <Grid container spacing={2}>
          {data.map((movie) => (
-            <MovieCard key={movie.id} data={movie} handleMarkAsWatched={() => setOpenMarkWatchedDialog(true)} />
+            <React.Fragment key={movie.id}>
+               <MovieCard data={movie} handleMarkAsWatched={() => setOpenMarkWatchedDialog(true)} />
+               <MarkWatchedDialog
+                  open={openMarkWatchedDialog}
+                  onClose={() => setOpenMarkWatchedDialog(false)}
+                  data={movie}
+               />
+            </React.Fragment>
          ))}
-         <MarkWatchedDialog open={openMarkWatchedDialog} onClose={() => setOpenMarkWatchedDialog(false)} />
       </Grid>
    );
 };
