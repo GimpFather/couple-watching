@@ -47,7 +47,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
       markAsWatchedMutate(
          {
             ...data,
-            watchedDate,
+            watchedDate: dayjs(watchedDate).format("DD/MM/YYYY"),
             rating,
             tags: {
                isHorny: !!tags?.isHorny,
