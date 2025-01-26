@@ -5,7 +5,11 @@ export type SearchMovieInputs = {
 
 export type MarkMovieWatchedInputs = {
    watchedDate: Date;
-   rating: number;
+   rating: {
+      ratingPersonOne: number;
+      ratingPersonTwo: number;
+      finalRating: number;
+   };
    tags?: MovieTags;
 };
 
