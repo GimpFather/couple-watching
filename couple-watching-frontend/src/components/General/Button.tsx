@@ -12,6 +12,7 @@ const Button: React.FC<ButtonProps> = ({ children, dark = false, ...props }) => 
          animate={{ opacity: 1 }}
          whileHover={{ scale: 1.05 }}
          whileTap={{ scale: 0.9 }}
+         style={{ width: "fit-content" }}
       >
          <MUIButton
             variant="contained"

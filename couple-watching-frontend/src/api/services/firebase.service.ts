@@ -1,6 +1,8 @@
 import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { Movie, WatchedMovie } from "../../types/Watchlist.types";
+import { createUserWithEmailAndPassword, User } from "firebase/auth";
+import { RegisterCredentials } from "../../types/Auth.types";
 
 export const GetWatchlistMovies = async (): Promise<Movie[]> => {
    const querySnapshot = await getDocs(collection(db, "watchlist"));
@@ -25,4 +27,9 @@ export const PostMovieAsWatched = async (movie: WatchedMovie) => {
 export const DeleteMovieFromWatchlist = async (movieId: string) => {
    const docRef = doc(db, "watchlist", movieId);
    await deleteDoc(docRef);
+};
+
+export const RegisterNewUser = async ({ email, password }: RegisterCredentials): Promise<User> => {
+   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+   return userCredential.user;
 };

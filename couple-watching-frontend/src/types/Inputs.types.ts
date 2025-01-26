@@ -26,3 +26,8 @@ export type WatchlistFiltersInput = {
    watchlistMode?: "cool" | "nerd";
    search?: string;
 };
+
+export type SignInInput = {
+   email: string;
+   password: string;
+};

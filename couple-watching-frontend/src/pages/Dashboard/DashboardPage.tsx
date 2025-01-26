@@ -1,22 +1,26 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
-import { Link } from "react-router";
-import Loading from "../../components/General/Loading";
-import React from "react";
+import { useAuthContext } from "../../context/AuthProvider";
+import Button from "../../components/General/Button";
+import { useLogout } from "../../api/hooks/auth";
 
 const DashboardPage = () => {
-   const [first, setfirst] = React.useState(true);
+   const { user } = useAuthContext();
+   const { mutate } = useLogout();
+
+   const handleLogout = () => {
+      mutate();
+   };
+
    return (
       <Stack spacing={4}>
          <PageTitle title="DASHBOARD.HEADER" subtitle="DASHBOARD.SUBTITLE" />
-         <Typography variant="h4">Look at this cool onboarding page</Typography>
-         <Link to="/hello">
-            <Button variant="contained">Go to onboarding page</Button>
-         </Link>
-         <Typography onClick={() => setfirst(!first)} variant="h4">
-            Look at this cool loading, click to toggle
-         </Typography>
-         <Loading isLoading={first} />
+         <Stack spacing={2} sx={{ padding: 2, borderRadius: 4, backgroundColor: "background.paper" }}>
+            <Typography variant="h6">Welcome {user?.email}</Typography>
+            <Button variant="outlined" onClick={() => handleLogout()}>
+               Logout
+            </Button>
+         </Stack>
       </Stack>
    );
 };

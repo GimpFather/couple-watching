@@ -1,18 +1,12 @@
 import { Grid2 as Grid, Stack, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import { FormattedMessage } from "react-intl";
-import AuthorizationCard from "../../components/Starter/AuthorizationCard";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import LoginIcon from "@mui/icons-material/Login";
-import React from "react";
 import Button from "../../components/General/Button";
+import { useNavigate } from "react-router";
 
 const StarterPage = () => {
-   const [path, setPath] = React.useState<"signIn" | "register">("signIn");
-   const handleCardFlip = (pathVariant: "signIn" | "register") => {
-      setPath(pathVariant);
-   };
-
+   const navigate = useNavigate();
    return (
       <Grid container sx={{ padding: 2, height: "100vh" }}>
          <Grid size={{ sm: 12, md: 8 }} sx={{ padding: 4, alignContent: "center", justifyItems: "center" }}>
@@ -70,31 +64,11 @@ const StarterPage = () => {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 1, delay: 1.5, type: "spring" }}
                >
-                  <Button startIcon={<AppRegistrationIcon />} onClick={() => handleCardFlip("register")}>
+                  <Button startIcon={<AppRegistrationIcon />} onClick={() => navigate("/auth")}>
                      <FormattedMessage id="START.BUTTON.PRIMARY" />
-                  </Button>
-                  <Button startIcon={<LoginIcon />} onClick={() => handleCardFlip("signIn")}>
-                     <FormattedMessage id="START.BUTTON.SECONDARY" />
                   </Button>
                </Stack>
             </Stack>
-         </Grid>
-         <Grid
-            size={{ sm: 12, md: 4 }}
-            component={motion.div}
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 2, type: "spring" }}
-            sx={{
-               alignContent: "center",
-               justifyItems: "center",
-            }}
-         >
-            <AuthorizationCard
-               flipped={path}
-               handleFlipRegister={() => handleCardFlip("signIn")}
-               handleFlipSignIn={() => handleCardFlip("register")}
-            />
          </Grid>
       </Grid>
    );

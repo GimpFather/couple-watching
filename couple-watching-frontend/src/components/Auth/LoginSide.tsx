@@ -5,13 +5,36 @@ import PasswordIcon from "@mui/icons-material/Password";
 import { motion } from "motion/react";
 import Button from "../General/Button";
 import { FormattedMessage } from "react-intl";
+import { Controller, useForm } from "react-hook-form";
+import { SignInInput } from "../../types/Inputs.types";
+import { useLogin } from "../../api/hooks/auth";
+import { useNavigate } from "react-router";
 
 type LoginSideProps = {
    handleFlip: () => void;
 };
 
 const LoginSide = ({ handleFlip }: LoginSideProps) => {
+   const { mutate } = useLogin();
+   const { watch, control } = useForm<SignInInput>();
+   const { email, password } = watch();
    const { palette } = useTheme();
+   const navigate = useNavigate();
+
+   const handleLogin = () => {
+      mutate(
+         { email, password },
+         {
+            onSuccess: () => {
+               navigate("/dashboard");
+            },
+            onError: () => {
+               alert("Error");
+            },
+         }
+      );
+   };
+
    return (
       <Card
          sx={{
@@ -37,23 +60,37 @@ const LoginSide = ({ handleFlip }: LoginSideProps) => {
                </Typography>
             </Stack>
             <Stack spacing={2}>
-               <TextField
-                  type="email"
-                  slotProps={{
-                     input: {
-                        endAdornment: <EmailIcon />,
-                     },
-                  }}
-                  label={<FormattedMessage id="START.AUTH_CARD.LOGIN.FIELD.EMAIL.LABEL" />}
+               <Controller
+                  control={control}
+                  name="email"
+                  render={({ field }) => (
+                     <TextField
+                        {...field}
+                        type="email"
+                        slotProps={{
+                           input: {
+                              endAdornment: <EmailIcon />,
+                           },
+                        }}
+                        label={<FormattedMessage id="START.AUTH_CARD.LOGIN.FIELD.EMAIL.LABEL" />}
+                     />
+                  )}
                />
-               <TextField
-                  type="password"
-                  slotProps={{ input: { endAdornment: <PasswordIcon /> } }}
-                  label={<FormattedMessage id="START.AUTH_CARD.LOGIN.FIELD.PASSWORD.LABEL" />}
+               <Controller
+                  control={control}
+                  name="password"
+                  render={({ field }) => (
+                     <TextField
+                        {...field}
+                        type="password"
+                        slotProps={{ input: { endAdornment: <PasswordIcon /> } }}
+                        label={<FormattedMessage id="START.AUTH_CARD.LOGIN.FIELD.PASSWORD.LABEL" />}
+                     />
+                  )}
                />
             </Stack>
             <Stack spacing={2} alignItems="center">
-               <Button startIcon={<LoginIcon />} onClick={() => alert("Login")}>
+               <Button startIcon={<LoginIcon />} onClick={() => handleLogin()}>
                   <FormattedMessage id="START.AUTH_CARD.LOGIN.BUTTON.PRIMARY" />
                </Button>
                <Typography
