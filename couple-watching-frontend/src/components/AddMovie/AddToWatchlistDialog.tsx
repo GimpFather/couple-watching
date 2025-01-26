@@ -64,10 +64,8 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
             <AddToWatchlistDialogSkeleton />
          ) : (
             <>
-               <DialogTitle>
-                  <Typography variant="h5" fontWeight={800} color="primary.main">
-                     {data?.title} ({data?.year})
-                  </Typography>
+               <DialogTitle component="h5" color="primary.main" fontWeight={800}>
+                  {data?.title} ({data?.year})
                </DialogTitle>
                <DialogContent>
                   <Stack spacing={2}>
