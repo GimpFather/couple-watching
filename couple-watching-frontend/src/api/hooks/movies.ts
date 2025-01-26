@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { GetMovieDetails, GetSearchForMovies } from "../services/ombd.service";
 import { OMDbSearchParameters } from "../models/movies.types";
-import { PostMovieAsWatched, PostMovieToWatchlist } from "../services/firebase.service";
+import { DeleteMovieFromWatchlist, PostMovieAsWatched, PostMovieToWatchlist } from "../services/firebase.service";
 import { Movie, WatchedMovie } from "../../types/Watchlist.types";
 
 export enum MoviesQueryKeys {
@@ -32,5 +32,11 @@ export const usePostToWatchlist = () => {
 export const usePostMovieAsWatched = () => {
    return useMutation<void, Error, WatchedMovie>({
       mutationFn: (newMovie) => PostMovieAsWatched(newMovie),
+   });
+};
+
+export const useDeleteMovieFromWatchlist = () => {
+   return useMutation<void, Error, string>({
+      mutationFn: (movieId) => DeleteMovieFromWatchlist(movieId),
    });
 };
