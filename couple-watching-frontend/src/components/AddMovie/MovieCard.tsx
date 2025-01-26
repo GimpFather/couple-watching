@@ -1,9 +1,10 @@
 import { Card, Stack, Typography } from "@mui/material";
-import CustomIconButton from "../General/CustomIconButton";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { MovieSearchDetails } from "../../api/models/movies.types";
 import AddToWatchlistDialog from "./AddToWatchlistDialog";
 import React from "react";
+import Button from "../General/Button";
+import { FormattedMessage } from "react-intl";
 
 type MovieCard = {
    movie: MovieSearchDetails;
@@ -33,11 +34,9 @@ const MovieCard = ({ movie }: MovieCard) => {
                      {movie.title} ({movie.productionYear})
                   </Typography>
                   <Stack spacing={1} direction="row" justifyContent="center">
-                     <CustomIconButton
-                        handleOnClick={() => setOpen(true)}
-                        icon={<AddCircleIcon />}
-                        text={<Typography>Add to watchlist</Typography>}
-                     />
+                     <Button startIcon={<AddCircleIcon />} onClick={() => setOpen(true)}>
+                        <FormattedMessage id="ADD_MOVIE.CARD.BUTTON.PRIMARY" />
+                     </Button>
                   </Stack>
                </Stack>
             </Stack>

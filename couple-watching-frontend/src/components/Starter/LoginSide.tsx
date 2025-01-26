@@ -1,9 +1,10 @@
 import { Card, Stack, Typography, TextField, useTheme } from "@mui/material";
-import CustomIconButton from "../General/CustomIconButton";
 import LoginIcon from "@mui/icons-material/Login";
 import EmailIcon from "@mui/icons-material/Email";
 import PasswordIcon from "@mui/icons-material/Password";
 import { motion } from "motion/react";
+import Button from "../General/Button";
+import { FormattedMessage } from "react-intl";
 
 type LoginSideProps = {
    handleFlip: () => void;
@@ -29,29 +30,32 @@ const LoginSide = ({ handleFlip }: LoginSideProps) => {
          <Stack justifyContent="space-evenly" alignItems="center" sx={{ height: "100%" }}>
             <Stack spacing={1} alignItems="center">
                <Typography variant="h4" color="primary" fontWeight={700}>
-                  Sign in
+                  <FormattedMessage id="START.AUTH_CARD.LOGIN.TITLE" />
                </Typography>
                <Typography variant="body1" sx={{ textAlign: "center" }}>
-                  ✨ Back for more? Welcome to CUM! 🎬💫 Sign in and let’s roll!
+                  <FormattedMessage id="START.AUTH_CARD.LOGIN.SUBTITLE" />
                </Typography>
             </Stack>
             <Stack spacing={2}>
                <TextField
+                  type="email"
                   slotProps={{
                      input: {
                         endAdornment: <EmailIcon />,
                      },
                   }}
-                  label="Email"
+                  label={<FormattedMessage id="START.AUTH_CARD.LOGIN.FIELD.EMAIL.LABEL" />}
                />
-               <TextField slotProps={{ input: { endAdornment: <PasswordIcon /> } }} label="Password" />
+               <TextField
+                  type="password"
+                  slotProps={{ input: { endAdornment: <PasswordIcon /> } }}
+                  label={<FormattedMessage id="START.AUTH_CARD.LOGIN.FIELD.PASSWORD.LABEL" />}
+               />
             </Stack>
             <Stack spacing={2} alignItems="center">
-               <CustomIconButton
-                  handleOnClick={() => alert("Login")}
-                  icon={<LoginIcon />}
-                  text={<Typography>Sign in</Typography>}
-               />
+               <Button startIcon={<LoginIcon />} onClick={() => alert("Login")}>
+                  <FormattedMessage id="START.AUTH_CARD.LOGIN.BUTTON.PRIMARY" />
+               </Button>
                <Typography
                   component={motion.div}
                   whileHover={{ color: palette.primary.main }}
@@ -59,7 +63,7 @@ const LoginSide = ({ handleFlip }: LoginSideProps) => {
                   onClick={() => handleFlip()}
                   sx={{ cursor: "pointer" }}
                >
-                  Not yet a member? Make an account!
+                  <FormattedMessage id="START.AUTH_CARD.LOGIN.NOT_A_MEMBER_YET" />
                </Typography>
             </Stack>
          </Stack>

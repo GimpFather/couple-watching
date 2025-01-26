@@ -37,7 +37,7 @@
    "START.DESC": "Couple’s Ultimate Manager: the ultimate tool for duos who do! 🎬💑 Make movie watchlists, track places you wanna visit, and keep tabs on all your shared dreams and schemes. Basically, it’s your relationship’s new BFF. 👫✨",
    "START.BUTTON.PRIMARY": "Join the Fun! 🎉",
    "START.BUTTON.SECONDARY": "Just Login 💕",
-   "WATCHLIST.CARD.BUTTON.PRIMARY": "Mark as watched",
+   "WATCHLIST.CARD.BUTTON.PRIMARY": "Mark watched",
    "WATCHLIST.CARD.BUTTON.SECONDARY": "Delete",
    "WATCHLIST.EMPTY_STATE.TITLE.FILTER": "Uh-oh! We couldn’t find that one...",
    "WATCHLIST.EMPTY_STATE.SUBTITLE.FILTER": "We couldn’t find anything like it in your watchlist. Maybe it’s time to add it yourself? 🎥✨",
@@ -64,5 +64,14 @@
    "ADD_MOVIE.SUBTITLE.THINKING": "Take your time! I'm here for you :)",
    "ADD_MOVIE.HEADER.LOOKING": "I'm watching you bitch.",
    "ADD_MOVIE.SUBTITLE.LOOKING": "This better be good, or I'm shutting this down.",
-   "WATCHLIST.DIALOG.ADD_TO_WATCHLIST.SUBTITLE": "Add it to your watchlist and let's make it a date! 😉🍿 We’re not here for boring choices, honey."
+   "WATCHLIST.DIALOG.ADD_TO_WATCHLIST.SUBTITLE": "Add it to your watchlist and let's make it a date! 😉🍿 We’re not here for boring choices, honey.",
+   "ADD_MOVIE.DIALOG.BUTTON.PRIMARY": "Add to watchlist!",
+   "ADD_MOVIE.DIALOG.BUTTON.SECONDARY": "Go back",
+   "ADD_MOVIE.CARD.BUTTON.PRIMARY": "Add to watchlist",
+   "START.AUTH_CARD.LOGIN.TITLE": "Sign in",
+   "START.AUTH_CARD.LOGIN.SUBTITLE": "✨ Back for more? Welcome to CUM! 🎬💫 Sign in and let’s roll!",
+   "START.AUTH_CARD.LOGIN.FIELD.EMAIL.LABEL": "Email",
+   "START.AUTH_CARD.LOGIN.FIELD.PASSWORD.LABEL": "Password",
+   "START.AUTH_CARD.LOGIN.BUTTON.PRIMARY": "Sign in",
+   "START.AUTH_CARD.LOGIN.NOT_A_MEMBER_YET": "Not yet a member? Make an account!"
 }

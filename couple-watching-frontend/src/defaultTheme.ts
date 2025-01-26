@@ -4,6 +4,8 @@ import "@fontsource/outfit";
 const palette = {
    primary: {
       main: "#38A169",
+      light: "#68D391", // Lighter green
+      dark: "#2F855A", //
    },
    secondary: {
       main: "#E53E3E",
@@ -68,6 +70,40 @@ export const defaultTheme = createTheme({
                borderRadius: "16px",
             },
          },
+      },
+      MuiButton: {
+         styleOverrides: {
+            root: {
+               borderRadius: "16px",
+               textTransform: "none",
+               fontSize: "1rem",
+            },
+         },
+         variants: [
+            {
+               props: { variant: "outlined" },
+               style: {
+                  color: palette.primary.main,
+                  border: `2px solid ${palette.primary.main}`,
+               },
+            },
+            {
+               props: { variant: "text" },
+               style: {
+                  ":hover": {
+                     backgroundColor: "unset",
+                  },
+               },
+            },
+            {
+               props: { variant: "contained", color: "primary" },
+               style: {
+                  ":hover": {
+                     backgroundColor: palette.primary.dark,
+                  },
+               },
+            },
+         ],
       },
    },
 });

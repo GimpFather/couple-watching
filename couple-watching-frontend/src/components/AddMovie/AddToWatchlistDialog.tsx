@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 import { useGetMovieDetails, usePostToWatchlist } from "../../api/hooks/movies";
-import CustomIconButton from "../General/CustomIconButton";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { motion } from "motion/react";
@@ -18,6 +17,7 @@ import StarIcon from "../General/CustomIcons/StarIcon";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { toast } from "react-toastify";
 import AddToWatchlistDialogSkeleton from "./AddToWatchlistDialogSkeleton";
+import Button from "../General/Button";
 
 type AddToWatchlistDialogProps = {
    open: boolean;
@@ -126,16 +126,12 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
                      justifyContent="flex-end"
                      sx={{ width: "100%" }}
                   >
-                     <CustomIconButton
-                        handleOnClick={() => handleMutate()}
-                        text={<Typography>Add to watchlist!</Typography>}
-                        icon={<AddCircleIcon />}
-                     />
-                     <CustomIconButton
-                        handleOnClick={() => onClose()}
-                        text={<Typography>Go back</Typography>}
-                        icon={<ExitToAppIcon />}
-                     />
+                     <Button startIcon={<AddCircleIcon />} onClick={() => handleMutate()} dark>
+                        <FormattedMessage id="ADD_MOVIE.DIALOG.BUTTON.PRIMARY" />
+                     </Button>
+                     <Button variant="outlined" startIcon={<ExitToAppIcon />} onClick={() => onClose()}>
+                        <FormattedMessage id="ADD_MOVIE.DIALOG.BUTTON.SECONDARY" />
+                     </Button>
                   </Stack>
                </DialogActions>
             </>

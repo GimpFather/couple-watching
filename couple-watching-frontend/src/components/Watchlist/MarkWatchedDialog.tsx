@@ -19,10 +19,10 @@ import TagsSection from "./TagsSection";
 import { FormattedMessage } from "react-intl";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import CustomIconButton from "../General/CustomIconButton";
 import { useDeleteMovieFromWatchlist, usePostMovieAsWatched } from "../../api/hooks/movies";
 import { Movie } from "../../types/Watchlist.types";
 import { useQueryClient } from "@tanstack/react-query";
+import Button from "../General/Button";
 
 interface AddProductDialogProps {
    open: boolean;
@@ -161,27 +161,12 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
             </Stack>
          </DialogContent>
          <DialogActions sx={{ padding: 2 }}>
-            <CustomIconButton
-               handleOnClick={() => handleMarkAsWatched()}
-               icon={<CheckCircleOutlineIcon />}
-               text={
-                  <Typography>
-                     <FormattedMessage id="WATCHLIST.DIALOG.ACTION.PRIMARY" />
-                  </Typography>
-               }
-            />
-            <CustomIconButton
-               dark
-               handleOnClick={() => {
-                  onClose();
-               }}
-               icon={<ExitToAppIcon />}
-               text={
-                  <Typography>
-                     <FormattedMessage id="WATCHLIST.DIALOG.ACTION.SECONDARY" />
-                  </Typography>
-               }
-            />
+            <Button startIcon={<CheckCircleOutlineIcon />} onClick={() => handleMarkAsWatched()}>
+               <FormattedMessage id="WATCHLIST.DIALOG.ACTION.PRIMARY" />
+            </Button>
+            <Button variant="outlined" startIcon={<ExitToAppIcon />} onClick={() => onClose()}>
+               <FormattedMessage id="WATCHLIST.DIALOG.ACTION.SECONDARY" />
+            </Button>
          </DialogActions>
       </Dialog>
    );

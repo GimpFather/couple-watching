@@ -1,7 +1,7 @@
 import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
-import CustomIconButton from "./CustomIconButton";
 import { motion } from "motion/react";
 import { FormattedMessage } from "react-intl";
+import Button from "./Button";
 
 type InfoSectionProps = {
    title: string;
@@ -43,26 +43,14 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
          {(primaryButton || secondaryButton) && (
             <Stack direction={isMobile ? "column" : "row"} spacing={2}>
                {primaryButton && (
-                  <CustomIconButton
-                     handleOnClick={() => primaryButton.action()}
-                     icon={primaryButton.icon}
-                     text={
-                        <Typography>
-                           <FormattedMessage id={primaryButton.caption} />
-                        </Typography>
-                     }
-                  />
+                  <Button variant="contained" startIcon={primaryButton.icon} onClick={() => primaryButton.action()}>
+                     <FormattedMessage id={primaryButton.caption} />
+                  </Button>
                )}
                {secondaryButton && (
-                  <CustomIconButton
-                     handleOnClick={() => secondaryButton.action()}
-                     icon={secondaryButton.icon}
-                     text={
-                        <Typography>
-                           <FormattedMessage id={secondaryButton.caption} />
-                        </Typography>
-                     }
-                  />
+                  <Button variant="contained" startIcon={secondaryButton.icon} onClick={() => secondaryButton.action()}>
+                     <FormattedMessage id={secondaryButton.caption} />
+                  </Button>
                )}
             </Stack>
          )}
