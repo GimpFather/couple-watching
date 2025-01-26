@@ -2,7 +2,6 @@ import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "
 import { Movie } from "../../types/Watchlist.types";
 import { Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { motion } from "motion/react";
-import MovieActions from "../../components/Watchlist/MovieActions";
 import { useIntl } from "react-intl";
 
 interface WatchlistTableProps {
@@ -35,11 +34,6 @@ const WatchlistTable = ({ data }: WatchlistTableProps) => {
       columnHelper.accessor("imdbReview", {
          cell: (info) => info.getValue(),
          header: formatMessage({ id: "WATCHLIST.TABLE.HEADER.IMDB_REVIEW" }),
-      }),
-      columnHelper.display({
-         id: "actions",
-         header: formatMessage({ id: "WATCHLIST.TABLE.HEADER.ACTIONS" }),
-         cell: () => <MovieActions />,
       }),
    ];
 
