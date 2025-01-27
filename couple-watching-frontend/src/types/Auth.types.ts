@@ -1,11 +1,10 @@
-import { User } from "firebase/auth";
-
-export interface AppUser extends User {
-   couple: Person[];
-}
-
 export interface Person {
-   name: string;
+   displayName: string;
+   email: string;
+   createdAt: string;
+   userId: string;
+   coupleId?: string;
+   partnerId?: string;
 }
 
 export interface LoginCredentials {
@@ -14,6 +13,14 @@ export interface LoginCredentials {
 }
 
 export interface RegisterCredentials {
+   displayName: string;
    email: string;
    password: string;
+}
+
+export interface PairRequest {
+   from: string;
+   to: string;
+   staus: "pending" | "accepted" | "rejected";
+   createdAt: string;
 }

@@ -5,8 +5,8 @@ export enum WatchlistQueryKeys {
    GET_WATCHLIST = "GET_WATCHLIST_MOVIES",
 }
 
-export const useGetWatchlistMovies = () =>
+export const useGetWatchlistMovies = ({ pairId }: { pairId: string }) =>
    useQuery({
       queryKey: [WatchlistQueryKeys.GET_WATCHLIST],
-      queryFn: () => GetWatchlistMovies(),
+      queryFn: () => GetWatchlistMovies(pairId),
    });
