@@ -11,12 +11,16 @@ import InfoSection from "../../components/General/InfoSection";
 import { useNavigate } from "react-router";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
+import { useAuthContext } from "../../context/AuthProvider";
+import { useUser } from "../../api/hooks/pairs";
 
 const WatchlistPage = () => {
+   const { user } = useAuthContext();
+   const { data: userData } = useUser(user!.uid);
    const navigate = useNavigate();
    const { control, watch, setValue } = useForm<WatchlistFiltersInput>({ defaultValues: { watchlistMode: "cool" } });
    const { watchlistMode, search } = watch();
-   const { data, isLoading } = useGetWatchlistMovies();
+   const { data, isLoading } = useGetWatchlistMovies({ pairId: userData?.coupleId ?? "" });
    const filteredData = data?.filter((movie) => movie.title.toLowerCase().includes(search?.toLowerCase() || ""));
 
    return (

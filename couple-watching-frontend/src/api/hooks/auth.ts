@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signInWithEmailAndPassword, signOut, User } from "firebase/auth";
 import { auth } from "../firebase";
-import { LoginCredentials, RegisterCredentials } from "../../types/Auth.types";
-import { RegisterNewUser } from "../services/firebase.service";
+import { LoginCredentials, Person, RegisterCredentials } from "../../types/Auth.types";
+import { RegisterNewUser, SaveUserToFirestore } from "../services/firebase.service";
 
 export const useLogin = () => {
    const queryClient = useQueryClient();
@@ -34,5 +34,11 @@ export const useLogout = () => {
 export const useRegister = () => {
    return useMutation<User, Error, RegisterCredentials>({
       mutationFn: async (credentials: RegisterCredentials) => RegisterNewUser(credentials),
+   });
+};
+
+export const useSaveUserToFirestore = () => {
+   return useMutation<void, Error, Person>({
+      mutationFn: async (user) => SaveUserToFirestore(user),
    });
 };
