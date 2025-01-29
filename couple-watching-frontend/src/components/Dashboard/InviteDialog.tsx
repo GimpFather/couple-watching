@@ -17,6 +17,7 @@ import { Controller, useForm } from "react-hook-form";
 import { PairRequestInput } from "../../types/Inputs.types";
 import { useSendPairRequest } from "../../api/hooks/pairs";
 import { useAuthContext } from "../../context/AuthProvider";
+import { FormattedMessage } from "react-intl";
 
 type InviteDialogProps = {
    open: boolean;
@@ -58,18 +59,18 @@ const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
       <Dialog open={open} onClose={() => handleClose()}>
          <DialogTitle component="div">
             <Typography variant="h4" color="primary.main" fontWeight={800}>
-               Find your partner!
+               <FormattedMessage id="INVITE_DIALOG.PAIR.TITLE" />
             </Typography>
          </DialogTitle>
          <DialogContent>
             <Stack spacing={2}>
                <DialogContentText component="div" sx={{ paddingBottom: 1 }}>
                   <Typography color="textPrimary">
-                     Simply copy the ID and give it to your partner, or paste below they ID!
+                     <FormattedMessage id="INVITE_DIALOG.PAIR.SUBTITLE" />
                   </Typography>
                </DialogContentText>
                <TextField
-                  label="Your ID"
+                  label={<FormattedMessage id="INVITE_DIALOG.PAIR.YOUR_ID_LABEL" />}
                   variant="outlined"
                   defaultValue={user.uid}
                   slotProps={{
@@ -90,12 +91,17 @@ const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
                <Controller
                   control={control}
                   name="to"
-                  render={({ field }) => <TextField {...field} label="Your partner ID" variant="outlined" />}
+                  render={({ field }) => (
+                     <TextField
+                        {...field}
+                        label={<FormattedMessage id="INVITE_DIALOG.PAIR.YOUR_PARTNER_ID_LABEL" />}
+                        variant="outlined"
+                     />
+                  )}
                />
                <DialogContentText component="div" sx={{ paddingBottom: 1 }}>
                   <Typography color="textPrimary">
-                     Once you send the request to your partner, they will be able to accept or decline it. If they
-                     accept it, you will be able to add movies to your couple watchlist!
+                     <FormattedMessage id="INVITE_DIALOG.PAIR.DESC" />
                   </Typography>
                </DialogContentText>
             </Stack>
@@ -106,7 +112,7 @@ const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
                onClick={() => handleSendPairRequest()}
                startIcon={<SendIcon sx={{ rotate: "180deg" }} />}
             >
-               Invite!
+               <FormattedMessage id="INVITE_DIALOG.PAIR.BUTTON.PRIMARY" />
             </Button>
             <Button
                onClick={() => {
@@ -115,7 +121,7 @@ const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
                }}
                variant="outlined"
             >
-               Cancel
+               <FormattedMessage id="INVITE_DIALOG.PAIR.BUTTON.SECONDARY" />
             </Button>
          </DialogActions>
       </Dialog>
