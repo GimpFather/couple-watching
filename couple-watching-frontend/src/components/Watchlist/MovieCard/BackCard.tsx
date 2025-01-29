@@ -41,7 +41,7 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
                queryClient.invalidateQueries({ queryKey: ["GET_WATCHLIST_MOVIES"] });
             },
             onError: (e) => {
-               console.log(e.message);
+               alert(e.message);
                notifyError();
             },
          }
