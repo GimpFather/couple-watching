@@ -11,12 +11,12 @@ import InviteDialog from "../../components/Dashboard/InviteDialog";
 import React from "react";
 
 const DashboardPage = () => {
-   const { user, userData, logout } = useAuthContext();
+   const { user, logout } = useAuthContext();
    const { data: pairRequestsData } = usePairRequests(user!.uid);
 
    const [open, setOpen] = React.useState(false);
 
-   if (!user || !userData) return null;
+   if (!user) return null;
 
    const handleLogout = () => {
       logout();
@@ -37,7 +37,7 @@ const DashboardPage = () => {
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
                <InfoSection
-                  title={`Welcome ${userData.displayName}!`}
+                  title={`Welcome ${user.displayName}!`}
                   subtitle="I’m so glad to see you here! I really appreciate you signing up and logging in to the app. 😊 Now, let’s dive in and explore it together!"
                   emoji={"👋"}
                />

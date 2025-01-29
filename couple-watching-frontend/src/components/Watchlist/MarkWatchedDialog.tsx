@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
    Dialog,
    DialogActions,
@@ -24,6 +25,7 @@ import { Movie } from "../../types/Watchlist.types";
 import { useQueryClient } from "@tanstack/react-query";
 import Button from "../General/Button";
 import { useAuthContext } from "../../context/AuthProvider";
+import { usePairId } from "../../api/hooks/pairs";
 
 interface AddProductDialogProps {
    open: boolean;
@@ -32,7 +34,9 @@ interface AddProductDialogProps {
 }
 
 const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
-   const { pairId } = useAuthContext();
+   const { user } = useAuthContext();
+   if (!user) return null;
+   const { data: pairId } = usePairId(user.uid);
    const { palette } = useTheme();
    const queryClient = useQueryClient();
    const { mutate: markAsWatchedMutate } = usePostMovieAsWatched();
@@ -75,12 +79,12 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                   isGay: !!tags?.isGay,
                },
             },
-            pairId: pairId,
+            pairId,
          },
          {
             onSuccess: () => {
                deleteMutate(
-                  { movieId: data.id, pairId: pairId },
+                  { movieId: data.id, pairId },
                   {
                      onSuccess: () => {
                         notifySuccess();

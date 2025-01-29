@@ -1,12 +1,3 @@
-export interface Person {
-   displayName: string;
-   email: string;
-   createdAt: string;
-   userId: string;
-   pairId?: string;
-   partnerId?: string;
-}
-
 export interface LoginCredentials {
    email: string;
    password: string;

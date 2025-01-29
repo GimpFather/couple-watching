@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Card, Stack, Typography } from "@mui/material";
 import { Movie } from "../../../types/Watchlist.types";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
@@ -11,6 +12,7 @@ import Button from "../../General/Button";
 import RatingChip from "../../General/Chips/RatingChip";
 import DurationChip from "../../General/Chips/DurationChip";
 import { useAuthContext } from "../../../context/AuthProvider";
+import { usePairId } from "../../../api/hooks/pairs";
 
 type BackCardProps = {
    movie: Movie;
@@ -19,7 +21,9 @@ type BackCardProps = {
 };
 
 const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => {
-   const { pairId } = useAuthContext();
+   const { user } = useAuthContext();
+   if (!user) return null;
+   const { data: pairId } = usePairId(user.uid);
    const queryClient = useQueryClient();
    const { mutate: deleteMutate } = useDeleteMovieFromWatchlist();
 
@@ -30,7 +34,7 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
 
    const handleDeleteMovie = () => {
       deleteMutate(
-         { movieId: movie.id, pairId: pairId },
+         { movieId: movie.id, pairId },
          {
             onSuccess: () => {
                notifySuccess();

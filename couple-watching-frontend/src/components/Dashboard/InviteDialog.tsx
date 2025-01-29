@@ -24,23 +24,23 @@ type InviteDialogProps = {
 };
 
 const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
-   const { userData } = useAuthContext();
+   const { user } = useAuthContext();
    const { mutate: sendPairRequest, isPending } = useSendPairRequest();
    const notify = () => toast(`Your ID has been copied! 🎉`);
 
    const { watch, control, reset } = useForm<PairRequestInput>();
    const { to } = watch();
 
-   if (!userData) return null;
+   if (!user) return null;
 
    const handleCopy = () => {
-      navigator.clipboard.writeText(userData.userId);
+      navigator.clipboard.writeText(user.uid);
       notify();
    };
 
    const handleSendPairRequest = () => {
       sendPairRequest(
-         { from: userData.userId, to, inviterName: userData.displayName },
+         { from: user.uid, to, inviterName: user.displayName ?? "" },
          {
             onSuccess: () => {
                toast("Your request has been sent! 🎉");
@@ -52,7 +52,7 @@ const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
       );
    };
 
-   const buttonsDisabled = !to || to === userData.userId || isPending;
+   const buttonsDisabled = !to || to === user.uid || isPending;
 
    return (
       <Dialog open={open} onClose={() => handleClose()}>
@@ -71,7 +71,7 @@ const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
                <TextField
                   label="Your ID"
                   variant="outlined"
-                  defaultValue={userData.userId}
+                  defaultValue={user.uid}
                   slotProps={{
                      input: {
                         readOnly: true,

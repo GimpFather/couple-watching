@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Stack } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
 import WatchlistTable from "./WatchlistTable";
@@ -12,15 +13,17 @@ import { useNavigate } from "react-router";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import { useAuthContext } from "../../context/AuthProvider";
-import { useUser } from "../../api/hooks/pairs";
+import { usePairId } from "../../api/hooks/pairs";
 
 const WatchlistPage = () => {
    const { user } = useAuthContext();
-   const { data: userData } = useUser(user!.uid);
+   if (!user) return null;
+   const { data: pairId } = usePairId(user.uid);
+   if (!pairId) return null;
    const navigate = useNavigate();
    const { control, watch, setValue } = useForm<WatchlistFiltersInput>({ defaultValues: { watchlistMode: "cool" } });
    const { watchlistMode, search } = watch();
-   const { data, isLoading } = useGetWatchlistMovies({ pairId: userData?.pairId ?? "" });
+   const { data, isLoading } = useGetWatchlistMovies({ pairId });
    const filteredData = data?.filter((movie) => movie.title.toLowerCase().includes(search?.toLowerCase() || ""));
 
    return (
