@@ -2,10 +2,11 @@ import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { motion } from "motion/react";
 import { FormattedMessage } from "react-intl";
 import Button from "./Button";
+import { isString } from "lodash";
 
 type InfoSectionProps = {
-   title: string;
-   subtitle: string;
+   title: React.ReactNode | string;
+   subtitle: React.ReactNode | string;
    emoji: string | React.ReactNode;
    primaryButton?: {
       caption: string;
@@ -35,11 +36,9 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
          <Stack spacing={1} alignItems="center" sx={{ textAlign: "center" }}>
             <Typography variant="h2">{emoji}</Typography>
             <Typography variant="h4" fontWeight={700}>
-               <FormattedMessage id={title} />
+               {isString(title) ? <FormattedMessage id={title} /> : title}
             </Typography>
-            <Typography variant="h6">
-               <FormattedMessage id={subtitle} />
-            </Typography>
+            <Typography variant="h6">{isString(subtitle) ? <FormattedMessage id={subtitle} /> : subtitle}</Typography>
          </Stack>
          {(primaryButton || secondaryButton) && (
             <Stack direction={isMobile ? "column" : "row"} spacing={2}>

@@ -9,6 +9,7 @@ import InfoSection from "../../components/General/InfoSection";
 import PairRequestNotification from "../../components/Dashboard/PairRequestNotification";
 import InviteDialog from "../../components/Dashboard/InviteDialog";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 const DashboardPage = () => {
    const { user, logout } = useAuthContext();
@@ -38,25 +39,25 @@ const DashboardPage = () => {
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
                <InfoSection
-                  title={`Welcome ${user.displayName}!`}
-                  subtitle="I’m so glad to see you here! I really appreciate you signing up and logging in to the app. 😊 Now, let’s dive in and explore it together!"
+                  title={
+                     <FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.WELCOME" values={{ name: user.displayName }} />
+                  }
+                  subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.WELCOME" />}
                   emoji={"👋"}
                />
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
                <InfoSection
-                  title="Wanna give me some feedback?"
-                  subtitle="I’m always looking to improve and make your experience better. If you have any feedback, suggestions, or just want to say hi, feel free to reach out to me. I’m here for you!"
+                  title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.FEEDBACK" />}
+                  subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.FEEDBACK" />}
                   emoji={"📫"}
                />
             </Grid>
             <Grid size={12}>
                {!pairData ? (
                   <InfoSection
-                     title={"Still maidenless?"}
-                     subtitle={
-                        "Looks like you’re flying solo in this watchlist! To unlock the full couple experience, invite your partner/friend/whatever to join you on your journey. After all, what’s a watchlist without a co-op partner? Make it official and share the fun!"
-                     }
+                     title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.MAIDENLESS" />}
+                     subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.MAIDENLESS" />}
                      emoji={"👥"}
                      primaryButton={{
                         icon: <WavingHandIcon />,
@@ -66,17 +67,15 @@ const DashboardPage = () => {
                   />
                ) : (
                   <InfoSection
-                     title={"You became a couple!"}
-                     subtitle={
-                        "Congratulations! You and your partner are now officially a couple in this watchlist. 🎉 Now you can share your favorite movies and TV shows with each other, and enjoy the full couple experience. Cheers to that!"
-                     }
+                     title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.COUPLE" />}
+                     subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.COUPLE" />}
                      emoji={"🥂"}
                   />
                )}
             </Grid>
          </Grid>
          <Button startIcon={<LogoutIcon />} onClick={() => handleLogout()}>
-            Logout
+            <FormattedMessage id="DASHBOARD.LOGOUT" />
          </Button>
          <InviteDialog open={open} handleClose={() => setOpen(false)} />
       </Stack>

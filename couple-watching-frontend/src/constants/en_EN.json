@@ -81,5 +81,14 @@
    "ADD_MOVIE.DIALOG.NO_DATA.DESC": "It sucks to show you this, but we couldn't find the data you're looking for. Maybe it's our fault, maybe it's API. Who knows? We can't controll everything, right?",
    "ADD_MOVIE.DIALOG.NO_DATA.BUTTON.DESC.PART_TWO": "Let's try again later, shall we?",
    "ADD_MOVIE.DIALOG.NO_DATA.BUTTON.PRIMARY":"Yeah, shit happens. Let's go back.",
-   "ADD_MOVIE.DIALOG.NO_DATA.BUTTON.SECONDARY": "No."
+   "ADD_MOVIE.DIALOG.NO_DATA.BUTTON.SECONDARY": "No.",
+   "DASHBOARD.INFO_SECTION.TITLE.WELCOME": "Welcome {name}",
+   "DASHBOARD.INFO_SECTION.SUBTITLE.WELCOME": "I’m so glad to see you here! I really appreciate you signing up and logging in to the app. 😊 Now, let’s dive in and explore it together!",
+   "DASHBOARD.INFO_SECTION.TITLE.FEEDBACK": "Wanna give me some feedback?",
+   "DASHBOARD.INFO_SECTION.SUBTITLE.FEEDBACK": "I’m always looking to improve and make your experience better. If you have any feedback, suggestions, or just want to say hi, feel free to reach out to me. I’m here for you!",
+   "DASHBOARD.INFO_SECTION.TITLE.MAIDENLESS": "Still maidenless?",
+   "DASHBOARD.INFO_SECTION.SUBTITLE.MAIDENLESS": "Looks like you’re flying solo in this watchlist! To unlock the full couple experience, invite your partner/friend/whatever to join you on your journey. After all, what’s a watchlist without a co-op partner? Make it official and share the fun!",
+   "DASHBOARD.INFO_SECTION.TITLE.COUPLE": "You became a couple!",
+   "DASHBOARD.INFO_SECTION.SUBTITLE.COUPLE": "Congratulations! You and your partner are now officially a couple in this watchlist. 🎉 Now you can share your favorite movies and TV shows with each other, and enjoy the full couple experience. Cheers to that!",
+   "DASHBOARD.LOGOUT": "Logout"
 }
