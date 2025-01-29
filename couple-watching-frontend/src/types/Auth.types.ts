@@ -21,6 +21,9 @@ export interface RegisterCredentials {
 export interface PairRequest {
    from: string;
    to: string;
-   staus: "pending" | "accepted" | "rejected";
-   createdAt: string;
+}
+
+export interface RespondToPair {
+   requestId: string;
+   accept: boolean;
 }

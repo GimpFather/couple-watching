@@ -13,7 +13,7 @@ import {
 import { auth, db } from "../firebase";
 import { Movie, WatchedMovie } from "../../types/Watchlist.types";
 import { createUserWithEmailAndPassword, User } from "firebase/auth";
-import { Person, RegisterCredentials } from "../../types/Auth.types";
+import { PairRequest, Person, RegisterCredentials, RespondToPair } from "../../types/Auth.types";
 
 export const GetWatchlistMovies = async (pairId: string): Promise<Movie[]> => {
    const querySnapshot = await getDocs(collection(db, "pairs", pairId, "watchlist"));
@@ -56,11 +56,11 @@ export const SaveUserToFirestore = async (user: Person) => {
    });
 };
 
-export const PostSendPairRequest = async (from: string, to: string) => {
+export const PostSendPairRequest = async (pairRequest: PairRequest) => {
    const pairRequestsRef = collection(db, "pairRequests");
    await addDoc(pairRequestsRef, {
-      from,
-      to,
+      from: pairRequest.from,
+      to: pairRequest.to,
       status: "pending",
       createdAt: new Date().toISOString(),
    });
@@ -89,7 +89,7 @@ export const GetPairRequests = async (userId: string) => {
    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 
-export const RespondToPairRequest = async (requestId: string, accept: boolean) => {
+export const RespondToPairRequest = async ({ accept, requestId }: RespondToPair) => {
    const pairRequestRef = doc(db, "pairRequests", requestId);
 
    if (accept) {
