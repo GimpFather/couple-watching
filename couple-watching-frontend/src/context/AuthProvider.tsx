@@ -6,7 +6,7 @@ import Loading from "../components/General/Loading";
 import { useLogout } from "../api/hooks/auth";
 import { useRespondToPairRequest, useSendPairRequest, useUser } from "../api/hooks/pairs";
 import React from "react";
-import { PairRequest, RespondToPair } from "../types/Auth.types";
+import { PairRequest, Person, RespondToPair } from "../types/Auth.types";
 import { Dialog } from "@mui/material";
 
 interface AuthContextProps {
@@ -15,6 +15,7 @@ interface AuthContextProps {
    logout: () => void;
    sendPairRequest: ({ from, to }: PairRequest) => void;
    respondToPairRequest: ({ accept, requestId }: RespondToPair) => void;
+   userData?: Person | null;
    pairId?: string;
 }
 
@@ -42,6 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
          value={{
             user,
             loading,
+            userData: userData,
             pairId: userData?.pairId,
             logout: logoutMutation,
             sendPairRequest: sendRequestMutation,
