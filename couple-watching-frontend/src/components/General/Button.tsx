@@ -10,8 +10,8 @@ const Button: React.FC<ButtonProps> = ({ children, dark = false, ...props }) => 
       <motion.div
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
-         whileHover={{ scale: 1.05 }}
-         whileTap={{ scale: 0.9 }}
+         whileHover={props.disabled ? {} : { scale: 1.05 }}
+         whileTap={props.disabled ? {} : { scale: 0.9 }}
          style={{ width: "fit-content" }}
       >
          <MUIButton

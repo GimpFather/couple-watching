@@ -1,4 +1,4 @@
-import { Grid2 as Grid, Stack, Typography } from "@mui/material";
+import { Grid2 as Grid, Stack } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
 import { useAuthContext } from "../../context/AuthProvider";
 import Button from "../../components/General/Button";
@@ -6,10 +6,15 @@ import { usePairRequests } from "../../api/hooks/pairs";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
 import LogoutIcon from "@mui/icons-material/Logout";
 import InfoSection from "../../components/General/InfoSection";
+import PairRequestNotification from "../../components/Dashboard/PairRequestNotification";
+import InviteDialog from "../../components/Dashboard/InviteDialog";
+import React from "react";
 
 const DashboardPage = () => {
-   const { user, userData, logout, respondToPairRequest, sendPairRequest } = useAuthContext();
+   const { user, userData, logout } = useAuthContext();
    const { data: pairRequestsData } = usePairRequests(user!.uid);
+
+   const [open, setOpen] = React.useState(false);
 
    if (!user || !userData) return null;
 
@@ -17,18 +22,19 @@ const DashboardPage = () => {
       logout();
    };
 
-   const handleInviteUserToCouple = () => {
-      sendPairRequest({ from: user!.uid, to: "TG8jlmm8yNXzjxspy7moooCnmrM2" });
-   };
-
-   const handleRespondToRequest = (accept: boolean, id: string) => {
-      respondToPairRequest({ requestId: id, accept });
-   };
-
    return (
       <Stack spacing={4}>
          <PageTitle title="DASHBOARD.HEADER" subtitle="DASHBOARD.SUBTITLE" />
          <Grid container spacing={4} justifyContent="center">
+            <Grid size={12}>
+               {pairRequestsData && pairRequestsData.length > 0 && (
+                  <Stack spacing={2}>
+                     {pairRequestsData?.map((request) => (
+                        <PairRequestNotification key={request.id} inviter={request.inviterName} invId={request.id} />
+                     ))}
+                  </Stack>
+               )}
+            </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
                <InfoSection
                   title={`Welcome ${userData.displayName}!`}
@@ -53,29 +59,15 @@ const DashboardPage = () => {
                   primaryButton={{
                      icon: <WavingHandIcon />,
                      caption: "Invite your partner",
-                     action: () => handleInviteUserToCouple(),
+                     action: () => setOpen(true),
                   }}
                />
             </Grid>
          </Grid>
-         {pairRequestsData && pairRequestsData.length > 0 && (
-            <Stack spacing={2} sx={{ padding: 2, borderRadius: 4, backgroundColor: "background.paper" }}>
-               <Typography variant="h6">Pair Requests</Typography>
-               {pairRequestsData?.map((request) => (
-                  <Stack key={request.id} direction="row" justifyContent="space-between">
-                     <Button variant="outlined" onClick={() => handleRespondToRequest(true, request.id)}>
-                        Accept
-                     </Button>
-                     <Button variant="outlined" onClick={() => handleRespondToRequest(false, request.id)}>
-                        Reject
-                     </Button>
-                  </Stack>
-               ))}
-            </Stack>
-         )}
          <Button startIcon={<LogoutIcon />} onClick={() => handleLogout()}>
             Logout
          </Button>
+         <InviteDialog open={open} handleClose={() => setOpen(false)} />
       </Stack>
    );
 };

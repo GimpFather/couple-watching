@@ -4,17 +4,15 @@ import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../api/firebase";
 import Loading from "../components/General/Loading";
 import { useLogout } from "../api/hooks/auth";
-import { useRespondToPairRequest, useSendPairRequest, useUser } from "../api/hooks/pairs";
+import { useUser } from "../api/hooks/pairs";
 import React from "react";
-import { PairRequest, Person, RespondToPair } from "../types/Auth.types";
+import { Person } from "../types/Auth.types";
 import { Dialog } from "@mui/material";
 
 interface AuthContextProps {
    user: User | null;
    loading: boolean;
    logout: () => void;
-   sendPairRequest: ({ from, to }: PairRequest) => void;
-   respondToPairRequest: ({ accept, requestId }: RespondToPair) => void;
    userData?: Person | null;
    pairId?: string;
 }
@@ -27,8 +25,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
    const { data: userData } = useUser(user?.uid ?? "");
    const { mutate: logoutMutation } = useLogout();
-   const { mutate: sendRequestMutation } = useSendPairRequest();
-   const { mutate: respondToRequestMutation } = useRespondToPairRequest();
 
    React.useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -46,8 +42,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             userData: userData,
             pairId: userData?.pairId,
             logout: logoutMutation,
-            sendPairRequest: sendRequestMutation,
-            respondToPairRequest: respondToRequestMutation,
          }}
       >
          {loading ? (

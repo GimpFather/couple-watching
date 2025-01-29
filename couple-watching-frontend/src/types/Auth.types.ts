@@ -21,6 +21,16 @@ export interface RegisterCredentials {
 export interface PairRequest {
    from: string;
    to: string;
+   inviterName: string;
+}
+
+export interface PairInvitation {
+   id: string;
+   from: string;
+   to: string;
+   inviterName: string;
+   status: string;
+   createdAt: string;
 }
 
 export interface RespondToPair {
