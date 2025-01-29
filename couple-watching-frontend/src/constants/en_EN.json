@@ -90,5 +90,9 @@
    "DASHBOARD.INFO_SECTION.SUBTITLE.MAIDENLESS": "Looks like you’re flying solo in this watchlist! To unlock the full couple experience, invite your partner/friend/whatever to join you on your journey. After all, what’s a watchlist without a co-op partner? Make it official and share the fun!",
    "DASHBOARD.INFO_SECTION.TITLE.COUPLE": "You became a couple!",
    "DASHBOARD.INFO_SECTION.SUBTITLE.COUPLE": "Congratulations! You and your partner are now officially a couple in this watchlist. 🎉 Now you can share your favorite movies and TV shows with each other, and enjoy the full couple experience. Cheers to that!",
-   "DASHBOARD.LOGOUT": "Logout"
+   "DASHBOARD.LOGOUT": "Logout",
+   "DASHBOARD.PAIR_REQUEST_NOTIFICATION.TITLE": "💌 A mysterious lover has sent you a pair request!",
+   "DASHBOARD.PAIR_REQUEST_NOTIFICATION.DETAILS": "H-Hey… It’s {inviter}… I think you’re really cool, and I’d be so happy to start my CUM journey with you! I hope you don’t mind me asking… 👉👈",
+   "DASHBOARD.PAIR_REQUEST_NOTIFICATION.PRIMARY_BUTTON": "Accept",
+   "DASHBOARD.PAIR_REQUEST_NOTIFICATION.SECONDARY_BUTTON": "Decline"
 }
