@@ -13,7 +13,7 @@ import {
 import { auth, db } from "../firebase";
 import { Movie, WatchedMovie } from "../../types/Watchlist.types";
 import { createUserWithEmailAndPassword, User } from "firebase/auth";
-import { PairRequest, Person, RegisterCredentials, RespondToPair } from "../../types/Auth.types";
+import { PairInvitation, PairRequest, Person, RegisterCredentials, RespondToPair } from "../../types/Auth.types";
 
 export const GetWatchlistMovies = async (pairId: string): Promise<Movie[]> => {
    const querySnapshot = await getDocs(collection(db, "pairs", pairId, "watchlist"));
@@ -61,6 +61,7 @@ export const PostSendPairRequest = async (pairRequest: PairRequest) => {
    await addDoc(pairRequestsRef, {
       from: pairRequest.from,
       to: pairRequest.to,
+      inviterName: pairRequest.inviterName,
       status: "pending",
       createdAt: new Date().toISOString(),
    });
@@ -82,11 +83,21 @@ export const PostCreatePair = async (user1Id: string, user2Id: string) => {
    await updateDoc(user2Ref, { partnerId: user1Id });
 };
 
-export const GetPairRequests = async (userId: string) => {
+export const GetPairRequests = async (userId: string): Promise<PairInvitation[]> => {
    const pairRequestsRef = collection(db, "pairRequests");
    const q = query(pairRequestsRef, where("to", "==", userId), where("status", "==", "pending"));
    const snapshot = await getDocs(q);
-   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+   return snapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+         id: doc.id,
+         from: data.from,
+         to: data.to,
+         inviterName: data.inviterName,
+         status: data.status,
+         createdAt: data.createdAt,
+      } as PairInvitation;
+   });
 };
 
 export const RespondToPairRequest = async ({ accept, requestId }: RespondToPair) => {

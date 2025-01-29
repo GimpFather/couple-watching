@@ -4,13 +4,13 @@ import { PairRequest, RespondToPair } from "../../types/Auth.types";
 
 export const useSendPairRequest = () => {
    return useMutation<void, Error, PairRequest>({
-      mutationFn: ({ from, to }) => PostSendPairRequest({ from, to }),
+      mutationFn: ({ from, to, inviterName }) => PostSendPairRequest({ from, to, inviterName }),
    });
 };
 
 export const usePairRequests = (userId: string) => {
    return useQuery({
-      queryKey: ["pairRequests", userId],
+      queryKey: ["PAIR_REQUEST", userId],
       queryFn: () => GetPairRequests(userId),
       enabled: !!userId,
    });
@@ -22,7 +22,7 @@ export const useRespondToPairRequest = () => {
    return useMutation<void, Error, RespondToPair>({
       mutationFn: ({ requestId, accept }) => RespondToPairRequest({ requestId, accept }),
       onSuccess: () => {
-         queryClient.invalidateQueries({ queryKey: ["pairRequests", "userId"] });
+         queryClient.invalidateQueries({ queryKey: ["PAIR_REQUEST"] });
       },
    });
 };
