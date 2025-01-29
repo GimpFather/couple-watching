@@ -13,7 +13,7 @@ export const useLogin = () => {
          return userCredential.user;
       },
       onSuccess: () => {
-         queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+         queryClient.invalidateQueries();
       },
    });
 };
@@ -26,7 +26,7 @@ export const useLogout = () => {
          await signOut(auth);
       },
       onSuccess: () => {
-         queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+         queryClient.invalidateQueries();
       },
    });
 };

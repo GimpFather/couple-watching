@@ -23,6 +23,7 @@ import { useDeleteMovieFromWatchlist, usePostMovieAsWatched } from "../../api/ho
 import { Movie } from "../../types/Watchlist.types";
 import { useQueryClient } from "@tanstack/react-query";
 import Button from "../General/Button";
+import { useAuthContext } from "../../context/AuthProvider";
 
 interface AddProductDialogProps {
    open: boolean;
@@ -31,6 +32,7 @@ interface AddProductDialogProps {
 }
 
 const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
+   const { pairId } = useAuthContext();
    const { palette } = useTheme();
    const queryClient = useQueryClient();
    const { mutate: markAsWatchedMutate } = usePostMovieAsWatched();
@@ -51,38 +53,46 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
    const notifySuccess = () => toast("Nice! That film is officially watched. 🎉");
    const notifyError = () => toast("Oops! Something went wrong. 😢");
 
+   if (!pairId) return null;
+
    const handleMarkAsWatched = () => {
       markAsWatchedMutate(
          {
-            ...data,
-            watchedDate: dayjs(watchedDate).format("DD/MM/YYYY"),
-            rating: {
-               ratingPersonOne: rating.ratingPersonOne,
-               ratingPersonTwo: rating.ratingPersonTwo,
-               finalRating: (rating.ratingPersonOne + rating.ratingPersonTwo) / 2,
+            newMovie: {
+               ...data,
+               watchedDate: dayjs(watchedDate).format("DD/MM/YYYY"),
+               rating: {
+                  ratingPersonOne: rating.ratingPersonOne,
+                  ratingPersonTwo: rating.ratingPersonTwo,
+                  finalRating: (rating.ratingPersonOne + rating.ratingPersonTwo) / 2,
+               },
+               tags: {
+                  isHorny: !!tags?.isHorny,
+                  isSad: !!tags?.isSad,
+                  isSnoby: !!tags?.isSnoby,
+                  isLiterallyMe: !!tags?.isLiterallyMe,
+                  isCertifiedShit: !!tags?.isCertifiedShit,
+                  isGay: !!tags?.isGay,
+               },
             },
-            tags: {
-               isHorny: !!tags?.isHorny,
-               isSad: !!tags?.isSad,
-               isSnoby: !!tags?.isSnoby,
-               isLiterallyMe: !!tags?.isLiterallyMe,
-               isCertifiedShit: !!tags?.isCertifiedShit,
-               isGay: !!tags?.isGay,
-            },
+            pairId: pairId,
          },
          {
             onSuccess: () => {
-               deleteMutate(data.id, {
-                  onSuccess: () => {
-                     notifySuccess();
-                     queryClient.invalidateQueries({ queryKey: ["GET_WATCHLIST_MOVIES"] });
-                     onClose();
-                  },
-                  onError: (e) => {
-                     console.log(e.message);
-                     notifyError();
-                  },
-               });
+               deleteMutate(
+                  { movieId: data.id, pairId: pairId },
+                  {
+                     onSuccess: () => {
+                        notifySuccess();
+                        queryClient.invalidateQueries({ queryKey: ["GET_WATCHLIST_MOVIES"] });
+                        onClose();
+                     },
+                     onError: (e) => {
+                        console.log(e.message);
+                        notifyError();
+                     },
+                  }
+               );
             },
             onError: (e) => {
                console.log(e.message);

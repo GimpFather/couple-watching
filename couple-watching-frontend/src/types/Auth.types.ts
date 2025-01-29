@@ -3,7 +3,7 @@ export interface Person {
    email: string;
    createdAt: string;
    userId: string;
-   coupleId?: string;
+   pairId?: string;
    partnerId?: string;
 }
 

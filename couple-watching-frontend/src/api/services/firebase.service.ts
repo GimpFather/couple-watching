@@ -30,8 +30,8 @@ export const PostMovieToWatchlist = async (movie: Movie, pairId: string) => {
    await setDoc(docRef, movie);
 };
 
-export const PostMovieAsWatched = async (movie: WatchedMovie) => {
-   const docRef = doc(db, "watched", movie.id);
+export const PostMovieAsWatched = async (movie: WatchedMovie, pairId: string) => {
+   const docRef = doc(db, "pairs", pairId, "watched", movie.id);
    await setDoc(docRef, movie);
 };
 
