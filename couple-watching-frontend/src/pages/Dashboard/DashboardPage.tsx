@@ -2,7 +2,7 @@ import { Grid2 as Grid, Stack } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
 import { useAuthContext } from "../../context/AuthProvider";
 import Button from "../../components/General/Button";
-import { usePairRequests } from "../../api/hooks/pairs";
+import { usePair, usePairRequests } from "../../api/hooks/pairs";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
 import LogoutIcon from "@mui/icons-material/Logout";
 import InfoSection from "../../components/General/InfoSection";
@@ -13,6 +13,7 @@ import React from "react";
 const DashboardPage = () => {
    const { user, logout } = useAuthContext();
    const { data: pairRequestsData } = usePairRequests(user!.uid);
+   const { data: pairData } = usePair(user!.uid);
 
    const [open, setOpen] = React.useState(false);
 
@@ -50,18 +51,28 @@ const DashboardPage = () => {
                />
             </Grid>
             <Grid size={12}>
-               <InfoSection
-                  title={"Still maidenless?"}
-                  subtitle={
-                     "Looks like you’re flying solo in this watchlist! To unlock the full couple experience, invite your partner/friend/whatever to join you on your journey. After all, what’s a watchlist without a co-op partner? Make it official and share the fun!"
-                  }
-                  emoji={"👥"}
-                  primaryButton={{
-                     icon: <WavingHandIcon />,
-                     caption: "Invite your partner",
-                     action: () => setOpen(true),
-                  }}
-               />
+               {!pairData ? (
+                  <InfoSection
+                     title={"Still maidenless?"}
+                     subtitle={
+                        "Looks like you’re flying solo in this watchlist! To unlock the full couple experience, invite your partner/friend/whatever to join you on your journey. After all, what’s a watchlist without a co-op partner? Make it official and share the fun!"
+                     }
+                     emoji={"👥"}
+                     primaryButton={{
+                        icon: <WavingHandIcon />,
+                        caption: "Invite your partner",
+                        action: () => setOpen(true),
+                     }}
+                  />
+               ) : (
+                  <InfoSection
+                     title={"You became a couple!"}
+                     subtitle={
+                        "Congratulations! You and your partner are now officially a couple in this watchlist. 🎉 Now you can share your favorite movies and TV shows with each other, and enjoy the full couple experience. Cheers to that!"
+                     }
+                     emoji={"🥂"}
+                  />
+               )}
             </Grid>
          </Grid>
          <Button startIcon={<LogoutIcon />} onClick={() => handleLogout()}>
