@@ -12,7 +12,7 @@ import Button from "../../General/Button";
 import RatingChip from "../../General/Chips/RatingChip";
 import DurationChip from "../../General/Chips/DurationChip";
 import { useAuthContext } from "../../../context/AuthProvider";
-import { usePairId } from "../../../api/hooks/pairs";
+import { usePair } from "../../../api/hooks/pairs";
 
 type BackCardProps = {
    movie: Movie;
@@ -23,18 +23,18 @@ type BackCardProps = {
 const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => {
    const { user } = useAuthContext();
    if (!user) return null;
-   const { data: pairId } = usePairId(user.uid);
+   const { data: pairData } = usePair(user.uid);
    const queryClient = useQueryClient();
    const { mutate: deleteMutate } = useDeleteMovieFromWatchlist();
 
    const notifySuccess = () => toast("Nice! That film is officially trashed. 🗑️");
    const notifyError = () => toast("Oops! Something went wrong. 😢");
 
-   if (!pairId) return null;
+   if (!pairData) return null;
 
    const handleDeleteMovie = () => {
       deleteMutate(
-         { movieId: movie.id, pairId },
+         { movieId: movie.id, pairId: pairData.id },
          {
             onSuccess: () => {
                notifySuccess();

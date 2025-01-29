@@ -25,7 +25,7 @@ import { Movie } from "../../types/Watchlist.types";
 import { useQueryClient } from "@tanstack/react-query";
 import Button from "../General/Button";
 import { useAuthContext } from "../../context/AuthProvider";
-import { usePairId } from "../../api/hooks/pairs";
+import { usePair } from "../../api/hooks/pairs";
 
 interface AddProductDialogProps {
    open: boolean;
@@ -36,7 +36,7 @@ interface AddProductDialogProps {
 const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
    const { user } = useAuthContext();
    if (!user) return null;
-   const { data: pairId } = usePairId(user.uid);
+   const { data: pairData } = usePair(user.uid);
    const { palette } = useTheme();
    const queryClient = useQueryClient();
    const { mutate: markAsWatchedMutate } = usePostMovieAsWatched();
@@ -57,7 +57,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
    const notifySuccess = () => toast("Nice! That film is officially watched. 🎉");
    const notifyError = () => toast("Oops! Something went wrong. 😢");
 
-   if (!pairId) return null;
+   if (!pairData) return null;
 
    const handleMarkAsWatched = () => {
       markAsWatchedMutate(
@@ -79,12 +79,12 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                   isGay: !!tags?.isGay,
                },
             },
-            pairId,
+            pairId: pairData.id,
          },
          {
             onSuccess: () => {
                deleteMutate(
-                  { movieId: data.id, pairId },
+                  { movieId: data.id, pairId: pairData.id },
                   {
                      onSuccess: () => {
                         notifySuccess();
@@ -169,7 +169,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                      <Typography variant="body1">
                         <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.RATING.LABEL" />
                      </Typography>
-                     <Typography variant="body2">Person One opinion</Typography>
+                     <Typography variant="body2">{pairData.personOne} opinion</Typography>
                      <Controller
                         name="rating.ratingPersonOne"
                         control={control}
@@ -177,7 +177,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                            <StarRating value={field.value} handleRate={(value: number) => field.onChange(value)} />
                         )}
                      />
-                     <Typography variant="body2">Person Two opinion</Typography>
+                     <Typography variant="body2">{pairData.personTwo} opinion</Typography>
                      <Controller
                         name="rating.ratingPersonTwo"
                         control={control}

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { GetPairId, GetPairRequest, PostSendPairRequest, RespondToPairRequest } from "../services/firebase.service";
+import { GetPair, GetPairRequest, PostSendPairRequest, RespondToPairRequest } from "../services/firebase.service";
 import { PairRequest, RespondToPair } from "../../types/Auth.types";
 
 export const useSendPairRequest = () => {
@@ -16,10 +16,10 @@ export const usePairRequests = (userId: string) => {
    });
 };
 
-export const usePairId = (userId: string) => {
+export const usePair = (userId: string) => {
    return useQuery({
       queryKey: ["PAIR_ID", userId],
-      queryFn: () => GetPairId(userId),
+      queryFn: () => GetPair(userId),
       enabled: !!userId,
    });
 };
@@ -28,7 +28,8 @@ export const useRespondToPairRequest = () => {
    const queryClient = useQueryClient();
 
    return useMutation<void, Error, RespondToPair>({
-      mutationFn: ({ requestId, accept }) => RespondToPairRequest({ requestId, accept }),
+      mutationFn: ({ requestId, accept, personOne, personTwo }) =>
+         RespondToPairRequest({ requestId, accept, personOne, personTwo }),
       onSuccess: () => {
          queryClient.invalidateQueries({ queryKey: ["PAIR_REQUEST"] });
       },
