@@ -6,6 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import { useRespondToPairRequest } from "../../api/hooks/pairs";
 import { useAuthContext } from "../../context/AuthProvider";
+import { FormattedMessage } from "react-intl";
 
 type PairRequestNotificationProps = {
    inviter: string;
@@ -28,7 +29,7 @@ const PairRequestNotification = ({ inviter, invId }: PairRequestNotificationProp
       >
          <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: "secondary.main" }} />}>
             <Typography variant="h5" color="secondary">
-               💌 A mysterious lover has sent you a pair request!
+               <FormattedMessage id="DASHBOARD.PAIR_REQUEST_NOTIFICATION.TITLE" />
             </Typography>
          </AccordionSummary>
          <AccordionDetails>
@@ -39,8 +40,7 @@ const PairRequestNotification = ({ inviter, invId }: PairRequestNotificationProp
                spacing={2}
             >
                <Typography>
-                  H-Hey… It’s {inviter}… I think you’re really cool, and I’d be so happy to start my CUM journey with
-                  you! I hope you don’t mind me asking… 👉👈
+                  <FormattedMessage id="DASHBOARD.PAIR_REQUEST_NOTIFICATION.DETAILS" values={{ inviter }} />
                </Typography>
                <Stack direction="row" spacing={2}>
                   <Button
@@ -56,7 +56,7 @@ const PairRequestNotification = ({ inviter, invId }: PairRequestNotificationProp
                         })
                      }
                   >
-                     Agree
+                     <FormattedMessage id="DASHBOARD.PAIR_REQUEST_NOTIFICATION.PRIMARY_BUTTON" />
                   </Button>
                   <Button
                      loading={isPending}
@@ -65,7 +65,7 @@ const PairRequestNotification = ({ inviter, invId }: PairRequestNotificationProp
                      variant="text"
                      onClick={() => respondToPairRequest({ requestId: invId, accept: false })}
                   >
-                     Nope
+                     <FormattedMessage id="DASHBOARD.PAIR_REQUEST_NOTIFICATION.SECONDARY_BUTTON" />
                   </Button>
                </Stack>
             </Stack>
