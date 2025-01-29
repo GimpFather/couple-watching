@@ -92,14 +92,14 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                         onClose();
                      },
                      onError: (e) => {
-                        console.log(e.message);
+                        alert(e.message);
                         notifyError();
                      },
                   }
                );
             },
             onError: (e) => {
-               console.log(e.message);
+               alert(e.message);
                notifyError();
             },
          }
