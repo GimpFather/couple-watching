@@ -20,6 +20,7 @@ import { ADD_MOVIE_SUBTITLE } from "../../constants/ADD_MOVIE_SUBTITLE";
 import RatingChip from "../General/Chips/RatingChip";
 import DurationChip from "../General/Chips/DurationChip";
 import AddToWatchlistNoDataDialog from "./AddToWatchlistNoDataDialog";
+import { useAuthContext } from "../../context/AuthProvider";
 
 type AddToWatchlistDialogProps = {
    open: boolean;
@@ -28,6 +29,7 @@ type AddToWatchlistDialogProps = {
 };
 
 const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) => {
+   const { pairId } = useAuthContext();
    const { breakpoints } = useTheme();
    const { data, isLoading } = useGetMovieDetails({ imdbId: id });
    const { mutate } = usePostToWatchlist();
@@ -41,18 +43,21 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
    const notify = () => toast(`Nice! "${data?.title}" is officially on your watchlist! 🎉`);
 
    const handleMutate = () => {
-      if (data) {
+      if (data && pairId) {
          mutate(
             {
-               id: data.imdbID,
-               title: data.title,
-               productionYear: data.year,
-               cover: data.poster,
-               plot: data.plot,
-               director: data.director,
-               duration: data.runtime.replace(" min", ""),
-               imdbReview: Number(data.imdbRating),
-               genre: data.genre.split(", "),
+               newMovie: {
+                  id: data.imdbID,
+                  title: data.title,
+                  productionYear: data.year,
+                  cover: data.poster,
+                  plot: data.plot,
+                  director: data.director,
+                  duration: data.runtime.replace(" min", ""),
+                  imdbReview: Number(data.imdbRating),
+                  genre: data.genre.split(", "),
+               },
+               pairId: pairId,
             },
             {
                onSuccess: () => {

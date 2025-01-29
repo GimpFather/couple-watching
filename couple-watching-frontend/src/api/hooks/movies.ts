@@ -24,19 +24,19 @@ export const useGetMovieDetails = ({ imdbId, enabled = true }: { imdbId: string;
    });
 
 export const usePostToWatchlist = () => {
-   return useMutation<void, Error, Movie>({
-      mutationFn: (newMovie) => PostMovieToWatchlist(newMovie),
+   return useMutation<void, Error, { newMovie: Movie; pairId: string }>({
+      mutationFn: ({ newMovie, pairId }) => PostMovieToWatchlist(newMovie, pairId),
    });
 };
 
 export const usePostMovieAsWatched = () => {
-   return useMutation<void, Error, WatchedMovie>({
-      mutationFn: (newMovie) => PostMovieAsWatched(newMovie),
+   return useMutation<void, Error, { newMovie: WatchedMovie; pairId: string }>({
+      mutationFn: ({ newMovie, pairId }) => PostMovieAsWatched(newMovie, pairId),
    });
 };
 
 export const useDeleteMovieFromWatchlist = () => {
-   return useMutation<void, Error, string>({
-      mutationFn: (movieId) => DeleteMovieFromWatchlist(movieId),
+   return useMutation<void, Error, { movieId: string; pairId: string }>({
+      mutationFn: ({ movieId, pairId }) => DeleteMovieFromWatchlist(movieId, pairId),
    });
 };

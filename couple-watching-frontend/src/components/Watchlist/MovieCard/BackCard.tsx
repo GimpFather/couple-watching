@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import Button from "../../General/Button";
 import RatingChip from "../../General/Chips/RatingChip";
 import DurationChip from "../../General/Chips/DurationChip";
+import { useAuthContext } from "../../../context/AuthProvider";
 
 type BackCardProps = {
    movie: Movie;
@@ -18,23 +19,29 @@ type BackCardProps = {
 };
 
 const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => {
+   const { pairId } = useAuthContext();
    const queryClient = useQueryClient();
    const { mutate: deleteMutate } = useDeleteMovieFromWatchlist();
 
    const notifySuccess = () => toast("Nice! That film is officially trashed. 🗑️");
    const notifyError = () => toast("Oops! Something went wrong. 😢");
 
+   if (!pairId) return null;
+
    const handleDeleteMovie = () => {
-      deleteMutate(movie.id, {
-         onSuccess: () => {
-            notifySuccess();
-            queryClient.invalidateQueries({ queryKey: ["GET_WATCHLIST_MOVIES"] });
-         },
-         onError: (e) => {
-            console.log(e.message);
-            notifyError();
-         },
-      });
+      deleteMutate(
+         { movieId: movie.id, pairId: pairId },
+         {
+            onSuccess: () => {
+               notifySuccess();
+               queryClient.invalidateQueries({ queryKey: ["GET_WATCHLIST_MOVIES"] });
+            },
+            onError: (e) => {
+               console.log(e.message);
+               notifyError();
+            },
+         }
+      );
    };
    return (
       <Card

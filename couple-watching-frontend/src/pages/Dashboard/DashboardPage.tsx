@@ -13,7 +13,7 @@ const DashboardPage = () => {
    };
 
    const handleInviteUserToCouple = () => {
-      sendPairRequest({ from: user!.uid, to: "pNTcBgd2ScRwLznjnQVuMhq3OSC3" });
+      sendPairRequest({ from: user!.uid, to: "TG8jlmm8yNXzjxspy7moooCnmrM2" });
    };
 
    const handleRespondToRequest = (accept: boolean, id: string) => {
@@ -25,6 +25,7 @@ const DashboardPage = () => {
          <PageTitle title="DASHBOARD.HEADER" subtitle="DASHBOARD.SUBTITLE" />
          <Stack spacing={2} sx={{ padding: 2, borderRadius: 4, backgroundColor: "background.paper" }}>
             <Typography variant="h6">Welcome {user?.email}</Typography>
+            <Typography variant="h6">Your id is: {user?.uid}</Typography>
             <Button variant="outlined" onClick={() => handleLogout()}>
                Logout
             </Button>
