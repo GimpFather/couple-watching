@@ -19,10 +19,10 @@ const WatchlistPage = () => {
    const { user } = useAuthContext();
    if (!user) return null;
    const { data: pairId } = usePairId(user.uid);
-   if (!pairId) return null;
    const navigate = useNavigate();
    const { control, watch, setValue } = useForm<WatchlistFiltersInput>({ defaultValues: { watchlistMode: "cool" } });
    const { watchlistMode, search } = watch();
+   if (!pairId) return null;
    const { data, isLoading } = useGetWatchlistMovies({ pairId });
    const filteredData = data?.filter((movie) => movie.title.toLowerCase().includes(search?.toLowerCase() || ""));
 
