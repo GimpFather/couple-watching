@@ -22,7 +22,7 @@ import RatingChip from "../General/Chips/RatingChip";
 import DurationChip from "../General/Chips/DurationChip";
 import AddToWatchlistNoDataDialog from "./AddToWatchlistNoDataDialog";
 import { useAuthContext } from "../../context/AuthProvider";
-import { usePairId } from "../../api/hooks/pairs";
+import { usePair } from "../../api/hooks/pairs";
 
 type AddToWatchlistDialogProps = {
    open: boolean;
@@ -33,7 +33,7 @@ type AddToWatchlistDialogProps = {
 const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) => {
    const { user } = useAuthContext();
    if (!user) return null;
-   const { data: pairId } = usePairId(user.uid);
+   const { data: pairData } = usePair(user.uid);
    const { breakpoints } = useTheme();
    const { data, isLoading } = useGetMovieDetails({ imdbId: id });
    const { mutate } = usePostToWatchlist();
@@ -47,7 +47,7 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
    const notify = () => toast(`Nice! "${data?.title}" is officially on your watchlist! 🎉`);
 
    const handleMutate = () => {
-      if (data && pairId) {
+      if (data && pairData) {
          mutate(
             {
                newMovie: {
@@ -61,7 +61,7 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
                   imdbReview: Number(data.imdbRating),
                   genre: data.genre.split(", "),
                },
-               pairId,
+               pairId: pairData.id,
             },
             {
                onSuccess: () => {

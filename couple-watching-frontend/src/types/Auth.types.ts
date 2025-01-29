@@ -27,4 +27,14 @@ export interface PairInvitation {
 export interface RespondToPair {
    requestId: string;
    accept: boolean;
+   personOne?: string;
+   personTwo?: string;
+}
+
+export interface Pair {
+   id: string;
+   users: string[];
+   personOne: string;
+   personTwo: string;
+   createdAt: string;
 }

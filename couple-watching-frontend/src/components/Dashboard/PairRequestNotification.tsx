@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import { useRespondToPairRequest } from "../../api/hooks/pairs";
+import { useAuthContext } from "../../context/AuthProvider";
 
 type PairRequestNotificationProps = {
    inviter: string;
@@ -12,7 +13,11 @@ type PairRequestNotificationProps = {
 };
 
 const PairRequestNotification = ({ inviter, invId }: PairRequestNotificationProps) => {
+   const { user } = useAuthContext();
    const { mutate: respondToPairRequest, isPending } = useRespondToPairRequest();
+
+   if (!user) return null;
+
    return (
       <Accordion
          component={motion.div}
@@ -42,7 +47,14 @@ const PairRequestNotification = ({ inviter, invId }: PairRequestNotificationProp
                      loading={isPending}
                      color="secondary"
                      startIcon={<FavoriteIcon />}
-                     onClick={() => respondToPairRequest({ requestId: invId, accept: true })}
+                     onClick={() =>
+                        respondToPairRequest({
+                           requestId: invId,
+                           accept: true,
+                           personOne: inviter,
+                           personTwo: user.displayName ?? "Cuttie pie~",
+                        })
+                     }
                   >
                      Agree
                   </Button>

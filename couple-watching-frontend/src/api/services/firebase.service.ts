@@ -13,7 +13,7 @@ import {
 import { auth, db } from "../firebase";
 import { Movie, WatchedMovie } from "../../types/Watchlist.types";
 import { createUserWithEmailAndPassword, updateProfile, User } from "firebase/auth";
-import { PairInvitation, PairRequest, RegisterCredentials, RespondToPair } from "../../types/Auth.types";
+import { Pair, PairInvitation, PairRequest, RegisterCredentials, RespondToPair } from "../../types/Auth.types";
 
 export const GetWatchlistMovies = async (pairId: string): Promise<Movie[]> => {
    const querySnapshot = await getDocs(collection(db, "pairs", pairId, "watchlist"));
@@ -74,15 +74,18 @@ export const GetPairRequest = async (userId: string): Promise<PairInvitation[]> 
    });
 };
 
-export const GetPairId = async (userId: string): Promise<string> => {
+export const GetPair = async (userId: string): Promise<Pair> => {
    const pairRef = collection(db, "pairs");
    const q = query(pairRef, where("users", "array-contains", userId));
    const snapshot = await getDocs(q);
 
-   return snapshot.docs[0].id;
+   return {
+      id: snapshot.docs[0].id,
+      ...snapshot.docs[0].data(),
+   } as Pair;
 };
 
-export const RespondToPairRequest = async ({ accept, requestId }: RespondToPair) => {
+export const RespondToPairRequest = async ({ accept, requestId, personOne, personTwo }: RespondToPair) => {
    const pairRequestRef = doc(db, "pairRequests", requestId);
 
    if (accept) {
@@ -99,6 +102,8 @@ export const RespondToPairRequest = async ({ accept, requestId }: RespondToPair)
       await setDoc(pairRef, {
          users: [from, to],
          createdAt: Date.now(),
+         personOne: personOne,
+         personTwo: personTwo,
       });
 
       await updateDoc(pairRequestRef, { status: "accepted" });
