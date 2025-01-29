@@ -12,8 +12,8 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { Movie, WatchedMovie } from "../../types/Watchlist.types";
-import { createUserWithEmailAndPassword, User } from "firebase/auth";
-import { PairInvitation, PairRequest, Person, RegisterCredentials, RespondToPair } from "../../types/Auth.types";
+import { createUserWithEmailAndPassword, updateProfile, User } from "firebase/auth";
+import { PairInvitation, PairRequest, RegisterCredentials, RespondToPair } from "../../types/Auth.types";
 
 export const GetWatchlistMovies = async (pairId: string): Promise<Movie[]> => {
    const querySnapshot = await getDocs(collection(db, "pairs", pairId, "watchlist"));
@@ -40,20 +40,12 @@ export const DeleteMovieFromWatchlist = async (movieId: string, pairId: string) 
    await deleteDoc(docRef);
 };
 
-export const RegisterNewUser = async ({ email, password }: RegisterCredentials): Promise<User> => {
+export const RegisterNewUser = async ({ email, password, displayName }: RegisterCredentials): Promise<User> => {
    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-   return userCredential.user;
-};
+   const user = userCredential.user;
+   await updateProfile(user, { displayName });
 
-export const SaveUserToFirestore = async (user: Person) => {
-   const userRef = doc(db, "users", user.userId);
-   await setDoc(userRef, {
-      email: user.email,
-      displayName: user.displayName,
-      userId: user.userId,
-      partnerId: null,
-      createdAt: user.createdAt,
-   });
+   return userCredential.user;
 };
 
 export const PostSendPairRequest = async (pairRequest: PairRequest) => {
@@ -67,37 +59,27 @@ export const PostSendPairRequest = async (pairRequest: PairRequest) => {
    });
 };
 
-export const PostCreatePair = async (user1Id: string, user2Id: string) => {
-   const pairId = `${user1Id}_${user2Id}`;
-   const pairRef = doc(db, "pairs", pairId);
-
-   await setDoc(pairRef, {
-      users: [user1Id, user2Id],
-      createdAt: Date.now(),
-   });
-
-   const user1Ref = doc(db, "users", user1Id);
-   const user2Ref = doc(db, "users", user2Id);
-
-   await updateDoc(user1Ref, { partnerId: user2Id });
-   await updateDoc(user2Ref, { partnerId: user1Id });
-};
-
-export const GetPairRequests = async (userId: string): Promise<PairInvitation[]> => {
+export const GetPairRequest = async (userId: string): Promise<PairInvitation[]> => {
    const pairRequestsRef = collection(db, "pairRequests");
    const q = query(pairRequestsRef, where("to", "==", userId), where("status", "==", "pending"));
+
    const snapshot = await getDocs(q);
+
    return snapshot.docs.map((doc) => {
-      const data = doc.data();
+      const { inviterName } = doc.data();
       return {
          id: doc.id,
-         from: data.from,
-         to: data.to,
-         inviterName: data.inviterName,
-         status: data.status,
-         createdAt: data.createdAt,
+         inviterName,
       } as PairInvitation;
    });
+};
+
+export const GetPairId = async (userId: string): Promise<string> => {
+   const pairRef = collection(db, "pairs");
+   const q = query(pairRef, where("users", "array-contains", userId));
+   const snapshot = await getDocs(q);
+
+   return snapshot.docs[0].id;
 };
 
 export const RespondToPairRequest = async ({ accept, requestId }: RespondToPair) => {
@@ -119,20 +101,8 @@ export const RespondToPairRequest = async ({ accept, requestId }: RespondToPair)
          createdAt: Date.now(),
       });
 
-      const user1Ref = doc(db, "users", from);
-      const user2Ref = doc(db, "users", to);
-
-      await updateDoc(user1Ref, { partnerId: to, pairId: pairId });
-      await updateDoc(user2Ref, { partnerId: from, pairId: pairId });
-
       await updateDoc(pairRequestRef, { status: "accepted" });
    } else {
       await updateDoc(pairRequestRef, { status: "rejected" });
    }
-};
-
-export const GetUserData = async (uid: string): Promise<Person | null> => {
-   const userRef = doc(db, "users", uid);
-   const snapshot = await getDoc(userRef);
-   return snapshot.exists() ? (snapshot.data() as Person) : null;
 };

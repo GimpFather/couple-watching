@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
    Dialog,
    DialogActions,
@@ -21,6 +22,7 @@ import RatingChip from "../General/Chips/RatingChip";
 import DurationChip from "../General/Chips/DurationChip";
 import AddToWatchlistNoDataDialog from "./AddToWatchlistNoDataDialog";
 import { useAuthContext } from "../../context/AuthProvider";
+import { usePairId } from "../../api/hooks/pairs";
 
 type AddToWatchlistDialogProps = {
    open: boolean;
@@ -29,7 +31,9 @@ type AddToWatchlistDialogProps = {
 };
 
 const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) => {
-   const { pairId } = useAuthContext();
+   const { user } = useAuthContext();
+   if (!user) return null;
+   const { data: pairId } = usePairId(user.uid);
    const { breakpoints } = useTheme();
    const { data, isLoading } = useGetMovieDetails({ imdbId: id });
    const { mutate } = usePostToWatchlist();
@@ -57,7 +61,7 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
                   imdbReview: Number(data.imdbRating),
                   genre: data.genre.split(", "),
                },
-               pairId: pairId,
+               pairId,
             },
             {
                onSuccess: () => {

@@ -3,7 +3,7 @@ import FlipIcon from "../Watchlist/MovieCard/FlipIcon";
 import Button from "../General/Button";
 import { Controller, useForm } from "react-hook-form";
 import { RegisterInput } from "../../types/Inputs.types";
-import { useRegister, useSaveUserToFirestore } from "../../api/hooks/auth";
+import { useRegister } from "../../api/hooks/auth";
 
 type RegisterSideProps = {
    handleFlip: () => void;
@@ -11,27 +11,15 @@ type RegisterSideProps = {
 
 const RegisterSide = ({ handleFlip }: RegisterSideProps) => {
    const { mutate: mutateRegister } = useRegister();
-   const { mutate: mutateSave } = useSaveUserToFirestore();
    const { watch, control } = useForm<RegisterInput>();
+   const { displayName, email, password } = watch();
 
    const handleRegister = async () => {
-      mutateRegister(
-         {
-            displayName: watch("displayName"),
-            email: watch("email"),
-            password: watch("password"),
-         },
-         {
-            onSuccess: (result) => {
-               mutateSave({
-                  displayName: watch("displayName"),
-                  email: watch("email"),
-                  userId: result.uid,
-                  createdAt: new Date().toISOString(),
-               });
-            },
-         }
-      );
+      mutateRegister({
+         displayName,
+         email,
+         password,
+      });
    };
 
    return (
