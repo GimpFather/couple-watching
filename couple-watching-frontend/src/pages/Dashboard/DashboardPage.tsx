@@ -2,27 +2,22 @@ import { Stack, Typography } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
 import { useAuthContext } from "../../context/AuthProvider";
 import Button from "../../components/General/Button";
-import { useLogout } from "../../api/hooks/auth";
-import { usePairRequests, useRespondToPairRequest, useSendPairRequest } from "../../api/hooks/pairs";
+import { usePairRequests } from "../../api/hooks/pairs";
 
 const DashboardPage = () => {
-   const { user } = useAuthContext();
-   console.log(user);
-   const { mutate } = useLogout();
-   const { mutate: sendRequest } = useSendPairRequest();
+   const { user, logout, respondToPairRequest, sendPairRequest } = useAuthContext();
    const { data } = usePairRequests(user!.uid);
-   const { mutate: respondToRequest } = useRespondToPairRequest();
 
    const handleLogout = () => {
-      mutate();
+      logout();
    };
 
    const handleInviteUserToCouple = () => {
-      sendRequest({ from: user!.uid, to: "RPvPbiTNWEQH1qCrKpT0zQyElwE3" });
+      sendPairRequest({ from: user!.uid, to: "pNTcBgd2ScRwLznjnQVuMhq3OSC3" });
    };
 
    const handleRespondToRequest = (accept: boolean, id: string) => {
-      respondToRequest({ requestId: id, accept });
+      respondToPairRequest({ requestId: id, accept });
    };
 
    return (
