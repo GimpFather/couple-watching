@@ -15,6 +15,13 @@ import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { AuthProvider } from "./context/AuthProvider.tsx";
 
+if ("serviceWorker" in navigator) {
+   navigator.serviceWorker
+      .register("/service-worker.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch((err) => console.error("Service Worker Registration Failed:", err));
+}
+
 dayjs.extend(updateLocale);
 dayjs.updateLocale("en", {
    weekStart: 1,
