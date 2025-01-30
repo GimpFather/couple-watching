@@ -1,0 +1,38 @@
+{
+   "theme_color": "#38A169",
+   "background_color": "#262626",
+   "icons": [
+      { "purpose": "maskable", "sizes": "512x512", "src": "icon512_maskable.png", "type": "image/png" },
+      { "purpose": "any", "sizes": "512x512", "src": "icon512_rounded.png", "type": "image/png" }
+   ],
+   "orientation": "any",
+   "display": "standalone",
+   "lang": "en",
+   "name": "Couple's Ultimate Manager",
+   "short_name": "CUM",
+   "start_url": ".",
+   "description": "Couple’s Ultimate Manager: the ultimate tool for duos who do! 🎬💑 Make movie watchlists, track places you wanna visit, and keep tabs on all your shared dreams and schemes. Basically, it’s your relationship’s new BFF. 👫✨",
+   "screenshots": [
+      {
+         "src": "screenshot_one.png",
+         "sizes": "375x640",
+         "type": "image/png",
+         "form_factor": "wide",
+         "label": "Dashboard Test Screen"
+      },
+      {
+         "src": "screenshot_one.png",
+         "sizes": "375x640",
+         "type": "image/png",
+         "form_factor": "wide",
+         "label": "Dashboard Test Screen"
+      },
+      {
+         "src": "screenshot_one.png",
+         "sizes": "375x640",
+         "type": "image/png",
+         "form_factor": "wide",
+         "label": "Dashboard Test Screen"
+      }
+   ]
+}
