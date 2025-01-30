@@ -14,6 +14,9 @@ import ClearAllIcon from "@mui/icons-material/ClearAll";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import { useAuthContext } from "../../context/AuthProvider";
 import { usePair } from "../../api/hooks/pairs";
+import AnimatedEmoji from "../../components/General/AnimatedEmoji";
+import PopcornEmoji from "../../assets/lottie/popcorn.json";
+import SadEmoji from "../../assets/lottie/sad.json";
 
 const WatchlistPage = () => {
    const { user } = useAuthContext();
@@ -47,7 +50,7 @@ const WatchlistPage = () => {
                         <InfoSection
                            title="WATCHLIST.EMPTY_STATE.TITLE.FILTER"
                            subtitle="WATCHLIST.EMPTY_STATE.SUBTITLE.FILTER"
-                           emoji="😔"
+                           emoji={<AnimatedEmoji emoji={SadEmoji} width={80} height={80} />}
                            primaryButton={{
                               icon: <ClearAllIcon />,
                               caption: "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.CLEAR_FILTERS",
@@ -65,7 +68,7 @@ const WatchlistPage = () => {
                   <InfoSection
                      title="WATCHLIST.EMPTY_STATE.TITLE.NO_DATA"
                      subtitle="WATCHLIST.EMPTY_STATE.SUBTITLE.NO_DATA"
-                     emoji="🍿"
+                     emoji={<AnimatedEmoji emoji={PopcornEmoji} width={80} height={80} />}
                      primaryButton={{
                         icon: <LibraryAddIcon />,
                         caption: "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.ADD_MOVIE",

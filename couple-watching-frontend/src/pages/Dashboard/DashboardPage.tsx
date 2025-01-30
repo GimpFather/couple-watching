@@ -10,8 +10,10 @@ import PairRequestNotification from "../../components/Dashboard/PairRequestNotif
 import InviteDialog from "../../components/Dashboard/InviteDialog";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import Lottie from "lottie-react";
-import cheersEmoji from "../../assets/lottie/cheers.json";
+import CheersEmoji from "../../assets/lottie/cheers.json";
+import AnimatedEmoji from "../../components/General/AnimatedEmoji";
+import WaveEmoji from "../../assets/lottie/wave.json";
+import LoveLetter from "../../assets/lottie/letter.json";
 
 const DashboardPage = () => {
    const { user, logout } = useAuthContext();
@@ -45,14 +47,14 @@ const DashboardPage = () => {
                      <FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.WELCOME" values={{ name: user.displayName }} />
                   }
                   subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.WELCOME" />}
-                  emoji={"👋"}
+                  emoji={<AnimatedEmoji emoji={WaveEmoji} width={80} height={80} />}
                />
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
                <InfoSection
                   title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.FEEDBACK" />}
                   subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.FEEDBACK" />}
-                  emoji={"📫"}
+                  emoji={<AnimatedEmoji emoji={LoveLetter} width={80} height={80} />}
                />
             </Grid>
             <Grid size={12}>
@@ -71,7 +73,7 @@ const DashboardPage = () => {
                   <InfoSection
                      title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.COUPLE" />}
                      subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.COUPLE" />}
-                     emoji={<Lottie animationData={cheersEmoji} alt="🥂" style={{ width: 80, height: "auto" }} />}
+                     emoji={<AnimatedEmoji emoji={CheersEmoji} width={80} height={80} />}
                   />
                )}
             </Grid>
