@@ -34,7 +34,7 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
          sx={{ padding: 4, borderRadius: 4, backgroundColor: "background.paper", height: "100%" }}
       >
          <Stack spacing={1} alignItems="center" sx={{ textAlign: "center" }}>
-            <Typography variant="h2">{emoji}</Typography>
+            {isString(emoji) ? <Typography variant="h2">{emoji}</Typography> : emoji}
             <Typography variant="h4" fontWeight={700}>
                {isString(title) ? <FormattedMessage id={title} /> : title}
             </Typography>

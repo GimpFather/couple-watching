@@ -10,6 +10,8 @@ import PairRequestNotification from "../../components/Dashboard/PairRequestNotif
 import InviteDialog from "../../components/Dashboard/InviteDialog";
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import Lottie from "lottie-react";
+import cheersEmoji from "../../assets/lottie/cheers.json";
 
 const DashboardPage = () => {
    const { user, logout } = useAuthContext();
@@ -69,7 +71,7 @@ const DashboardPage = () => {
                   <InfoSection
                      title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.COUPLE" />}
                      subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.COUPLE" />}
-                     emoji={"🥂"}
+                     emoji={<Lottie animationData={cheersEmoji} alt="🥂" style={{ width: 80, height: "auto" }} />}
                   />
                )}
             </Grid>
