@@ -1,11 +1,15 @@
 export type SearchMovieInputs = {
    title: string;
+   type: "movie" | "series";
 };
 
 export type MarkMovieWatchedInputs = {
    watchedDate: Date;
-   rating: number;
-   opinion?: string;
+   rating: {
+      ratingPersonOne: number;
+      ratingPersonTwo: number;
+      finalRating: number;
+   };
    tags?: MovieTags;
 };
 
@@ -19,6 +23,21 @@ export type MovieTags = {
 };
 
 export type WatchlistFiltersInput = {
-   coolMode?: boolean;
+   watchlistMode?: "cool" | "nerd";
    search?: string;
+};
+
+export type SignInInput = {
+   email: string;
+   password: string;
+};
+
+export type RegisterInput = {
+   displayName: string;
+   email: string;
+   password: string;
+};
+
+export type PairRequestInput = {
+   to: string;
 };

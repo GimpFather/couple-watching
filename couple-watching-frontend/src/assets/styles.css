@@ -6,3 +6,8 @@ html {
 	width: 0; /* Remove scrollbar space */
 	background: transparent; /* Optional: just make scrollbar invisible */
 }
+
+.Toastify__toast-theme--light {
+	background-color: #262626;
+	color: #F9F9F9;
+}

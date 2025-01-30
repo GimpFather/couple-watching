@@ -10,7 +10,15 @@ import { ToastContainer } from "react-toastify";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { IntlProvider } from "react-intl";
-import us_US from "./constants/us_Us.json";
+import en_EN from "./constants/en_EN.json";
+import dayjs from "dayjs";
+import updateLocale from "dayjs/plugin/updateLocale";
+import { AuthProvider } from "./context/AuthProvider.tsx";
+
+dayjs.extend(updateLocale);
+dayjs.updateLocale("en", {
+   weekStart: 1,
+});
 
 const queryClient = new QueryClient();
 
@@ -20,20 +28,22 @@ createRoot(document.getElementById("root")!).render(
          <BrowserRouter>
             <ThemeProvider theme={defaultTheme}>
                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <IntlProvider messages={us_US} locale="us">
-                     <CssBaseline>
-                        <ToastContainer
-                           position="top-center"
-                           autoClose={5000}
-                           hideProgressBar={false}
-                           closeOnClick
-                           pauseOnFocusLoss
-                           draggable
-                           pauseOnHover
-                           theme="light"
-                        />
-                        <AppRouting />
-                     </CssBaseline>
+                  <IntlProvider messages={en_EN} locale="en">
+                     <AuthProvider>
+                        <CssBaseline>
+                           <ToastContainer
+                              position="top-center"
+                              autoClose={5000}
+                              hideProgressBar={false}
+                              closeOnClick
+                              pauseOnFocusLoss
+                              draggable
+                              pauseOnHover
+                              theme="light"
+                           />
+                           <AppRouting />
+                        </CssBaseline>
+                     </AuthProvider>
                   </IntlProvider>
                </LocalizationProvider>
             </ThemeProvider>
