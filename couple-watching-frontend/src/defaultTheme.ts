@@ -4,8 +4,8 @@ import "@fontsource/outfit";
 const palette = {
    primary: {
       main: "#38A169",
-      light: "#68D391", // Lighter green
-      dark: "#2F855A", //
+      light: "#68D391",
+      dark: "#2F855A", 
    },
    secondary: {
       main: "#E53E3E",
