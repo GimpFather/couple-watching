@@ -1,24 +1,83 @@
-import { Button, Stack } from "@mui/material";
+import { Grid2 as Grid, Stack } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
-import { motion } from "motion/react";
-import { Link } from "react-router";
+import { useAuthContext } from "../../context/AuthProvider";
+import Button from "../../components/General/Button";
+import { usePair, usePairRequests } from "../../api/hooks/pairs";
+import WavingHandIcon from "@mui/icons-material/WavingHand";
+import LogoutIcon from "@mui/icons-material/Logout";
+import InfoSection from "../../components/General/InfoSection";
+import PairRequestNotification from "../../components/Dashboard/PairRequestNotification";
+import InviteDialog from "../../components/Dashboard/InviteDialog";
+import React from "react";
+import { FormattedMessage } from "react-intl";
 
 const DashboardPage = () => {
+   const { user, logout } = useAuthContext();
+   const { data: pairRequestsData } = usePairRequests(user!.uid);
+   const { data: pairData } = usePair(user!.uid);
+
+   const [open, setOpen] = React.useState(false);
+
+   if (!user) return null;
+
+   const handleLogout = () => {
+      logout();
+   };
+
    return (
       <Stack spacing={4}>
          <PageTitle title="DASHBOARD.HEADER" subtitle="DASHBOARD.SUBTITLE" />
-         <Stack
-            spacing={2}
-            direction="row"
-            sx={{ padding: 2, backgroundColor: "background.paper", borderRadius: 4 }}
-            component={motion.div}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-         >
-            <Link to="/hello">
-               <Button variant="contained">Przejdź do strony startowej</Button>
-            </Link>
-         </Stack>
+         <Grid container spacing={4} justifyContent="center">
+            <Grid size={12}>
+               {pairRequestsData && pairRequestsData.length > 0 && (
+                  <Stack spacing={2}>
+                     {pairRequestsData?.map((request) => (
+                        <PairRequestNotification key={request.id} inviter={request.inviterName} invId={request.id} />
+                     ))}
+                  </Stack>
+               )}
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+               <InfoSection
+                  title={
+                     <FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.WELCOME" values={{ name: user.displayName }} />
+                  }
+                  subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.WELCOME" />}
+                  emoji={"👋"}
+               />
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+               <InfoSection
+                  title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.FEEDBACK" />}
+                  subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.FEEDBACK" />}
+                  emoji={"📫"}
+               />
+            </Grid>
+            <Grid size={12}>
+               {!pairData ? (
+                  <InfoSection
+                     title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.MAIDENLESS" />}
+                     subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.MAIDENLESS" />}
+                     emoji={"👥"}
+                     primaryButton={{
+                        icon: <WavingHandIcon />,
+                        caption: "Invite your partner",
+                        action: () => setOpen(true),
+                     }}
+                  />
+               ) : (
+                  <InfoSection
+                     title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.COUPLE" />}
+                     subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.COUPLE" />}
+                     emoji={"🥂"}
+                  />
+               )}
+            </Grid>
+         </Grid>
+         <Button startIcon={<LogoutIcon />} onClick={() => handleLogout()}>
+            <FormattedMessage id="DASHBOARD.LOGOUT" />
+         </Button>
+         <InviteDialog open={open} handleClose={() => setOpen(false)} />
       </Stack>
    );
 };

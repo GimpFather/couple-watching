@@ -12,7 +12,7 @@ const Navbar = () => {
       //TODO: Fix the padding in the box
       //The padding in the box is added due to problem with the fixed AppBar
       <Box sx={{ paddingTop: "80px" }}>
-         <AppBar elevation={24} position="fixed" sx={{ top: "auto", bottom: 0 }}>
+         <AppBar elevation={24} position="fixed" sx={{ top: "auto", bottom: 0, backgroundColor: "unset" }}>
             <Stack
                direction="row"
                justifyContent="space-around"
@@ -33,7 +33,7 @@ const Navbar = () => {
                <AppBarLink
                   icon={<DashboardOutlinedIcon sx={{ color: "common.white" }} />}
                   filledIcon={<DashboardIcon sx={{ color: "primary.main" }} />}
-                  url={"/"}
+                  url={"/dashboard"}
                   caption={"NAVBAR.DASHBOARD"}
                />
             </Stack>
