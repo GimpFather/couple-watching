@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-globals */
-
 const CACHE_NAME = "simple-pwa-cache-v1";
 const urlsToCache = ["/", "/index.html"];
 
