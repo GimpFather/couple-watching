@@ -101,5 +101,12 @@
    "INVITE_DIALOG.PAIR.YOUR_PARTNER_ID_LABEL": "Your partner ID",
    "INVITE_DIALOG.PAIR.DESC": "Once you send the request to your partner, they will be able to accept or decline it. If they accept it, you will be able to add movies to your couple watchlist!",
    "INVITE_DIALOG.PAIR.BUTTON.PRIMARY": "Invite!",
-   "INVITE_DIALOG.PAIR.BUTTON.SECONDARY": "Close"
+   "INVITE_DIALOG.PAIR.BUTTON.SECONDARY": "Close",
+   "AUTH.REGISTER.TITLE": "Register",
+   "AUTH.REGISTER.SUBTITLE": "✨ Awww, that's soo cool you decide to join us! It means so much to me! 😊",
+   "AUTH.REGISTER.LABEL.NICKNAME": "Let's start with your nickname!",
+   "AUTH.REGISTER.LABEL.EMAIL": "Now your mail",
+   "AUTH.REGISTER.LABEL.PASSWORD": "And finally, your password",
+   "AUTH.REGISTER.LABEL.DESC": "When you will be ready, just click button bellow! We gonna need couple more things to make your account! 😎",
+   "AUTH.REGISTER.BUTTON": "Okey! What's next?"
 }

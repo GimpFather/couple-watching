@@ -4,6 +4,7 @@ import Button from "../General/Button";
 import { Controller, useForm } from "react-hook-form";
 import { RegisterInput } from "../../types/Inputs.types";
 import { useRegister } from "../../api/hooks/auth";
+import { FormattedMessage } from "react-intl";
 
 type RegisterSideProps = {
    handleFlip: () => void;
@@ -41,35 +42,48 @@ const RegisterSide = ({ handleFlip }: RegisterSideProps) => {
             <Stack spacing={1}>
                <Stack justifyContent="space-between" alignItems="center" direction="row">
                   <Typography variant="h4" color="primary" fontWeight={800}>
-                     Register
+                     <FormattedMessage id="AUTH.REGISTER.TITLE" />
                   </Typography>
                   <FlipIcon handleClick={() => handleFlip()} dark />
                </Stack>
-               <Typography>✨ Awww, that's soo cool you decide to join us! It means so much to me! 😊</Typography>
+               <Typography>
+                  <FormattedMessage id="AUTH.REGISTER.SUBTITLE" />
+               </Typography>
             </Stack>
             <Stack spacing={2}>
                <Controller
                   name="displayName"
                   control={control}
-                  render={({ field }) => <TextField {...field} label="Let's start with your nickname" />}
+                  render={({ field }) => (
+                     <TextField {...field} label={<FormattedMessage id="AUTH.REGISTER.LABEL.NICKNAME" />} />
+                  )}
                />
                <Controller
                   name="email"
                   control={control}
-                  render={({ field }) => <TextField {...field} label="Now your mail" />}
+                  render={({ field }) => (
+                     <TextField {...field} label={<FormattedMessage id="AUTH.REGISTER.LABEL.EMAIL" />} />
+                  )}
                />
                <Controller
                   name="password"
                   control={control}
-                  render={({ field }) => <TextField {...field} type="password" label="And finally, your password" />}
+                  render={({ field }) => (
+                     <TextField
+                        {...field}
+                        type="password"
+                        label={<FormattedMessage id="AUTH.REGISTER.LABEL.PASSWORD" />}
+                     />
+                  )}
                />
                <Typography>
-                  When you will be ready, just click button bellow! We gonna need couple more things to make your
-                  account! 😎
+                  <FormattedMessage id="AUTH.REGISTER.LABEL.DESC" />
                </Typography>
             </Stack>
             <Stack alignItems="center">
-               <Button onClick={() => handleRegister()}>Okey! What's next?</Button>
+               <Button onClick={() => handleRegister()}>
+                  <FormattedMessage id="AUTH.REGISTER.BUTTON" />
+               </Button>
             </Stack>
          </Stack>
       </Card>
