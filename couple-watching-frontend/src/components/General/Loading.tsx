@@ -2,14 +2,19 @@ import { AnimatePresence, motion } from "motion/react";
 import { bouncy } from "ldrs";
 import { Stack, useTheme } from "@mui/material";
 import InfoSection from "./InfoSection";
+import { FormattedMessage } from "react-intl";
 
 type LoadingProps = {
    isLoading: boolean;
-   title?: string;
-   subtitle?: string;
+   title?: React.ReactNode;
+   subtitle?: React.ReactNode;
 };
 
-const Loading = ({ isLoading, title = "LOADING.TITLE", subtitle = "LOADING.SUBTITLE" }: LoadingProps) => {
+const Loading = ({
+   isLoading,
+   title = <FormattedMessage id="LOADING.TITLE" />,
+   subtitle = <FormattedMessage id="LOADING.SUBTITLE" />,
+}: LoadingProps) => {
    const { palette } = useTheme();
    bouncy.register();
 

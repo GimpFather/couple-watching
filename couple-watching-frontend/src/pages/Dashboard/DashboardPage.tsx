@@ -65,7 +65,7 @@ const DashboardPage = () => {
                      emoji={"👥"}
                      primaryButton={{
                         icon: <WavingHandIcon />,
-                        caption: "Invite your partner",
+                        caption: <FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.MAIDENLESS.BUTTON" />,
                         action: () => setOpen(true),
                      }}
                   />
