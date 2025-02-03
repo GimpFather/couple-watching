@@ -17,6 +17,7 @@ import { usePair } from "../../api/hooks/pairs";
 import AnimatedEmoji from "../../components/General/AnimatedEmoji";
 import PopcornEmoji from "../../assets/lottie/popcorn.json";
 import SadEmoji from "../../assets/lottie/sad.json";
+import { FormattedMessage } from "react-intl";
 
 const WatchlistPage = () => {
    const { user } = useAuthContext();
@@ -48,17 +49,17 @@ const WatchlistPage = () => {
                         </>
                      ) : (
                         <InfoSection
-                           title="WATCHLIST.EMPTY_STATE.TITLE.FILTER"
-                           subtitle="WATCHLIST.EMPTY_STATE.SUBTITLE.FILTER"
+                           title={<FormattedMessage id="WATCHLIST.EMPTY_STATE.TITLE.FILTER" />}
+                           subtitle={<FormattedMessage id="WATCHLIST.EMPTY_STATE.SUBTITLE.FILTER" />}
                            emoji={<AnimatedEmoji emoji={SadEmoji} width={80} height={80} />}
                            primaryButton={{
                               icon: <ClearAllIcon />,
-                              caption: "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.CLEAR_FILTERS",
+                              caption: <FormattedMessage id="WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.CLEAR_FILTERS" />,
                               action: () => setValue("search", ""),
                            }}
                            secondaryButton={{
                               icon: <LibraryAddIcon />,
-                              caption: "WATCHLIST.EMPTY_STATE.BUTTON.SECONDARY.ADD_MOVIE",
+                              caption: <FormattedMessage id='"WATCHLIST.EMPTY_STATE.BUTTON.SECONDARY.ADD_MOVIE"' />,
                               action: () => navigate("/add-movie"),
                            }}
                         />
@@ -66,12 +67,12 @@ const WatchlistPage = () => {
                   </>
                ) : (
                   <InfoSection
-                     title="WATCHLIST.EMPTY_STATE.TITLE.NO_DATA"
-                     subtitle="WATCHLIST.EMPTY_STATE.SUBTITLE.NO_DATA"
+                     title={<FormattedMessage id="WATCHLIST.EMPTY_STATE.TITLE.NO_DATA" />}
+                     subtitle={<FormattedMessage id="WATCHLIST.EMPTY_STATE.SUBTITLE.NO_DATA" />}
                      emoji={<AnimatedEmoji emoji={PopcornEmoji} width={80} height={80} />}
                      primaryButton={{
                         icon: <LibraryAddIcon />,
-                        caption: "WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.ADD_MOVIE",
+                        caption: <FormattedMessage id="WATCHLIST.EMPTY_STATE.BUTTON.PRIMARY.ADD_MOVIE" />,
                         action: () => navigate("/add-movie"),
                      }}
                   />

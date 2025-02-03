@@ -1,22 +1,20 @@
 import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { motion } from "motion/react";
-import { FormattedMessage } from "react-intl";
 import Button from "./Button";
-import { isString } from "lodash";
 import React from "react";
 import Loading from "./Loading";
 
 type InfoSectionProps = {
-   title: React.ReactNode | string;
-   subtitle: React.ReactNode | string;
+   title: React.ReactNode;
+   subtitle: React.ReactNode;
    emoji: string | React.ReactNode;
    primaryButton?: {
-      caption: string;
+      caption: React.ReactNode;
       icon: React.ReactNode;
       action: () => void;
    };
    secondaryButton?: {
-      caption: string;
+      caption: React.ReactNode;
       icon: React.ReactNode;
       action: () => void;
    };
@@ -37,19 +35,17 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
             sx={{ padding: 4, borderRadius: 4, backgroundColor: "background.paper", height: "100%" }}
          >
             <Stack spacing={1} alignItems="center" sx={{ textAlign: "center" }}>
-               {isString(emoji) ? <Typography variant="h2">{emoji}</Typography> : emoji}
+               <Typography variant="h2">{emoji}</Typography>
                <Typography variant="h4" fontWeight={700}>
-                  {isString(title) ? <FormattedMessage id={title} /> : title}
+                  {title}
                </Typography>
-               <Typography variant="h6">
-                  {isString(subtitle) ? <FormattedMessage id={subtitle} /> : subtitle}
-               </Typography>
+               <Typography variant="h6">{subtitle}</Typography>
             </Stack>
             {(primaryButton || secondaryButton) && (
                <Stack direction={isMobile ? "column" : "row"} spacing={2}>
                   {primaryButton && (
                      <Button variant="contained" startIcon={primaryButton.icon} onClick={() => primaryButton.action()}>
-                        <FormattedMessage id={primaryButton.caption} />
+                        {primaryButton.caption}
                      </Button>
                   )}
                   {secondaryButton && (
@@ -58,7 +54,7 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
                         startIcon={secondaryButton.icon}
                         onClick={() => secondaryButton.action()}
                      >
-                        <FormattedMessage id={secondaryButton.caption} />
+                        {secondaryButton.caption}
                      </Button>
                   )}
                </Stack>
