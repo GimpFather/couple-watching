@@ -11,6 +11,8 @@
       "preview": "vite preview"
    },
    "dependencies": {
+      "@dicebear/collection": "^9.2.2",
+      "@dicebear/core": "^9.2.2",
       "@emotion/react": "^11.14.0",
       "@emotion/styled": "^11.14.0",
       "@fontsource-variable/outfit": "^5.1.1",

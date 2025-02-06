@@ -37,7 +37,3 @@ export type RegisterInput = {
    email: string;
    password: string;
 };
-
-export type PairRequestInput = {
-   to: string;
-};

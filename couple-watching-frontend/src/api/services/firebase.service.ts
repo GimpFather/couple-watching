@@ -1,19 +1,8 @@
-import {
-   addDoc,
-   collection,
-   deleteDoc,
-   doc,
-   getDoc,
-   getDocs,
-   query,
-   setDoc,
-   updateDoc,
-   where,
-} from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { Movie, WatchedMovie } from "../../types/Watchlist.types";
 import { createUserWithEmailAndPassword, updateProfile, User } from "firebase/auth";
-import { Pair, PairInvitation, PairRequest, RegisterCredentials, RespondToPair } from "../../types/Auth.types";
+import { Pair, RegisterCredentials, RespondToPair } from "../../types/Auth.types";
 
 export const GetWatchlistMovies = async (pairId: string): Promise<Movie[]> => {
    const querySnapshot = await getDocs(collection(db, "pairs", pairId, "watchlist"));
@@ -48,32 +37,6 @@ export const RegisterNewUser = async ({ email, password, displayName }: Register
    return userCredential.user;
 };
 
-export const PostSendPairRequest = async (pairRequest: PairRequest) => {
-   const pairRequestsRef = collection(db, "pairRequests");
-   await addDoc(pairRequestsRef, {
-      from: pairRequest.from,
-      to: pairRequest.to,
-      inviterName: pairRequest.inviterName,
-      status: "pending",
-      createdAt: new Date().toISOString(),
-   });
-};
-
-export const GetPairRequest = async (userId: string): Promise<PairInvitation[]> => {
-   const pairRequestsRef = collection(db, "pairRequests");
-   const q = query(pairRequestsRef, where("to", "==", userId), where("status", "==", "pending"));
-
-   const snapshot = await getDocs(q);
-
-   return snapshot.docs.map((doc) => {
-      const { inviterName } = doc.data();
-      return {
-         id: doc.id,
-         inviterName,
-      } as PairInvitation;
-   });
-};
-
 export const GetPair = async (userId: string): Promise<Pair> => {
    const pairRef = collection(db, "pairs");
    const q = query(pairRef, where("users", "array-contains", userId));
@@ -85,29 +48,14 @@ export const GetPair = async (userId: string): Promise<Pair> => {
    } as Pair;
 };
 
-export const RespondToPairRequest = async ({ accept, requestId, personOne, personTwo }: RespondToPair) => {
-   const pairRequestRef = doc(db, "pairRequests", requestId);
+export const RespondToPairRequest = async ({ personOne, personTwo }: RespondToPair) => {
+   const pairId = `${personOne.uid}_${personTwo.uid}`;
+   const pairRef = doc(db, "pairs", pairId);
 
-   if (accept) {
-      const requestSnap = await getDoc(pairRequestRef);
-      const requestData = requestSnap.data();
-      if (!requestData) {
-         throw new Error("Request data not found");
-      }
-      const { from, to } = requestData;
-
-      const pairId = `${from}_${to}`;
-      const pairRef = doc(db, "pairs", pairId);
-
-      await setDoc(pairRef, {
-         users: [from, to],
-         createdAt: Date.now(),
-         personOne: personOne,
-         personTwo: personTwo,
-      });
-
-      await updateDoc(pairRequestRef, { status: "accepted" });
-   } else {
-      await updateDoc(pairRequestRef, { status: "rejected" });
-   }
+   await setDoc(pairRef, {
+      users: [personOne.uid, personTwo.uid],
+      createdAt: Date.now(),
+      personOne: personOne.displayName,
+      personTwo: personTwo.displayName,
+   });
 };

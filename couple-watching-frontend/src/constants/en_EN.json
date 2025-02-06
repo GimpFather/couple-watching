@@ -97,9 +97,7 @@
    "DASHBOARD.PAIR_REQUEST_NOTIFICATION.PRIMARY_BUTTON": "Accept",
    "DASHBOARD.PAIR_REQUEST_NOTIFICATION.SECONDARY_BUTTON": "Decline",
    "INVITE_DIALOG.PAIR.TITLE": "Find your partner!",
-   "INVITE_DIALOG.PAIR.SUBTITLE": "Simply copy the ID and give it to your partner, or paste below they ID!",
-   "INVITE_DIALOG.PAIR.YOUR_ID_LABEL": "Your ID",
-   "INVITE_DIALOG.PAIR.YOUR_PARTNER_ID_LABEL": "Your partner ID",
+   "INVITE_DIALOG.PAIR.SUBTITLE": "Share this link with your partner! When they gonna click it, they will be able to join your watchlist! 🎬💕",
    "INVITE_DIALOG.PAIR.DESC": "Once you send the request to your partner, they will be able to accept or decline it. If they accept it, you will be able to add movies to your couple watchlist!",
    "INVITE_DIALOG.PAIR.BUTTON.PRIMARY": "Invite!",
    "INVITE_DIALOG.PAIR.BUTTON.SECONDARY": "Close",
@@ -109,5 +107,9 @@
    "AUTH.REGISTER.LABEL.EMAIL": "Now your mail",
    "AUTH.REGISTER.LABEL.PASSWORD": "And finally, your password",
    "AUTH.REGISTER.LABEL.DESC": "When you will be ready, just click button bellow! We gonna need couple more things to make your account! 😎",
-   "AUTH.REGISTER.BUTTON": "Okey! What's next?"
+   "AUTH.REGISTER.BUTTON": "Okey! What's next?",
+   "RESPONSE_DIALOG.PAIR.BUTTON.PRIMARY": "Accept",
+   "RESPONSE_DIALOG.PAIR.BUTTON.SECONDARY": "Decline",
+   "RESPONSE_DIALOG.PAIR.TITLE": "Let's became a pair!",
+   "RESPONSE_DIALOG.PAIR.SUBTITLE": "H-Hey… It’s {inviter}… I think you’re really cool, and I’d be so happy to start my CUM journey with you! I hope you don’t mind me asking… 👉👈"
 }
