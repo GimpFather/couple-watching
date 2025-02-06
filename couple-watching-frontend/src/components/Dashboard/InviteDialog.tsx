@@ -42,14 +42,16 @@ const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
                <FacebookMessengerShareButton url={INVITE_LINK} appId={import.meta.env.VITE_FACEBOOK_APP_ID}>
                   <Stack alignItems="center" spacing={1}>
                      <FacebookMessengerIcon round size={36} />
-                     <Typography>Messenger</Typography>
+                     <Typography>
+                        <FormattedMessage id="INVITE_DIALOG.PAIR.MESSENGER" />
+                     </Typography>
                   </Stack>
                </FacebookMessengerShareButton>
             </Stack>
          </DialogContent>
          <DialogActions sx={{ padding: 2 }}>
             <Button startIcon={<IosShareIcon />} onClick={() => handleCopy()}>
-               Copy your invite link!
+               <FormattedMessage id="INVITE_DIALOG.PAIR.BUTTON.PRIMARY" />
             </Button>
             <Button onClick={() => handleClose()} variant="outlined">
                <FormattedMessage id="INVITE_DIALOG.PAIR.BUTTON.SECONDARY" />
