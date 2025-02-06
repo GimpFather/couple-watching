@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useAuthContext } from "../../context/AuthProvider";
 import { FormattedMessage } from "react-intl";
 import IosShareIcon from "@mui/icons-material/IosShare";
+import { FacebookMessengerShareButton, FacebookMessengerIcon } from "react-share";
 
 type InviteDialogProps = {
    open: boolean;
@@ -38,6 +39,12 @@ const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
                      <FormattedMessage id="INVITE_DIALOG.PAIR.SUBTITLE" />
                   </Typography>
                </DialogContentText>
+               <FacebookMessengerShareButton url={INVITE_LINK} appId={import.meta.env.VITE_FACEBOOK_APP_ID}>
+                  <Stack alignItems="center" spacing={1}>
+                     <FacebookMessengerIcon round size={36} />
+                     <Typography>Messenger</Typography>
+                  </Stack>
+               </FacebookMessengerShareButton>
             </Stack>
          </DialogContent>
          <DialogActions sx={{ padding: 2 }}>
