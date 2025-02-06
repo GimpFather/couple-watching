@@ -25,10 +25,14 @@ export interface PairInvitation {
 }
 
 export interface RespondToPair {
-   requestId: string;
-   accept: boolean;
-   personOne?: string;
-   personTwo?: string;
+   personOne: {
+      uid: string;
+      displayName: string;
+   };
+   personTwo: {
+      uid: string;
+      displayName: string;
+   };
 }
 
 export interface Pair {
