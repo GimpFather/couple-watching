@@ -52,6 +52,7 @@ Before you start, make sure you have the following installed:
 - **React-Intl (v7.1.1)**: For internationalization and localization of the app.
 - **React Toastify (v11.0.3)**: For showing toast notifications.
 - **React Lazy Load Image Component (v1.6.3)**: For lazy-loading images to improve performance.
+- **Lottie-React (v2.4.1)**: For beautiful animated emojis.
 
 ## Documentation
 
