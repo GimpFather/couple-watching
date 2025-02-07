@@ -56,7 +56,7 @@ Before you start, make sure you have the following installed:
 
 ## Documentation
 
-For more detailed documentation and technical information, please refer to the [Technical Documentation](https://ebony-plot-645.notion.site/Dokumentacja-techniczna-1890adc28dca807bb6aaed1c64741a74?pvs=4). It's in Polish because it's easier to me to understand it, but hey - in 2025 we have all this fancy AI so I think you can translate that easily. :)
+For more detailed documentation and technical information, please refer to the `docs.md` file.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
