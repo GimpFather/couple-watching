@@ -112,5 +112,11 @@
    "RESPONSE_DIALOG.PAIR.BUTTON.SECONDARY": "Decline",
    "RESPONSE_DIALOG.PAIR.TITLE": "Let's became a pair!",
    "RESPONSE_DIALOG.PAIR.SUBTITLE": "H-Hey… It’s {inviter}… I think you’re really cool, and I’d be so happy to start my CUM journey with you! I hope you don’t mind me asking… 👉👈",
-   "INVITE_DIALOG.PAIR.MESSENGER": "Messenger"
+   "INVITE_DIALOG.PAIR.MESSENGER": "Messenger",
+   "DASHBOARD.INFO_SECTION.TITLE.COLOR_PICK.BLUE_ORANGE": "Golden Hours, Blue Skies",
+   "DASHBOARD.INFO_SECTION.SUBTITLE.COLOR_PICK.BLUE_ORANGE": "Capture the fleeting warmth of golden hours and the serene coolness of blue skies. Choose these tones if you're feeling effortlessly laid-back yet undeniably cool.",
+   "DASHBOARD.INFO_SECTION.BUTTON.COLOR_PICK.BLUE_ORANGE": "Pick this palette",
+   "DASHBOARD.INFO_SECTION.TITLE.COLOR_PICK.GREEN_RED": "Holiday Heist",
+   "DASHBOARD.INFO_SECTION.SUBTITLE.COLOR_PICK.GREEN_RED": "Evoke the fresh vibrancy of lush greens and the bold warmth of deep reds. Perfect for when you want to feel grounded yet irresistibly dynamic.",
+   "DASHBOARD.INFO_SECTION.BUTTON.COLOR_PICK.GREEN_RED": "Pick this palette"
 }

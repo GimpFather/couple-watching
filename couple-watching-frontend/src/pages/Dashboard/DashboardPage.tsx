@@ -13,11 +13,19 @@ import CheersEmoji from "../../assets/lottie/cheers.json";
 import AnimatedEmoji from "../../components/General/AnimatedEmoji";
 import WaveEmoji from "../../assets/lottie/wave.json";
 import LoveLetter from "../../assets/lottie/letter.json";
+import BlueHeart from "../../assets/lottie/hearts/blue.json";
+import OrangeHeart from "../../assets/lottie/hearts/orange.json";
+import GreenHeart from "../../assets/lottie/hearts/green.json";
+import RedHeart from "../../assets/lottie/hearts/red.json";
+import ColorLensIcon from "@mui/icons-material/ColorLens";
 import ResponseDialog from "../../components/Dashboard/ResponseDialog";
 import { toast } from "react-toastify";
+import { useThemeContext } from "../../context/ThemeContext";
+import { blueOrangePalette, defaultPalette } from "../../theme";
 
 const DashboardPage = () => {
    const { user, logout } = useAuthContext();
+   const { setUserPalette } = useThemeContext();
    const { data: pairData } = usePair(user!.uid);
    const { mutate: respondToPairRequest } = useRespondToPairRequest();
 
@@ -72,6 +80,40 @@ const DashboardPage = () => {
                      emoji={<AnimatedEmoji emoji={CheersEmoji} width={80} height={80} />}
                   />
                )}
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+               <InfoSection
+                  title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.COLOR_PICK.BLUE_ORANGE" />}
+                  subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.COLOR_PICK.BLUE_ORANGE" />}
+                  emoji={
+                     <Stack direction="row" gap={1}>
+                        <AnimatedEmoji emoji={BlueHeart} width={80} height={80} />
+                        <AnimatedEmoji emoji={OrangeHeart} width={80} height={80} />
+                     </Stack>
+                  }
+                  primaryButton={{
+                     icon: <ColorLensIcon />,
+                     caption: <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.COLOR_PICK.BLUE_ORANGE" />,
+                     action: () => setUserPalette(blueOrangePalette),
+                  }}
+               />
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+               <InfoSection
+                  title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.COLOR_PICK.GREEN_RED" />}
+                  subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.COLOR_PICK.GREEN_RED" />}
+                  emoji={
+                     <Stack direction="row" gap={1}>
+                        <AnimatedEmoji emoji={GreenHeart} width={80} height={80} />
+                        <AnimatedEmoji emoji={RedHeart} width={80} height={80} />
+                     </Stack>
+                  }
+                  primaryButton={{
+                     icon: <ColorLensIcon />,
+                     caption: <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.COLOR_PICK.GREEN_RED" />,
+                     action: () => setUserPalette(defaultPalette),
+                  }}
+               />
             </Grid>
          </Grid>
          <Button startIcon={<LogoutIcon />} onClick={() => handleLogout()}>

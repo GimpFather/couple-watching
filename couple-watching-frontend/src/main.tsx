@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { defaultTheme } from "./defaultTheme.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router";
 import AppRouting from "./AppRouting.tsx";
@@ -14,6 +13,7 @@ import en_EN from "./constants/en_EN.json";
 import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { AuthProvider } from "./context/AuthProvider.tsx";
+import { ThemeProviderWrapper } from "./context/ThemeContext.tsx";
 
 if ("serviceWorker" in navigator) {
    navigator.serviceWorker
@@ -33,27 +33,31 @@ createRoot(document.getElementById("root")!).render(
    <StrictMode>
       <QueryClientProvider client={queryClient}>
          <BrowserRouter>
-            <ThemeProvider theme={defaultTheme}>
-               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <IntlProvider messages={en_EN} locale="en">
-                     <AuthProvider>
-                        <CssBaseline>
-                           <ToastContainer
-                              position="top-center"
-                              autoClose={5000}
-                              hideProgressBar={false}
-                              closeOnClick
-                              pauseOnFocusLoss
-                              draggable
-                              pauseOnHover
-                              theme="light"
-                           />
-                           <AppRouting />
-                        </CssBaseline>
-                     </AuthProvider>
-                  </IntlProvider>
-               </LocalizationProvider>
-            </ThemeProvider>
+            <ThemeProviderWrapper>
+               {(theme) => (
+                  <ThemeProvider theme={theme}>
+                     <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <IntlProvider messages={en_EN} locale="en">
+                           <AuthProvider>
+                              <CssBaseline>
+                                 <ToastContainer
+                                    position="top-center"
+                                    autoClose={5000}
+                                    hideProgressBar={false}
+                                    closeOnClick
+                                    pauseOnFocusLoss
+                                    draggable
+                                    pauseOnHover
+                                    theme="light"
+                                 />
+                                 <AppRouting />
+                              </CssBaseline>
+                           </AuthProvider>
+                        </IntlProvider>
+                     </LocalizationProvider>
+                  </ThemeProvider>
+               )}
+            </ThemeProviderWrapper>
          </BrowserRouter>
       </QueryClientProvider>
    </StrictMode>
