@@ -1,28 +1,25 @@
 import { createTheme, PaletteColor, PaletteMode, PaletteOptions } from "@mui/material";
 import "@fontsource/outfit";
 
-export const blueOrangePalette = {
+export const blueOrangePalette: PaletteOptions = {
    primary: {
-      main: "#007BFF",
-      light: "#66B2FF",
-      dark: "#0056B3",
+      main: "#016DFE",
+      dark: "#0E499A",
    },
    secondary: {
-      main: "#FF7F00",
-      light: "#FFB347",
-      dark: "#CC6600",
+      main: "#D55937",
    },
    background: {
-      default: "#181413",
-      paper: "#262626",
+      default: "#ED7C4240",
+      paper: "#FFFFFF",
    },
    common: {
-      black: "#050D06",
-      white: "#F9F9F9",
+      black: "#0C0C0C",
+      white: "#FFFFFF",
    },
    text: {
-      primary: "#F9F9F9",
-      secondary: "#050D06",
+      primary: "#0C0C0C",
+      secondary: "#FFFFFF",
    },
 };
 
@@ -56,7 +53,7 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions) =>
          ...palette,
       },
       typography: {
-         fontFamily: `'Outfit', sans-serif`,
+         fontFamily: `'IBM Plex Mono', monospace`,
          fontWeightLight: 300,
          fontWeightRegular: 400,
          fontWeightMedium: 500,
@@ -104,6 +101,8 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions) =>
             styleOverrides: {
                root: {
                   borderRadius: "16px",
+                  border: `2px solid ${palette.common?.black}`,
+                  boxShadow: "none",
                   textTransform: "none",
                   fontSize: "1rem",
                },
@@ -128,7 +127,8 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions) =>
                   props: { variant: "contained", color: "primary" },
                   style: {
                      ":hover": {
-                        backgroundColor: (palette.primary as PaletteColor).dark,
+                        backgroundColor: (palette.primary as PaletteColor).main,
+                        boxShadow: "none",
                      },
                   },
                },

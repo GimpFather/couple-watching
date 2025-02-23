@@ -1,9 +1,10 @@
-import { Box, Card, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { Movie } from "../../../types/Watchlist.types";
 import FlipIcon from "./FlipIcon";
 import { FormattedMessage } from "react-intl";
 import Button from "../../General/Button";
+import OutlinedCard from "../../General/OutlinedCard";
 
 type FrontCardProps = {
    movie: Movie;
@@ -13,20 +14,19 @@ type FrontCardProps = {
 
 const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) => {
    return (
-      <Card
+      <OutlinedCard
          sx={{
             position: "absolute",
             backfaceVisibility: "hidden",
             padding: 2,
             width: 350,
             height: 500,
-            borderRadius: 4,
             overflow: "hidden",
-            boxShadow: 3,
             backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,1)), url(${movie.cover})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            backgroundClip: "padding-box",
          }}
       >
          <Stack justifyContent="space-between" sx={{ height: "100%" }}>
@@ -51,7 +51,7 @@ const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) =
                </Stack>
             </Stack>
          </Stack>
-      </Card>
+      </OutlinedCard>
    );
 };
 

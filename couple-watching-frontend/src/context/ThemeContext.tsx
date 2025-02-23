@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { PaletteMode, PaletteOptions, Theme } from "@mui/material";
 import { createContext, useContext, ReactNode } from "react";
-import { defaultPalette, getTheme } from "../theme";
+import { blueOrangePalette, getTheme } from "../theme";
 import React from "react";
 
 interface ThemeContextInterface {
@@ -19,7 +19,7 @@ const ThemeContext = createContext<ThemeContextInterface | undefined>(undefined)
 
 export const ThemeProviderWrapper = ({ children }: ThemeProviderWrapperProps) => {
    const [mode, setMode] = React.useState<PaletteMode>("light");
-   const [userPalatte, setUserPalette] = React.useState<PaletteOptions>(defaultPalette);
+   const [userPalatte, setUserPalette] = React.useState<PaletteOptions>(blueOrangePalette);
 
    const theme = React.useMemo(() => getTheme(mode, userPalatte), [mode, userPalatte]);
 
