@@ -106,7 +106,7 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
                            justifyContent="flex-end"
                            sx={{ width: "100%" }}
                         >
-                           <Button startIcon={<AddCircleIcon />} onClick={() => handleMutate()} dark>
+                           <Button startIcon={<AddCircleIcon />} onClick={() => handleMutate()}>
                               <FormattedMessage id="ADD_MOVIE.DIALOG.BUTTON.PRIMARY" />
                            </Button>
                            <Button startIcon={<ExitToAppIcon />} onClick={() => onClose()}>

@@ -105,10 +105,10 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
             </Stack>
             <Stack direction="row" justifyContent="space-between">
                <FlipIcon handleClick={() => handleFlip()} />
-               <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()} dark>
+               <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()}>
                   <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
                </Button>
-               <Button startIcon={<BookmarkRemoveIcon />} onClick={() => handleDeleteMovie()} dark>
+               <Button startIcon={<BookmarkRemoveIcon />} onClick={() => handleDeleteMovie()}>
                   <FormattedMessage id="WATCHLIST.CARD.BUTTON.SECONDARY" />
                </Button>
             </Stack>

@@ -30,10 +30,10 @@ const AddToWatchlistNoDataDialog = ({ onClose }: AddToWatchlistNoDataDialogProps
          </DialogContent>
          <DialogActions sx={{ padding: 2 }}>
             <Stack direction="row" spacing={2}>
-               <Button onClick={() => onClose()} dark>
+               <Button onClick={() => onClose()}>
                   <FormattedMessage id="ADD_MOVIE.DIALOG.NO_DATA.BUTTON.PRIMARY" />
                </Button>
-               <Button onClick={() => onClose()} dark>
+               <Button onClick={() => onClose()}>
                   <FormattedMessage id="ADD_MOVIE.DIALOG.NO_DATA.BUTTON.SECONDARY" />
                </Button>
             </Stack>
