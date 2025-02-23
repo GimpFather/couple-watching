@@ -46,20 +46,12 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
                {(primaryButton || secondaryButton) && (
                   <Stack direction={isMobile ? "column" : "row"} spacing={2}>
                      {primaryButton && (
-                        <Button
-                           variant="contained"
-                           startIcon={primaryButton.icon}
-                           onClick={() => primaryButton.action()}
-                        >
+                        <Button startIcon={primaryButton.icon} onClick={() => primaryButton.action()}>
                            {primaryButton.caption}
                         </Button>
                      )}
                      {secondaryButton && (
-                        <Button
-                           variant="contained"
-                           startIcon={secondaryButton.icon}
-                           onClick={() => secondaryButton.action()}
-                        >
+                        <Button startIcon={secondaryButton.icon} onClick={() => secondaryButton.action()}>
                            {secondaryButton.caption}
                         </Button>
                      )}

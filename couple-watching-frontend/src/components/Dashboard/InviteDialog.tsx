@@ -53,7 +53,7 @@ const InviteDialog = ({ open, handleClose }: InviteDialogProps) => {
             <Button startIcon={<IosShareIcon />} onClick={() => handleCopy()}>
                <FormattedMessage id="INVITE_DIALOG.PAIR.BUTTON.PRIMARY" />
             </Button>
-            <Button onClick={() => handleClose()} variant="outlined">
+            <Button onClick={() => handleClose()}>
                <FormattedMessage id="INVITE_DIALOG.PAIR.BUTTON.SECONDARY" />
             </Button>
          </DialogActions>

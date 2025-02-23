@@ -62,7 +62,7 @@ const ResponseDialog = ({ handleClose, open, invName, handleResponse }: Response
             </Typography>
          </DialogContent>
          <DialogActions sx={{ padding: 2, justifyContent: "center" }}>
-            <Button color="secondary" onClick={() => handleResponse()} variant="contained">
+            <Button color="secondary" onClick={() => handleResponse()}>
                <FormattedMessage id="RESPONSE_DIALOG.PAIR.BUTTON.PRIMARY" />
             </Button>
             <Button color="secondary" onClick={() => handleClose()}>

@@ -199,7 +199,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
             <Button startIcon={<CheckCircleOutlineIcon />} onClick={() => handleMarkAsWatched()}>
                <FormattedMessage id="WATCHLIST.DIALOG.ACTION.PRIMARY" />
             </Button>
-            <Button variant="outlined" startIcon={<ExitToAppIcon />} onClick={() => onClose()}>
+            <Button startIcon={<ExitToAppIcon />} onClick={() => onClose()}>
                <FormattedMessage id="WATCHLIST.DIALOG.ACTION.SECONDARY" />
             </Button>
          </DialogActions>

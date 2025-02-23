@@ -109,7 +109,7 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
                            <Button startIcon={<AddCircleIcon />} onClick={() => handleMutate()} dark>
                               <FormattedMessage id="ADD_MOVIE.DIALOG.BUTTON.PRIMARY" />
                            </Button>
-                           <Button variant="outlined" startIcon={<ExitToAppIcon />} onClick={() => onClose()}>
+                           <Button startIcon={<ExitToAppIcon />} onClick={() => onClose()}>
                               <FormattedMessage id="ADD_MOVIE.DIALOG.BUTTON.SECONDARY" />
                            </Button>
                         </Stack>
