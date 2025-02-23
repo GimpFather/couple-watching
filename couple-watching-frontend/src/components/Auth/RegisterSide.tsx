@@ -44,7 +44,7 @@ const RegisterSide = ({ handleFlip }: RegisterSideProps) => {
                   <Typography variant="h4" color="primary" fontWeight={800}>
                      <FormattedMessage id="AUTH.REGISTER.TITLE" />
                   </Typography>
-                  <FlipIcon handleClick={() => handleFlip()} dark />
+                  <FlipIcon handleClick={() => handleFlip()} />
                </Stack>
                <Typography>
                   <FormattedMessage id="AUTH.REGISTER.SUBTITLE" />

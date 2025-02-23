@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { Movie } from "../../../types/Watchlist.types";
 import FlipIcon from "./FlipIcon";
@@ -18,36 +18,43 @@ const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) =
          sx={{
             position: "absolute",
             backfaceVisibility: "hidden",
-            padding: 2,
-            width: 350,
-            height: 500,
+            width: 343,
+            height: 508,
             overflow: "hidden",
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,1)), url(${movie.cover})`,
+            backgroundImage: `url(${movie.cover})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundClip: "padding-box",
+            placeContent: "end",
          }}
       >
-         <Stack justifyContent="space-between" sx={{ height: "100%" }}>
-            <Box sx={{ marginLeft: "auto" }}>
-               <FlipIcon handleClick={() => handleFlip()} />
-            </Box>
-            <Stack>
-               <Stack spacing={1}>
-                  <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "center" }}>
+         <Stack
+            justifyContent="flex-end"
+            sx={{
+               height: "50%",
+               padding: 1.5,
+               background: " linear-gradient(180deg, rgba(12, 12, 12, 0.00) 0%, #0C0C0C 75%, #0C0C0C 100%);",
+            }}
+         >
+            <Stack spacing={3}>
+               <Stack spacing={0.5}>
+                  <Typography variant="h5" color="text.secondary" sx={{ fontWeight: "bold" }}>
                      {movie.title}
                   </Typography>
-                  <Stack direction="row" justifyContent="center" spacing={1}>
+                  <Stack direction="row" spacing={1}>
                      {movie.genre.map((genre: string, index) => (
-                        <Typography key={index}>#{genre}</Typography>
+                        <Typography key={index} color="grey.500">
+                           #{genre.toLowerCase()}
+                        </Typography>
                      ))}
                   </Stack>
-                  <Box sx={{ width: "fit-content", alignSelf: "center" }}>
-                     <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()}>
-                        <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
-                     </Button>
-                  </Box>
+               </Stack>
+               <Stack direction="row" spacing={1}>
+                  <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()}>
+                     <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
+                  </Button>
+                  <FlipIcon handleClick={() => handleFlip()} />
                </Stack>
             </Stack>
          </Stack>

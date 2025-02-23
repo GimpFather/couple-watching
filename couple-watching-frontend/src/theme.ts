@@ -21,6 +21,10 @@ export const blueOrangePalette: PaletteOptions = {
       primary: "#0C0C0C",
       secondary: "#FFFFFF",
    },
+   grey: {
+      100: "#E4E0DB",
+      500: "#817771",
+   },
 };
 
 export const defaultPalette = {

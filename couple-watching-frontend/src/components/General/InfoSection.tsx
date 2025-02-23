@@ -34,7 +34,7 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
                spacing={4}
                alignItems="center"
                justifyContent="center"
-               sx={{ padding: 4, borderRadius: 4, backgroundColor: "background.paper", height: "100%" }}
+               sx={{ padding: 4, borderRadius: 4, height: "100%" }}
             >
                <Stack spacing={1} alignItems="center" sx={{ textAlign: "center" }}>
                   <Typography variant="h2">{emoji}</Typography>

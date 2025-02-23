@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Card, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { Movie } from "../../../types/Watchlist.types";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
@@ -13,6 +13,7 @@ import RatingChip from "../../General/Chips/RatingChip";
 import DurationChip from "../../General/Chips/DurationChip";
 import { useAuthContext } from "../../../context/AuthProvider";
 import { usePair } from "../../../api/hooks/pairs";
+import OutlinedCard from "../../General/OutlinedCard";
 
 type BackCardProps = {
    movie: Movie;
@@ -48,7 +49,7 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
       );
    };
    return (
-      <Card
+      <OutlinedCard
          sx={{
             position: "absolute",
             backfaceVisibility: "hidden",
@@ -56,16 +57,13 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
             width: 350,
             height: 500,
             borderRadius: 4,
-            backgroundColor: "background.paper",
             overflow: "hidden",
-            boxShadow: 3,
             transform: "rotateY(180deg)",
          }}
       >
          <Stack justifyContent="space-between" sx={{ height: "100%" }}>
             <Stack spacing={2}>
                <Typography
-                  color="primary"
                   variant="h4"
                   sx={{
                      fontWeight: "bold",
@@ -106,7 +104,7 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
                </Stack>
             </Stack>
             <Stack direction="row" justifyContent="space-between">
-               <FlipIcon handleClick={() => handleFlip()} dark />
+               <FlipIcon handleClick={() => handleFlip()} />
                <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()} dark>
                   <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
                </Button>
@@ -115,7 +113,7 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
                </Button>
             </Stack>
          </Stack>
-      </Card>
+      </OutlinedCard>
    );
 };
 

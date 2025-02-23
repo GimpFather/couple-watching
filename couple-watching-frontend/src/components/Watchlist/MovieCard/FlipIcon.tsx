@@ -1,28 +1,27 @@
 import { motion } from "motion/react";
-import SyncIcon from "@mui/icons-material/Sync";
+import DeviceRotate from "../../General/CustomIcons/DeviceRotate";
+import { SvgIcon } from "@mui/material";
 
 type FlipIconProps = {
    handleClick: () => void;
-   dark?: boolean;
 };
 
-const FlipIcon = ({ handleClick, dark }: FlipIconProps) => {
+const FlipIcon = ({ handleClick }: FlipIconProps) => {
    return (
-      <SyncIcon
+      <SvgIcon
          component={motion.svg}
          onClick={() => handleClick()}
-         whileHover={{ scale: 1.05, rotate: 180 }}
-         whileTap={{ scale: 0.9, rotate: 360 }}
-         transition={{ duration: 1, type: "spring" }}
          sx={{
-            backgroundColor: "primary.main",
-            color: dark ? "background.paper" : "common.white",
+            backgroundColor: "grey.100",
+            color: "common.black",
             padding: 1,
             fontSize: 40,
-            borderRadius: "50%",
+            borderRadius: 3,
             outline: "none",
          }}
-      />
+      >
+         <DeviceRotate />
+      </SvgIcon>
    );
 };
 
