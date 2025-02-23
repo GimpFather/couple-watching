@@ -109,6 +109,14 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions) =>
                   boxShadow: "none",
                   textTransform: "none",
                   fontSize: "1rem",
+                  WebkitTapHighlightColor: "transparent",
+                  "&:hover": {
+                     backgroundColor: "transparent",
+                     boxShadow: "none",
+                  },
+                  "&:active": {
+                     boxShadow: "none",
+                  },
                },
             },
             variants: [
@@ -117,21 +125,34 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions) =>
                   style: {
                      color: (palette.primary as PaletteColor).main,
                      border: `2px solid ${(palette.primary as PaletteColor).main}`,
+                     "&:hover": {
+                        backgroundColor: "transparent",
+                        border: `2px solid ${(palette.primary as PaletteColor).main}`,
+                     },
+                     "&:active": {
+                        boxShadow: "none",
+                     },
                   },
                },
                {
                   props: { variant: "text" },
                   style: {
-                     ":hover": {
-                        backgroundColor: "unset",
+                     "&:hover": {
+                        backgroundColor: "transparent",
+                     },
+                     "&:active": {
+                        boxShadow: "none",
                      },
                   },
                },
                {
                   props: { variant: "contained", color: "primary" },
                   style: {
-                     ":hover": {
+                     "&:hover": {
                         backgroundColor: (palette.primary as PaletteColor).main,
+                        boxShadow: "none",
+                     },
+                     "&:active": {
                         boxShadow: "none",
                      },
                   },

@@ -6,45 +6,43 @@ type ButtonProps = MUIButtonProps & {
    dark?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ children, dark = false, ...props }) => {
-   const [animate, setAnimate] = React.useState<boolean>(true);
+const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
    return (
       <motion.div
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
-         onTap={() => setAnimate((prev) => !prev)}
-         style={{ width: "fit-content", position: "relative", zIndex: 1 }}
+         style={{ width: "fit-content", position: "relative" }}
       >
-         <MUIButton variant="contained" {...props}>
-            <Box
-               component={motion.div}
-               animate={{ y: animate ? 0 : "-13%" }}
-               sx={{
-                  position: "relative",
-                  ...(dark && {
-                     color: "background.paper",
-                     "&:hover": {
-                        backgroundColor: "primary.main",
-                     },
-                  }),
-               }}
-            />
+         <Box
+            sx={{
+               position: "absolute",
+               height: 40,
+               width: "100%",
+               boxSizing: "border-box",
+               backgroundColor: props.color ? `${props.color}.dark` : "primary.dark",
+               borderRadius: 3,
+               border: "2px solid black",
+            }}
+         />
+         <MUIButton
+            variant="contained"
+            disableRipple
+            {...props}
+            sx={{
+               position: "relative",
+               backgroundColor: props.color ? `${props.color}.main` : "primary.main",
+               color: "text.secondary",
+               borderRadius: 3,
+               border: "2px solid black",
+               transition: "transform 0.2s",
+               transform: "translateY(-8px)",
+               "&:active": {
+                  backgroundColor: props.color ? `${props.color}.dark` : "primary.dark",
+                  transform: "translateY(-4px)",
+               },
+            }}
+         >
             {children}
-            <Box
-               sx={{
-                  position: "absolute",
-                  boxSizing: "content-box",
-                  top: "13%",
-                  zIndex: -1,
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "primary.dark",
-                  borderRadius: 4,
-                  borderBottom: "2px solid black",
-                  borderRight: "2px solid black",
-                  borderLeft: "2px solid black",
-               }}
-            />
          </MUIButton>
       </motion.div>
    );
