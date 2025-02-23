@@ -1,22 +1,23 @@
-import { InputAdornment, Stack, TextField } from "@mui/material";
+import { InputAdornment, Stack, TextField, useTheme } from "@mui/material";
 import { motion } from "motion/react";
-import SearchIcon from "@mui/icons-material/Search";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 import { Control, Controller } from "react-hook-form";
 import { WatchlistFiltersInput } from "../../types/Inputs.types";
-import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 type SearchBarProps = {
    control: Control<WatchlistFiltersInput, unknown>;
 };
 
 const SearchBar = ({ control }: SearchBarProps) => {
+   const { formatMessage } = useIntl();
+   const { palette } = useTheme();
    return (
       <Stack
          spacing={2}
          direction="row"
          alignItems="center"
          justifyContent="space-between"
-         sx={{ padding: 2, width: "100%", backgroundColor: "background.paper", borderRadius: 4 }}
          component={motion.div}
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
@@ -27,17 +28,28 @@ const SearchBar = ({ control }: SearchBarProps) => {
             render={({ field }) => (
                <TextField
                   {...field}
-                  label={<FormattedMessage id="FILTERS.SEARCHBAR.LABEL" />}
+                  variant="outlined"
+                  placeholder={formatMessage({ id: "FILTERS.SEARCHBAR.LABEL" })}
                   slotProps={{
                      input: {
+                        sx: {
+                           typography: "emphasizedBodyMedium",
+                        },
                         startAdornment: (
                            <InputAdornment position="start">
-                              <SearchIcon sx={{ color: "common.white" }} />
+                              <MagnifyingGlass color={palette.common[500]} />
                            </InputAdornment>
                         ),
+                        slotProps: {
+                           input: {
+                              sx: { paddingY: 1, paddingRight: 1.5 },
+                           },
+                        },
                      },
                   }}
-                  sx={{ width: "100%" }}
+                  sx={{
+                     width: "100%",
+                  }}
                />
             )}
          />

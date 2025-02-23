@@ -82,7 +82,7 @@ const AddToWatchlistDialog = ({ open, id, onClose }: AddToWatchlistDialogProps) 
                {data ? (
                   <>
                      <DialogTitle component="div">
-                        <Typography variant="h4" color="primary.main" fontWeight={800}>
+                        <Typography variant="headingSmall" color="primary.main" fontWeight={800}>
                            {data.title} ({data.year})
                         </Typography>
                      </DialogTitle>

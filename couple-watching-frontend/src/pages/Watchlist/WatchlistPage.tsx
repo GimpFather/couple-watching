@@ -31,8 +31,8 @@ const WatchlistPage = () => {
 
    return (
       <Stack spacing={4}>
-         <PageTitle title="WATCHLIST.HEADER" subtitle="WATCHLIST.SUBTITLE" />
-         <Filters control={control} watch={watch} />
+         <PageTitle title="WATCHLIST.HEADER" />
+         <Filters control={control} />
          {isLoading ? (
             <WatchlistSkeleton />
          ) : (

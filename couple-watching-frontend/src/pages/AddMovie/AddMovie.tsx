@@ -48,7 +48,7 @@ function ExamplePage() {
 
    return (
       <Stack spacing={4}>
-         <PageTitle title="ADD_MOVIE.HEADER" subtitle="ADD_MOVIE.SUBTITLE" />
+         <PageTitle title="ADD_MOVIE.HEADER" />
          <form onSubmit={handleSubmit(onSubmit)}>
             <Grid
                container

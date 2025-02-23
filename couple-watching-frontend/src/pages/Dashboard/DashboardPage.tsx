@@ -43,7 +43,7 @@ const DashboardPage = () => {
 
    return (
       <Stack spacing={4}>
-         <PageTitle title="DASHBOARD.HEADER" subtitle="DASHBOARD.SUBTITLE" />
+         <PageTitle title="DASHBOARD.HEADER" />
          <Grid container spacing={4} justifyContent="center">
             <Grid size={{ xs: 12, md: 6 }}>
                <InfoSection
