@@ -46,11 +46,7 @@ const MovieCard = ({ data, handleMarkAsWatched }: MovieCardProps) => {
                handleFlip={() => handleCardFlip()}
                handleMarkAsWatched={() => handleMarkAsWatched()}
             />
-            <BackCard
-               movie={data}
-               handleFlip={() => handleCardFlip()}
-               handleMarkAsWatched={() => handleMarkAsWatched()}
-            />
+            <BackCard movie={data} handleFlip={() => handleCardFlip()} />
          </motion.div>
       </Box>
    );

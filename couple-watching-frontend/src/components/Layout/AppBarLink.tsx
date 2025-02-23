@@ -18,7 +18,7 @@ const AppBarLink = ({ icon, filledIcon, url, caption }: AppBarLinkProps) => {
       <Link to={url} style={{ color: "inherit", textDecoration: "inherit" }}>
          <Stack alignItems="center" component={motion.div} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             {isActive ? filledIcon : icon}
-            <Typography color={isActive ? "primary.main" : "textPrimary"} variant="body1">
+            <Typography color={isActive ? "secondary.main" : "textPrimary"} variant="body1">
                <FormattedMessage id={caption} />
             </Typography>
          </Stack>

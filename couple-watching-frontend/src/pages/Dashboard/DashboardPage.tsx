@@ -22,6 +22,7 @@ import ResponseDialog from "../../components/Dashboard/ResponseDialog";
 import { toast } from "react-toastify";
 import { useThemeContext } from "../../context/ThemeContext";
 import { blueOrangePalette, defaultPalette } from "../../theme";
+import IconButton from "../../components/General/IconButton";
 
 const DashboardPage = () => {
    const { user, logout } = useAuthContext();
@@ -44,6 +45,37 @@ const DashboardPage = () => {
    return (
       <Stack spacing={4}>
          <PageTitle title="DASHBOARD.HEADER" />
+         <Stack direction="row" spacing={2}>
+            <Button color="primary">Button</Button>
+            <Button color="secondary">Button</Button>
+            <Button color="success">Button</Button>
+            <Button color="error">Button</Button>
+         </Stack>
+         <Stack direction="row" spacing={2}>
+            <Button startIcon={<LogoutIcon />} color="primary">
+               Button
+            </Button>
+            <Button startIcon={<LogoutIcon />} color="secondary">
+               Button
+            </Button>
+            <Button startIcon={<LogoutIcon />} color="success">
+               Button
+            </Button>
+            <Button startIcon={<LogoutIcon />} color="error">
+               Button
+            </Button>
+         </Stack>
+         <Stack direction="row" spacing={2}>
+            <IconButton color="primary">
+               <LogoutIcon sx={{ fontSize: 22 }} />
+            </IconButton>
+            <IconButton color="secondary">
+               <LogoutIcon />
+            </IconButton>
+            <IconButton color="success">
+               <LogoutIcon />
+            </IconButton>
+         </Stack>
          <Grid container spacing={4} justifyContent="center">
             <Grid size={{ xs: 12, md: 6 }}>
                <InfoSection

@@ -1,16 +1,12 @@
-import { Box, Button as MUIButton, ButtonProps as MUIButtonProps } from "@mui/material";
+import { Box, IconButton as MUIButton, ButtonProps as MUIButtonProps, SvgIcon } from "@mui/material";
 import { motion } from "motion/react";
 import React from "react";
 
-type ButtonProps = MUIButtonProps & {};
+type IconButtonProps = MUIButtonProps & {};
 
-const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+const IconButton: React.FC<IconButtonProps> = ({ children, ...props }) => {
    return (
-      <motion.div
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
-         style={{ position: "relative", ...(props.fullWidth && { width: "100%" }) }}
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ position: "relative" }}>
          <Box
             sx={{
                position: "absolute",
@@ -27,11 +23,10 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
             disableRipple
             {...props}
             sx={{
+               paddingX: "11px",
+               paddingY: "9px",
+               width: 44,
                height: 40,
-               width: "100%",
-               paddingX: 3,
-               paddingY: 1,
-               typography: "emphasizedBodyMedium",
                position: "relative",
                backgroundColor: props.color ? `${props.color}.main` : "primary.main",
                color: "text.secondary",
@@ -48,10 +43,10 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
                },
             }}
          >
-            {children}
+            <SvgIcon sx={{ fontSize: 22 }}>{children}</SvgIcon>
          </MUIButton>
       </motion.div>
    );
 };
 
-export default Button;
+export default IconButton;

@@ -257,8 +257,22 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions) =>
          MuiOutlinedInput: {
             styleOverrides: {
                root: {
-                  backgroundColor: palette.common?.white,
-                  "& fieldset": { borderColor: palette.common?.black, border: "2px solid", borderRadius: "12px" },
+                  borderRadius: "12px",
+                  backgroundColor: palette.common?.[50],
+                  "&.Mui-focused": {
+                     backgroundColor: palette.common?.white,
+                     "& fieldset": {
+                        borderColor: palette.common?.black,
+                     },
+                  },
+                  "&.Mui-focused fieldset": {
+                     borderColor: palette.common?.black,
+                  },
+                  "& fieldset": {
+                     borderColor: palette.common?.black,
+                     border: "2px solid",
+                     borderRadius: "12px",
+                  },
                },
             },
          },
@@ -291,11 +305,8 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions) =>
          MuiButton: {
             styleOverrides: {
                root: {
-                  borderRadius: "16px",
-                  border: `2px solid ${palette.common?.black}`,
                   boxShadow: "none",
                   textTransform: "none",
-                  fontSize: "1rem",
                   WebkitTapHighlightColor: "transparent",
                   "&:hover": {
                      backgroundColor: "transparent",

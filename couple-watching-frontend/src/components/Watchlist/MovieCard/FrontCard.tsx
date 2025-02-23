@@ -1,10 +1,11 @@
 import { Stack, Typography } from "@mui/material";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { Movie } from "../../../types/Watchlist.types";
-import FlipIcon from "./FlipIcon";
 import { FormattedMessage } from "react-intl";
 import Button from "../../General/Button";
 import OutlinedCard from "../../General/OutlinedCard";
+import IconButton from "../../General/IconButton";
+import { DeviceRotate } from "@phosphor-icons/react";
 
 type FrontCardProps = {
    movie: Movie;
@@ -51,10 +52,12 @@ const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) =
                   </Stack>
                </Stack>
                <Stack direction="row" spacing={1}>
-                  <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()}>
+                  <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()} fullWidth>
                      <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
                   </Button>
-                  <FlipIcon handleClick={() => handleFlip()} />
+                  <IconButton color="secondary" onClick={() => handleFlip()}>
+                     <DeviceRotate />
+                  </IconButton>
                </Stack>
             </Stack>
          </Stack>

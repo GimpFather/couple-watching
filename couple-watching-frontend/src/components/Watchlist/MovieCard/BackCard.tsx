@@ -1,27 +1,23 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Stack, Typography } from "@mui/material";
 import { Movie } from "../../../types/Watchlist.types";
-import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
-import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
-import FlipIcon from "./FlipIcon";
-import { FormattedMessage } from "react-intl";
 import { useDeleteMovieFromWatchlist } from "../../../api/hooks/movies";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
-import Button from "../../General/Button";
 import RatingChip from "../../General/Chips/RatingChip";
 import DurationChip from "../../General/Chips/DurationChip";
 import { useAuthContext } from "../../../context/AuthProvider";
 import { usePair } from "../../../api/hooks/pairs";
 import OutlinedCard from "../../General/OutlinedCard";
+import IconButton from "../../General/IconButton";
+import { DeviceRotate, Trash } from "@phosphor-icons/react";
 
 type BackCardProps = {
    movie: Movie;
    handleFlip: () => void;
-   handleMarkAsWatched: () => void;
 };
 
-const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => {
+const BackCard = ({ movie, handleFlip }: BackCardProps) => {
    const { user } = useAuthContext();
    if (!user) return null;
    const { data: pairData } = usePair(user.uid);
@@ -103,14 +99,13 @@ const BackCard = ({ movie, handleFlip, handleMarkAsWatched }: BackCardProps) => 
                   ))}
                </Stack>
             </Stack>
-            <Stack direction="row" justifyContent="space-between">
-               <FlipIcon handleClick={() => handleFlip()} />
-               <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()}>
-                  <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
-               </Button>
-               <Button startIcon={<BookmarkRemoveIcon />} onClick={() => handleDeleteMovie()}>
-                  <FormattedMessage id="WATCHLIST.CARD.BUTTON.SECONDARY" />
-               </Button>
+            <Stack direction="row" alignItems="end" spacing={1}>
+               <IconButton color="error" onClick={() => handleDeleteMovie()}>
+                  <Trash />
+               </IconButton>
+               <IconButton color="secondary" onClick={() => handleFlip()}>
+                  <DeviceRotate />
+               </IconButton>
             </Stack>
          </Stack>
       </OutlinedCard>

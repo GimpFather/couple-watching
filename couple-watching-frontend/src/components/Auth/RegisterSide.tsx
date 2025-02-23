@@ -1,10 +1,11 @@
 import { Card, Stack, TextField, Typography } from "@mui/material";
-import FlipIcon from "../Watchlist/MovieCard/FlipIcon";
 import Button from "../General/Button";
 import { Controller, useForm } from "react-hook-form";
 import { RegisterInput } from "../../types/Inputs.types";
 import { useRegister } from "../../api/hooks/auth";
 import { FormattedMessage } from "react-intl";
+import { DeviceRotate } from "@phosphor-icons/react";
+import IconButton from "../General/IconButton";
 
 type RegisterSideProps = {
    handleFlip: () => void;
@@ -44,7 +45,9 @@ const RegisterSide = ({ handleFlip }: RegisterSideProps) => {
                   <Typography variant="h4" color="primary" fontWeight={800}>
                      <FormattedMessage id="AUTH.REGISTER.TITLE" />
                   </Typography>
-                  <FlipIcon handleClick={() => handleFlip()} />
+                  <IconButton color="secondary" onClick={() => handleFlip()}>
+                     <DeviceRotate />
+                  </IconButton>
                </Stack>
                <Typography>
                   <FormattedMessage id="AUTH.REGISTER.SUBTITLE" />

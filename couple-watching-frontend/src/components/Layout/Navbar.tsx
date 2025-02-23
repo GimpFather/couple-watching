@@ -19,20 +19,20 @@ const Navbar = () => {
                sx={{ padding: 2, backgroundColor: "background.paper" }}
             >
                <AppBarLink
-                  icon={<LocalMoviesOutlinedIcon sx={{ color: "common.white" }} />}
-                  filledIcon={<LocalMoviesIcon sx={{ color: "primary.main" }} />}
+                  icon={<LocalMoviesOutlinedIcon sx={{ color: "common.700" }} />}
+                  filledIcon={<LocalMoviesIcon sx={{ color: "secondary.main" }} />}
                   url={"/watchlist"}
                   caption={"NAVBAR.WATCHLIST"}
                />
                <AppBarLink
-                  icon={<AddCircleOutlineOutlinedIcon sx={{ color: "common.white" }} />}
-                  filledIcon={<AddCircleIcon sx={{ color: "primary.main" }} />}
+                  icon={<AddCircleOutlineOutlinedIcon sx={{ color: "common.700" }} />}
+                  filledIcon={<AddCircleIcon sx={{ color: "secondary.main" }} />}
                   url={"/add-movie"}
                   caption={"NAVBAR.ADD_THE_MOVIE"}
                />
                <AppBarLink
-                  icon={<DashboardOutlinedIcon sx={{ color: "common.white" }} />}
-                  filledIcon={<DashboardIcon sx={{ color: "primary.main" }} />}
+                  icon={<DashboardOutlinedIcon sx={{ color: "common.700" }} />}
+                  filledIcon={<DashboardIcon sx={{ color: "secondary.main" }} />}
                   url={"/dashboard"}
                   caption={"NAVBAR.DASHBOARD"}
                />
