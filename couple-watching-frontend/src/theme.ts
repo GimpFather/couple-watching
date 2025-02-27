@@ -143,17 +143,17 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions, backgroundG
                   backgroundColor: palette.common?.[50],
                   "&.Mui-focused": {
                      backgroundColor: palette.common?.white,
-                     "& fieldset": {
-                        borderColor: palette.common?.black,
-                     },
                   },
-                  "&.Mui-focused fieldset": {
-                     borderColor: palette.common?.black,
-                  },
-                  "& fieldset": {
+                  "& .MuiOutlinedInput-notchedOutline": {
                      borderColor: palette.common?.black,
                      border: "2px solid",
                      borderRadius: "12px",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                     borderColor: palette.common?.black,
+                  },
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                     borderColor: palette.common?.black,
                   },
                },
             },

@@ -37,7 +37,7 @@ const SearchBar = ({ control }: SearchBarProps) => {
                         },
                         startAdornment: (
                            <InputAdornment position="start">
-                              <MagnifyingGlass color={palette.common[500]} />
+                              <MagnifyingGlass color={palette.common.black} />
                            </InputAdornment>
                         ),
                         slotProps: {
