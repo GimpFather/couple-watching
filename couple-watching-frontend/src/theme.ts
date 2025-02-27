@@ -117,7 +117,7 @@ export const blueOrangePalette: PaletteOptions = {
    },
 };
 
-export const defaultPalette = {
+export const defaultPalette: PaletteOptions = {
    primary: {
       main: "#38A169",
       light: "#68D391",
@@ -137,6 +137,22 @@ export const defaultPalette = {
    text: {
       primary: "#F9F9F9",
       secondary: "#050D06",
+   },
+   accent: {
+      main: "#e4e0db",
+      light: "#dad4ce",
+      dark: "#988477",
+      50: "#f7f6f5",
+      100: "#e4e0db",
+      200: "#dad4ce",
+      300: "#c2b9af",
+      400: "#a99a8e",
+      500: "#988477",
+      600: "#8b756b",
+      700: "#74625a",
+      800: "#60514c",
+      900: "#4f433f",
+      950: "#292321",
    },
 };
 
@@ -183,70 +199,70 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions, backgroundG
             letterSpacing: "-0.42px",
          },
          bodyExtraLarge: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "1.125rem",
             fontWeight: 400,
             lineHeight: 1.75,
             letterSpacing: "-0.18px",
          },
          bodyLarge: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "1rem",
             fontWeight: 400,
             lineHeight: 1.75,
             letterSpacing: "-0.16px",
          },
          bodyMedium: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "0.875rem",
             fontWeight: 400,
             lineHeight: 1.75,
             letterSpacing: "-0.14px",
          },
          bodySmall: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "0.75rem",
             fontWeight: 400,
             lineHeight: 1.75,
             letterSpacing: "-0.12px",
          },
          bodyExtraSmall: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "0.563rem",
             fontWeight: 400,
             lineHeight: 1.75,
             letterSpacing: "-0.09px",
          },
          emphasizedBodyExtraLarge: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "1.125rem",
             fontWeight: 500,
             lineHeight: 1.45,
             letterSpacing: "-0.18px",
          },
          emphasizedBodyLarge: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "1rem",
             fontWeight: 500,
             lineHeight: 1.45,
             letterSpacing: "-0.16px",
          },
          emphasizedBodyMedium: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "0.875rem",
             fontWeight: 500,
             lineHeight: 1.45,
             letterSpacing: "-0.14px",
          },
          emphasizedBodySmall: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "0.75rem",
             fontWeight: 500,
             lineHeight: 1.45,
             letterSpacing: "-0.12px",
          },
          emphasizedBodyExtraSmall: {
-            fontFamily: `'DMS Sans', sans-serif`,
+            fontFamily: `'DM Sans', sans-serif`,
             fontSize: "0.563rem",
             fontWeight: 500,
             lineHeight: 1.45,

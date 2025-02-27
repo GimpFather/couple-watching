@@ -96,7 +96,15 @@ const DashboardPage = () => {
                   primaryButton={{
                      icon: <ColorLensIcon />,
                      caption: <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.COLOR_PICK.BLUE_ORANGE" />,
-                     action: () => setUserPalette(blueOrangePalette),
+                     action: () => {
+                        setUserPalette(blueOrangePalette);
+                        setBackgroundGradient(
+                           handleBackgroundGradient({
+                              intensity: 25,
+                              backgroundColor: blueOrangePalette.background!.default!,
+                           })
+                        );
+                     },
                   }}
                />
             </Grid>
@@ -113,7 +121,15 @@ const DashboardPage = () => {
                   primaryButton={{
                      icon: <ColorLensIcon />,
                      caption: <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.COLOR_PICK.GREEN_RED" />,
-                     action: () => setUserPalette(defaultPalette),
+                     action: () => {
+                        setUserPalette(defaultPalette);
+                        setBackgroundGradient(
+                           handleBackgroundGradient({
+                              intensity: 25,
+                              backgroundColor: defaultPalette.background!.default!,
+                           })
+                        );
+                     },
                   }}
                />
             </Grid>
