@@ -16,6 +16,8 @@ type FrontCardProps = {
 const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) => {
    const { palette } = useTheme();
    const genres = movie.genre.map((genre) => `#${genre.toLowerCase()}`).join(" ");
+   const coverUrl = movie.cover.replace("SX300", "SX700");
+
    return (
       <OutlinedCard
          sx={{
@@ -24,7 +26,7 @@ const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) =
             width: 343,
             height: 508,
             overflow: "hidden",
-            backgroundImage: `url(${movie.cover})`,
+            backgroundImage: `url(${coverUrl})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
