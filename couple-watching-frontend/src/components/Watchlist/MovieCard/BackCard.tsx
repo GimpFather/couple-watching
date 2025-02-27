@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useTheme } from "@mui/material";
 import { Movie } from "../../../types/Watchlist.types";
 import { useDeleteMovieFromWatchlist } from "../../../api/hooks/movies";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ import { usePair } from "../../../api/hooks/pairs";
 import OutlinedCard from "../../General/OutlinedCard";
 import IconButton from "../../General/IconButton";
 import { DeviceRotate, Trash } from "@phosphor-icons/react";
+import { FormattedMessage } from "react-intl";
 
 type BackCardProps = {
    movie: Movie;
@@ -19,10 +20,13 @@ type BackCardProps = {
 
 const BackCard = ({ movie, handleFlip }: BackCardProps) => {
    const { user } = useAuthContext();
+   const { palette } = useTheme();
    if (!user) return null;
    const { data: pairData } = usePair(user.uid);
    const queryClient = useQueryClient();
    const { mutate: deleteMutate } = useDeleteMovieFromWatchlist();
+
+   const genres = movie.genre.map((genre) => `#${genre.toLowerCase()}`).join(" ");
 
    const notifySuccess = () => toast("Nice! That film is officially trashed. 🗑️");
    const notifyError = () => toast("Oops! Something went wrong. 😢");
@@ -49,7 +53,7 @@ const BackCard = ({ movie, handleFlip }: BackCardProps) => {
          sx={{
             position: "absolute",
             backfaceVisibility: "hidden",
-            padding: 2,
+            padding: 1.5,
             width: 350,
             height: 500,
             borderRadius: 4,
@@ -59,52 +63,66 @@ const BackCard = ({ movie, handleFlip }: BackCardProps) => {
       >
          <Stack justifyContent="space-between" sx={{ height: "100%" }}>
             <Stack spacing={2}>
-               <Typography
-                  variant="h4"
-                  sx={{
-                     fontWeight: "bold",
-                     display: "-webkit-box",
-                     WebkitBoxOrient: "vertical",
-                     overflow: "hidden",
-                     WebkitLineClamp: 3,
-                     textOverflow: "ellipsis",
-                  }}
-               >
-                  {movie.title}
-               </Typography>
-               <Stack spacing={1} direction="row">
+               <Stack spacing={0.5} direction="row">
                   <RatingChip rate={movie.imdbReview} />
                   <DurationChip duration={`${movie.duration} min`} />
                </Stack>
-               <Typography>
-                  {movie.director} ({movie.productionYear})
-               </Typography>
+               <Stack gap={0.5}>
+                  <Typography
+                     variant="headingLarge"
+                     sx={{
+                        fontWeight: "bold",
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        WebkitLineClamp: 3,
+                        textOverflow: "ellipsis",
+                     }}
+                  >
+                     {movie.title}
+                  </Typography>
+                  <Typography variant="bodyMedium" color="grey.500">
+                     {genres}
+                  </Typography>
+               </Stack>
+               <Stack spacing={0.25}>
+                  <Stack direction="row" spacing={0.5} alignItems="center">
+                     <Typography variant="bodyMedium">
+                        <FormattedMessage id="WATCHLIST.CARD.DIRECTOR" />
+                     </Typography>
+                     <Typography variant="bodyMedium" fontWeight={700}>
+                        {movie.director}
+                     </Typography>
+                  </Stack>
+                  <Stack direction="row" spacing={0.5} alignItems="center">
+                     <Typography variant="bodyMedium">
+                        <FormattedMessage id="WATCHLIST.CARD.RELEASE_YEAR" />
+                     </Typography>
+                     <Typography variant="bodyMedium" fontWeight={700}>
+                        {movie.productionYear}
+                     </Typography>
+                  </Stack>
+               </Stack>
                <Typography
-                  variant="body1"
+                  variant="bodyMedium"
                   sx={{
                      display: "-webkit-box",
                      WebkitBoxOrient: "vertical",
                      overflow: "hidden",
                      WebkitLineClamp: 8,
                      textOverflow: "ellipsis",
+                     fontStyle: "italic",
                   }}
                >
                   {movie.plot}
                </Typography>
-               <Stack alignItems="center" direction="row" spacing={1}>
-                  {movie.genre.map((genre, index) => (
-                     <Typography key={index} variant="body1">
-                        #{genre}
-                     </Typography>
-                  ))}
-               </Stack>
             </Stack>
-            <Stack direction="row" alignItems="end" spacing={1}>
+            <Stack direction="row" justifyContent="flex-end" spacing={1}>
                <IconButton color="error" onClick={() => handleDeleteMovie()}>
                   <Trash />
                </IconButton>
-               <IconButton color="secondary" onClick={() => handleFlip()}>
-                  <DeviceRotate />
+               <IconButton color="accent" onClick={() => handleFlip()}>
+                  <DeviceRotate style={{ color: palette.text.primary }} />
                </IconButton>
             </Stack>
          </Stack>

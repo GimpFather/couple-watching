@@ -36,11 +36,11 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton, c
                sx={{ padding: 4, borderRadius: 4, height: "100%" }}
             >
                <Stack spacing={1} alignItems="center" sx={{ textAlign: "center" }}>
-                  {emoji && <Typography variant="h2">{emoji}</Typography>}
-                  <Typography variant="h4" fontWeight={700}>
+                  {emoji && <Typography variant="headingLarge">{emoji}</Typography>}
+                  <Typography variant="headingLarge" fontWeight={700}>
                      {title}
                   </Typography>
-                  <Typography variant="h6">{subtitle}</Typography>
+                  <Typography variant="bodyMedium">{subtitle}</Typography>
                </Stack>
                {(primaryButton || secondaryButton) && (
                   <Stack direction={isMobile ? "column" : "row"} spacing={2}>

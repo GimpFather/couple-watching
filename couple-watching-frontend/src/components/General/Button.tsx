@@ -1,4 +1,4 @@
-import { Box, Button as MUIButton, ButtonProps as MUIButtonProps } from "@mui/material";
+import { Box, Button as MUIButton, ButtonProps as MUIButtonProps, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import React from "react";
 
@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
                width: "100%",
                paddingX: 3,
                paddingY: 1,
-               typography: "emphasizedBodyMedium",
+               alignItems: "top",
                position: "relative",
                backgroundColor: props.color ? `${props.color}.main` : "primary.main",
                color: "text.secondary",
@@ -48,7 +48,7 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
                },
             }}
          >
-            {children}
+            <Typography variant="emphasizedBodyMedium">{children}</Typography>
          </MUIButton>
       </motion.div>
    );

@@ -1,5 +1,14 @@
 import { createTheme, PaletteColor, PaletteMode, PaletteOptions } from "@mui/material";
-import "@fontsource/outfit";
+import "@fontsource/ibm-plex-mono/100.css";
+import "@fontsource/ibm-plex-mono/200.css";
+import "@fontsource/ibm-plex-mono/300.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-mono/600.css";
+import "@fontsource/ibm-plex-mono/700.css";
+import "@fontsource/dm-sans/400.css";
+import "@fontsource/dm-sans/500.css";
+import "@fontsource/dm-sans/700.css";
 
 export const blueOrangePalette: PaletteOptions = {
    primary: {
@@ -163,36 +172,41 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions, backgroundG
          ...palette,
       },
       typography: {
-         fontFamily: `'IBM Plex Mono', monospace`,
+         fontFamily: `'DM Sans', sans-serif`,
          fontWeightLight: 300,
          fontWeightRegular: 400,
          fontWeightMedium: 500,
          fontWeightBold: 700,
          headingExtraLarge: {
+            fontFamily: `'IBM Plex Mono', monospace`,
             fontSize: "2rem",
             fontWeight: 600,
             lineHeight: 1.45,
             letterSpacing: "-0.96px",
          },
          headingLarge: {
+            fontFamily: `'IBM Plex Mono', monospace`,
             fontSize: "1.5rem",
             fontWeight: 600,
             lineHeight: 1.45,
             letterSpacing: "-0.72px",
          },
          headingMedium: {
+            fontFamily: `'IBM Plex Mono', monospace`,
             fontSize: "1.25rem",
             fontWeight: 600,
             lineHeight: 1.45,
             letterSpacing: "-0.60px",
          },
          headingSmall: {
+            fontFamily: `'IBM Plex Mono', monospace`,
             fontSize: "1.125rem",
             fontWeight: 600,
             lineHeight: 1.45,
             letterSpacing: "-0.54px",
          },
          headingExtraSmall: {
+            fontFamily: `'IBM Plex Mono', monospace`,
             fontSize: "0.875rem",
             fontWeight: 600,
             lineHeight: 1.45,

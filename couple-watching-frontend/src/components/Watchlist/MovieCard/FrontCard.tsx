@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useTheme } from "@mui/material";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { Movie } from "../../../types/Watchlist.types";
 import { FormattedMessage } from "react-intl";
@@ -14,6 +14,8 @@ type FrontCardProps = {
 };
 
 const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) => {
+   const { palette } = useTheme();
+   const genres = movie.genre.map((genre) => `#${genre.toLowerCase()}`).join(" ");
    return (
       <OutlinedCard
          sx={{
@@ -38,25 +40,21 @@ const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) =
                background: " linear-gradient(180deg, rgba(12, 12, 12, 0.00) 0%, #0C0C0C 75%, #0C0C0C 100%);",
             }}
          >
-            <Stack spacing={3}>
+            <Stack spacing={2}>
                <Stack spacing={0.5}>
-                  <Typography variant="h5" color="text.secondary" sx={{ fontWeight: "bold" }}>
+                  <Typography variant="headingLarge" color="text.secondary" sx={{ fontWeight: "bold" }}>
                      {movie.title}
                   </Typography>
-                  <Stack direction="row" spacing={1}>
-                     {movie.genre.map((genre: string, index) => (
-                        <Typography key={index} color="grey.500">
-                           #{genre.toLowerCase()}
-                        </Typography>
-                     ))}
-                  </Stack>
+                  <Typography variant="bodyMedium" color="grey.500">
+                     {genres}
+                  </Typography>
                </Stack>
                <Stack direction="row" spacing={1}>
                   <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()} fullWidth>
                      <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
                   </Button>
-                  <IconButton color="secondary" onClick={() => handleFlip()}>
-                     <DeviceRotate />
+                  <IconButton color="accent" onClick={() => handleFlip()}>
+                     <DeviceRotate style={{ color: palette.text.primary }} />
                   </IconButton>
                </Stack>
             </Stack>

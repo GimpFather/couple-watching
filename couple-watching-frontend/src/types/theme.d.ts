@@ -24,11 +24,11 @@ declare module "@mui/material" {
 
 declare module "@mui/material/styles" {
    interface Palette {
-      accent: PaletteColor;
+      accent: Palette["primary"];
       danger: PaletteColor;
    }
    interface PaletteOptions {
-      accent?: PaletteColorOptions;
+      accent: PaletteOptions["primary"];
       danger?: PaletteColorOptions;
    }
    interface TypographyVariants {
@@ -85,5 +85,17 @@ declare module "@mui/material/Typography" {
       emphasizedBodyMedium: true;
       emphasizedBodySmall: true;
       emphasizedBodyExtraSmall: true;
+   }
+}
+
+declare module "@mui/material/Button" {
+   interface ButtonPropsColorOverrides {
+      accent: true;
+   }
+}
+
+declare module "@mui/material/IconButton" {
+   interface IconButtonPropsColorOverrides {
+      accent: true;
    }
 }

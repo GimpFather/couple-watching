@@ -1,6 +1,6 @@
-import { Chip, Typography, useTheme } from "@mui/material";
+import { Stack, Typography, useTheme } from "@mui/material";
+import { Star } from "@phosphor-icons/react";
 import { FormattedMessage } from "react-intl";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 type RatingChipProps = {
    rate: string | number;
@@ -9,24 +9,32 @@ type RatingChipProps = {
 const RatingChip = ({ rate }: RatingChipProps) => {
    const { palette } = useTheme();
    return (
-      <Chip
-         icon={<StarRoundedIcon sx={{ fill: palette.background.paper }} />}
-         label={
-            <Typography variant="body2" sx={{ color: "background.paper" }}>
-               <FormattedMessage
-                  id="CHIP.RATE.SLASH_TEN"
-                  values={{
-                     rating: (
-                        <Typography fontWeight={800} component="span">
-                           {rate}
-                        </Typography>
-                     ),
-                  }}
-               />
-            </Typography>
-         }
-         color="primary"
-      />
+      <Stack
+         direction="row"
+         alignItems="center"
+         spacing={0.5}
+         sx={{
+            paddingX: 1.5,
+            paddingY: 0.45,
+            borderRadius: 4,
+            border: `2px solid ${palette.common.black}`,
+            backgroundColor: "accent.main",
+         }}
+      >
+         <Star fontSize={20} weight="duotone" style={{ color: palette.common.black }} />
+         <Typography variant="bodyMedium" sx={{ color: palette.common.black }}>
+            <FormattedMessage
+               id="CHIP.RATE.SLASH_TEN"
+               values={{
+                  rating: (
+                     <Typography variant="bodyMedium" fontWeight={700} component="span">
+                        {rate.toString().replace(".", ",")}
+                     </Typography>
+                  ),
+               }}
+            />
+         </Typography>
+      </Stack>
    );
 };
 
