@@ -20,9 +20,13 @@ declare module "@mui/material" {
       900: string;
       950: string;
    }
+
+   type CustomColorOptions = "primary" | "secondary" | "error" | "warning" | "info" | "success" | "accent" | "danger";
 }
 
 declare module "@mui/material/styles" {
+   type CustomColorOptions = "primary" | "secondary" | "error" | "warning" | "info" | "success" | "accent" | "danger";
+
    interface Palette {
       accent: Palette["primary"];
       danger: PaletteColor;
@@ -91,11 +95,13 @@ declare module "@mui/material/Typography" {
 declare module "@mui/material/Button" {
    interface ButtonPropsColorOverrides {
       accent: true;
+      danger: true;
    }
 }
 
 declare module "@mui/material/IconButton" {
    interface IconButtonPropsColorOverrides {
       accent: true;
+      danger: true;
    }
 }

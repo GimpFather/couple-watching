@@ -1,50 +1,86 @@
-import { Box, IconButton as MUIButton, ButtonProps as MUIButtonProps, SvgIcon } from "@mui/material";
-import { motion } from "motion/react";
+import {
+   IconButton as MUIButton,
+   ButtonProps as MUIButtonProps,
+   useTheme,
+   type CustomColorOptions,
+} from "@mui/material";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import React from "react";
 
-type IconButtonProps = MUIButtonProps & {};
+type IconButtonProps = Omit<MUIButtonProps, "color"> & {
+   isLoading?: boolean;
+   color?: CustomColorOptions;
+};
 
-const IconButton: React.FC<IconButtonProps> = ({ children, ...props }) => {
+const IconButton: React.FC<IconButtonProps> = ({ children, isLoading, ...props }) => {
+   const y = useMotionValue(-5);
+   const ySpring = useSpring(y, { stiffness: 400, damping: 20 });
+   const { palette } = useTheme();
+
    return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ position: "relative" }}>
-         <Box
-            sx={{
+      <motion.div
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         transition={{ duration: 0.3 }}
+         style={{
+            position: "relative",
+            width: 44,
+         }}
+      >
+         <motion.div
+            style={{
                position: "absolute",
                height: 36,
-               width: "100%",
-               boxSizing: "border-box",
-               backgroundColor: props.color ? `${props.color}.dark` : "primary.dark",
-               borderRadius: 3,
+               width: 44,
+               backgroundColor: props.color ? palette[props.color].dark : palette.primary.dark,
+               borderRadius: 12,
                border: "2px solid black",
+               y: 4,
             }}
          />
-         <MUIButton
-            variant="contained"
-            disableRipple
-            {...props}
-            sx={{
-               paddingX: "11px",
-               paddingY: "9px",
-               width: 44,
-               height: 40,
-               position: "relative",
-               backgroundColor: props.color ? `${props.color}.main` : "primary.main",
-               color: "text.secondary",
-               borderRadius: 3,
-               border: "2px solid black",
-               transition: "all 0.3s cubic-bezier(0.1, 0, 0.2, 1)",
-               transform: "translateY(-8px)",
-               "&:active": {
-                  backgroundColor: props.color ? `${props.color}.dark` : "primary.dark",
-                  transform: "translateY(-3px)",
-               },
-               "&:hover": {
-                  backgroundColor: props.color ? `${props.color}.light` : "primary.light",
-               },
-            }}
+         <motion.div
+            style={{ y: ySpring }}
+            onTapStart={() => y.set(3)}
+            onTapCancel={() => y.set(-5)}
+            onPointerUp={() => y.set(-5)}
          >
-            <SvgIcon sx={{ fontSize: 22 }}>{children}</SvgIcon>
-         </MUIButton>
+            <MUIButton
+               variant="contained"
+               disableRipple
+               disabled={isLoading}
+               {...props}
+               sx={{
+                  padding: 0,
+                  minWidth: 44,
+                  width: 44,
+                  height: 40,
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: props.color ? palette[props.color].main : palette.primary.main,
+                  color: "text.secondary",
+                  borderRadius: 3,
+                  border: "2px solid black",
+                  transition: "background-color 0.3s cubic-bezier(0.1, 0, 0.2, 1)",
+                  "& .MuiSvgIcon-root": {
+                     display: "flex",
+                     alignItems: "center",
+                     justifyContent: "center",
+                     fontSize: 22,
+                  },
+                  "&:hover": {
+                     backgroundColor: props.color ? palette[props.color].light : palette.primary.light,
+                  },
+                  "&:disabled": {
+                     backgroundColor: "grey.400",
+                     cursor: "not-allowed",
+                  },
+               }}
+            >
+               {children}
+            </MUIButton>
+         </motion.div>
       </motion.div>
    );
 };

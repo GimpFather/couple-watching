@@ -1,8 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 import { PaletteMode, PaletteOptions, Theme } from "@mui/material";
 import { createContext, useContext, ReactNode } from "react";
-import { blueOrangePalette, getTheme } from "../theme";
+import { getTheme } from "../theme";
 import React from "react";
+import { blueOrangePalette } from "../constants/PALETTS";
 
 interface ThemeContextInterface {
    mode: PaletteMode;

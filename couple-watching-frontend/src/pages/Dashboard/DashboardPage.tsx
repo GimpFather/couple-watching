@@ -17,12 +17,14 @@ import BlueHeart from "../../assets/lottie/hearts/blue.json";
 import OrangeHeart from "../../assets/lottie/hearts/orange.json";
 import GreenHeart from "../../assets/lottie/hearts/green.json";
 import RedHeart from "../../assets/lottie/hearts/red.json";
+import PurpleHeart from "../../assets/lottie/hearts/purple.json";
+import YellowHeart from "../../assets/lottie/hearts/yellow.json";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import ResponseDialog from "../../components/Dashboard/ResponseDialog";
 import { toast } from "react-toastify";
 import { useThemeContext } from "../../context/ThemeContext";
-import { blueOrangePalette, defaultPalette } from "../../theme";
 import { handleBackgroundGradient } from "../../utils";
+import { blueOrangePalette, purpleYellowPalette, defaultPalette } from "../../constants/PALETTS";
 
 const DashboardPage = () => {
    const { user, logout } = useAuthContext();
@@ -133,7 +135,32 @@ const DashboardPage = () => {
                   }}
                />
             </Grid>
-            <Grid size={{ xs: 12 }}>
+            <Grid size={{ xs: 12, md: 6 }}>
+               <InfoSection
+                  title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.COLOR_PICK.PURPLE_YELLOW" />}
+                  subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.COLOR_PICK.PURPLE_YELLOW" />}
+                  emoji={
+                     <Stack direction="row" gap={1}>
+                        <AnimatedEmoji emoji={PurpleHeart} width={80} height={80} />
+                        <AnimatedEmoji emoji={YellowHeart} width={80} height={80} />
+                     </Stack>
+                  }
+                  primaryButton={{
+                     icon: <ColorLensIcon />,
+                     caption: <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.COLOR_PICK.PURPLE_YELLOW" />,
+                     action: () => {
+                        setUserPalette(purpleYellowPalette);
+                        setBackgroundGradient(
+                           handleBackgroundGradient({
+                              intensity: 25,
+                              backgroundColor: purpleYellowPalette.background!.default!,
+                           })
+                        );
+                     },
+                  }}
+               />
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
                <InfoSection
                   title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.BACKGROUND_PICKER" />}
                   subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.BACKGROUND_PICKER" />}

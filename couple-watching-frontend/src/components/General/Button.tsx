@@ -1,55 +1,79 @@
-import { Box, Button as MUIButton, ButtonProps as MUIButtonProps, Typography } from "@mui/material";
-import { motion } from "motion/react";
+import {
+   Button as MUIButton,
+   ButtonProps as MUIButtonProps,
+   Typography,
+   useTheme,
+   type CustomColorOptions,
+} from "@mui/material";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import React from "react";
 
-type ButtonProps = MUIButtonProps & {};
+type ButtonProps = Omit<MUIButtonProps, "color"> & {
+   isLoading?: boolean;
+   color?: CustomColorOptions;
+};
 
-const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+const Button: React.FC<ButtonProps> = ({ children, isLoading, ...props }) => {
+   const y = useMotionValue(-5);
+   const ySpring = useSpring(y, { stiffness: 400, damping: 20 });
+   const { palette } = useTheme();
+
    return (
       <motion.div
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
-         style={{ position: "relative", ...(props.fullWidth && { width: "100%" }) }}
+         transition={{ duration: 0.3 }}
+         style={{
+            position: "relative",
+            ...(props.fullWidth && { width: "100%" }),
+         }}
       >
-         <Box
-            sx={{
+         <motion.div
+            style={{
                position: "absolute",
                height: 36,
                width: "100%",
-               boxSizing: "border-box",
-               backgroundColor: props.color ? `${props.color}.dark` : "primary.dark",
-               borderRadius: 3,
+               backgroundColor: props.color ? palette[props.color].dark : palette.primary.dark,
+               borderRadius: 12,
                border: "2px solid black",
+               y: 4,
             }}
          />
-         <MUIButton
-            variant="contained"
-            disableRipple
-            {...props}
-            sx={{
-               height: 40,
-               width: "100%",
-               paddingX: 3,
-               paddingY: 1,
-               alignItems: "top",
-               position: "relative",
-               backgroundColor: props.color ? `${props.color}.main` : "primary.main",
-               color: "text.secondary",
-               borderRadius: 3,
-               border: "2px solid black",
-               transition: "all 0.3s cubic-bezier(0.1, 0, 0.2, 1)",
-               transform: "translateY(-8px)",
-               "&:active": {
-                  backgroundColor: props.color ? `${props.color}.dark` : "primary.dark",
-                  transform: "translateY(-3px)",
-               },
-               "&:hover": {
-                  backgroundColor: props.color ? `${props.color}.light` : "primary.light",
-               },
-            }}
+         <motion.div
+            style={{ y: ySpring }}
+            onTapStart={() => y.set(3)}
+            onTapCancel={() => y.set(-5)}
+            onPointerUp={() => y.set(-5)}
          >
-            <Typography variant="emphasizedBodyMedium">{children}</Typography>
-         </MUIButton>
+            <MUIButton
+               variant="contained"
+               disableRipple
+               disabled={isLoading}
+               {...props}
+               sx={{
+                  height: 40,
+                  width: "100%",
+                  paddingX: 3,
+                  paddingY: 1,
+                  alignItems: "center",
+                  position: "relative",
+                  backgroundColor: props.color ? palette[props.color].main : palette.primary.main,
+                  color: "text.secondary",
+                  borderRadius: 3,
+                  border: "2px solid black",
+                  transition: "background-color 0.3s cubic-bezier(0.1, 0, 0.2, 1)",
+                  "&:hover": {
+                     backgroundColor: props.color ? palette[props.color].light : palette.primary.light,
+                  },
+                  "&:disabled": {
+                     backgroundColor: "grey.400",
+                     cursor: "not-allowed",
+                  },
+               }}
+            >
+               <Typography variant="emphasizedBodyMedium">{children}</Typography>
+            </MUIButton>
+         </motion.div>
       </motion.div>
    );
 };
