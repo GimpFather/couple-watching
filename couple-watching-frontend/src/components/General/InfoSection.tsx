@@ -5,23 +5,22 @@ import React from "react";
 import Loading from "./Loading";
 import OutlinedCard from "./OutlinedCard";
 
+type InfoSectionButton = {
+   caption: React.ReactNode;
+   icon?: React.ReactNode;
+   action: () => void;
+};
+
 type InfoSectionProps = {
    title: React.ReactNode;
    subtitle: React.ReactNode;
-   emoji: string | React.ReactNode;
-   primaryButton?: {
-      caption: React.ReactNode;
-      icon: React.ReactNode;
-      action: () => void;
-   };
-   secondaryButton?: {
-      caption: React.ReactNode;
-      icon: React.ReactNode;
-      action: () => void;
-   };
+   emoji?: string | React.ReactNode;
+   primaryButton?: InfoSectionButton;
+   secondaryButton?: InfoSectionButton;
+   container?: React.ReactNode;
 };
 
-const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }: InfoSectionProps) => {
+const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton, container }: InfoSectionProps) => {
    const { breakpoints } = useTheme();
    const isMobile = useMediaQuery(breakpoints.down("sm"));
    return (
@@ -37,7 +36,7 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
                sx={{ padding: 4, borderRadius: 4, height: "100%" }}
             >
                <Stack spacing={1} alignItems="center" sx={{ textAlign: "center" }}>
-                  <Typography variant="h2">{emoji}</Typography>
+                  {emoji && <Typography variant="h2">{emoji}</Typography>}
                   <Typography variant="h4" fontWeight={700}>
                      {title}
                   </Typography>
@@ -57,6 +56,7 @@ const InfoSection = ({ title, subtitle, emoji, primaryButton, secondaryButton }:
                      )}
                   </Stack>
                )}
+               {container}
             </Stack>
          </OutlinedCard>
       </React.Suspense>

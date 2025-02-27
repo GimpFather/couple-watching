@@ -7,8 +7,10 @@ import React from "react";
 interface ThemeContextInterface {
    mode: PaletteMode;
    userPalatte: PaletteOptions;
+   backgroundGradient: string;
    setMode: (mode: PaletteMode) => void;
    setUserPalette: (palette: PaletteOptions) => void;
+   setBackgroundGradient: (gradient: string) => void;
 }
 
 interface ThemeProviderWrapperProps {
@@ -20,11 +22,16 @@ const ThemeContext = createContext<ThemeContextInterface | undefined>(undefined)
 export const ThemeProviderWrapper = ({ children }: ThemeProviderWrapperProps) => {
    const [mode, setMode] = React.useState<PaletteMode>("light");
    const [userPalatte, setUserPalette] = React.useState<PaletteOptions>(blueOrangePalette);
-
-   const theme = React.useMemo(() => getTheme(mode, userPalatte), [mode, userPalatte]);
+   const [backgroundGradient, setBackgroundGradient] = React.useState<string>(blueOrangePalette.background!.default!);
+   const theme = React.useMemo(
+      () => getTheme(mode, userPalatte, backgroundGradient),
+      [mode, userPalatte, backgroundGradient]
+   );
 
    return (
-      <ThemeContext.Provider value={{ mode, setMode, userPalatte, setUserPalette }}>
+      <ThemeContext.Provider
+         value={{ mode, setMode, userPalatte, setUserPalette, backgroundGradient, setBackgroundGradient }}
+      >
          {children(theme)}
       </ThemeContext.Provider>
    );

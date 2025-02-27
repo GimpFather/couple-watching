@@ -1,4 +1,4 @@
-import { Grid2 as Grid, Stack } from "@mui/material";
+import { Grid2 as Grid, Stack, useTheme } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
 import { useAuthContext } from "../../context/AuthProvider";
 import Button from "../../components/General/Button";
@@ -22,11 +22,12 @@ import ResponseDialog from "../../components/Dashboard/ResponseDialog";
 import { toast } from "react-toastify";
 import { useThemeContext } from "../../context/ThemeContext";
 import { blueOrangePalette, defaultPalette } from "../../theme";
-import IconButton from "../../components/General/IconButton";
+import { handleBackgroundGradient } from "../../utils";
 
 const DashboardPage = () => {
    const { user, logout } = useAuthContext();
-   const { setUserPalette } = useThemeContext();
+   const { setUserPalette, setBackgroundGradient } = useThemeContext();
+   const { palette } = useTheme();
    const { data: pairData } = usePair(user!.uid);
    const { mutate: respondToPairRequest } = useRespondToPairRequest();
 
@@ -45,37 +46,6 @@ const DashboardPage = () => {
    return (
       <Stack spacing={4}>
          <PageTitle title="DASHBOARD.HEADER" />
-         <Stack direction="row" spacing={2}>
-            <Button color="primary">Button</Button>
-            <Button color="secondary">Button</Button>
-            <Button color="success">Button</Button>
-            <Button color="error">Button</Button>
-         </Stack>
-         <Stack direction="row" spacing={2}>
-            <Button startIcon={<LogoutIcon />} color="primary">
-               Button
-            </Button>
-            <Button startIcon={<LogoutIcon />} color="secondary">
-               Button
-            </Button>
-            <Button startIcon={<LogoutIcon />} color="success">
-               Button
-            </Button>
-            <Button startIcon={<LogoutIcon />} color="error">
-               Button
-            </Button>
-         </Stack>
-         <Stack direction="row" spacing={2}>
-            <IconButton color="primary">
-               <LogoutIcon sx={{ fontSize: 22 }} />
-            </IconButton>
-            <IconButton color="secondary">
-               <LogoutIcon />
-            </IconButton>
-            <IconButton color="success">
-               <LogoutIcon />
-            </IconButton>
-         </Stack>
          <Grid container spacing={4} justifyContent="center">
             <Grid size={{ xs: 12, md: 6 }}>
                <InfoSection
@@ -145,6 +115,76 @@ const DashboardPage = () => {
                      caption: <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.COLOR_PICK.GREEN_RED" />,
                      action: () => setUserPalette(defaultPalette),
                   }}
+               />
+            </Grid>
+            <Grid size={{ xs: 12 }}>
+               <InfoSection
+                  title={<FormattedMessage id="DASHBOARD.INFO_SECTION.TITLE.BACKGROUND_PICKER" />}
+                  subtitle={<FormattedMessage id="DASHBOARD.INFO_SECTION.SUBTITLE.BACKGROUND_PICKER" />}
+                  container={
+                     <Stack direction="row" gap={2}>
+                        <Button
+                           onClick={() =>
+                              setBackgroundGradient(
+                                 handleBackgroundGradient({
+                                    intensity: 10,
+                                    backgroundColor: palette.background.default,
+                                 })
+                              )
+                           }
+                        >
+                           <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.BACKGROUND_PICKER.PRIMARY" />
+                        </Button>
+                        <Button
+                           onClick={() =>
+                              setBackgroundGradient(
+                                 handleBackgroundGradient({
+                                    intensity: 25,
+                                    backgroundColor: palette.background.default,
+                                 })
+                              )
+                           }
+                        >
+                           <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.BACKGROUND_PICKER.SECONDARY" />
+                        </Button>
+                        <Button
+                           onClick={() =>
+                              setBackgroundGradient(
+                                 handleBackgroundGradient({
+                                    intensity: 50,
+                                    backgroundColor: palette.background.default,
+                                 })
+                              )
+                           }
+                        >
+                           <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.BACKGROUND_PICKER.THIRD" />
+                        </Button>
+                        <Button
+                           onClick={() =>
+                              setBackgroundGradient(
+                                 handleBackgroundGradient({
+                                    intensity: 75,
+                                    backgroundColor: palette.background.default,
+                                 })
+                              )
+                           }
+                        >
+                           <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.BACKGROUND_PICKER.FOURTH" />
+                        </Button>
+                        <Button
+                           onClick={() =>
+                              setBackgroundGradient(
+                                 handleBackgroundGradient({
+                                    intensity: 100,
+                                    backgroundColor: palette.background.default,
+                                 })
+                              )
+                           }
+                        >
+                           <FormattedMessage id="DASHBOARD.INFO_SECTION.BUTTON.BACKGROUND_PICKER.FIFTH" />
+                        </Button>
+                     </Stack>
+                  }
                />
             </Grid>
          </Grid>

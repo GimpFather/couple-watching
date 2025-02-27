@@ -51,7 +51,7 @@ export const blueOrangePalette: PaletteOptions = {
       950: "#292321",
    },
    background: {
-      default: "#ED7C4240",
+      default: "#ED7C42",
       paper: "#FFFFFF",
    },
    common: {
@@ -140,7 +140,7 @@ export const defaultPalette = {
    },
 };
 
-export const getTheme = (mode: PaletteMode, palette: PaletteOptions) =>
+export const getTheme = (mode: PaletteMode, palette: PaletteOptions, backgroundGradient: string) =>
    createTheme({
       palette: {
          mode,
@@ -254,6 +254,13 @@ export const getTheme = (mode: PaletteMode, palette: PaletteOptions) =>
          },
       },
       components: {
+         MuiCssBaseline: {
+            styleOverrides: {
+               body: {
+                  background: backgroundGradient,
+               },
+            },
+         },
          MuiOutlinedInput: {
             styleOverrides: {
                root: {
