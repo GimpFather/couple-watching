@@ -13,19 +13,19 @@ import { toast } from "react-toastify";
 import { DatePicker } from "@mui/x-date-pickers";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import { Controller, useForm } from "react-hook-form";
-import { MarkMovieWatchedInputs } from "../../types/Inputs.types";
+import { MarkMovieWatchedInputs } from "../../../types/Inputs.types";
 import dayjs from "dayjs";
-import StarRating from "./StarRating";
-import TagsSection from "./TagsSection";
 import { FormattedMessage } from "react-intl";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { useDeleteMovieFromWatchlist, usePostMovieAsWatched } from "../../api/hooks/movies";
-import { Movie } from "../../types/Watchlist.types";
+import { useDeleteMovieFromWatchlist, usePostMovieAsWatched } from "../../../api/hooks/movies";
+import { Movie } from "../../../types/Watchlist.types";
 import { useQueryClient } from "@tanstack/react-query";
-import Button from "../General/Button";
-import { useAuthContext } from "../../context/AuthProvider";
-import { usePair } from "../../api/hooks/pairs";
+import Button from "../../General/Button";
+import { useAuthContext } from "../../../context/AuthProvider";
+import { usePair } from "../../../api/hooks/pairs";
+import StarRating from "../StarRating";
+import TagsSection from "../TagsSection";
 
 interface AddProductDialogProps {
    open: boolean;
@@ -89,6 +89,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                      onSuccess: () => {
                         notifySuccess();
                         queryClient.invalidateQueries({ queryKey: ["GET_WATCHLIST_MOVIES"] });
+                        queryClient.invalidateQueries({ queryKey: ["GET_WATCHED_MOVIES"] });
                         onClose();
                      },
                      onError: (e) => {

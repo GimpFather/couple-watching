@@ -8,7 +8,7 @@ import RatingChip from "../../General/Chips/RatingChip";
 import DurationChip from "../../General/Chips/DurationChip";
 import { useAuthContext } from "../../../context/AuthProvider";
 import { usePair } from "../../../api/hooks/pairs";
-import OutlinedCard from "../../General/OutlinedCard";
+import OutlinedCard from "../../General/Cards/OutlinedCard";
 import IconButton from "../../General/IconButton";
 import { DeviceRotate, Trash } from "@phosphor-icons/react";
 import { FormattedMessage } from "react-intl";

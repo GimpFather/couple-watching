@@ -58,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({ children, isLoading, ...props }) => {
                   alignItems: "center",
                   position: "relative",
                   backgroundColor: props.color ? palette[props.color].main : palette.primary.main,
-                  color: "text.secondary",
+                  color: props.color === "accent" ? palette.common.black : "text.secondary",
                   borderRadius: 3,
                   border: "2px solid black",
                   transition: "background-color 0.3s cubic-bezier(0.1, 0, 0.2, 1)",

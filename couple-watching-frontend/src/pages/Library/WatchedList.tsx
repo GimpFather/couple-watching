@@ -1,9 +1,9 @@
 import { Grid2 as Grid } from "@mui/material";
 import { WatchedMovie } from "../../types/Watchlist.types";
 import React, { Suspense } from "react";
-import MarkWatchedDialog from "../../components/Watchlist/MarkWatchedDialog";
 import WatchlistSkeleton from "../../components/Watchlist/WatchlistSkeleton";
 import EmptyStateFilters from "../../components/Watchlist/InfoSections/EmptyStateFilters";
+import ShowOpinionDialog from "../../components/Watchlist/Dialog/ShowOpinionDialog";
 
 const MovieCard = React.lazy(() => import("../../components/Watchlist/MovieCard/MovieCard"));
 
@@ -13,7 +13,7 @@ type WatchedListProps = {
 };
 
 const WatchedList = ({ data, clearFilters }: WatchedListProps) => {
-   const [openMarkWatchedDialog, setOpenMarkWatchedDialog] = React.useState<boolean>(false);
+   const [openShowOpinionDialog, setOpenShowOpinionDialog] = React.useState<boolean>(false);
 
    return (
       <>
@@ -22,12 +22,16 @@ const WatchedList = ({ data, clearFilters }: WatchedListProps) => {
                {data.map((movie) => (
                   <React.Fragment key={movie.id}>
                      <Suspense fallback={<WatchlistSkeleton />}>
-                        <MovieCard data={movie} handleMarkAsWatched={() => setOpenMarkWatchedDialog(true)} />
+                        <MovieCard
+                           data={movie}
+                           handleMarkAsWatched={() => setOpenShowOpinionDialog(true)}
+                           watched={true}
+                        />
                      </Suspense>
-                     {openMarkWatchedDialog && (
-                        <MarkWatchedDialog
-                           open={openMarkWatchedDialog}
-                           onClose={() => setOpenMarkWatchedDialog(false)}
+                     {openShowOpinionDialog && (
+                        <ShowOpinionDialog
+                           open={openShowOpinionDialog}
+                           onClose={() => setOpenShowOpinionDialog(false)}
                            data={movie}
                         />
                      )}

@@ -1,7 +1,7 @@
 import { Grid2 as Grid } from "@mui/material";
 import { Movie } from "../../types/Watchlist.types";
 import React, { Suspense } from "react";
-import MarkWatchedDialog from "../../components/Watchlist/MarkWatchedDialog";
+import MarkWatchedDialog from "../../components/Watchlist/Dialog/MarkWatchedDialog";
 import WatchlistSkeleton from "../../components/Watchlist/WatchlistSkeleton";
 import EmptyStateFilters from "../../components/Watchlist/InfoSections/EmptyStateFilters";
 
@@ -22,7 +22,11 @@ const WatchlistList = ({ data, clearFilters }: WatchlistListProps) => {
                {data.map((movie) => (
                   <React.Fragment key={movie.id}>
                      <Suspense fallback={<WatchlistSkeleton />}>
-                        <MovieCard data={movie} handleMarkAsWatched={() => setOpenMarkWatchedDialog(true)} />
+                        <MovieCard
+                           data={movie}
+                           handleMarkAsWatched={() => setOpenMarkWatchedDialog(true)}
+                           watched={false}
+                        />
                      </Suspense>
                      {openMarkWatchedDialog && (
                         <MarkWatchedDialog

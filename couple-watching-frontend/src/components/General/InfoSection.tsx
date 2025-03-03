@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import Button from "./Button";
 import React from "react";
 import Loading from "./Loading";
-import OutlinedCard from "./OutlinedCard";
+import OutlinedCard from "./Cards/OutlinedCard";
 
 type InfoSectionButton = {
    caption: React.ReactNode;

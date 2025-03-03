@@ -123,5 +123,6 @@
    "DASHBOARD.INFO_SECTION.SUBTITLE.COLOR_PICK.PURPLE_YELLOW": "Embrace gay vibes with this palette! Perfect for when you want to feel vibrant and energetic.",
    "DASHBOARD.INFO_SECTION.BUTTON.COLOR_PICK.PURPLE_YELLOW": "Pick this palette",
    "WATCHLIST.VIEW_SWITCH.WATCHLIST": "Watchlist",
-   "WATCHLIST.VIEW_SWITCH.WATCHED": "Watched"
+   "WATCHLIST.VIEW_SWITCH.WATCHED": "Watched",
+   "LIBRARY.WATCHED.CARD.BUTTON.PRIMARY": "Show my opinion"
 }
