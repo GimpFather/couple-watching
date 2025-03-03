@@ -118,7 +118,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
             <Stack spacing={2}>
                <DialogContentText component="div" sx={{ paddingBottom: 1 }}>
                   <Typography color="textPrimary">
-                     <FormattedMessage id="WATCHLIST.DIALOG.MARK.SUBTITLE" />
+                     <FormattedMessage id="LIBRARY.DIALOG.MARK.SUBTITLE" />
                   </Typography>
                </DialogContentText>
                <Stack spacing={2}>
@@ -133,7 +133,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                            onChange={(date) => field.onChange(date)}
                            defaultValue={dayjs(new Date())}
                            format="DD/MM/YYYY"
-                           label={<FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.WATCHED_DATE.LABEL" />}
+                           label={<FormattedMessage id="LIBRARY.DIALOG.MARK.INPUT.WATCHED_DATE.LABEL" />}
                            slots={{ openPickerIcon: EventAvailableIcon }}
                            slotProps={{
                               openPickerIcon: {
@@ -168,7 +168,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                   />
                   <Stack spacing={1}>
                      <Typography variant="body1">
-                        <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.RATING.LABEL" />
+                        <FormattedMessage id="LIBRARY.DIALOG.MARK.INPUT.RATING.LABEL" />
                      </Typography>
                      <Typography variant="body2">{pairData.personOne} opinion</Typography>
                      <Controller
@@ -189,7 +189,7 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
                   </Stack>
                   <Stack spacing={1.25}>
                      <Typography variant="body1">
-                        <FormattedMessage id="WATCHLIST.DIALOG.MARK.INPUT.TAGS.LABEL" />
+                        <FormattedMessage id="LIBRARY.DIALOG.MARK.INPUT.TAGS.LABEL" />
                      </Typography>
                      <TagsSection watch={watch} control={control} />
                   </Stack>
@@ -198,10 +198,10 @@ const MarkWatchedDialog = ({ open, onClose, data }: AddProductDialogProps) => {
          </DialogContent>
          <DialogActions sx={{ padding: 2 }}>
             <Button startIcon={<CheckCircleOutlineIcon />} onClick={() => handleMarkAsWatched()}>
-               <FormattedMessage id="WATCHLIST.DIALOG.ACTION.PRIMARY" />
+               <FormattedMessage id="LIBRARY.DIALOG.ACTION.PRIMARY" />
             </Button>
             <Button startIcon={<ExitToAppIcon />} onClick={() => onClose()}>
-               <FormattedMessage id="WATCHLIST.DIALOG.ACTION.SECONDARY" />
+               <FormattedMessage id="LIBRARY.DIALOG.ACTION.SECONDARY" />
             </Button>
          </DialogActions>
       </Dialog>

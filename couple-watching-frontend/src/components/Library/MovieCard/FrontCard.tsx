@@ -53,7 +53,7 @@ const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) =
                </Stack>
                <Stack direction="row" spacing={1}>
                   <Button onClick={() => handleMarkAsWatched()} fullWidth>
-                     <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
+                     <FormattedMessage id="LIBRARY.CARD.BUTTON.PRIMARY" />
                   </Button>
                   <IconButton color="accent" onClick={() => handleFlip()}>
                      <DeviceRotate style={{ color: palette.text.primary }} />

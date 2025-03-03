@@ -2,18 +2,18 @@
 import { Stack } from "@mui/material";
 import PageTitle from "../../components/Layout/PageTitle";
 import { useForm } from "react-hook-form";
-import Filters from "../../components/Watchlist/Filters";
+import Filters from "../../components/Library/Filters";
 import WatchlistList from "./WatchlistList";
 import { WatchlistFiltersInput } from "../../types/Inputs.types";
 import { useGetWatchedMovies, useGetWatchlistMovies } from "../../api/hooks/library";
-import WatchlistSkeleton from "../../components/Watchlist/WatchlistSkeleton";
+import WatchlistSkeleton from "../../components/Library/WatchlistSkeleton";
 import { useAuthContext } from "../../context/AuthProvider";
 import { usePair } from "../../api/hooks/pairs";
-import ViewSwitch from "../../components/Watchlist/ViewSwitch";
+import ViewSwitch from "../../components/Library/ViewSwitch";
 import React from "react";
 import WatchedList from "./WatchedList";
 import { Movie, WatchedMovie } from "../../types/Watchlist.types";
-import EmptyStateNoData from "../../components/Watchlist/InfoSections/EmptyStateNoData";
+import EmptyStateNoData from "../../components/Library/InfoSections/EmptyStateNoData";
 
 const LibraryPage = () => {
    const { user } = useAuthContext();

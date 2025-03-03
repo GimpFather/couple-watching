@@ -14,7 +14,7 @@ const ShowOpinionDialog = ({ open, onClose, data }: ShowOpinionDialogProps) => {
          <DialogTitle>Show Opinion</DialogTitle>
          <DialogContent>
             <Typography>
-               <FormattedMessage id="WATCHLIST.DIALOG.SHOW_OPINION.TITLE" />
+               <FormattedMessage id="LIBRARY.DIALOG.SHOW_OPINION.TITLE" />
             </Typography>
             {JSON.stringify(data)}
          </DialogContent>

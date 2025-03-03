@@ -1,11 +1,11 @@
 import { Grid2 as Grid } from "@mui/material";
 import { WatchedMovie } from "../../types/Watchlist.types";
 import React, { Suspense } from "react";
-import WatchlistSkeleton from "../../components/Watchlist/WatchlistSkeleton";
-import EmptyStateFilters from "../../components/Watchlist/InfoSections/EmptyStateFilters";
-import ShowOpinionDialog from "../../components/Watchlist/Dialog/ShowOpinionDialog";
+import WatchlistSkeleton from "../../components/Library/WatchlistSkeleton";
+import EmptyStateFilters from "../../components/Library/InfoSections/EmptyStateFilters";
+import ShowOpinionDialog from "../../components/Library/Dialog/ShowOpinionDialog";
 
-const MovieCard = React.lazy(() => import("../../components/Watchlist/MovieCard/MovieCard"));
+const MovieCard = React.lazy(() => import("../../components/Library/MovieCard/MovieCard"));
 
 type WatchedListProps = {
    data: WatchedMovie[];

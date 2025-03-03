@@ -87,7 +87,7 @@ const SwitchButton = ({ direction, isActive, onChange }: ViewSwitchButtonProps) 
                }}
             >
                <Typography variant="emphasizedBodyMedium">
-                  <FormattedMessage id={`WATCHLIST.VIEW_SWITCH.${direction === "left" ? "WATCHLIST" : "WATCHED"}`} />
+                  <FormattedMessage id={`LIBRARY.VIEW_SWITCH.${direction === "left" ? "WATCHLIST" : "WATCHED"}`} />
                </Typography>
             </Button>
          </motion.div>

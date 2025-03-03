@@ -50,6 +50,7 @@ const BackCard = ({ movie, handleFlip }: BackCardProps) => {
    };
    return (
       <OutlinedCard
+         color={palette.common.white}
          sx={{
             position: "absolute",
             backfaceVisibility: "hidden",
@@ -88,7 +89,7 @@ const BackCard = ({ movie, handleFlip }: BackCardProps) => {
                <Stack spacing={0.25}>
                   <Stack direction="row" spacing={0.5} alignItems="center">
                      <Typography variant="bodyMedium">
-                        <FormattedMessage id="WATCHLIST.CARD.DIRECTOR" />
+                        <FormattedMessage id="LIBRARY.CARD.DIRECTOR" />
                      </Typography>
                      <Typography variant="bodyMedium" fontWeight={700}>
                         {movie.director}
@@ -96,7 +97,7 @@ const BackCard = ({ movie, handleFlip }: BackCardProps) => {
                   </Stack>
                   <Stack direction="row" spacing={0.5} alignItems="center">
                      <Typography variant="bodyMedium">
-                        <FormattedMessage id="WATCHLIST.CARD.RELEASE_YEAR" />
+                        <FormattedMessage id="LIBRARY.CARD.RELEASE_YEAR" />
                      </Typography>
                      <Typography variant="bodyMedium" fontWeight={700}>
                         {movie.productionYear}
