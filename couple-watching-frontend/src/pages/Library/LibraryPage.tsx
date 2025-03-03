@@ -25,10 +25,7 @@ const LibraryPage = () => {
    const { data: watchlistData, isLoading: isLoadingWatchlist } = useGetWatchlistMovies({ pairId: pairData?.id ?? "" });
    const { data: watchedData, isLoading: isLoadingWatched } = useGetWatchedMovies({ pairId: pairData?.id ?? "" });
 
-   const filterMoviesBySearch = <T extends { title: string }>(
-      movies: T[] | undefined,
-      search: string | undefined
-   ): T[] => {
+   const filterMoviesBySearch = <T extends { title: string }>(movies?: T[], search?: string): T[] => {
       if (!movies) return [];
       const searchTerm = search?.toLowerCase() || "";
       return movies.filter((movie) => movie.title.toLowerCase().includes(searchTerm));
