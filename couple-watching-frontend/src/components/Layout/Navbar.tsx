@@ -1,5 +1,5 @@
 import { AppBar, Box, Stack, useTheme } from "@mui/material";
-import { BookmarkSimple, HouseSimple, MagnifyingGlass, PresentationChart, UserCircle } from "@phosphor-icons/react";
+import { BookmarksSimple, HouseSimple, MagnifyingGlass, PresentationChart, UserCircle } from "@phosphor-icons/react";
 import { Link, useLocation } from "react-router";
 import { handleBackgroundGradient } from "../../utils";
 
@@ -35,7 +35,12 @@ const Navbar = () => {
                   <HouseSimple size={28} color={pathname === "/dashboard" ? activeColor : inactiveColor} />
                </Link>
                <Link to="/watchlist" style={{ height: "28px" }}>
-                  <BookmarkSimple size={28} color={pathname === "/watchlist" ? activeColor : inactiveColor} />
+                  <BookmarksSimple
+                     weight="duotone"
+                     style={{ color: pathname === "/watchlist" ? activeColor : inactiveColor }}
+                     size={28}
+                     color={pathname === "/watchlist" ? activeColor : inactiveColor}
+                  />
                </Link>
                <Link to="/add-movie" style={{ height: "28px" }}>
                   <MagnifyingGlass size={28} color={pathname === "/add-movie" ? activeColor : inactiveColor} />

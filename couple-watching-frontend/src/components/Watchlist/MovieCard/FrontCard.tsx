@@ -1,5 +1,4 @@
 import { Stack, Typography, useTheme } from "@mui/material";
-import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { Movie } from "../../../types/Watchlist.types";
 import { FormattedMessage } from "react-intl";
 import Button from "../../General/Button";
@@ -52,7 +51,7 @@ const FrontCard = ({ movie, handleFlip, handleMarkAsWatched }: FrontCardProps) =
                   </Typography>
                </Stack>
                <Stack direction="row" spacing={1}>
-                  <Button startIcon={<BookmarkAddedIcon />} onClick={() => handleMarkAsWatched()} fullWidth>
+                  <Button onClick={() => handleMarkAsWatched()} fullWidth>
                      <FormattedMessage id="WATCHLIST.CARD.BUTTON.PRIMARY" />
                   </Button>
                   <IconButton color="accent" onClick={() => handleFlip()}>

@@ -14,6 +14,16 @@ export const GetWatchlistMovies = async (pairId: string): Promise<Movie[]> => {
    return data;
 };
 
+export const GetWatchedMovies = async (pairId: string): Promise<WatchedMovie[]> => {
+   const querySnapshot = await getDocs(collection(db, "pairs", pairId, "watched"));
+   const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+   })) as WatchedMovie[];
+
+   return data;
+};
+
 export const PostMovieToWatchlist = async (movie: Movie, pairId: string) => {
    const docRef = doc(db, "pairs", pairId, "watchlist", movie.id);
    await setDoc(docRef, movie);
