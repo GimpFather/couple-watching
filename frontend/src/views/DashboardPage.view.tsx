@@ -1,6 +1,8 @@
 import { Navigate } from "react-router";
-import { Button, Container, Divider, Stack, Typography } from "@mui/material";
+import { Container, Divider, Stack, Typography } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
+import NBCard from "../components/NeoBrutalism/NBCard";
+import NBButton from "../components/NeoBrutalism/NBButton";
 
 const DashboardPage = () => {
    const { user, logout } = useAuth();
@@ -14,18 +16,20 @@ const DashboardPage = () => {
    };
 
    return (
-      <Container maxWidth="sm">
-         <Stack direction="column" gap={2}>
-            <Typography variant="headingExtraLarge">Dashboard</Typography>
-            <Typography variant="bodyExtraLarge">Welcome, {user.email}</Typography>
-            <Divider />
-            <Stack direction="row" gap={2}>
-               <Button onClick={() => console.log(user)}>Console Log User</Button>
-               <Button onClick={(event) => handleLogout(event)} color="danger">
-                  Logout
-               </Button>
+      <Container maxWidth="sm" sx={{ paddingY: "24px" }}>
+         <NBCard sx={{ padding: "16px" }}>
+            <Stack direction="column" gap={2}>
+               <Typography variant="headingExtraLarge">Dashboard</Typography>
+               <Typography variant="bodyExtraLarge">Welcome, {user.email}</Typography>
+               <Divider />
+               <Stack direction="row" gap={2}>
+                  <NBButton onClick={() => console.log(user)}>Console Log User</NBButton>
+                  <NBButton onClick={(event) => handleLogout(event)} color="danger">
+                     Logout
+                  </NBButton>
+               </Stack>
             </Stack>
-         </Stack>
+         </NBCard>
       </Container>
    );
 };

@@ -12,19 +12,20 @@ import { palette } from "./theme/palette.ts";
 import AuthPage from "./views/AuthPage.view.tsx";
 import DashboardPage from "./views/DashboardPage.view.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")!).render(
    <StrictMode>
       <BrowserRouter>
          <ThemeProvider theme={getTheme("light", palette)}>
-            <CssBaseline>
-               <AuthProvider>
-                  <Routes>
-                     <Route path="/" element={<AuthPage />} />
-                     <Route path="/dashboard" element={<DashboardPage />} />
-                  </Routes>
-               </AuthProvider>
-            </CssBaseline>
+            <AuthProvider>
+               <CssBaseline />
+               <Toaster position="top-right" />
+               <Routes>
+                  <Route path="/" element={<AuthPage />} />
+                  <Route path="/dashboard" element={<DashboardPage />} />
+               </Routes>
+            </AuthProvider>
          </ThemeProvider>
       </BrowserRouter>
    </StrictMode>
