@@ -1,7 +1,7 @@
-import type { ToastProps } from "./toasts.types";
-import NBCard from "../NeoBrutalism/NBCard";
 import { Typography } from "@mui/material";
 import { Stack } from "@mui/material";
+import NBCard from "../NeoBrutalism/NBCard";
+import type { ToastProps } from "./toasts.types";
 
 const Toast = (props: ToastProps) => {
    const { title, description, color = "primary" } = props;

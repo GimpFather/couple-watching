@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { Stack, TextField, Typography } from "@mui/material";
 import NBButton from "../NeoBrutalism/NBButton";
-import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 type AuthFormProps = {
