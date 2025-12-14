@@ -1,26 +1,33 @@
 import { Navigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
+import { Button, Container, Divider, Stack, Typography } from "@mui/material";
 
 const DashboardPage = () => {
-  const { user, logout } = useAuth();
-  if (!user) {
-    return <Navigate to="/" />;
-  }
+   const { user, logout } = useAuth();
+   if (!user) {
+      return <Navigate to="/" />;
+   }
 
-  const handleLogout = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    await logout();
-  };
+   const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      await logout();
+   };
 
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Welcome, {user.email}</p>
-      <form onSubmit={(event) => handleLogout(event)}>
-        <button type="submit">Logout</button>
-      </form>
-    </div>
-  );
+   return (
+      <Container maxWidth="sm">
+         <Stack direction="column" gap={2}>
+            <Typography variant="headingExtraLarge">Dashboard</Typography>
+            <Typography variant="bodyExtraLarge">Welcome, {user.email}</Typography>
+            <Divider />
+            <Stack direction="row" gap={2}>
+               <Button onClick={() => console.log(user)}>Console Log User</Button>
+               <Button onClick={(event) => handleLogout(event)} color="danger">
+                  Logout
+               </Button>
+            </Stack>
+         </Stack>
+      </Container>
+   );
 };
 
 export default DashboardPage;

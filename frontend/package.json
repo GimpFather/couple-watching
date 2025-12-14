@@ -10,6 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource-variable/bricolage-grotesque": "^5.2.10",
+    "@fontsource-variable/dm-sans": "^5.2.8",
+    "@mui/material": "^7.3.6",
+    "@phosphor-icons/react": "^2.1.10",
     "@supabase/supabase-js": "^2.87.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

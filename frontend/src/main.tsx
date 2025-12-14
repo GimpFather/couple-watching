@@ -1,6 +1,14 @@
+import "@fontsource-variable/bricolage-grotesque/index.css";
+import "@fontsource-variable/dm-sans/index.css";
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
+
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { getTheme } from "./theme/defaultTheme.ts";
+import { palette } from "./theme/palette.ts";
+
 import AuthPage from "./views/AuthPage.view.tsx";
 import DashboardPage from "./views/DashboardPage.view.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
@@ -8,12 +16,16 @@ import AuthProvider from "./context/AuthContext.tsx";
 createRoot(document.getElementById("root")!).render(
    <StrictMode>
       <BrowserRouter>
-         <AuthProvider>
-            <Routes>
-               <Route path="/" element={<AuthPage />} />
-               <Route path="/dashboard" element={<DashboardPage />} />
-            </Routes>
-         </AuthProvider>
+         <ThemeProvider theme={getTheme("light", palette)}>
+            <CssBaseline>
+               <AuthProvider>
+                  <Routes>
+                     <Route path="/" element={<AuthPage />} />
+                     <Route path="/dashboard" element={<DashboardPage />} />
+                  </Routes>
+               </AuthProvider>
+            </CssBaseline>
+         </ThemeProvider>
       </BrowserRouter>
    </StrictMode>
 );
