@@ -1,6 +1,6 @@
 import { Navigate } from "react-router";
-import { useAuth } from "../context/AuthContext";
 import { Button, Container, Divider, Stack, Typography } from "@mui/material";
+import { useAuth } from "../context/AuthContext";
 
 const DashboardPage = () => {
    const { user, logout } = useAuth();
