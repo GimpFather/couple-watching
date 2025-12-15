@@ -37,12 +37,14 @@ const AuthForm = ({ type }: AuthFormProps) => {
                   onChange={(event) => setEmail(event.target.value)}
                   adornment={{ position: "start", icon: <EnvelopeIcon size={20} /> }}
                   placeholder="Email"
+                  type="email"
                />
                <NBTextField
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   adornment={{ position: "start", icon: <LockKeyIcon size={20} /> }}
                   placeholder="Password"
+                  type="password"
                />
                <NBButton type="submit">{buttonText}</NBButton>
             </Stack>
