@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Stack, TextField, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import { EnvelopeIcon, LockKeyIcon } from "@phosphor-icons/react";
 import NBButton from "../NeoBrutalism/NBButton";
 import { useAuth } from "../../context/AuthContext";
+import NBTextField from "../NeoBrutalism/NBTextField";
 
 type AuthFormProps = {
    type: "signup" | "signin";
@@ -30,17 +32,17 @@ const AuthForm = ({ type }: AuthFormProps) => {
          <Typography variant="headingLarge">{title}</Typography>
          <Stack direction="column" gap={2}>
             <Stack component="form" onSubmit={handleSubmit} direction="column" gap={2}>
-               <TextField
-                  type="email"
-                  placeholder="Email"
+               <NBTextField
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
+                  adornment={{ position: "start", icon: <EnvelopeIcon size={20} /> }}
+                  placeholder="Email"
                />
-               <TextField
-                  type="password"
-                  placeholder="Password"
+               <NBTextField
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
+                  adornment={{ position: "start", icon: <LockKeyIcon size={20} /> }}
+                  placeholder="Password"
                />
                <NBButton type="submit">{buttonText}</NBButton>
             </Stack>
