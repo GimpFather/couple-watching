@@ -2,9 +2,9 @@ import { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { EnvelopeIcon, LockKeyIcon } from "@phosphor-icons/react";
-import NBButton from "../NeoBrutalism/NBButton";
-import { useAuth } from "../../context/AuthContext";
-import NBTextField from "../NeoBrutalism/NBTextField";
+import NBButton from "~/components/NeoBrutalism/NBButton";
+import NBTextField from "~/components/NeoBrutalism/NBTextField";
+import { useAuth } from "~/context/useAuth";
 
 type AuthFormProps = {
    type: "signup" | "signin";

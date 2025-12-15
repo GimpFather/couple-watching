@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
-import NBCard from "../components/NeoBrutalism/NBCard";
-import AuthForm from "../components/Auth/AuthForm";
+import NBCard from "~/components/NeoBrutalism/NBCard";
+import AuthForm from "~/components/Auth/AuthForm";
 
 // This page is the entry point for the application.
 // But for the sake of development, I dump everything here.

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { styled } from "@mui/material/styles";
 import Card, { type CardProps } from "@mui/material/Card";
 import { motion, type MotionProps } from "motion/react";
@@ -20,4 +21,4 @@ const NBCard = ({ children, ...props }: NBCardProps) => {
    return <CustomCard {...props}>{children}</CustomCard>;
 };
 
-export default NBCard;
+export default memo(NBCard);

@@ -1,7 +1,8 @@
+import { memo } from "react";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import NBCard from "../NeoBrutalism/NBCard";
-import type { ToastProps } from "./toasts.types";
+import NBCard from "~/components/NeoBrutalism/NBCard";
+import type { ToastProps } from "~/components/Toasts/toasts.types";
 
 const Toast = (props: ToastProps) => {
    const { title, description, color = "primary" } = props;
@@ -18,4 +19,4 @@ const Toast = (props: ToastProps) => {
    );
 };
 
-export default Toast;
+export default memo(Toast);

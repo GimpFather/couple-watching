@@ -18,6 +18,19 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+    },  
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@mui/material',
+              message: '\n\n☝️ Import components from @mui/material/yourComponent\n',
+            },
+          ],
+        },
+      ],
     },
   },
 ])

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import { styled } from "@mui/material/styles";
 import TextField, { type TextFieldProps } from "@mui/material/TextField";
@@ -79,4 +80,4 @@ const NBTextField = ({ adornment, ...props }: NBTextFieldProps) => {
    );
 };
 
-export default NBTextField;
+export default memo(NBTextField);

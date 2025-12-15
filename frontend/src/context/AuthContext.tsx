@@ -1,9 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { useNavigate } from "react-router";
-import type { AuthContextType } from "./context.types";
-import { supabaseClient as supabase } from "../api/client";
-import showToast from "../components/Toasts/showToast";
+import type { AuthContextType } from "~/context/context.types";
+import { supabaseClient as supabase } from "~/api/client";
+import showToast from "~/components/Toasts/showToast";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -33,7 +33,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
          }
       });
       return () => subscription.unsubscribe();
-   }, []);
+   }, [navigate]);
 
    async function handleSignUp(email: string, password: string) {
       const { error } = await supabase.auth.signUp({
@@ -85,11 +85,4 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default AuthProvider;
-
-export const useAuth = (): AuthContextType => {
-   const context = useContext(AuthContext);
-   if (!context) {
-      throw new Error("useAuth must be used within an AuthProvider");
-   }
-   return context;
-};
+export { AuthContext };

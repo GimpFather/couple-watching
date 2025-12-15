@@ -3,9 +3,9 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Navigate } from "react-router";
-import { useAuth } from "../context/AuthContext";
-import NBCard from "../components/NeoBrutalism/NBCard";
-import NBButton from "../components/NeoBrutalism/NBButton";
+import NBCard from "~/components/NeoBrutalism/NBCard";
+import NBButton from "~/components/NeoBrutalism/NBButton";
+import { useAuth } from "~/context/useAuth";
 
 const DashboardPage = () => {
    const { user, logout } = useAuth();

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Typography from "@mui/material/Typography";
 import MUIButton, { type ButtonProps as MUIButtonProps } from "@mui/material/Button";
 import type { CustomColorOptions } from "@mui/material/styles";
@@ -81,4 +82,4 @@ const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, ...props 
    );
 };
 
-export default NBButton;
+export default memo(NBButton);

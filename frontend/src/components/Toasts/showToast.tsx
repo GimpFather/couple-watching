@@ -1,6 +1,6 @@
 import { toast as sonnerToast } from "sonner";
-import Toast from "./Toast";
-import type { ToastProps } from "./toasts.types";
+import Toast from "~/components/Toasts/Toast";
+import type { ToastProps } from "~/components/Toasts/toasts.types";
 
 const showToast = (toast: Omit<ToastProps, "id">) => {
    return sonnerToast.custom((id) => {

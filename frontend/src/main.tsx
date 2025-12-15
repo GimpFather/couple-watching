@@ -10,12 +10,12 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import { Toaster } from "sonner";
 
-import { getTheme } from "./theme/defaultTheme.ts";
-import { palette } from "./theme/palette.ts";
+import { getTheme } from "~/theme/defaultTheme";
+import { palette } from "~/theme/palette";
 
-import AuthPage from "./views/AuthPage.view.tsx";
-import DashboardPage from "./views/DashboardPage.view.tsx";
-import AuthProvider from "./context/AuthContext.tsx";
+import AuthPage from "~/views/AuthPage.view.tsx";
+import DashboardPage from "~/views/DashboardPage.view.tsx";
+import AuthProvider from "~/context/AuthContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
    <StrictMode>
