@@ -5,14 +5,17 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+
+import { Toaster } from "sonner";
+
 import { getTheme } from "./theme/defaultTheme.ts";
 import { palette } from "./theme/palette.ts";
 
 import AuthPage from "./views/AuthPage.view.tsx";
 import DashboardPage from "./views/DashboardPage.view.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
-import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")!).render(
    <StrictMode>

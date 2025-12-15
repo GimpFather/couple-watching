@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Stack, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { EnvelopeIcon, LockKeyIcon } from "@phosphor-icons/react";
 import NBButton from "../NeoBrutalism/NBButton";
 import { useAuth } from "../../context/AuthContext";

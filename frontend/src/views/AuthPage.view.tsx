@@ -1,5 +1,5 @@
 import Container from "@mui/material/Container";
-import { Divider } from "@mui/material";
+import Divider from "@mui/material/Divider";
 import NBCard from "../components/NeoBrutalism/NBCard";
 import AuthForm from "../components/Auth/AuthForm";
 

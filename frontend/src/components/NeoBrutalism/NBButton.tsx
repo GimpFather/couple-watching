@@ -1,10 +1,7 @@
-import {
-   Typography,
-   useTheme,
-   Button as MUIButton,
-   type ButtonProps as MUIButtonProps,
-   type CustomColorOptions,
-} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import MUIButton, { type ButtonProps as MUIButtonProps } from "@mui/material/Button";
+import type { CustomColorOptions } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
 type NBButtonProps = Omit<MUIButtonProps, "color"> & {

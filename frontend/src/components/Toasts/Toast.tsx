@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
-import { Stack } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 import NBCard from "../NeoBrutalism/NBCard";
 import type { ToastProps } from "./toasts.types";
 

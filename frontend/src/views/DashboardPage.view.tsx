@@ -1,5 +1,8 @@
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { Navigate } from "react-router";
-import { Container, Divider, Stack, Typography } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 import NBCard from "../components/NeoBrutalism/NBCard";
 import NBButton from "../components/NeoBrutalism/NBButton";
