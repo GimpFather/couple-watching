@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import { EnvelopeIcon, LockKeyIcon } from "@phosphor-icons/react";
 import NBButton from "~/components/NeoBrutalism/NBButton";
 import NBTextField from "~/components/NeoBrutalism/NBTextField";
-import { useAuth } from "~/context/useAuth";
+import { useAuth } from "~/context/auth/useAuth";
 
 type AuthFormProps = {
    type: "signup" | "signin";

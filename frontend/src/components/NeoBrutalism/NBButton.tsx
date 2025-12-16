@@ -16,6 +16,23 @@ const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, ...props 
    const INITIAL_Y = -4;
    const y = useMotionValue(INITIAL_Y);
    const ySpring = useSpring(y, { stiffness: 500, damping: 30 });
+   const clickedSound = new Audio(
+      "https://mxqxaduggzrvmnbxktpx.supabase.co/storage/v1/object/public/audio%20files/button-click--start.mp3"
+   );
+   const releasedSound = new Audio(
+      "https://mxqxaduggzrvmnbxktpx.supabase.co/storage/v1/object/public/audio%20files/button-click--end.mp3"
+   );
+
+   clickedSound.volume = 0.35;
+   releasedSound.volume = 0.35;
+
+   const handleButtonClickSound = () => {
+      clickedSound.play();
+   };
+
+   const handleButtonReleaseSound = () => {
+      releasedSound.play();
+   };
 
    return (
       <motion.div
@@ -39,9 +56,19 @@ const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, ...props 
          )}
          <motion.div
             style={{ y: props.disabled ? 0 : ySpring }}
-            onTapStart={() => y.set(INITIAL_Y - INITIAL_Y)}
-            onTapCancel={() => y.set(INITIAL_Y)}
-            onPointerUp={() => y.set(INITIAL_Y)}
+            onTapStart={() => {
+               y.set(INITIAL_Y - INITIAL_Y);
+            }}
+            onTapCancel={() => {
+               y.set(INITIAL_Y);
+            }}
+            onPointerUp={() => {
+               y.set(INITIAL_Y);
+               handleButtonReleaseSound();
+            }}
+            onPointerDown={() => {
+               handleButtonClickSound();
+            }}
          >
             <MUIButton
                variant="contained"

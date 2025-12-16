@@ -2,16 +2,14 @@ import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { Navigate } from "react-router";
 import NBCard from "~/components/NeoBrutalism/NBCard";
 import NBButton from "~/components/NeoBrutalism/NBButton";
-import { useAuth } from "~/context/useAuth";
+import { useAuth } from "~/context/auth/useAuth";
+import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 
 const DashboardPage = () => {
-   const { user, logout } = useAuth();
-   if (!user) {
-      return <Navigate to="/" />;
-   }
+   const user = useRequiredAuth();
+   const { logout } = useAuth();
 
    const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();

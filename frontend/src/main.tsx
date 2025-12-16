@@ -3,7 +3,7 @@ import "@fontsource-variable/dm-sans/index.css";
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter } from "react-router";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
@@ -13,9 +13,8 @@ import { Toaster } from "sonner";
 import { getTheme } from "~/theme/defaultTheme";
 import { palette } from "~/theme/palette";
 
-import AuthPage from "~/views/AuthPage.view.tsx";
-import DashboardPage from "~/views/DashboardPage.view.tsx";
-import AuthProvider from "~/context/AuthContext.tsx";
+import AuthProvider from "~/context/auth/AuthContext";
+import AppRouting from "~/router/AppRouting";
 
 createRoot(document.getElementById("root")!).render(
    <StrictMode>
@@ -24,10 +23,7 @@ createRoot(document.getElementById("root")!).render(
             <AuthProvider>
                <CssBaseline />
                <Toaster position="top-right" />
-               <Routes>
-                  <Route path="/" element={<AuthPage />} />
-                  <Route path="/dashboard" element={<DashboardPage />} />
-               </Routes>
+               <AppRouting />
             </AuthProvider>
          </ThemeProvider>
       </BrowserRouter>
