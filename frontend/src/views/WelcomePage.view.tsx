@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router";
 import Typography from "@mui/material/Typography";
-import NBCard from "~/components/NeoBrutalism/NBCard";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import NBButton from "~/components/NeoBrutalism/NBButton";
 import { MESSAGES } from "~/locales/en";
+import NBCard from "~/components/NeoBrutalism/NBCard";
+import NBButton from "~/components/NeoBrutalism/NBButton";
+import PhoneContainer from "~/components/Custom/PhoneContainer";
 
 const WelcomePage = () => {
    const welcomeBackgroundImage =
@@ -11,17 +13,10 @@ const WelcomePage = () => {
 
    const { TITLE, BUTTON, SUBTEXT } = MESSAGES.WELCOME_PAGE;
 
+   const navigate = useNavigate();
+
    return (
-      <Box
-         sx={{
-            padding: "16px",
-            maxWidth: 375,
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-         }}
-      >
+      <PhoneContainer direction="forward">
          <NBCard
             sx={{
                padding: "4px",
@@ -49,15 +44,20 @@ const WelcomePage = () => {
             <Typography variant="headingLarge" sx={{ textAlign: "center" }}>
                {TITLE}
             </Typography>
-            <NBButton>{BUTTON.GET_STARTED}</NBButton>
+            <NBButton onClick={() => navigate("/auth/register")}>{BUTTON.GET_STARTED}</NBButton>
             <Typography variant="bodyMedium" color="common.500" sx={{ textAlign: "center" }}>
                {SUBTEXT.ALREADY_HAVE_ACCOUNT}
-               <Typography component="span" variant="bodyMedium" color="primary.main">
+               <Typography
+                  component="span"
+                  variant="bodyMedium"
+                  color="primary.main"
+                  onClick={() => navigate("/auth/login")}
+               >
                   {SUBTEXT.LOG_IN}
                </Typography>
             </Typography>
          </Stack>
-      </Box>
+      </PhoneContainer>
    );
 };
 

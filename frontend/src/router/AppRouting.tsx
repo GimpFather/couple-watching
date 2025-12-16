@@ -1,18 +1,25 @@
-import { Route, Routes } from "react-router";
+import { AnimatePresence } from "motion/react";
+import { Route, Routes, useLocation } from "react-router";
 import ProtectedRoute from "~/router/ProtectedRoute";
-import AuthPage from "~/views/AuthPage.view";
+import AuthLoginPage from "~/views/AuthLoginPage.view";
+import AuthRegisterPage from "~/views/AuthRegisterPage.view";
 import DashboardPage from "~/views/DashboardPage.view";
 import WelcomePage from "~/views/WelcomePage.view";
 
 const AppRouting = () => {
+   const location = useLocation();
+
    return (
-      <Routes>
-         <Route path="/" element={<WelcomePage />} />
-         <Route path="auth" element={<AuthPage />} />
-         <Route element={<ProtectedRoute />}>
-            <Route path="dashboard" element={<DashboardPage />} />
-         </Route>
-      </Routes>
+      <AnimatePresence mode="popLayout">
+         <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<WelcomePage />} key="welcome" />
+            <Route path="auth/login" element={<AuthLoginPage />} key="auth-login" />
+            <Route path="auth/register" element={<AuthRegisterPage />} key="auth-register" />
+            <Route element={<ProtectedRoute />}>
+               <Route path="dashboard" element={<DashboardPage />} key="dashboard" />
+            </Route>
+         </Routes>
+      </AnimatePresence>
    );
 };
 
