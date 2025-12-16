@@ -8,6 +8,9 @@ declare module "@mui/material/styles" {
       950: string;
    }
    interface CommonColors {
+      main: string;
+      light: string;
+      dark: string;
       50: string;
       100: string;
       200: string;
@@ -21,16 +24,27 @@ declare module "@mui/material/styles" {
       950: string;
    }
 
-   type CustomColorOptions = "primary" | "secondary" | "error" | "warning" | "info" | "success" | "accent" | "danger";
+   type CustomColorOptions =
+      | "primary"
+      | "secondary"
+      | "error"
+      | "warning"
+      | "info"
+      | "success"
+      | "accent"
+      | "danger"
+      | "common";
 
    interface Palette {
       accent: PaletteColor;
       danger: PaletteColor;
+      common: PaletteColor;
    }
 
    interface PaletteOptions {
       accent: PaletteColorOptions;
       danger: PaletteColorOptions;
+      common: PaletteColorOptions;
    }
 
    interface TypographyVariants {
@@ -94,6 +108,7 @@ declare module "@mui/material/Button" {
    interface ButtonPropsColorOverrides {
       accent: true;
       danger: true;
+      common: true;
    }
 }
 
@@ -101,5 +116,6 @@ declare module "@mui/material/IconButton" {
    interface IconButtonPropsColorOverrides {
       accent: true;
       danger: true;
+      common: true;
    }
 }

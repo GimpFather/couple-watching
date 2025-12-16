@@ -4,6 +4,8 @@ import MUIButton, { type ButtonProps as MUIButtonProps } from "@mui/material/But
 import type { CustomColorOptions } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { motion, useMotionValue, useSpring } from "motion/react";
+import { useSound } from "~/hooks/useSound";
+import { SOUNDS } from "~/hooks/sounds.config";
 
 type NBButtonProps = Omit<MUIButtonProps, "color"> & {
    loading?: boolean;
@@ -12,26 +14,22 @@ type NBButtonProps = Omit<MUIButtonProps, "color"> & {
 
 const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, ...props }) => {
    const { palette } = useTheme();
+   const { playSound } = useSound();
    const DEFAULT_COLOR = palette.primary;
    const INITIAL_Y = -4;
    const y = useMotionValue(INITIAL_Y);
    const ySpring = useSpring(y, { stiffness: 500, damping: 30 });
-   const clickedSound = new Audio(
-      "https://mxqxaduggzrvmnbxktpx.supabase.co/storage/v1/object/public/audio%20files/button-click--start.mp3"
-   );
-   const releasedSound = new Audio(
-      "https://mxqxaduggzrvmnbxktpx.supabase.co/storage/v1/object/public/audio%20files/button-click--end.mp3"
-   );
-
-   clickedSound.volume = 0.35;
-   releasedSound.volume = 0.35;
 
    const handleButtonClickSound = () => {
-      clickedSound.play();
+      playSound(SOUNDS.BUTTON_RUSTY_CLICK_START.url, {
+         volume: SOUNDS.BUTTON_RUSTY_CLICK_START.defaultVolume,
+      });
    };
 
    const handleButtonReleaseSound = () => {
-      releasedSound.play();
+      playSound(SOUNDS.BUTTON_RUSTY_CLICK_END.url, {
+         volume: SOUNDS.BUTTON_RUSTY_CLICK_END.defaultVolume,
+      });
    };
 
    return (

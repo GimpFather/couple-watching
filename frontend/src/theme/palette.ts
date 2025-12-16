@@ -56,6 +56,9 @@ export const palette: PaletteOptions = {
    common: {
       black: "#0c0c0c",
       white: "#FFFFFF",
+      main: "#453e3e",
+      light: "#4e4645",
+      dark: "#0C0C0C",
       50: "#f4f3f2",
       100: "#e3e0de",
       200: "#c8c4c0",

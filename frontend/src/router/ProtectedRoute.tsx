@@ -6,7 +6,7 @@ interface ProtectedRouteProps {
    redirectTo?: string;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ redirectTo = "/auth" }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ redirectTo = "/" }) => {
    const { user } = useAuth();
 
    if (!user) {

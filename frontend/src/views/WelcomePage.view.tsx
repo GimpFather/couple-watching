@@ -23,6 +23,7 @@ const WelcomePage = () => {
                height: "480px",
                width: "324px",
                backgroundColor: "white",
+               placeSelf: "center",
             }}
          >
             <Box
@@ -51,6 +52,7 @@ const WelcomePage = () => {
                   component="span"
                   variant="bodyMedium"
                   color="primary.main"
+                  sx={{ cursor: "pointer" }}
                   onClick={() => navigate("/auth/login")}
                >
                   {SUBTEXT.LOG_IN}

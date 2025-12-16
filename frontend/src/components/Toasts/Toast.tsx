@@ -9,7 +9,7 @@ const Toast = (props: ToastProps) => {
 
    return (
       <NBCard sx={{ padding: "8px" }}>
-         <Stack direction="column" gap={2}>
+         <Stack direction="column" gap="4px">
             <Typography variant="headingMedium" color={color}>
                {title}
             </Typography>

@@ -67,11 +67,20 @@ const NBTextField = ({ adornment, ...props }: NBTextFieldProps) => {
          {...(adornment && {
             slotProps: {
                input: {
-                  startAdornment: (
-                     <InputAdornment position={adornment.position} sx={{ marginRight: 0 }}>
-                        {adornment.icon}
-                     </InputAdornment>
-                  ),
+                  ...(adornment.position === "start" && {
+                     startAdornment: (
+                        <InputAdornment position={adornment.position} sx={{ marginRight: 0 }}>
+                           {adornment.icon}
+                        </InputAdornment>
+                     ),
+                  }),
+                  ...(adornment.position === "end" && {
+                     endAdornment: (
+                        <InputAdornment position={adornment.position} sx={{ marginRight: 0 }}>
+                           {adornment.icon}
+                        </InputAdornment>
+                     ),
+                  }),
                },
             },
          })}
