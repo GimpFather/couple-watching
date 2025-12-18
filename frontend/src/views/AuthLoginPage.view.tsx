@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import PhoneContainer from "~/components/Custom/PhoneContainer";
 import { ArrowLeftIcon } from "@phosphor-icons/react";
 import Stack from "@mui/material/Stack";
-import { Divider } from "@mui/material";
+import Divider from "@mui/material/Divider";
 import OAuthStack from "~/components/Auth/OAuthStack";
 import AuthForm from "~/components/Auth/AuthForm";
 import messages from "~/locales/en.json";

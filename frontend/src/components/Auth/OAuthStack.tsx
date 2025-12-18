@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import Stack from "@mui/material/Stack";
 import messages from "~/locales/en.json";
 import { AppleLogoIcon, DiscordLogoIcon, GoogleLogoIcon } from "@phosphor-icons/react";
 import NBButton from "../NeoBrutalism/NBButton";

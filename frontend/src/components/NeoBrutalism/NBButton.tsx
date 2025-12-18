@@ -90,10 +90,14 @@ const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, icon, dis
             }}
             onPointerUp={() => {
                y.set(INITIAL_Y);
-               isEnabled && playSound(SOUNDS.BUTTON_RUSTY_CLICK_END.url);
+               if (isEnabled) {
+                  playSound(SOUNDS.BUTTON_RUSTY_CLICK_END.url);
+               }
             }}
             onPointerDown={() => {
-               isEnabled && playSound(SOUNDS.BUTTON_RUSTY_CLICK_START.url);
+               if (isEnabled) {
+                  playSound(SOUNDS.BUTTON_RUSTY_CLICK_START.url);
+               }
             }}
          >
             <CustomButtonBase disableRipple disabled={loading || disabled} color={color} {...props}>
