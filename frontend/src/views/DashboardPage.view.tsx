@@ -38,7 +38,7 @@ const DashboardPage = () => {
                <Typography variant="bodyExtraLarge">Welcome, {user.email}</Typography>
                <Divider />
                <Stack direction="row" gap={2}>
-                  <NBButton startIcon={<MaskHappyIcon />} onClick={() => handleYouDidIt()}>
+                  <NBButton icon={<MaskHappyIcon />} onClick={() => handleYouDidIt()}>
                      You did it!
                   </NBButton>
                   <NBButton onClick={(event) => handleLogout(event)} color="danger">

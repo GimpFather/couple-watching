@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { MESSAGES } from "~/locales/en";
+import messages from "~/locales/en.json";
 import NBCard from "~/components/NeoBrutalism/NBCard";
 import NBButton from "~/components/NeoBrutalism/NBButton";
 import PhoneContainer from "~/components/Custom/PhoneContainer";
@@ -10,8 +10,6 @@ import PhoneContainer from "~/components/Custom/PhoneContainer";
 const WelcomePage = () => {
    const welcomeBackgroundImage =
       "https://mxqxaduggzrvmnbxktpx.supabase.co/storage/v1/object/public/images/welcome-banner.webp";
-
-   const { TITLE, BUTTON, SUBTEXT } = MESSAGES.WELCOME_PAGE;
 
    const navigate = useNavigate();
 
@@ -43,19 +41,21 @@ const WelcomePage = () => {
          </NBCard>
          <Stack direction="column" gap="20px" sx={{ marginTop: "24px" }}>
             <Typography variant="headingLarge" sx={{ textAlign: "center" }}>
-               {TITLE}
+               {messages["WELCOME_PAGE.TITLE"]}
             </Typography>
-            <NBButton onClick={() => navigate("/auth/register")}>{BUTTON.GET_STARTED}</NBButton>
-            <Typography variant="bodyMedium" color="common.500" sx={{ textAlign: "center" }}>
-               {SUBTEXT.ALREADY_HAVE_ACCOUNT}
+            <NBButton onClick={() => navigate("/auth/register")}>
+               {messages["WELCOME_PAGE.BUTTON.GET_STARTED"]}
+            </NBButton>
+            <Typography variant="bodyMedium" color="accent.500" sx={{ textAlign: "center" }}>
+               {messages["WELCOME_PAGE.SUBTEXT.ALREADY_HAVE_ACCOUNT"]}
                <Typography
                   component="span"
                   variant="bodyMedium"
-                  color="primary.main"
+                  color="primary.700"
                   sx={{ cursor: "pointer" }}
                   onClick={() => navigate("/auth/login")}
                >
-                  {SUBTEXT.LOG_IN}
+                  {messages["WELCOME_PAGE.SUBTEXT.LOG_IN"]}
                </Typography>
             </Typography>
          </Stack>

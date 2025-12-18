@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { MESSAGES } from "~/locales/en";
+import messages from "~/locales/en.json";
 import { AppleLogoIcon, DiscordLogoIcon, GoogleLogoIcon } from "@phosphor-icons/react";
 import NBButton from "../NeoBrutalism/NBButton";
 import showToast from "../Toasts/showToast";
@@ -7,42 +7,41 @@ import { SOUNDS } from "~/hooks/sounds.config";
 import { useSound } from "~/hooks/useSound";
 
 const OAuthStack = () => {
-   const { APPLE, GOOGLE, DISCORD } = MESSAGES.AUTH.OAUTH;
    const { playSound } = useSound();
    const handleAppleLogin = () => {
       playSound(SOUNDS.NOTIFICATION_BUBBLE_POP.url);
       showToast({
-         title: APPLE.ALERT,
-         description: APPLE.DESCRIPTION,
+         title: messages["AUTH.OAUTH.APPLE.ALERT"],
+         description: messages["AUTH.OAUTH.APPLE.DESCRIPTION"],
       });
    };
 
    const handleGoogleLogin = () => {
       playSound(SOUNDS.NOTIFICATION_BUBBLE_POP.url);
       showToast({
-         title: GOOGLE.ALERT,
-         description: GOOGLE.DESCRIPTION,
+         title: messages["AUTH.OAUTH.GOOGLE.ALERT"],
+         description: messages["AUTH.OAUTH.GOOGLE.DESCRIPTION"],
       });
    };
 
    const handleDiscordLogin = () => {
       playSound(SOUNDS.NOTIFICATION_BUBBLE_POP.url);
       showToast({
-         title: DISCORD.ALERT,
-         description: DISCORD.DESCRIPTION,
+         title: messages["AUTH.OAUTH.DISCORD.ALERT"],
+         description: messages["AUTH.OAUTH.DISCORD.DESCRIPTION"],
       });
    };
 
    return (
       <Stack gap="12px">
-         <NBButton startIcon={<AppleLogoIcon size={24} />} color="common" onClick={handleAppleLogin}>
-            {APPLE.BUTTON}
+         <NBButton icon={<AppleLogoIcon />} color="accent" onClick={handleAppleLogin}>
+            {messages["AUTH.OAUTH.APPLE.BUTTON"]}
          </NBButton>
-         <NBButton startIcon={<GoogleLogoIcon size={24} />} color="accent" onClick={handleGoogleLogin}>
-            {GOOGLE.BUTTON}
+         <NBButton icon={<GoogleLogoIcon />} color="accent" onClick={handleGoogleLogin}>
+            {messages["AUTH.OAUTH.GOOGLE.BUTTON"]}
          </NBButton>
-         <NBButton startIcon={<DiscordLogoIcon size={24} />} color="accent" onClick={handleDiscordLogin}>
-            {DISCORD.BUTTON}
+         <NBButton icon={<DiscordLogoIcon />} color="accent" onClick={handleDiscordLogin}>
+            {messages["AUTH.OAUTH.DISCORD.BUTTON"]}
          </NBButton>
       </Stack>
    );

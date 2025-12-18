@@ -27,7 +27,7 @@ createRoot(document.getElementById("root")!).render(
          <ThemeProvider theme={getTheme("light", palette)}>
             <AuthProvider>
                <CssBaseline />
-               <Toaster position="bottom-center" />
+               <Toaster position="top-center" />
                <AppRouting />
             </AuthProvider>
          </ThemeProvider>

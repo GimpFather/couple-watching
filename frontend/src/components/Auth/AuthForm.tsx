@@ -6,7 +6,7 @@ import NBButton from "~/components/NeoBrutalism/NBButton";
 import NBTextField from "~/components/NeoBrutalism/NBTextField";
 import { useAuth } from "~/context/auth/useAuth";
 import showToast from "../Toasts/showToast";
-import { MESSAGES } from "~/locales/en";
+import messages from "~/locales/en.json";
 import { SOUNDS } from "~/hooks/sounds.config";
 import { useSound } from "~/hooks/useSound";
 
@@ -15,7 +15,6 @@ type AuthFormProps = {
 };
 
 const AuthForm = ({ type }: AuthFormProps) => {
-   const { REGISTER, LOGIN } = MESSAGES.AUTH;
    const { login, signUp } = useAuth();
    const { playSound } = useSound();
 
@@ -24,11 +23,19 @@ const AuthForm = ({ type }: AuthFormProps) => {
    const [showPassword, setShowPassword] = useState(false);
 
    const isRegister = type === "register";
-   const buttonText = isRegister ? REGISTER.FORM.BUTTON.CREATE_ACCOUNT : LOGIN.FORM.BUTTON.LOG_IN;
-   const emailLabel = isRegister ? REGISTER.FORM.EMAIL.LABEL : LOGIN.FORM.EMAIL.LABEL;
-   const passwordLabel = isRegister ? REGISTER.FORM.PASSWORD.LABEL : LOGIN.FORM.PASSWORD.LABEL;
-   const emailPlaceholder = isRegister ? REGISTER.FORM.EMAIL.PLACEHOLDER : LOGIN.FORM.EMAIL.PLACEHOLDER;
-   const passwordPlaceholder = isRegister ? REGISTER.FORM.PASSWORD.PLACEHOLDER : LOGIN.FORM.PASSWORD.PLACEHOLDER;
+   const buttonText = isRegister
+      ? messages["AUTH.REGISTER.FORM.BUTTON.CREATE_ACCOUNT"]
+      : messages["AUTH.LOGIN.FORM.BUTTON.LOG_IN"];
+   const emailLabel = isRegister ? messages["AUTH.REGISTER.FORM.EMAIL.LABEL"] : messages["AUTH.LOGIN.FORM.EMAIL.LABEL"];
+   const passwordLabel = isRegister
+      ? messages["AUTH.REGISTER.FORM.PASSWORD.LABEL"]
+      : messages["AUTH.LOGIN.FORM.PASSWORD.LABEL"];
+   const emailPlaceholder = isRegister
+      ? messages["AUTH.REGISTER.FORM.EMAIL.PLACEHOLDER"]
+      : messages["AUTH.LOGIN.FORM.EMAIL.PLACEHOLDER"];
+   const passwordPlaceholder = isRegister
+      ? messages["AUTH.REGISTER.FORM.PASSWORD.PLACEHOLDER"]
+      : messages["AUTH.LOGIN.FORM.PASSWORD.PLACEHOLDER"];
 
    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -37,7 +44,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
          showToast({
             title: "🤔 Buddy please.",
             description: "Have you ever thought about the importance of filling in all the fields?",
-            color: "warning",
+            color: "danger",
          });
          return;
       }
@@ -46,6 +53,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
       } else {
          await login(email, password);
       }
+   };
+
+   const handleShowPassword = () => {
+      setShowPassword(!showPassword);
+      playSound(SOUNDS.NOTIFICATION_BUBBLE_POP.url);
    };
 
    return (
@@ -70,9 +82,9 @@ const AuthForm = ({ type }: AuthFormProps) => {
                   adornment={{
                      position: "end",
                      icon: !showPassword ? (
-                        <EyeIcon onClick={() => setShowPassword(!showPassword)} cursor="pointer" size={20} />
+                        <EyeIcon onClick={() => handleShowPassword()} cursor="pointer" size={20} />
                      ) : (
-                        <EyeSlashIcon onClick={() => setShowPassword(!showPassword)} cursor="pointer" size={20} />
+                        <EyeSlashIcon onClick={() => handleShowPassword()} cursor="pointer" size={20} />
                      ),
                   }}
                />

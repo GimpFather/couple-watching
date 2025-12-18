@@ -1,53 +1,32 @@
 import { memo } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import { styled } from "@mui/material/styles";
-import TextField, { type TextFieldProps } from "@mui/material/TextField";
-import { motion, type MotionProps } from "motion/react";
+import InputBase, { type InputBaseProps } from "@mui/material/InputBase";
 
-const MotionTextField = motion.create(TextField);
-
-const CustomTextField = styled(MotionTextField)(({ theme }) => ({
-   "& .MuiInputLabel-root": {
+const CustomTextField = styled(InputBase)(({ theme }) => ({
+   padding: "9.5px 12px",
+   border: `0.094rem solid ${theme.palette.common.black}`,
+   borderRadius: 12,
+   backgroundColor: theme.palette.accent[50],
+   color: theme.palette.common.black,
+   "& .MuiInputBase-input": {
       ...theme.typography.emphasizedBodyMedium,
-      color: theme.palette.common[500],
-      "&.Mui-focused": {
-         color: theme.palette.common.black,
-      },
+      padding: 0,
    },
-   "& .MuiOutlinedInput-root": {
-      borderRadius: 12,
-      backgroundColor: theme.palette.common[50],
-      "&.Mui-focused": {
-         backgroundColor: theme.palette.common.white,
-      },
-      "& input": {
-         ...theme.typography.emphasizedBodyMedium,
-         color: theme.palette.common[500],
-         padding: "7.5px 12px 7.5px 8px",
-      },
-      "& input:not(:placeholder-shown)": {
-         color: theme.palette.common.black,
-      },
-      "& fieldset": {
-         border: `1.5px solid ${theme.palette.common.black}`,
-      },
-      "&:hover fieldset": {
-         border: `1.5px solid ${theme.palette.common.black}`,
-         boxShadow: "none",
-         outline: "none",
-      },
-      "&.Mui-focused fieldset": {
-         border: `1.5px solid ${theme.palette.common.black}`,
-         boxShadow: "none",
-         outline: "none",
-      },
-      "& .MuiInputAdornment-root": {
-         color: theme.palette.common[500],
-      },
-      "&.Mui-focused .MuiInputAdornment-root": {
-         color: theme.palette.common.black,
-      },
+   "& .MuiInputBase-input::placeholder": {
+      opacity: 1,
+      color: theme.palette.accent[500],
    },
+}));
+
+const CustomInputAdornment = styled(InputAdornment)(({ theme, position }) => ({
+   color: theme.palette.common.black,
+   ...(position === "start" && {
+      marginLeft: 0,
+   }),
+   ...(position === "end" && {
+      marginRight: 0,
+   }),
 }));
 
 type Adornment = {
@@ -55,34 +34,21 @@ type Adornment = {
    icon: React.ReactNode;
 };
 
-type NBTextFieldProps = TextFieldProps &
-   MotionProps & {
+type NBTextFieldProps = InputBaseProps &
+   InputBaseProps & {
       adornment?: Adornment;
    };
 
 const NBTextField = ({ adornment, ...props }: NBTextFieldProps) => {
    return (
       <CustomTextField
-         variant="outlined"
          {...(adornment && {
-            slotProps: {
-               input: {
-                  ...(adornment.position === "start" && {
-                     startAdornment: (
-                        <InputAdornment position={adornment.position} sx={{ marginRight: 0 }}>
-                           {adornment.icon}
-                        </InputAdornment>
-                     ),
-                  }),
-                  ...(adornment.position === "end" && {
-                     endAdornment: (
-                        <InputAdornment position={adornment.position} sx={{ marginRight: 0 }}>
-                           {adornment.icon}
-                        </InputAdornment>
-                     ),
-                  }),
-               },
-            },
+            ...(adornment.position === "start" && {
+               startAdornment: <CustomInputAdornment position="start">{adornment.icon}</CustomInputAdornment>,
+            }),
+            ...(adornment.position === "end" && {
+               endAdornment: <CustomInputAdornment position="end">{adornment.icon}</CustomInputAdornment>,
+            }),
          })}
          {...props}
       />

@@ -1,107 +1,105 @@
 import { memo } from "react";
-import Typography from "@mui/material/Typography";
-import MUIButton, { type ButtonProps as MUIButtonProps } from "@mui/material/Button";
-import type { CustomColorOptions } from "@mui/material/styles";
-import { useTheme } from "@mui/material/styles";
+import ButtonBase, { type ButtonBaseProps as ButtonBaseProps } from "@mui/material/ButtonBase";
+import { styled } from "@mui/material/styles";
+import type { CustomColorOptions, CommonColors } from "@mui/material/styles";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useSound } from "~/hooks/useSound";
 import { SOUNDS } from "~/hooks/sounds.config";
 
-type NBButtonProps = Omit<MUIButtonProps, "color"> & {
+type NBButtonProps = Omit<ButtonBaseProps, "color"> & {
    loading?: boolean;
    color?: CustomColorOptions;
+   icon?: React.ReactNode;
 };
 
-const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, ...props }) => {
-   const { palette } = useTheme();
+const INITIAL_Y = -4;
+
+const CustomButtonBase = styled(ButtonBase)<{ color?: CustomColorOptions }>(({ theme, color }) => {
+   const bodyColor = color ? (theme.palette[color] as CommonColors) : theme.palette.primary;
+   const captionColor =
+      color === "danger" || color === "success" ? theme.palette.common.white : theme.palette.common.dark;
+
+   return {
+      ...theme.typography.emphasizedBodyMedium,
+      padding: "0px 24px",
+      position: "relative",
+      height: 40,
+      width: "100%",
+      alignItems: "center",
+      backgroundColor: bodyColor.main,
+      color: captionColor,
+      border: "0.094rem solid",
+      borderColor: theme.palette.common.black,
+      borderRadius: "12px",
+      "&:disabled": {
+         backgroundColor: theme.palette.accent[500],
+         color: theme.palette.accent[200],
+         borderColor: theme.palette.accent[800],
+         cursor: "not-allowed",
+      },
+   };
+});
+
+const BottomLayer = styled(motion.div)<{ color?: CustomColorOptions }>(({ theme, color }) => {
+   const shadowColor = color ? (theme.palette[color] as CommonColors) : theme.palette.primary;
+
+   return {
+      position: "absolute",
+      height: 36,
+      width: "100%",
+      backgroundColor: shadowColor.dark,
+      border: "2px solid black",
+      borderRadius: 12,
+   };
+});
+
+const IconContainer = styled("span")(() => ({
+   display: "flex",
+   alignItems: "center",
+   justifyContent: "center",
+   marginRight: 8,
+   svg: {
+      width: 24,
+      height: 24,
+   },
+}));
+
+const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, icon, disabled, ...props }) => {
    const { playSound } = useSound();
-   const DEFAULT_COLOR = palette.primary;
-   const INITIAL_Y = -4;
+
    const y = useMotionValue(INITIAL_Y);
    const ySpring = useSpring(y, { stiffness: 500, damping: 30 });
 
-   const handleButtonClickSound = () => {
-      playSound(SOUNDS.BUTTON_RUSTY_CLICK_START.url, {
-         volume: SOUNDS.BUTTON_RUSTY_CLICK_START.defaultVolume,
-      });
-   };
-
-   const handleButtonReleaseSound = () => {
-      playSound(SOUNDS.BUTTON_RUSTY_CLICK_END.url, {
-         volume: SOUNDS.BUTTON_RUSTY_CLICK_END.defaultVolume,
-      });
-   };
+   const isEnabled = !disabled;
 
    return (
       <motion.div
          style={{
             position: "relative",
-            ...(props.fullWidth && { width: "100%" }),
+            width: "auto",
          }}
       >
-         {!props.disabled && (
-            <motion.div
-               style={{
-                  position: "absolute",
-                  y: -INITIAL_Y,
-                  height: 36,
-                  width: "100%",
-                  backgroundColor: color ? palette[color].dark : DEFAULT_COLOR.dark,
-                  border: "2px solid black",
-                  borderRadius: 12,
-               }}
-            />
-         )}
+         {isEnabled && <BottomLayer color={color} style={{ y: -INITIAL_Y }} />}
          <motion.div
-            style={{ y: props.disabled ? 0 : ySpring }}
+            style={{ y: disabled ? 0 : ySpring }}
             onTapStart={() => {
-               y.set(INITIAL_Y - INITIAL_Y);
+               y.set(0);
             }}
             onTapCancel={() => {
                y.set(INITIAL_Y);
             }}
             onPointerUp={() => {
                y.set(INITIAL_Y);
-               handleButtonReleaseSound();
+               isEnabled && playSound(SOUNDS.BUTTON_RUSTY_CLICK_END.url);
             }}
             onPointerDown={() => {
-               handleButtonClickSound();
+               isEnabled && playSound(SOUNDS.BUTTON_RUSTY_CLICK_START.url);
             }}
          >
-            <MUIButton
-               variant="contained"
-               disableRipple
-               disabled={loading}
-               {...props}
-               sx={{
-                  paddingX: 3,
-                  position: "relative",
-                  height: 40,
-                  width: "100%",
-                  alignItems: "center",
-                  backgroundColor: color ? palette[color].main : DEFAULT_COLOR.main,
-                  color: color === "accent" ? palette.common.black : "text.secondary",
-                  border: "2px solid black",
-                  borderRadius: 3,
-                  "&:hover": {
-                     backgroundColor: color ? palette[color].light : DEFAULT_COLOR.light,
-                     boxShadow: "none",
-                  },
-                  "&:active": {
-                     boxShadow: "none",
-                  },
-                  "&:disabled": {
-                     color: "common.200",
-                     backgroundColor: "common.500",
-                     borderColor: "common.800",
-                     cursor: "not-allowed",
-                  },
-               }}
-            >
-               <Typography variant="emphasizedBodyMedium" sx={{ textTransform: "none" }}>
-                  {children}
-               </Typography>
-            </MUIButton>
+            <CustomButtonBase disableRipple disabled={loading || disabled} color={color} {...props}>
+               {icon && <IconContainer>{icon}</IconContainer>}
+               {children}
+            </CustomButtonBase>
          </motion.div>
       </motion.div>
    );

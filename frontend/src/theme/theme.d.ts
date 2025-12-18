@@ -24,19 +24,10 @@ declare module "@mui/material/styles" {
       950: string;
    }
 
-   type CustomColorOptions =
-      | "primary"
-      | "secondary"
-      | "error"
-      | "warning"
-      | "info"
-      | "success"
-      | "accent"
-      | "danger"
-      | "common";
+   type CustomColorOptions = "primary" | "success" | "accent" | "danger";
 
    interface Palette {
-      accent: PaletteColor;
+      accent: CommonColors;
       danger: PaletteColor;
       common: PaletteColor;
    }
