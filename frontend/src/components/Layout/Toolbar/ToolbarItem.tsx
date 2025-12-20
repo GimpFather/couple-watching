@@ -10,7 +10,13 @@ interface ToolbarItemProps {
 
 const ToolbarItem = ({ label, onClick, icon }: ToolbarItemProps) => {
    return (
-      <Stack gap="2px" alignItems="center" justifyContent="center" sx={{ cursor: "pointer" }} onClick={onClick}>
+      <Stack
+         gap="2px"
+         alignItems="center"
+         justifyContent="center"
+         sx={{ cursor: "pointer", paddingBottom: "6px" }}
+         onClick={onClick}
+      >
          {icon}
          <Typography
             sx={{
