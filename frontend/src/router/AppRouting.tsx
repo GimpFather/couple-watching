@@ -2,7 +2,6 @@ import { Route, Routes, useLocation } from "react-router";
 import { AnimatePresence } from "motion/react";
 import ProtectedRoute from "~/router/ProtectedRoute";
 import ToolbarLayout from "~/components/Layout/Toolbar/ToolbarLayout";
-
 import WelcomePage from "~/views/WelcomePage.view";
 import AuthLoginPage from "~/views/AuthLoginPage.view";
 import AuthRegisterPage from "~/views/AuthRegisterPage.view";
