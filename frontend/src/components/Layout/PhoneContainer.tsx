@@ -9,6 +9,13 @@ type PhoneContainerProps = {
 const PhoneContainer = ({ children, developerMode = false }: PhoneContainerProps) => {
    return (
       <motion.div
+         initial={{ y: "-100%" }}
+         animate={{ y: 0 }}
+         exit={{ y: "-100%" }}
+         transition={{
+            duration: 0.3,
+            ease: [0.87, 0, 0.13, 1],
+         }}
          style={{
             padding: "16px",
             maxWidth: 375,

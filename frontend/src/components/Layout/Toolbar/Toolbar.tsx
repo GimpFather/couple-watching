@@ -11,6 +11,7 @@ import {
    SmileyXEyesIcon,
    type IconProps,
 } from "@phosphor-icons/react";
+import { motion } from "motion/react";
 
 const Toolbar = () => {
    const { pathname } = useLocation();
@@ -44,6 +45,14 @@ const Toolbar = () => {
 
    return (
       <Stack
+         component={motion.div}
+         initial={{ y: "100%" }}
+         animate={{ y: 0 }}
+         exit={{ y: "100%" }}
+         transition={{
+            duration: 0.3,
+            ease: [0.87, 0, 0.13, 1],
+         }}
          direction="row"
          justifyContent="space-around"
          alignItems="center"
