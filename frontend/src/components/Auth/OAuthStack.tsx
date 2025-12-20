@@ -1,12 +1,14 @@
 import Stack from "@mui/material/Stack";
 import messages from "~/locales/en.json";
 import { AppleLogoIcon, DiscordLogoIcon, GoogleLogoIcon } from "@phosphor-icons/react";
-import NBButton from "../NeoBrutalism/NBButton";
-import showToast from "../Toasts/showToast";
+import NBButton from "~/components/NeoBrutalism/NBButton";
+import showToast from "~/components/Toasts/showToast";
 import { SOUNDS } from "~/hooks/sounds.config";
 import { useSound } from "~/hooks/useSound";
+import { useAuth } from "~/context/auth/useAuth";
 
 const OAuthStack = () => {
+   const { signInWithOAuth } = useAuth();
    const { playSound } = useSound();
    const handleAppleLogin = () => {
       playSound(SOUNDS.NOTIFICATION_BUBBLE_POP.url);
@@ -16,12 +18,8 @@ const OAuthStack = () => {
       });
    };
 
-   const handleGoogleLogin = () => {
-      playSound(SOUNDS.NOTIFICATION_BUBBLE_POP.url);
-      showToast({
-         title: messages["AUTH.OAUTH.GOOGLE.ALERT"],
-         description: messages["AUTH.OAUTH.GOOGLE.DESCRIPTION"],
-      });
+   const handleGoogleLogin = async () => {
+      await signInWithOAuth("google");
    };
 
    const handleDiscordLogin = () => {
@@ -37,7 +35,7 @@ const OAuthStack = () => {
          <NBButton icon={<AppleLogoIcon />} color="accent" onClick={handleAppleLogin}>
             {messages["AUTH.OAUTH.APPLE.BUTTON"]}
          </NBButton>
-         <NBButton icon={<GoogleLogoIcon />} color="accent" onClick={handleGoogleLogin}>
+         <NBButton icon={<GoogleLogoIcon />} color="accent" onClick={() => handleGoogleLogin()}>
             {messages["AUTH.OAUTH.GOOGLE.BUTTON"]}
          </NBButton>
          <NBButton icon={<DiscordLogoIcon />} color="accent" onClick={handleDiscordLogin}>

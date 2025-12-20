@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { useNavigate } from "react-router";
-import type { AuthContextType } from "~/context/context.types";
+import type { AuthContextType, AuthOAuthProvider } from "~/context/context.types";
 import { supabaseClient as supabase } from "~/api/client";
 import showToast from "~/components/Toasts/showToast";
 
@@ -74,11 +74,25 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
    }
 
+   async function handleSignInWithOAuth(provider: AuthOAuthProvider) {
+      const { error } = await supabase.auth.signInWithOAuth({
+         provider,
+      });
+      if (error) {
+         showToast({
+            title: "Error",
+            color: "danger",
+            description: error.message,
+         });
+      }
+   }
+
    const value: AuthContextType = {
       user,
       login: handleSignIn,
       logout: handleSignOut,
       signUp: handleSignUp,
+      signInWithOAuth: handleSignInWithOAuth,
    };
 
    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
