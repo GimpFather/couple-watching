@@ -76,11 +76,7 @@ export const useSound = () => {
          }
          audio.currentTime = 0;
 
-         await audio.play().catch((error) => {
-            if (error.name !== "NotAllowedError") {
-               console.warn("Nie udało się odtworzyć dźwięku:", error);
-            }
-         });
+         await audio.play();
 
          pool.currentIndex = (pool.currentIndex + 1) % POOL_SIZE;
       },
@@ -106,4 +102,9 @@ export const preloadAllSounds = () => {
    Object.values(SOUNDS).forEach((sound) => {
       preloadSoundDirect(sound.url, sound.defaultVolume);
    });
+};
+
+export const playSoundDirect = (url: string, volume: number = 0.35): void => {
+   const pool = getOrCreatePool(url, volume);
+   pool.instances[0].play();
 };
