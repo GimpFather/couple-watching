@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import PhoneContainer from "~/components/Custom/PhoneContainer";
+import PhoneContainer from "~/components/Layout/PhoneContainer";
 import { ArrowLeftIcon } from "@phosphor-icons/react";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
@@ -21,7 +21,7 @@ const AuthLoginPage = () => {
    };
 
    return (
-      <PhoneContainer direction="backward">
+      <PhoneContainer>
          <Stack direction="row" alignItems="center" sx={{ marginBottom: "28px" }}>
             <ArrowLeftIcon cursor="pointer" size={18} onClick={() => handleNavigationTransition("/")} />
             <Typography variant="headingSmall" sx={{ margin: "0 auto" }}>

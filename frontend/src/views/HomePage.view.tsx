@@ -1,15 +1,14 @@
-import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import NBCard from "~/components/NeoBrutalism/NBCard";
 import NBButton from "~/components/NeoBrutalism/NBButton";
 import { useAuth } from "~/context/auth/useAuth";
 import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 import showToast from "~/components/Toasts/showToast";
 import { MaskHappyIcon } from "@phosphor-icons/react";
+import PhoneContainer from "~/components/Layout/PhoneContainer";
 
-const DashboardPage = () => {
+const HomePage = () => {
    const user = useRequiredAuth();
    const { logout } = useAuth();
 
@@ -28,24 +27,22 @@ const DashboardPage = () => {
    };
 
    return (
-      <Container maxWidth="sm" sx={{ paddingY: "24px" }}>
-         <NBCard sx={{ padding: "16px" }}>
-            <Stack direction="column" gap={2}>
-               <Typography variant="headingExtraLarge">Dashboard</Typography>
-               <Typography variant="bodyExtraLarge">Welcome, {user.email}</Typography>
-               <Divider />
-               <Stack direction="row" gap={2}>
-                  <NBButton icon={<MaskHappyIcon />} onClick={() => handleYouDidIt()}>
-                     You did it!
-                  </NBButton>
-                  <NBButton onClick={(event) => handleLogout(event)} color="danger">
-                     Logout
-                  </NBButton>
-               </Stack>
+      <PhoneContainer>
+         <Stack direction="column" gap={2}>
+            <Typography variant="headingExtraLarge">Home</Typography>
+            <Typography variant="bodyExtraLarge">Welcome, {user.email}</Typography>
+            <Divider />
+            <Stack direction="row" gap={2}>
+               <NBButton icon={<MaskHappyIcon />} onClick={() => handleYouDidIt()}>
+                  You did it!
+               </NBButton>
+               <NBButton onClick={(event) => handleLogout(event)} color="danger">
+                  Logout
+               </NBButton>
             </Stack>
-         </NBCard>
-      </Container>
+         </Stack>
+      </PhoneContainer>
    );
 };
 
-export default DashboardPage;
+export default HomePage;

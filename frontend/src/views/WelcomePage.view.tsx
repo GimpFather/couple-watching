@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import messages from "~/locales/en.json";
 import NBCard from "~/components/NeoBrutalism/NBCard";
 import NBButton from "~/components/NeoBrutalism/NBButton";
-import PhoneContainer from "~/components/Custom/PhoneContainer";
+import PhoneContainer from "~/components/Layout/PhoneContainer";
 import { useNavigationTransition } from "~/hooks/useNavigationTransition";
 
 const WelcomePage = () => {
@@ -14,7 +14,7 @@ const WelcomePage = () => {
    const handleNavigationTransition = useNavigationTransition();
 
    return (
-      <PhoneContainer direction="forward">
+      <PhoneContainer>
          <NBCard
             sx={{
                padding: "4px",
