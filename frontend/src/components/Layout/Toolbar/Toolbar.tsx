@@ -63,7 +63,6 @@ const Toolbar = () => {
             right: 0,
             borderTop: `1px solid ${palette.accent.main}`,
             padding: "6px 8px",
-            marginBottom: "28px",
          }}
       >
          <ToolbarItem
