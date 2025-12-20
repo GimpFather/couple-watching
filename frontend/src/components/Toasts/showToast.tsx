@@ -1,12 +1,15 @@
 import { toast as sonnerToast } from "sonner";
 import Toast from "~/components/Toasts/Toast";
 import type { ToastProps } from "~/components/Toasts/toasts.types";
-import { SOUNDS } from "~/hooks/sounds.config";
-import { playSoundDirect } from "~/hooks/useSound";
+import { playSound } from "~/hooks/useSound";
+import type { SoundName } from "~/hooks/hooks.types";
 
-const showToast = (toast: Omit<ToastProps, "id">) => {
-   playSoundDirect(SOUNDS.NOTIFICATION_BUBBLE_POP.url);
-
+const showToast = (toast: Omit<ToastProps, "id"> & { sound?: SoundName }) => {
+   if (toast.sound) {
+      playSound(toast.sound);
+   } else {
+      playSound("NOTIFICATION_BUBBLE_POP");
+   }
    return sonnerToast.custom((id) => {
       return <Toast id={id} {...toast} />;
    });

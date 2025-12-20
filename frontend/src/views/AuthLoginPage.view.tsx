@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import Typography from "@mui/material/Typography";
 import PhoneContainer from "~/components/Custom/PhoneContainer";
 import { ArrowLeftIcon } from "@phosphor-icons/react";
@@ -8,15 +7,12 @@ import OAuthStack from "~/components/Auth/OAuthStack";
 import AuthForm from "~/components/Auth/AuthForm";
 import messages from "~/locales/en.json";
 import showToast from "~/components/Toasts/showToast";
-import { useSound } from "~/hooks/useSound";
-import { SOUNDS } from "~/hooks/sounds.config";
+import { useNavigationTransition } from "~/hooks/useNavigationTransition";
 
 const AuthLoginPage = () => {
-   const navigate = useNavigate();
-   const { playSound } = useSound();
+   const handleNavigationTransition = useNavigationTransition();
 
    const handleForgotPassword = () => {
-      playSound(SOUNDS.NOTIFICATION_BUBBLE_POP.url);
       showToast({
          title: "To be done.",
          description: "This feature is not available yet.",
@@ -27,7 +23,7 @@ const AuthLoginPage = () => {
    return (
       <PhoneContainer direction="backward">
          <Stack direction="row" alignItems="center" sx={{ marginBottom: "28px" }}>
-            <ArrowLeftIcon cursor="pointer" size={18} onClick={() => navigate("/")} />
+            <ArrowLeftIcon cursor="pointer" size={18} onClick={() => handleNavigationTransition("/")} />
             <Typography variant="headingSmall" sx={{ margin: "0 auto" }}>
                {messages["AUTH.LOGIN.TITLE"]}
             </Typography>

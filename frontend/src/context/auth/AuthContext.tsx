@@ -1,15 +1,16 @@
 import { createContext, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
-import { useNavigate } from "react-router";
 import type { AuthContextType, AuthOAuthProvider } from "~/context/context.types";
 import { supabaseClient as supabase } from "~/api/client";
 import showToast from "~/components/Toasts/showToast";
+import { useNavigationTransition } from "~/hooks/useNavigationTransition";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
    const [user, setUser] = useState<User | null>(null);
-   const navigate = useNavigate();
+
+   const handleNavigationTransition = useNavigationTransition();
 
    useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
@@ -21,7 +22,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       } = supabase.auth.onAuthStateChange((event, session) => {
          if (event === "SIGNED_IN") {
             setUser(session?.user ?? null);
-            navigate("/dashboard");
+            handleNavigationTransition("/dashboard");
          }
          if (event === "SIGNED_OUT") {
             setUser(null);
@@ -33,7 +34,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
          }
       });
       return () => subscription.unsubscribe();
-   }, [navigate]);
+   }, [handleNavigationTransition]);
 
    async function handleSignUp(email: string, password: string) {
       const { error } = await supabase.auth.signUp({

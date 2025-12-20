@@ -3,8 +3,7 @@ import ButtonBase, { type ButtonBaseProps as ButtonBaseProps } from "@mui/materi
 import { styled } from "@mui/material/styles";
 import type { CustomColorOptions, CommonColors } from "@mui/material/styles";
 import { motion, useMotionValue, useSpring } from "motion/react";
-import { useSound } from "~/hooks/useSound";
-import { SOUNDS } from "~/hooks/sounds.config";
+import { playSound } from "~/hooks/useSound";
 
 type NBButtonProps = Omit<ButtonBaseProps, "color"> & {
    loading?: boolean;
@@ -65,8 +64,6 @@ const IconContainer = styled("span")(() => ({
 }));
 
 const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, icon, disabled, ...props }) => {
-   const { playSound } = useSound();
-
    const y = useMotionValue(INITIAL_Y);
    const ySpring = useSpring(y, { stiffness: 500, damping: 30 });
 
@@ -91,12 +88,12 @@ const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, icon, dis
             onPointerUp={() => {
                y.set(INITIAL_Y);
                if (isEnabled) {
-                  playSound(SOUNDS.BUTTON_RUSTY_CLICK_END.url);
+                  playSound("BUTTON_RUSTY_CLICK_END");
                }
             }}
             onPointerDown={() => {
                if (isEnabled) {
-                  playSound(SOUNDS.BUTTON_RUSTY_CLICK_START.url);
+                  playSound("BUTTON_RUSTY_CLICK_START");
                }
             }}
          >

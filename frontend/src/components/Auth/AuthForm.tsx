@@ -7,8 +7,7 @@ import NBTextField from "~/components/NeoBrutalism/NBTextField";
 import { useAuth } from "~/context/auth/useAuth";
 import showToast from "../Toasts/showToast";
 import messages from "~/locales/en.json";
-import { SOUNDS } from "~/hooks/sounds.config";
-import { useSound } from "~/hooks/useSound";
+import { playSound } from "~/hooks/useSound";
 
 type AuthFormProps = {
    type: "register" | "login";
@@ -16,7 +15,6 @@ type AuthFormProps = {
 
 const AuthForm = ({ type }: AuthFormProps) => {
    const { login, signUp } = useAuth();
-   const { playSound } = useSound();
 
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
@@ -40,11 +38,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (!email || !password) {
-         playSound(SOUNDS.MEME_ALERT_WHAT.url);
          showToast({
             title: "🤔 Buddy please.",
             description: "Have you ever thought about the importance of filling in all the fields?",
             color: "danger",
+            sound: "MEME_ALERT_WHAT",
          });
          return;
       }
@@ -57,7 +55,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
 
    const handleShowPassword = () => {
       setShowPassword(!showPassword);
-      playSound(SOUNDS.NOTIFICATION_BUBBLE_POP.url);
+      playSound("NOTIFICATION_BUBBLE_POP");
    };
 
    return (
