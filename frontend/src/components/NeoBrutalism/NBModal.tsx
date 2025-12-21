@@ -26,6 +26,9 @@ const CustomModalContent = styled(motion.div)(({ theme }) => ({
    backgroundColor: theme.palette.background.paper,
    borderRadius: "12px",
    border: `0.094rem solid ${theme.palette.common.black}`,
+   "&:focus-visible": {
+      outline: "none", // This might be needed for accessibility reasons.
+   },
 }));
 
 const NBModal = ({ children, ...props }: CustomModalProps) => {

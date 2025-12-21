@@ -19,12 +19,18 @@ const CustomizeAcountDialog = ({ open, onClose }: DialogProps) => {
          description: `Hello, ${username}! 🎉`,
          sound: "MEME_ALERT_SHINE",
       });
+      onClose();
+   };
+
+   const handleClose = () => {
+      setUsername("");
+      onClose();
    };
 
    return (
       <NBModal
          open={open}
-         onClose={onClose}
+         onClose={handleClose}
          children={
             <Stack direction="column" gap="16px">
                <Typography variant="headingLarge">Time for customization</Typography>
@@ -45,7 +51,7 @@ const CustomizeAcountDialog = ({ open, onClose }: DialogProps) => {
                   <NBButton onClick={() => handleUpdateData()} disabled={disableSubmit} fullWidth>
                      Update data
                   </NBButton>
-                  <NBButton onClick={onClose} color="danger" fullWidth>
+                  <NBButton onClick={handleClose} color="danger" fullWidth>
                      Cancel
                   </NBButton>
                </Stack>
