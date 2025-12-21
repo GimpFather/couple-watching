@@ -9,6 +9,7 @@ type NBButtonProps = Omit<ButtonBaseProps, "color"> & {
    loading?: boolean;
    color?: CustomColorOptions;
    icon?: React.ReactNode;
+   fullWidth?: boolean;
 };
 
 const INITIAL_Y = -4;
@@ -63,7 +64,7 @@ const IconContainer = styled("span")(() => ({
    },
 }));
 
-const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, icon, disabled, ...props }) => {
+const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, icon, disabled, fullWidth, ...props }) => {
    const y = useMotionValue(INITIAL_Y);
    const ySpring = useSpring(y, { stiffness: 500, damping: 30 });
 
@@ -73,7 +74,7 @@ const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, icon, dis
       <motion.div
          style={{
             position: "relative",
-            width: "auto",
+            width: fullWidth ? "100%" : "auto",
          }}
       >
          {isEnabled && <BottomLayer color={color} style={{ y: -INITIAL_Y }} />}

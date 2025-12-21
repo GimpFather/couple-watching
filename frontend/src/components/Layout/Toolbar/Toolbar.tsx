@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
-import ToolbarItem from "./ToolbarItem";
+import ToolbarItem from "~/components/Layout/Toolbar/ToolbarItem";
 import { useLocation } from "react-router";
 import { useNavigationTransition } from "~/hooks/useNavigationTransition";
 import {

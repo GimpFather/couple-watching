@@ -2,21 +2,19 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import NBButton from "~/components/NeoBrutalism/NBButton";
-import showToast from "~/components/Toasts/showToast";
 import { SealCheckIcon } from "@phosphor-icons/react";
 import PhoneContainer from "~/components/Layout/PhoneContainer";
+import { useState } from "react";
+import CustomizeAcountDialog from "~/components/Dialogs/CustomizeAcountDialog";
 
 const CouplePage = () => {
    const isPaired = false;
    const isCustomized = false;
 
+   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
    const handleCoupleButton = () => {
-      showToast({
-         title: "Show me the couple!",
-         description: "You are now in the couple! 💑",
-         color: "success",
-         sound: "MEME_ALERT_SHINE",
-      });
+      setIsDialogOpen((prev) => !prev);
    };
 
    return (
@@ -53,6 +51,11 @@ const CouplePage = () => {
                </NBButton>
             </Stack>
          </Stack>
+         <CustomizeAcountDialog
+            open={isDialogOpen}
+            onClose={() => setIsDialogOpen(false)}
+            action={() => handleCoupleButton()}
+         />
       </PhoneContainer>
    );
 };

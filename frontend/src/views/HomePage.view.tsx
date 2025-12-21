@@ -30,7 +30,7 @@ const HomePage = () => {
       <PhoneContainer>
          <Stack direction="column" gap={2}>
             <Typography variant="headingExtraLarge">Home</Typography>
-            <Typography variant="bodyExtraLarge">Welcome, {user.email}</Typography>
+            <Typography variant="bodyExtraLarge">Welcome, {user.user_metadata.name ?? "Guest"}</Typography>
             <Divider />
             <Stack direction="row" gap={2}>
                <NBButton icon={<MaskHappyIcon />} onClick={() => handleYouDidIt()}>

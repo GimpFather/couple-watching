@@ -12,13 +12,13 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Toaster } from "sonner";
 
 import { initSounds } from "~/hooks/useSound";
+import { SOUNDS } from "~/hooks/sounds.config";
 
 import { getTheme } from "~/theme/defaultTheme";
 import { palette } from "~/theme/palette";
 
 import AuthProvider from "~/context/auth/AuthContext";
 import AppRouting from "~/router/AppRouting";
-import { SOUNDS } from "./hooks/sounds.config";
 
 initSounds(Object.values(SOUNDS));
 

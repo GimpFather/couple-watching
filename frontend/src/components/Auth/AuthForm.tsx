@@ -5,7 +5,7 @@ import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react";
 import NBButton from "~/components/NeoBrutalism/NBButton";
 import NBTextField from "~/components/NeoBrutalism/NBTextField";
 import { useAuth } from "~/context/auth/useAuth";
-import showToast from "../Toasts/showToast";
+import showToast from "~/components/Toasts/showToast";
 import messages from "~/locales/en.json";
 import { playSound } from "~/hooks/useSound";
 

@@ -1,4 +1,4 @@
-import type { Sound, SoundName } from "./hooks.types";
+import type { Sound, SoundName } from "~/hooks/hooks.types";
 
 const POOL_SIZE = 3;
 
