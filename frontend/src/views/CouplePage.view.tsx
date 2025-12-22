@@ -6,10 +6,14 @@ import { SealCheckIcon } from "@phosphor-icons/react";
 import PhoneContainer from "~/components/Layout/PhoneContainer";
 import { useState } from "react";
 import CustomizeAcountDialog from "~/components/Dialogs/CustomizeAcountDialog";
+import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
+import { useGetProfileData } from "~/api/hooks/profiles";
 
 const CouplePage = () => {
+   const user = useRequiredAuth();
+   const { data: profileData } = useGetProfileData(user.id);
    const isPaired = false;
-   const isCustomized = false;
+   const isCustomized = !!profileData?.username;
 
    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -24,9 +28,7 @@ const CouplePage = () => {
             <Typography variant="bodyExtraLarge">It's time to set up your couple! 💑</Typography>
             <Divider />
             <Typography variant="bodyMedium">Start with customizing your account details . . .</Typography>
-            <NBButton disabled={isCustomized} onClick={() => handleCoupleButton()}>
-               Customize my account details
-            </NBButton>
+            <NBButton onClick={() => handleCoupleButton()}>Customize my account details</NBButton>
             <Typography variant="bodyMedium">. . . then, set up your couple details.</Typography>
             <NBButton disabled={!isCustomized} onClick={() => handleCoupleButton()}>
                Make a pair
@@ -55,6 +57,7 @@ const CouplePage = () => {
             open={isDialogOpen}
             onClose={() => setIsDialogOpen(false)}
             action={() => handleCoupleButton()}
+            authId={user.id}
          />
       </PhoneContainer>
    );

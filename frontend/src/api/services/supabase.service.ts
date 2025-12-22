@@ -6,3 +6,9 @@ export const getProfileData = async (authId: string): Promise<Profile> => {
 
    return response.data;
 };
+
+export const updateProfileData = async (authId: string, data: Pick<Profile, "username">): Promise<Profile | null> => {
+   const response = await supabaseClient.from("Profiles").update(data).eq("authId", authId).single();
+
+   return response.data;
+};

@@ -3,14 +3,16 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import NBButton from "~/components/NeoBrutalism/NBButton";
 import { useAuth } from "~/context/auth/useAuth";
-import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 import showToast from "~/components/Toasts/showToast";
 import { MaskHappyIcon } from "@phosphor-icons/react";
 import PhoneContainer from "~/components/Layout/PhoneContainer";
+import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
+import { useGetProfileData } from "~/api/hooks/profiles";
 
 const HomePage = () => {
-   const user = useRequiredAuth();
    const { logout } = useAuth();
+   const user = useRequiredAuth();
+   const { data: profileData } = useGetProfileData(user.id);
 
    const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
@@ -30,7 +32,7 @@ const HomePage = () => {
       <PhoneContainer>
          <Stack direction="column" gap={2}>
             <Typography variant="headingExtraLarge">Home</Typography>
-            <Typography variant="bodyExtraLarge">Welcome, {user.user_metadata.name ?? "Guest"}</Typography>
+            <Typography variant="bodyExtraLarge">Welcome, {profileData?.username ?? "Guest"}</Typography>
             <Divider />
             <Stack direction="row" gap={2}>
                <NBButton icon={<MaskHappyIcon />} onClick={() => handleYouDidIt()}>

@@ -40,7 +40,7 @@ const AuthLoginPage = () => {
          <Stack alignItems="center">
             <Typography
                variant="bodyMedium"
-               sx={{ color: "primary.main", cursor: "pointer" }}
+               sx={{ color: "primary.700", cursor: "pointer" }}
                onClick={() => handleForgotPassword()}
             >
                {messages["AUTH.LOGIN.FORGOT_PASSWORD"]}
