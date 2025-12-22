@@ -61,8 +61,9 @@ const Toolbar = () => {
             bottom: 0,
             left: 0,
             right: 0,
-            borderTop: `1px solid ${palette.accent.main}`,
             padding: "6px 8px",
+            backgroundColor: palette.background.paper,
+            borderTop: `1px solid ${palette.accent.main}`,
          }}
       >
          <ToolbarItem
