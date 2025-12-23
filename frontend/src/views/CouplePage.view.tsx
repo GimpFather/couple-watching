@@ -8,6 +8,7 @@ import { useState } from "react";
 import CustomizeAcountDialog from "~/components/Dialogs/CustomizeAcountDialog";
 import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 import { useGetProfileData } from "~/api/hooks/profiles";
+import MakePairWithSomeoneDialog from "~/components/Dialogs/MakePairWithSomeoneDialog";
 
 const CouplePage = () => {
    const user = useRequiredAuth();
@@ -15,10 +16,15 @@ const CouplePage = () => {
    const isPaired = false;
    const isCustomized = !!profileData?.username;
 
-   const [isDialogOpen, setIsDialogOpen] = useState(false);
+   const [isCustomizeAccountDialogOpen, setIsCustomizeAccountDialogOpen] = useState(false);
+   const [isMakePairDialogOpen, setIsMakePairDialogOpen] = useState(false);
 
-   const handleCoupleButton = () => {
-      setIsDialogOpen((prev) => !prev);
+   const handleCustomizeAccountButton = () => {
+      setIsCustomizeAccountDialogOpen((prev) => !prev);
+   };
+
+   const handleMakePairButton = () => {
+      setIsMakePairDialogOpen((prev) => !prev);
    };
 
    return (
@@ -28,10 +34,13 @@ const CouplePage = () => {
             <Typography variant="bodyExtraLarge">It's time to set up your couple! 💑</Typography>
             <Divider />
             <Typography variant="bodyMedium">Start with customizing your account details . . .</Typography>
-            <NBButton onClick={() => handleCoupleButton()}>Customize my account details</NBButton>
+            <NBButton onClick={() => handleCustomizeAccountButton()}>Customize my account details</NBButton>
             <Typography variant="bodyMedium">. . . then, set up your couple details.</Typography>
-            <NBButton disabled={!isCustomized} onClick={() => handleCoupleButton()}>
-               Make a pair
+            <NBButton disabled={!isCustomized} onClick={() => handleMakePairButton()}>
+               Make a pair with someone
+            </NBButton>
+            <NBButton disabled={!isCustomized} onClick={() => {}}>
+               Make a pair managed by yourself
             </NBButton>
             <Divider />
             <Typography variant="bodyMedium">
@@ -40,25 +49,20 @@ const CouplePage = () => {
                purposes.
             </Typography>
             <Stack direction="row" gap={2}>
-               <NBButton
-                  color="success"
-                  disabled={!isPaired}
-                  onClick={() => handleCoupleButton()}
-                  icon={<SealCheckIcon />}
-               >
+               <NBButton color="success" disabled={!isPaired} onClick={() => {}} icon={<SealCheckIcon />}>
                   Check
                </NBButton>
-               <NBButton color="danger" disabled={!isPaired} onClick={() => handleCoupleButton()}>
+               <NBButton color="danger" disabled={!isPaired} onClick={() => {}}>
                   Delete pair
                </NBButton>
             </Stack>
          </Stack>
          <CustomizeAcountDialog
-            open={isDialogOpen}
-            onClose={() => setIsDialogOpen(false)}
-            action={() => handleCoupleButton()}
+            open={isCustomizeAccountDialogOpen}
+            onClose={() => setIsCustomizeAccountDialogOpen(false)}
             authId={user.id}
          />
+         <MakePairWithSomeoneDialog open={isMakePairDialogOpen} onClose={() => setIsMakePairDialogOpen(false)} />
       </PhoneContainer>
    );
 };
