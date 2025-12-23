@@ -19,7 +19,7 @@ const CustomTextField = styled(InputBase)(({ theme }) => ({
    },
 }));
 
-const CustomInputAdornment = styled(InputAdornment)(({ theme, position }) => ({
+const CustomInputAdornment = styled(InputAdornment)(({ theme, position, onClick }) => ({
    color: theme.palette.common.black,
    ...(position === "start" && {
       marginLeft: 0,
@@ -27,11 +27,15 @@ const CustomInputAdornment = styled(InputAdornment)(({ theme, position }) => ({
    ...(position === "end" && {
       marginRight: 0,
    }),
+   ...(onClick && {
+      cursor: "pointer",
+   }),
 }));
 
 type Adornment = {
    position: "start" | "end";
    icon: React.ReactNode;
+   onClick?: () => void;
 };
 
 type NBTextFieldProps = InputBaseProps &
@@ -44,10 +48,18 @@ const NBTextField = ({ adornment, ...props }: NBTextFieldProps) => {
       <CustomTextField
          {...(adornment && {
             ...(adornment.position === "start" && {
-               startAdornment: <CustomInputAdornment position="start">{adornment.icon}</CustomInputAdornment>,
+               startAdornment: (
+                  <CustomInputAdornment position="start" {...(adornment.onClick && { onClick: adornment.onClick })}>
+                     {adornment.icon}
+                  </CustomInputAdornment>
+               ),
             }),
             ...(adornment.position === "end" && {
-               endAdornment: <CustomInputAdornment position="end">{adornment.icon}</CustomInputAdornment>,
+               endAdornment: (
+                  <CustomInputAdornment position="end" {...(adornment.onClick && { onClick: adornment.onClick })}>
+                     {adornment.icon}
+                  </CustomInputAdornment>
+               ),
             }),
          })}
          {...props}

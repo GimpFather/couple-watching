@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getProfileData, updateProfileData } from "~/api/services/supabase.service";
+import { getProfileData, updateProfileData } from "~/api/services/profiles.services";
 import QUERY_KEYS from "~/api/queryKeys";
-import type { Profile } from "../types/profiles";
+import type { Profile } from "~/api/types/profiles";
 
 export const useGetProfileData = (authId: string) =>
    useQuery({
@@ -15,9 +15,3 @@ export const useUpdateProfileData = (authId: string) =>
       mutationKey: [QUERY_KEYS.UPDATE_PROFILE_DATA, authId],
       mutationFn: (data: Pick<Profile, "username">) => updateProfileData(authId, data),
    });
-
-// export const usePostToWatchlist = () => {
-//    return useMutation<void, Error, { newMovie: Movie; pairId: string }>({
-//       mutationFn: ({ newMovie, pairId }) => PostMovieToWatchlist(newMovie, pairId),
-//    });
-// };

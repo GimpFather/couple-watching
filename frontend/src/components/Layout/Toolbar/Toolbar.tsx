@@ -12,6 +12,7 @@ import {
    type IconProps,
 } from "@phosphor-icons/react";
 import { motion } from "motion/react";
+import Box from "@mui/material/Box";
 
 const Toolbar = () => {
    const { pathname } = useLocation();
@@ -44,54 +45,56 @@ const Toolbar = () => {
    };
 
    return (
-      <Stack
-         component={motion.div}
-         initial={{ y: "100%" }}
-         animate={{ y: 0 }}
-         exit={{ y: "100%" }}
-         transition={{
-            duration: 0.3,
-            ease: [0.87, 0, 0.13, 1],
-         }}
-         direction="row"
-         justifyContent="space-around"
-         alignItems="center"
-         sx={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            padding: "6px 8px",
-            backgroundColor: palette.background.paper,
-            borderTop: `1px solid ${palette.accent.main}`,
-         }}
-      >
-         <ToolbarItem
-            label="Home"
-            icon={getIcon("Home", pathname === "/home")}
-            onClick={() => handleNavigationTransition("/home")}
-         />
-         <ToolbarItem
-            label="Library"
-            icon={getIcon("Library", pathname === "/library")}
-            onClick={() => handleNavigationTransition("/library")}
-         />
-         <ToolbarItem
-            label="Search"
-            icon={getIcon("Search", pathname === "/search")}
-            onClick={() => handleNavigationTransition("/search")}
-         />
-         <ToolbarItem
-            label="Statistics"
-            icon={getIcon("Statistics", pathname === "/statistics")}
-            onClick={() => handleNavigationTransition("/statistics")}
-         />
-         <ToolbarItem
-            label="Couple"
-            icon={getIcon("Couple", pathname === "/couple")}
-            onClick={() => handleNavigationTransition("/couple")}
-         />
-      </Stack>
+      <Box sx={{ paddingTop: "64px" }}>
+         <Stack
+            component={motion.div}
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{
+               duration: 0.3,
+               ease: [0.87, 0, 0.13, 1],
+            }}
+            direction="row"
+            justifyContent="space-around"
+            alignItems="center"
+            sx={{
+               position: "fixed",
+               bottom: 0,
+               left: 0,
+               right: 0,
+               padding: "6px 8px",
+               backgroundColor: palette.background.paper,
+               borderTop: `1px solid ${palette.accent.main}`,
+            }}
+         >
+            <ToolbarItem
+               label="Home"
+               icon={getIcon("Home", pathname === "/home")}
+               onClick={() => handleNavigationTransition("/home")}
+            />
+            <ToolbarItem
+               label="Library"
+               icon={getIcon("Library", pathname === "/library")}
+               onClick={() => handleNavigationTransition("/library")}
+            />
+            <ToolbarItem
+               label="Search"
+               icon={getIcon("Search", pathname === "/search")}
+               onClick={() => handleNavigationTransition("/search")}
+            />
+            <ToolbarItem
+               label="Statistics"
+               icon={getIcon("Statistics", pathname === "/statistics")}
+               onClick={() => handleNavigationTransition("/statistics")}
+            />
+            <ToolbarItem
+               label="Couple"
+               icon={getIcon("Couple", pathname === "/couple")}
+               onClick={() => handleNavigationTransition("/couple")}
+            />
+         </Stack>
+      </Box>
    );
 };
 
