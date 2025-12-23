@@ -10,6 +10,7 @@ import LibraryPage from "~/views/LibraryPage.view";
 import SearchPage from "~/views/SearchPage.view";
 import StatisticsPage from "~/views/StatisticsPage.view";
 import CouplePage from "~/views/CouplePage.view";
+import AuthConfirmEmailPage from "~/views/AuthConfirmEmail.view";
 
 const AppRouting = () => {
    const location = useLocation();
@@ -20,6 +21,7 @@ const AppRouting = () => {
             <Route path="/" element={<WelcomePage />} key="welcome" />
             <Route path="auth/login" element={<AuthLoginPage />} key="auth-login" />
             <Route path="auth/register" element={<AuthRegisterPage />} key="auth-register" />
+            <Route path="auth/confirm-email" element={<AuthConfirmEmailPage />} key="auth-confirm-email" />
             <Route element={<ProtectedRoute />}>
                <Route element={<ToolbarLayout />}>
                   <Route path="home" element={<HomePage />} key="home" />

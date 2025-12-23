@@ -3,13 +3,14 @@ import type { User } from "@supabase/supabase-js";
 import type { AuthContextType, AuthOAuthProvider } from "~/context/context.types";
 import { supabaseClient as supabase } from "~/api/client";
 import showToast from "~/components/Toasts/showToast";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
    const [user, setUser] = useState<User | null>(null);
    const navigate = useNavigate();
+   const location = useLocation();
 
    useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
@@ -21,7 +22,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       } = supabase.auth.onAuthStateChange((event, session) => {
          if (event === "SIGNED_IN") {
             setUser(session?.user ?? null);
-            navigate("/home");
+            localStorage.removeItem("pendingEmailVerification");
+            const isOnAuthPage = location.pathname.startsWith("/auth") || location.pathname === "/";
+            if (isOnAuthPage) {
+               navigate("/home", { replace: true });
+            }
          }
          if (event === "SIGNED_OUT") {
             setUser(null);
@@ -31,9 +36,15 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                description: "You have been logged out",
             });
          }
+         if (event === "TOKEN_REFRESHED") {
+            setUser(session?.user ?? null);
+         }
+         if (event === "INITIAL_SESSION") {
+            setUser(session?.user ?? null);
+         }
       });
       return () => subscription.unsubscribe();
-   }, [navigate]);
+   }, [navigate, location.pathname]);
 
    async function handleSignUp(email: string, password: string) {
       const { error } = await supabase.auth.signUp({
@@ -46,6 +57,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             color: "danger",
             description: error.message,
          });
+      } else {
+         localStorage.setItem("pendingEmailVerification", email);
+         navigate("/auth/confirm-email", { state: { email } });
       }
    }
 

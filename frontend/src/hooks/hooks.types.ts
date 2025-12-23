@@ -10,4 +10,5 @@ export type SoundName =
    | "TRANSITION_1"
    | "NOTIFICATION_BUBBLE_POP"
    | "MEME_ALERT_WHAT"
-   | "MEME_ALERT_SHINE";
+   | "MEME_ALERT_SHINE"
+   | "MEME_ALERT_VIOLIN_SAD";

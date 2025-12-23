@@ -33,4 +33,9 @@ export const SOUNDS: Sound[] = [
       url: `${BASE_URL}/meme-alert--shine.mp3`,
       defaultVolume: 0.25,
    },
+   {
+      name: "MEME_ALERT_VIOLIN_SAD",
+      url: `${BASE_URL}/meme-alert--violin-sad.mp3`,
+      defaultVolume: 0.25,
+   },
 ];

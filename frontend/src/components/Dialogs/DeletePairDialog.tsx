@@ -24,6 +24,7 @@ const DeletePairDialog = ({ open, onClose, pairId }: DialogProps & { pairId: num
                title: "Pair deleted!",
                color: "danger",
                description: "Your pair has been deleted successfully.",
+               sound: "MEME_ALERT_VIOLIN_SAD",
             });
             onClose();
          },
