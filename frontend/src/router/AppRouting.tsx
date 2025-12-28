@@ -2,15 +2,15 @@ import { Route, Routes, useLocation } from "react-router";
 import { AnimatePresence } from "motion/react";
 import ProtectedRoute from "~/router/ProtectedRoute";
 import ToolbarLayout from "~/components/Layout/Toolbar/ToolbarLayout";
-import WelcomePage from "~/views/WelcomePage.view";
-import AuthLoginPage from "~/views/AuthLoginPage.view";
-import AuthRegisterPage from "~/views/AuthRegisterPage.view";
+import WelcomePage from "~/views/Auth/WelcomePage.view";
+import AuthLoginPage from "~/views/Auth/AuthLoginPage.view";
+import AuthRegisterPage from "~/views/Auth/AuthRegisterPage.view";
 import HomePage from "~/views/HomePage.view";
 import LibraryPage from "~/views/LibraryPage.view";
 import SearchPage from "~/views/SearchPage.view";
 import StatisticsPage from "~/views/StatisticsPage.view";
 import CouplePage from "~/views/CouplePage.view";
-import AuthConfirmEmailPage from "~/views/AuthConfirmEmail.view";
+import AuthConfirmEmailPage from "~/views/Auth/AuthConfirmEmail.view";
 
 const AppRouting = () => {
    const location = useLocation();
