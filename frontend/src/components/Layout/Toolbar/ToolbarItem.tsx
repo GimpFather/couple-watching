@@ -6,9 +6,10 @@ interface ToolbarItemProps {
    label: string;
    onClick: () => void;
    icon: ReactNode;
+   active: boolean;
 }
 
-const ToolbarItem = ({ label, onClick, icon }: ToolbarItemProps) => {
+const ToolbarItem = ({ label, onClick, icon, active }: ToolbarItemProps) => {
    return (
       <Stack
          gap="2px"
@@ -22,7 +23,7 @@ const ToolbarItem = ({ label, onClick, icon }: ToolbarItemProps) => {
             sx={{
                fontFamily: `'DM Sans Variable', sans-serif`,
                fontSize: "10px",
-               fontWeight: 500,
+               fontWeight: active ? 700 : 500,
                lineHeight: "175%",
                color: "text.primary",
             }}

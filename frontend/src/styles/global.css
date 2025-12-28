@@ -10,3 +10,12 @@ html {
 * {
     scrollbar-width: none; 
   }
+
+.overwrite-toolbar-icon {
+   path:first-child {
+	  opacity: 1;
+   }
+   path:last-child {
+      fill: #292321;
+   }
+}  

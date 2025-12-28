@@ -24,8 +24,9 @@ const Toolbar = () => {
       const weight = active ? "duotone" : "regular";
       const iconProps: IconProps = {
          weight,
-         color,
+         fill: color,
          size: 24,
+         className: "overwrite-toolbar-icon",
       };
 
       switch (label) {
@@ -72,26 +73,31 @@ const Toolbar = () => {
                label="Home"
                icon={getIcon("Home", pathname === "/home")}
                onClick={() => handleNavigationTransition("/home")}
+               active={pathname === "/home"}
             />
             <ToolbarItem
                label="Library"
                icon={getIcon("Library", pathname === "/library")}
                onClick={() => handleNavigationTransition("/library")}
+               active={pathname === "/library"}
             />
             <ToolbarItem
                label="Search"
                icon={getIcon("Search", pathname === "/search")}
                onClick={() => handleNavigationTransition("/search")}
+               active={pathname === "/search"}
             />
             <ToolbarItem
                label="Statistics"
                icon={getIcon("Statistics", pathname === "/statistics")}
                onClick={() => handleNavigationTransition("/statistics")}
+               active={pathname === "/statistics"}
             />
             <ToolbarItem
                label="Couple"
                icon={getIcon("Couple", pathname === "/couple")}
                onClick={() => handleNavigationTransition("/couple")}
+               active={pathname === "/couple"}
             />
          </Stack>
       </Box>
