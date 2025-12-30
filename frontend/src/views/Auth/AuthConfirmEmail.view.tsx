@@ -40,6 +40,7 @@ const AuthConfirmEmailPage = () => {
          });
       } else {
          localStorage.removeItem("pendingEmailVerification");
+         handleNavigationTransition("/auth/success");
       }
    };
 

@@ -18,6 +18,7 @@
     "@phosphor-icons/react": "^2.1.10",
     "@supabase/supabase-js": "^2.87.1",
     "@tanstack/react-query": "^5.90.12",
+    "canvas-confetti": "^1.9.4",
     "lodash": "^4.17.21",
     "motion": "^12.23.26",
     "react": "^19.2.0",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/lodash": "^4.17.21",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",

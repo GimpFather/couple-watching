@@ -30,11 +30,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
          }
          if (event === "SIGNED_OUT") {
             setUser(null);
-            showToast({
-               title: "Logged out",
-               color: "success",
-               description: "You have been logged out",
-            });
          }
          if (event === "TOKEN_REFRESHED") {
             setUser(session?.user ?? null);
