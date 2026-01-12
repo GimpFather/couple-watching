@@ -5,4 +5,5 @@ export type Profile = {
    createdAt: string;
    authId: string;
    avatarSeed: string;
+   personalCode: string;
 };

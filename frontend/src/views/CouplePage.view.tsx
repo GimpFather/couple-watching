@@ -8,14 +8,11 @@ import { useState } from "react";
 import CustomizeAcountDialog from "~/components/Dialogs/CustomizeAcountDialog";
 import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 import { useGetProfileData } from "~/api/hooks/profiles";
-import MakePairWithSomeoneDialog from "~/components/Dialogs/MakePairWithSomeoneDialog";
 import MakePairByYourselfDialog from "~/components/Dialogs/MakePairByYourselfDialog";
 import { useGetYourPairData } from "~/api/hooks/pairs";
 import showToast from "~/components/Toasts/showToast";
 import DeletePairDialog from "~/components/Dialogs/DeletePairDialog";
-import { generateAvatar, generateAvatarSeed } from "~/utils/utils";
-import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
+import { useNavigationTransition } from "~/hooks/useNavigationTransition";
 
 // This is a test page for the couple feature.
 // Dont mind redundant code, it's for testing purposes.
@@ -24,13 +21,12 @@ const CouplePage = () => {
    const user = useRequiredAuth();
    const { data: profileData } = useGetProfileData(user.id);
    const { data: yourPairData } = useGetYourPairData(profileData?.id);
-   const { palette } = useTheme();
+   const handleNavigationTransition = useNavigationTransition();
 
    const isPaired = !!yourPairData;
    const isCustomized = !!profileData?.username;
 
    const [isCustomizeAccountDialogOpen, setIsCustomizeAccountDialogOpen] = useState(false);
-   const [isMakePairDialogOpen, setIsMakePairDialogOpen] = useState(false);
    const [isMakePairByYourselfDialogOpen, setIsMakePairByYourselfDialogOpen] = useState(false);
    const [isDeletePairDialogOpen, setIsDeletePairDialogOpen] = useState(false);
 
@@ -39,7 +35,7 @@ const CouplePage = () => {
    };
 
    const handleMakePairButton = () => {
-      setIsMakePairDialogOpen((prev) => !prev);
+      handleNavigationTransition("/customization/pairing");
    };
 
    const handleMakePairByYourselfButton = () => {
@@ -66,44 +62,12 @@ const CouplePage = () => {
       <PhoneContainer>
          <Stack direction="column" gap={2}>
             <Typography variant="headingExtraLarge">Couple</Typography>
-            {profileData && (
-               <Stack direction="row" gap={0}>
-                  <Box
-                     sx={{
-                        width: "80px",
-                        height: "80px",
-                        borderRadius: "50%",
-                        border: `5px solid ${palette.common.black}`,
-                     }}
-                  >
-                     <img
-                        src={generateAvatar(profileData.avatar_seed)}
-                        alt="Avatar"
-                        style={{ width: "100%", height: "100%", borderRadius: "50%" }}
-                     />
-                  </Box>
-                  <Box
-                     sx={{
-                        width: "80px",
-                        height: "80px",
-                        borderRadius: "50%",
-                        border: `5px solid ${palette.common.black}`,
-                     }}
-                  >
-                     <img
-                        src={generateAvatar(generateAvatarSeed())}
-                        alt="Avatar"
-                        style={{ width: "100%", height: "100%", borderRadius: "50%" }}
-                     />
-                  </Box>
-               </Stack>
-            )}
             <Typography variant="bodyExtraLarge">It's time to set up your couple! 💑</Typography>
             <Divider />
-            <Typography variant="bodyMedium">Start with customizing your account details . . .</Typography>
+            <Typography variant="bodyMedium">Start with customizing your username . . .</Typography>
             <NBButton onClick={() => handleCustomizeAccountButton()}>Customize my account details</NBButton>
             <Typography variant="bodyMedium">. . . then, set up your couple details.</Typography>
-            <NBButton disabled={true} onClick={() => handleMakePairButton()}>
+            <NBButton disabled={!isCustomized || !!isPaired} onClick={() => handleMakePairButton()}>
                Make a pair with someone
             </NBButton>
             <NBButton disabled={!isCustomized || !!isPaired} onClick={() => handleMakePairByYourselfButton()}>
@@ -134,7 +98,6 @@ const CouplePage = () => {
             onClose={() => setIsCustomizeAccountDialogOpen(false)}
             authId={user.id}
          />
-         <MakePairWithSomeoneDialog open={isMakePairDialogOpen} onClose={() => setIsMakePairDialogOpen(false)} />
          <MakePairByYourselfDialog
             open={isMakePairByYourselfDialogOpen}
             onClose={() => setIsMakePairByYourselfDialogOpen(false)}

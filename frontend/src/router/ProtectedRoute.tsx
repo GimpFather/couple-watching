@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router";
+import LoadingPage from "~/components/Layout/LoadingPage";
 import { useAuth } from "~/context/auth/useAuth";
 
 interface ProtectedRouteProps {
@@ -10,7 +11,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ redirectTo = "/" }) => 
    const { user, loading } = useAuth();
 
    if (loading) {
-      return null;
+      return <LoadingPage />;
    }
 
    if (!user) {

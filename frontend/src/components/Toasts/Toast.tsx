@@ -13,7 +13,7 @@ const Toast = (props: ToastProps) => {
             <Typography variant="headingMedium" color={color}>
                {title}
             </Typography>
-            <Typography variant="bodyMedium">{description}</Typography>
+            {description && <Typography variant="bodyMedium">{description}</Typography>}
          </Stack>
       </NBCard>
    );
