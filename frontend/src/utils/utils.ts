@@ -1,5 +1,7 @@
 import camelCase from "lodash/camelCase";
 import confetti from "canvas-confetti";
+import { createAvatar } from "@dicebear/core";
+import { thumbs } from "@dicebear/collection";
 
 export function keysToCamel<T>(obj: T): T {
    if (Array.isArray(obj)) {
@@ -52,4 +54,19 @@ export const launchConfettiSuccess = () => {
          requestAnimationFrame(frame);
       }
    })();
+};
+
+export const generateAvatarSeed = () => {
+   return Math.random().toString(36).substring(2, 15);
+};
+
+export const generateAvatar = (userSeed: string) => {
+   const shapeColors = ["5DCB8F", "F5C519", "A2A1FF", "FF78DB", "70DEED", "FC819D"];
+   const seed = userSeed;
+   const randomAvatar = createAvatar(thumbs, {
+      seed,
+      backgroundColor: ["transparent"],
+      shapeColor: shapeColors,
+   });
+   return randomAvatar.toDataUri();
 };

@@ -89,12 +89,12 @@ const NBButton: React.FC<NBButtonProps> = ({ children, loading, color, icon, dis
             onPointerUp={() => {
                y.set(INITIAL_Y);
                if (isEnabled) {
-                  playSound("BUTTON_RUSTY_CLICK_END");
+                  playSound("BUTTON_CLICK_END");
                }
             }}
             onPointerDown={() => {
                if (isEnabled) {
-                  playSound("BUTTON_RUSTY_CLICK_START");
+                  playSound("BUTTON_CLICK_START");
                }
             }}
          >

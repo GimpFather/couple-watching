@@ -13,6 +13,9 @@ import MakePairByYourselfDialog from "~/components/Dialogs/MakePairByYourselfDia
 import { useGetYourPairData } from "~/api/hooks/pairs";
 import showToast from "~/components/Toasts/showToast";
 import DeletePairDialog from "~/components/Dialogs/DeletePairDialog";
+import { generateAvatar, generateAvatarSeed } from "~/utils/utils";
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 // This is a test page for the couple feature.
 // Dont mind redundant code, it's for testing purposes.
@@ -21,6 +24,7 @@ const CouplePage = () => {
    const user = useRequiredAuth();
    const { data: profileData } = useGetProfileData(user.id);
    const { data: yourPairData } = useGetYourPairData(profileData?.id);
+   const { palette } = useTheme();
 
    const isPaired = !!yourPairData;
    const isCustomized = !!profileData?.username;
@@ -62,6 +66,38 @@ const CouplePage = () => {
       <PhoneContainer>
          <Stack direction="column" gap={2}>
             <Typography variant="headingExtraLarge">Couple</Typography>
+            {profileData && (
+               <Stack direction="row" gap={0}>
+                  <Box
+                     sx={{
+                        width: "80px",
+                        height: "80px",
+                        borderRadius: "50%",
+                        border: `5px solid ${palette.common.black}`,
+                     }}
+                  >
+                     <img
+                        src={generateAvatar(profileData.avatar_seed)}
+                        alt="Avatar"
+                        style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+                     />
+                  </Box>
+                  <Box
+                     sx={{
+                        width: "80px",
+                        height: "80px",
+                        borderRadius: "50%",
+                        border: `5px solid ${palette.common.black}`,
+                     }}
+                  >
+                     <img
+                        src={generateAvatar(generateAvatarSeed())}
+                        alt="Avatar"
+                        style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+                     />
+                  </Box>
+               </Stack>
+            )}
             <Typography variant="bodyExtraLarge">It's time to set up your couple! 💑</Typography>
             <Divider />
             <Typography variant="bodyMedium">Start with customizing your account details . . .</Typography>

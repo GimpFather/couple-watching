@@ -4,14 +4,14 @@ const BASE_URL = import.meta.env.VITE_SUPABASE_AUDIO_STORAGE_BASE;
 
 export const SOUNDS: Sound[] = [
    {
-      name: "BUTTON_RUSTY_CLICK_START",
+      name: "BUTTON_CLICK_START",
       url: `${BASE_URL}/button-click--start.mp3`,
-      defaultVolume: 0.35,
+      defaultVolume: 1,
    },
    {
-      name: "BUTTON_RUSTY_CLICK_END",
+      name: "BUTTON_CLICK_END",
       url: `${BASE_URL}/button-click--end.mp3`,
-      defaultVolume: 0.35,
+      defaultVolume: 1,
    },
    {
       name: "TRANSITION_1",

@@ -5,8 +5,8 @@ export type Sound = {
 };
 
 export type SoundName =
-   | "BUTTON_RUSTY_CLICK_START"
-   | "BUTTON_RUSTY_CLICK_END"
+   | "BUTTON_CLICK_START"
+   | "BUTTON_CLICK_END"
    | "TRANSITION_1"
    | "NOTIFICATION_BUBBLE_POP"
    | "MEME_ALERT_WHAT"

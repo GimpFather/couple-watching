@@ -9,12 +9,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
    const [user, setUser] = useState<User | null>(null);
+   const [loading, setLoading] = useState<boolean>(true);
    const navigate = useNavigate();
    const location = useLocation();
 
    useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
          setUser(session?.user ?? null);
+         setLoading(false);
       });
 
       const {
@@ -22,6 +24,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       } = supabase.auth.onAuthStateChange((event, session) => {
          if (event === "SIGNED_IN") {
             setUser(session?.user ?? null);
+            setLoading(false);
             localStorage.removeItem("pendingEmailVerification");
             const isOnAuthPage = location.pathname.startsWith("/auth") || location.pathname === "/";
             if (isOnAuthPage) {
@@ -30,12 +33,15 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
          }
          if (event === "SIGNED_OUT") {
             setUser(null);
+            setLoading(false);
          }
          if (event === "TOKEN_REFRESHED") {
             setUser(session?.user ?? null);
+            setLoading(false);
          }
          if (event === "INITIAL_SESSION") {
             setUser(session?.user ?? null);
+            setLoading(false);
          }
       });
       return () => subscription.unsubscribe();
@@ -98,6 +104,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
    const value: AuthContextType = {
       user,
+      loading,
       login: handleSignIn,
       logout: handleSignOut,
       signUp: handleSignUp,

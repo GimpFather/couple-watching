@@ -12,6 +12,8 @@ import StatisticsPage from "~/views/StatisticsPage.view";
 import CouplePage from "~/views/CouplePage.view";
 import AuthConfirmEmailPage from "~/views/Auth/AuthConfirmEmail.view";
 import AuthSuccessPage from "~/views/Auth/AuthSuccess.view";
+import CustomizationPage from "~/views/Onboarding/CustomizationPage.view";
+import PairingPage from "~/views/Onboarding/PairingPage.view";
 
 const AppRouting = () => {
    const location = useLocation();
@@ -23,8 +25,10 @@ const AppRouting = () => {
             <Route path="auth/login" element={<AuthLoginPage />} key="auth-login" />
             <Route path="auth/register" element={<AuthRegisterPage />} key="auth-register" />
             <Route path="auth/confirm-email" element={<AuthConfirmEmailPage />} key="auth-confirm-email" />
-            <Route path="auth/success" element={<AuthSuccessPage />} key="auth-success" />
             <Route element={<ProtectedRoute />}>
+               <Route path="auth/success" element={<AuthSuccessPage />} key="auth-success" />
+               <Route path="customization/profile" element={<CustomizationPage />} key="onboarding-customization" />
+               <Route path="customization/pairing" element={<PairingPage />} key="onboarding-pairing" />
                <Route element={<ToolbarLayout />}>
                   <Route path="home" element={<HomePage />} key="home" />
                   <Route path="library" element={<LibraryPage />} key="library" />

@@ -12,8 +12,12 @@ export const getProfileData = async (authId: string): Promise<Profile> => {
    return keysToCamel(data);
 };
 
-export const updateProfileData = async (authId: string, data: Pick<Profile, "username">) => {
-   const { error } = await supabaseClient.from("profiles").update(data).eq("auth_id", authId);
+export const updateProfileData = async (authId: string, data: Pick<Profile, "username" | "avatarSeed">) => {
+   const payload = {
+      username: data.username,
+      avatar_seed: data.avatarSeed,
+   };
+   const { error } = await supabaseClient.from("profiles").update(payload).eq("auth_id", authId);
    if (error) {
       throw error;
    }
