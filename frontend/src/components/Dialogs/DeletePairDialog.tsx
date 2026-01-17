@@ -8,7 +8,7 @@ import { ImageBrokenIcon } from "@phosphor-icons/react";
 import { useTheme } from "@mui/material/styles";
 import showToast from "~/components/Toasts/showToast";
 
-const DeletePairDialog = ({ open, onClose, pairId }: DialogProps & { pairId: number }) => {
+const DeletePairDialog = ({ open, onClose, pairId }: DialogProps & { pairId: string }) => {
    const { mutate: mutateDeletePair, isPending: isDeletingPair } = useDeletePair();
 
    const theme = useTheme();

@@ -6,13 +6,11 @@ import { useAuth } from "~/context/auth/useAuth";
 import showToast from "~/components/Toasts/showToast";
 import { MaskHappyIcon } from "@phosphor-icons/react";
 import PhoneContainer from "~/components/Layout/PhoneContainer";
-import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
-import { useGetProfileData } from "~/api/hooks/profiles";
+import { useGetMyPairWithProfiles } from "~/api/hooks/pairs";
 
 const HomePage = () => {
    const { logout } = useAuth();
-   const user = useRequiredAuth();
-   const { data: profileData } = useGetProfileData(user.id);
+   const { data: pairData } = useGetMyPairWithProfiles();
 
    const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
@@ -32,7 +30,7 @@ const HomePage = () => {
       <PhoneContainer>
          <Stack direction="column" gap={2}>
             <Typography variant="headingExtraLarge">Home</Typography>
-            <Typography variant="bodyExtraLarge">Welcome, {profileData?.username ?? "Guest"}</Typography>
+            <Typography variant="bodyExtraLarge">{`Welcome, ${pairData?.myUsername ?? "Guest"}`}</Typography>
             <Divider />
             <Stack direction="row" gap={2}>
                <NBButton icon={<MaskHappyIcon />} onClick={() => handleYouDidIt()}>

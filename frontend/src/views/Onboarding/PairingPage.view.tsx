@@ -11,12 +11,38 @@ import AvatarsDuo from "~/components/Avatar/AvatarsDuoPairing";
 import LoadingPage from "~/components/Layout/LoadingPage";
 import { useState } from "react";
 import PersonalCodeBlock from "~/components/Profile/PersonalCodeBlock";
+import { useAuth } from "~/context/auth/useAuth";
+import { useHandleJoinPairByCode } from "~/api/hooks/pairs";
+import showToast from "~/components/Toasts/showToast";
 
 const PairingPage = () => {
    const user = useRequiredAuth();
+   const { logout } = useAuth();
    const { data: profileData, isLoading: isLoadingProfileData } = useGetProfileData(user.id);
    const handleNavigationTransition = useNavigationTransition();
    const [partnerCode, setPartnerCode] = useState("");
+   const { mutate: mutateHandleJoinPairByCode } = useHandleJoinPairByCode();
+   
+   const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      await logout();
+   };
+
+   const handleJoinPair = async (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      mutateHandleJoinPairByCode({ partnerCode, myProfileId: profileData?.id ?? "" }, {
+         onSuccess: () => {
+            handleNavigationTransition("/home");
+         },
+         onError: (error) => {
+            showToast({
+               title: "🤔 Something went wrong.",
+               color: "danger",
+               description: error.message,
+            });
+         },
+      });
+   };
 
    if (!profileData?.avatarSeed || !profileData?.username || !profileData?.personalCode) {
       if (isLoadingProfileData) {
@@ -55,10 +81,10 @@ const PairingPage = () => {
          </PhoneContainer>
          <ActionsBlock>
             <Stack gap="12px">
-               <NBButton disabled fullWidth>
+               <NBButton onClick={(event) => handleJoinPair(event)} disabled={!partnerCode} fullWidth>
                   Continue
                </NBButton>
-               <NBButton color="accent" onClick={() => handleNavigationTransition("/home")} fullWidth>
+               <NBButton color="accent" onClick={(event) => handleLogout(event)} fullWidth>
                   Skip for now
                </NBButton>
             </Stack>

@@ -4,6 +4,7 @@ const QUERY_KEYS = {
    MAKE_PAIR_BY_YOURSELF: "PAIR.makePairByYourself",
    GET_YOUR_PAIR_DATA: "PAIR.getYourPairData",
    DELETE_PAIR: "PAIR.deletePair",
+   HANDLE_JOIN_PAIR_BY_CODE: "PAIR.handleJoinPairByCode",
 };
 
 export default QUERY_KEYS;

@@ -3,7 +3,7 @@ import type { Profile } from "~/api/types/profiles";
 import { keysToCamel } from "~/utils/utils";
 
 export const getProfileData = async (authId: string): Promise<Profile> => {
-   const { data, error } = await supabaseClient.from("profiles").select("*").eq("auth_id", authId).single();
+   const { data, error } = await supabaseClient.from("profiles").select("*").eq("auth_id", authId).maybeSingle();
 
    if (error) {
       throw error;

@@ -7,55 +7,34 @@ import PhoneContainer from "~/components/Layout/PhoneContainer";
 import { useState } from "react";
 import CustomizeAcountDialog from "~/components/Dialogs/CustomizeAcountDialog";
 import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
-import { useGetProfileData } from "~/api/hooks/profiles";
-import MakePairByYourselfDialog from "~/components/Dialogs/MakePairByYourselfDialog";
-import { useGetYourPairData } from "~/api/hooks/pairs";
+import { useGetMyPairWithProfiles } from "~/api/hooks/pairs";
 import showToast from "~/components/Toasts/showToast";
-import DeletePairDialog from "~/components/Dialogs/DeletePairDialog";
-import { useNavigationTransition } from "~/hooks/useNavigationTransition";
 
 // This is a test page for the couple feature.
 // Dont mind redundant code, it's for testing purposes.
 
 const CouplePage = () => {
    const user = useRequiredAuth();
-   const { data: profileData } = useGetProfileData(user.id);
-   const { data: yourPairData } = useGetYourPairData(profileData?.id);
-   const handleNavigationTransition = useNavigationTransition();
+   const { data: myPairData } = useGetMyPairWithProfiles();
 
-   const isPaired = !!yourPairData;
-   const isCustomized = !!profileData?.username;
+   const isPaired = !!myPairData;
 
    const [isCustomizeAccountDialogOpen, setIsCustomizeAccountDialogOpen] = useState(false);
-   const [isMakePairByYourselfDialogOpen, setIsMakePairByYourselfDialogOpen] = useState(false);
-   const [isDeletePairDialogOpen, setIsDeletePairDialogOpen] = useState(false);
 
    const handleCustomizeAccountButton = () => {
       setIsCustomizeAccountDialogOpen((prev) => !prev);
    };
 
-   const handleMakePairButton = () => {
-      handleNavigationTransition("/customization/pairing");
-   };
-
-   const handleMakePairByYourselfButton = () => {
-      setIsMakePairByYourselfDialogOpen((prev) => !prev);
-   };
-
    const handleCheckPair = () => {
-      if (yourPairData) {
-         console.log(yourPairData);
-         const partnerNickname = yourPairData.secondDisplayName;
+      if (myPairData) {
+         console.log(myPairData);
+         const partnerNickname = myPairData.partnerUsername;
          showToast({
             title: "🎉 Pair found!",
             color: "success",
-            description: `You are paired with ${partnerNickname}.`,
+            description: `You are paired with ${partnerNickname}. More information about your pair can be found in console.`,
          });
       }
-   };
-
-   const handleDeletePairButton = () => {
-      setIsDeletePairDialogOpen((prev) => !prev);
    };
 
    return (
@@ -66,13 +45,6 @@ const CouplePage = () => {
             <Divider />
             <Typography variant="bodyMedium">Start with customizing your username . . .</Typography>
             <NBButton onClick={() => handleCustomizeAccountButton()}>Customize my account details</NBButton>
-            <Typography variant="bodyMedium">. . . then, set up your couple details.</Typography>
-            <NBButton disabled={!isCustomized || !!isPaired} onClick={() => handleMakePairButton()}>
-               Make a pair with someone
-            </NBButton>
-            <NBButton disabled={!isCustomized || !!isPaired} onClick={() => handleMakePairByYourselfButton()}>
-               Make a pair managed by yourself
-            </NBButton>
             <Divider />
             <Typography variant="bodyMedium">
                If everything is set up correctly, buttons below will be enabled, and you can start toodling around the
@@ -88,26 +60,17 @@ const CouplePage = () => {
                >
                   Check
                </NBButton>
-               <NBButton color="danger" disabled={!isPaired} onClick={() => handleDeletePairButton()}>
+               {/* {TODO: There should be a special function for deleting pair - with cascade delete of reviews} */}
+               <NBButton color="danger" disabled={true}>
                   Delete pair
                </NBButton>
             </Stack>
          </Stack>
-         <CustomizeAcountDialog
-            open={isCustomizeAccountDialogOpen}
-            onClose={() => setIsCustomizeAccountDialogOpen(false)}
-            authId={user.id}
-         />
-         <MakePairByYourselfDialog
-            open={isMakePairByYourselfDialogOpen}
-            onClose={() => setIsMakePairByYourselfDialogOpen(false)}
-            authId={user.id}
-         />
-         {yourPairData && (
-            <DeletePairDialog
-               open={isDeletePairDialogOpen}
-               onClose={() => setIsDeletePairDialogOpen(false)}
-               pairId={yourPairData.id}
+         {isCustomizeAccountDialogOpen && (
+            <CustomizeAcountDialog
+               open={isCustomizeAccountDialogOpen}
+               onClose={() => setIsCustomizeAccountDialogOpen(false)}
+               authId={user.id}
             />
          )}
       </PhoneContainer>

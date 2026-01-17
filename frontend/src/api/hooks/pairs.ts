@@ -1,8 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import QUERY_KEYS from "~/api/queryKeys";
-import { deletePair, getYourPairData, insertPairByYourself } from "~/api/services/pairs.service";
+import { deletePair, getMyPairWithProfiles, handleJoinPairByCode, insertPairByYourself } from "~/api/services/pairs.service";
 import type { MakePairByYourselfData } from "~/api/types/pairs";
 
+//TODO: This is not used anywhere, but it's here for future use.
 export const useMakePairByYourself = () => {
    const queryClient = useQueryClient();
    return useMutation({
@@ -14,24 +15,34 @@ export const useMakePairByYourself = () => {
    });
 };
 
-export const useGetYourPairData = (profileId?: number) => {
-   return useQuery({
-      queryKey: [QUERY_KEYS.GET_YOUR_PAIR_DATA, profileId],
-      queryFn: async () => {
-         if (profileId == null) return null;
-         return getYourPairData(profileId);
-      },
-      enabled: profileId != null,
-   });
-};
-
+//TODO: This is not used anywhere, but it's here for future use.
 export const useDeletePair = () => {
    const queryClient = useQueryClient();
    return useMutation({
       mutationKey: [QUERY_KEYS.DELETE_PAIR],
-      mutationFn: (pairId: number) => deletePair(pairId),
+      mutationFn: (pairId: string) => deletePair(pairId),
       onSuccess: () => {
          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GET_YOUR_PAIR_DATA] });
+      },
+   });
+};
+
+export const useHandleJoinPairByCode = () => {
+   const queryClient = useQueryClient();
+   return useMutation({
+      mutationKey: [QUERY_KEYS.HANDLE_JOIN_PAIR_BY_CODE],
+      mutationFn: ({ partnerCode, myProfileId }: { partnerCode: string, myProfileId: string }) => handleJoinPairByCode(partnerCode, myProfileId),
+      onSuccess: () => {
+         queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GET_YOUR_PAIR_DATA] });
+      },
+   });
+};
+
+export const useGetMyPairWithProfiles = () => {
+   return useQuery({
+      queryKey: [QUERY_KEYS.GET_YOUR_PAIR_DATA],
+      queryFn: async () => {
+         return getMyPairWithProfiles();
       },
    });
 };
