@@ -8,7 +8,6 @@ import type { DialogProps } from "~/components/Dialogs/dialogs.types";
 import showToast from "~/components/Toasts/showToast";
 import { useUpdateProfileData } from "~/api/hooks/profiles";
 
-//TODO: Poprawić. Coś modal nie wyjeżdża.
 const CustomizeAcountDialog = ({ open, onClose, authId }: DialogProps & { authId: string }) => {
    const [username, setUsername] = useState("");
    const { mutate: updateProfileData, isPending: isUpdatingProfileData } = useUpdateProfileData(authId);

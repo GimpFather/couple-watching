@@ -33,7 +33,7 @@ const CustomModalContent = styled(motion.div)(({ theme }) => ({
 
 const NBModal = ({ children, ...props }: CustomModalProps) => {
    return (
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence mode="wait" initial={true}>
          {props.open && (
             <CustomModal
                component={motion.div}

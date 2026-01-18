@@ -66,13 +66,11 @@ const CouplePage = () => {
                </NBButton>
             </Stack>
          </Stack>
-         {isCustomizeAccountDialogOpen && (
-            <CustomizeAcountDialog
-               open={isCustomizeAccountDialogOpen}
-               onClose={() => setIsCustomizeAccountDialogOpen(false)}
-               authId={authId}
-            />
-         )}
+         <CustomizeAcountDialog
+            open={isCustomizeAccountDialogOpen}
+            onClose={() => setIsCustomizeAccountDialogOpen(false)}
+            authId={authId}
+         />
       </PhoneContainer>
    );
 };
