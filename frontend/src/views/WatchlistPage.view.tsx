@@ -3,14 +3,14 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import NBButton from "~/components/NeoBrutalism/NBButton";
 import showToast from "~/components/Toasts/showToast";
-import { BinocularsIcon } from "@phosphor-icons/react";
+import { BooksIcon } from "@phosphor-icons/react";
 import PhoneContainer from "~/components/Layout/PhoneContainer";
 
-const SearchPage = () => {
-   const handleSearchButton = () => {
+const LibraryPage = () => {
+   const handleWatchlistButton = () => {
       showToast({
-         title: "Show me the search!",
-         description: "You are now in the search! 🔍",
+         title: "Show me the watchlist!",
+         description: "You are now in the watchlist!",
          color: "success",
          sound: "MEME_ALERT_SHINE",
       });
@@ -19,12 +19,12 @@ const SearchPage = () => {
    return (
       <PhoneContainer>
          <Stack direction="column" gap={2}>
-            <Typography variant="headingExtraLarge">Search</Typography>
-            <Typography variant="bodyExtraLarge">This is the search! 🔍</Typography>
+            <Typography variant="headingExtraLarge">Watchlist</Typography>
+            <Typography variant="bodyExtraLarge">This is the watchlist!</Typography>
             <Divider />
             <Stack direction="row" gap={2}>
-               <NBButton icon={<BinocularsIcon />} onClick={() => handleSearchButton()}>
-                  Show me the search!
+               <NBButton icon={<BooksIcon />} onClick={() => handleWatchlistButton()}>
+                  Show me the watchlist!
                </NBButton>
             </Stack>
          </Stack>
@@ -32,4 +32,4 @@ const SearchPage = () => {
    );
 };
 
-export default SearchPage;
+export default LibraryPage;

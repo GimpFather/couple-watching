@@ -6,7 +6,6 @@ import { useNavigationTransition } from "~/hooks/useNavigationTransition";
 import {
    HouseLineIcon,
    FilmReelIcon,
-   BinocularsIcon,
    ProjectorScreenChartIcon,
    SmileyXEyesIcon,
    type IconProps,
@@ -32,10 +31,8 @@ const Toolbar = () => {
       switch (label) {
          case "Home":
             return <HouseLineIcon {...iconProps} />;
-         case "Library":
+         case "Watchlist":
             return <FilmReelIcon {...iconProps} />;
-         case "Search":
-            return <BinocularsIcon {...iconProps} />;
          case "Statistics":
             return <ProjectorScreenChartIcon {...iconProps} />;
          case "Couple":
@@ -76,16 +73,10 @@ const Toolbar = () => {
                active={pathname === "/home"}
             />
             <ToolbarItem
-               label="Library"
-               icon={getIcon("Library", pathname === "/library")}
-               onClick={() => handleNavigationTransition("/library")}
-               active={pathname === "/library"}
-            />
-            <ToolbarItem
-               label="Search"
-               icon={getIcon("Search", pathname === "/search")}
-               onClick={() => handleNavigationTransition("/search")}
-               active={pathname === "/search"}
+               label="Watchlist"
+               icon={getIcon("Watchlist", pathname === "/watchlist")}
+               onClick={() => handleNavigationTransition("/watchlist")}
+               active={pathname === "/watchlist"}
             />
             <ToolbarItem
                label="Statistics"

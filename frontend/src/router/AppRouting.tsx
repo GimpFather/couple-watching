@@ -6,8 +6,7 @@ import WelcomePage from "~/views/Auth/WelcomePage.view";
 import AuthLoginPage from "~/views/Auth/AuthLoginPage.view";
 import AuthRegisterPage from "~/views/Auth/AuthRegisterPage.view";
 import HomePage from "~/views/HomePage.view";
-import LibraryPage from "~/views/LibraryPage.view";
-import SearchPage from "~/views/SearchPage.view";
+import WatchlistPage from "~/views/WatchlistPage.view";
 import StatisticsPage from "~/views/StatisticsPage.view";
 import CouplePage from "~/views/CouplePage.view";
 import AuthConfirmEmailPage from "~/views/Auth/AuthConfirmEmail.view";
@@ -35,8 +34,7 @@ const AppRouting = () => {
                   <Route path="customization/success" element={<PairingSuccessPage />} key="obording-success" />
                   <Route element={<ToolbarLayout />}>
                      <Route path="home" element={<HomePage />} key="home" />
-                     <Route path="library" element={<LibraryPage />} key="library" />
-                     <Route path="search" element={<SearchPage />} key="search" />
+                     <Route path="watchlist" element={<WatchlistPage />} key="watchlist" />
                      <Route path="statistics" element={<StatisticsPage />} key="statistics" />
                      <Route path="couple" element={<CouplePage />} key="couple" />
                   </Route>
