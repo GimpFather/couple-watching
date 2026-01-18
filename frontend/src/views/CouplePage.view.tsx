@@ -14,8 +14,8 @@ import showToast from "~/components/Toasts/showToast";
 // Dont mind redundant code, it's for testing purposes.
 
 const CouplePage = () => {
-   const user = useRequiredAuth();
-   const { data: myPairData } = useGetMyPairWithProfiles();
+   const { id: authId } = useRequiredAuth();
+   const { data: myPairData } = useGetMyPairWithProfiles(authId);
 
    const isPaired = !!myPairData;
 
@@ -70,7 +70,7 @@ const CouplePage = () => {
             <CustomizeAcountDialog
                open={isCustomizeAccountDialogOpen}
                onClose={() => setIsCustomizeAccountDialogOpen(false)}
-               authId={user.id}
+               authId={authId}
             />
          )}
       </PhoneContainer>

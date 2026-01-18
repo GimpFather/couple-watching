@@ -7,10 +7,12 @@ import showToast from "~/components/Toasts/showToast";
 import { MaskHappyIcon } from "@phosphor-icons/react";
 import PhoneContainer from "~/components/Layout/PhoneContainer";
 import { useGetMyPairWithProfiles } from "~/api/hooks/pairs";
+import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 
 const HomePage = () => {
    const { logout } = useAuth();
-   const { data: pairData } = useGetMyPairWithProfiles();
+   const { id: authId } = useRequiredAuth();
+   const { data: pairData } = useGetMyPairWithProfiles(authId);
 
    const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();

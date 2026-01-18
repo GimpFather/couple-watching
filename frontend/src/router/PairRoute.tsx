@@ -1,9 +1,11 @@
 import { Navigate, Outlet } from "react-router";
 import { useGetMyPairWithProfiles } from "~/api/hooks/pairs";
 import LoadingPage from "~/components/Layout/LoadingPage";
+import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 
 const PairRoute = () => {
-    const { data: pairData, isLoading: isLoadingPairData } = useGetMyPairWithProfiles();
+    const { id: authId } = useRequiredAuth();
+    const { data: pairData, isLoading: isLoadingPairData } = useGetMyPairWithProfiles(authId);
 
     if (isLoadingPairData) {
         return <LoadingPage />;

@@ -2,6 +2,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import QUERY_KEYS from "~/api/queryKeys";
 import { deletePair, getMyPairWithProfiles, handleJoinPairByCode, insertPairByYourself } from "~/api/services/pairs.service";
 import type { MakePairByYourselfData } from "~/api/types/pairs";
+import { usePairRealtime } from "./usePairRealtime";
+import { useGetProfileData } from "./profiles";
 
 //TODO: This is not used anywhere, but it's here for future use.
 export const useMakePairByYourself = () => {
@@ -38,11 +40,14 @@ export const useHandleJoinPairByCode = () => {
    });
 };
 
-export const useGetMyPairWithProfiles = () => {
+export const useGetMyPairWithProfiles = (authId: string) => {
+   const { data: profileData } = useGetProfileData(authId);
+ 
+   usePairRealtime(profileData?.id);
+ 
    return useQuery({
-      queryKey: [QUERY_KEYS.GET_YOUR_PAIR_DATA],
-      queryFn: async () => {
-         return getMyPairWithProfiles();
-      },
+     queryKey: [QUERY_KEYS.GET_YOUR_PAIR_DATA, authId],
+     enabled: !!profileData?.id,
+     queryFn: getMyPairWithProfiles,
    });
-};
+ };

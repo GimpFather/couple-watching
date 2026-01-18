@@ -9,10 +9,10 @@ import { useNavigationTransition } from "~/hooks/useNavigationTransition";
 import ActionsBlock from "~/components/Layout/ActionsBlock";
 import AvatarsDuo from "~/components/Avatar/AvatarsDuoPairing";
 import LoadingPage from "~/components/Layout/LoadingPage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PersonalCodeBlock from "~/components/Profile/PersonalCodeBlock";
 import { useAuth } from "~/context/auth/useAuth";
-import { useHandleJoinPairByCode } from "~/api/hooks/pairs";
+import { useHandleJoinPairByCode, useGetMyPairWithProfiles } from "~/api/hooks/pairs";
 import showToast from "~/components/Toasts/showToast";
 
 const PairingPage = () => {
@@ -22,7 +22,16 @@ const PairingPage = () => {
    const handleNavigationTransition = useNavigationTransition();
    const [partnerCode, setPartnerCode] = useState("");
    const { mutate: mutateHandleJoinPairByCode } = useHandleJoinPairByCode();
-   
+
+   const { id: authId } = useRequiredAuth();
+   const { data: pairData } = useGetMyPairWithProfiles(authId);
+
+   useEffect(() => {
+      if (pairData) {
+         handleNavigationTransition("/home");
+      }
+   }, [pairData, handleNavigationTransition]);
+
    const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
       await logout();
