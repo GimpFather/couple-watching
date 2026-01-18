@@ -28,7 +28,7 @@ const PairingPage = () => {
 
    useEffect(() => {
       if (pairData) {
-         handleNavigationTransition("/home");
+         handleNavigationTransition("/customization/success");
       }
    }, [pairData, handleNavigationTransition]);
 
@@ -40,9 +40,6 @@ const PairingPage = () => {
    const handleJoinPair = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
       mutateHandleJoinPairByCode({ partnerCode, myProfileId: profileData?.id ?? "" }, {
-         onSuccess: () => {
-            handleNavigationTransition("/home");
-         },
          onError: (error) => {
             showToast({
                title: "🤔 Something went wrong.",

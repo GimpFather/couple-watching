@@ -15,6 +15,7 @@ import AuthSuccessPage from "~/views/Auth/AuthSuccess.view";
 import CustomizationPage from "~/views/Onboarding/CustomizationPage.view";
 import PairingPage from "~/views/Onboarding/PairingPage.view";
 import PairRoute from "./PairRoute";
+import PairingSuccessPage from "~/views/Onboarding/PairingSuccessPage.view";
 
 const AppRouting = () => {
    const location = useLocation();
@@ -31,13 +32,14 @@ const AppRouting = () => {
                <Route path="customization/profile" element={<CustomizationPage />} key="onboarding-customization" />
                <Route path="customization/pairing" element={<PairingPage />} key="onboarding-pairing" />
                <Route element={<PairRoute />}>
-               <Route element={<ToolbarLayout />}>
-                  <Route path="home" element={<HomePage />} key="home" />
-                  <Route path="library" element={<LibraryPage />} key="library" />
-                  <Route path="search" element={<SearchPage />} key="search" />
-                  <Route path="statistics" element={<StatisticsPage />} key="statistics" />
-                  <Route path="couple" element={<CouplePage />} key="couple" />
-               </Route>
+                  <Route path="customization/success" element={<PairingSuccessPage />} key="obording-success" />
+                  <Route element={<ToolbarLayout />}>
+                     <Route path="home" element={<HomePage />} key="home" />
+                     <Route path="library" element={<LibraryPage />} key="library" />
+                     <Route path="search" element={<SearchPage />} key="search" />
+                     <Route path="statistics" element={<StatisticsPage />} key="statistics" />
+                     <Route path="couple" element={<CouplePage />} key="couple" />
+                  </Route>
                </Route>
             </Route>
          </Routes>

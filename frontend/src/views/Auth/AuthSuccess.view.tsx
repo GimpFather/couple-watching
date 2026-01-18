@@ -16,7 +16,7 @@ const AuthSuccessPage = () => {
 
    useEffect(() => {
       launchConfettiSuccess();
-      playSound("MEME_ALERT_VIOLIN_HAPPY");
+      playSound("MEME_ALERT_SHINE_SOFT");
    }, []);
 
    return (
