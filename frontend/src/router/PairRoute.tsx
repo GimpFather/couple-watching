@@ -11,7 +11,7 @@ const PairRoute = () => {
         return <LoadingPage />;
     }
 
-    if (!pairData) {
+    if (pairData === null) {
         return <Navigate to="/customization/pairing" replace />;
     }
 

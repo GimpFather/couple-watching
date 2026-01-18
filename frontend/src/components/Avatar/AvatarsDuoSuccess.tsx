@@ -10,10 +10,10 @@ const AvatarsDuoSuccess = ({ avatarSeedOne, avatarSeedTwo }: AvatarsDuoSuccessPr
     return (
         <Box sx={{ position: "relative", width: "96px", height: "96px" }}>
             <Box sx={{ position: "absolute", top: 0, left: -24, zIndex: 1, backgroundColor: "white", borderRadius: "50%", border: '0px solid' }}>
-                <AvatarCircle seed={avatarSeedOne} />
+                <AvatarCircle seed={avatarSeedOne} size="96px" borderSize="5px" />
             </Box>
             <Box sx={{ position: "absolute", top: 0, left: 24, zIndex: 2, backgroundColor: "white", borderRadius: "50%", border: '0px solid' }}>
-                <AvatarCircle seed={avatarSeedTwo} />
+                <AvatarCircle seed={avatarSeedTwo} size="96px" borderSize="5px" />
             </Box>
         </Box>
     );

@@ -7,13 +7,17 @@ import {
    HouseLineIcon,
    FilmReelIcon,
    ProjectorScreenChartIcon,
-   SmileyXEyesIcon,
    type IconProps,
 } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import Box from "@mui/material/Box";
+import AvatarsDuoToolbar from "~/components/Avatar/AvatarsDuoToolbar";
+import { useGetMyPairWithProfiles } from "~/api/hooks/pairs";
+import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 
 const Toolbar = () => {
+   const { id: authId } = useRequiredAuth();
+   const { data: pairData } = useGetMyPairWithProfiles(authId);
    const { pathname } = useLocation();
    const { palette } = useTheme();
    const handleNavigationTransition = useNavigationTransition();
@@ -36,7 +40,7 @@ const Toolbar = () => {
          case "Statistics":
             return <ProjectorScreenChartIcon {...iconProps} />;
          case "Couple":
-            return <SmileyXEyesIcon {...iconProps} />;
+            return <AvatarsDuoToolbar avatarSeedOne={pairData?.myAvatarSeed ?? ""} avatarSeedTwo={pairData?.partnerAvatarSeed ?? ""} />;
          default:
             return null;
       }

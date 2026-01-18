@@ -12,7 +12,7 @@ const AvatarsDuo = ({ avatarSeedOne }: AvatarsDuoProps) => {
    return (
       <Box sx={{ position: "relative", width: "80px", height: "80px" }}>
          <Box sx={{ position: "absolute", top: 0, left: -20, zIndex: 1 }}>
-            <AvatarCircle seed={avatarSeedOne} />
+            <AvatarCircle seed={avatarSeedOne} size="80px" borderSize="5px" />
          </Box>
          <Box
             sx={{
