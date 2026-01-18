@@ -2,16 +2,18 @@ import { supabaseClient } from "~/api/client";
 import type { MakePairByYourselfData, Pair, PairWithProfiles } from "~/api/types/pairs";
 import { keysToCamel } from "~/utils/utils";
 
-export const insertPairByYourself = async (data: MakePairByYourselfData) => {
-   const { error } = await supabaseClient.from("pairs").insert({
-      owner_profile_id: data.firstProfileId,
-      partner_display_name: data.secondDisplayName,
-      status: "OWNER_ONLY",
+export const handlePairByYourself = async (data: MakePairByYourselfData): Promise<Pair> => {
+   const { data: result, error } = await supabaseClient.rpc('create_owner_only_pair', {
+      p_my_profile_id: data.firstProfileId,
+      p_partner_display_name: data.secondDisplayName,
+      p_partner_avatar_seed: data.secondAvatarSeed,
    });
 
    if (error) {
       throw error;
    }
+
+   return keysToCamel(result[0]) as Pair;
 };
 
 export const deletePair = async (pairId: string) => {

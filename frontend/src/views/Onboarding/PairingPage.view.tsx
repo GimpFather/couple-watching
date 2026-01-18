@@ -11,31 +11,26 @@ import AvatarsDuo from "~/components/Avatar/AvatarsDuoPairing";
 import LoadingPage from "~/components/Layout/LoadingPage";
 import { useState, useEffect } from "react";
 import PersonalCodeBlock from "~/components/Profile/PersonalCodeBlock";
-import { useAuth } from "~/context/auth/useAuth";
 import { useHandleJoinPairByCode, useGetMyPairWithProfiles } from "~/api/hooks/pairs";
 import showToast from "~/components/Toasts/showToast";
+import MakePairByYourselfDialog from "~/components/Dialogs/MakePairByYourselfDialog";
 
 const PairingPage = () => {
-   const user = useRequiredAuth();
-   const { logout } = useAuth();
-   const { data: profileData, isLoading: isLoadingProfileData } = useGetProfileData(user.id);
-   const handleNavigationTransition = useNavigationTransition();
-   const [partnerCode, setPartnerCode] = useState("");
-   const { mutate: mutateHandleJoinPairByCode } = useHandleJoinPairByCode();
-
    const { id: authId } = useRequiredAuth();
+   const { data: profileData, isLoading: isLoadingProfileData } = useGetProfileData(authId);
+   const { mutate: mutateHandleJoinPairByCode } = useHandleJoinPairByCode();
    const { data: pairData } = useGetMyPairWithProfiles(authId);
+
+   const handleNavigationTransition = useNavigationTransition();
+
+   const [partnerCode, setPartnerCode] = useState("");
+   const [openPairByYourselfDialog, setOpenPairByYourselfDialog] = useState(false);
 
    useEffect(() => {
       if (pairData) {
          handleNavigationTransition("/customization/success");
       }
    }, [pairData, handleNavigationTransition]);
-
-   const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-      await logout();
-   };
 
    const handleJoinPair = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
@@ -90,11 +85,12 @@ const PairingPage = () => {
                <NBButton onClick={(event) => handleJoinPair(event)} disabled={!partnerCode} fullWidth>
                   Continue
                </NBButton>
-               <NBButton color="accent" onClick={(event) => handleLogout(event)} fullWidth>
+               <NBButton color="accent" onClick={() => setOpenPairByYourselfDialog(true)} fullWidth>
                   Skip for now
                </NBButton>
             </Stack>
          </ActionsBlock>
+         <MakePairByYourselfDialog open={openPairByYourselfDialog} onClose={() => setOpenPairByYourselfDialog(false)} ownerProfileId={profileData.id} />
       </>
    );
 };

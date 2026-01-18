@@ -4,10 +4,11 @@ export type Pair = {
    firstProfileId: string;
    secondProfileId: string | null;
    secondDisplayName: string | null;
+   secondAvatarSeed: string | null;
    status: "OWNER_ONLY" | "PENDING" | "PAIRED";
 };
 
-export type MakePairByYourselfData = Pick<Pair, "firstProfileId" | "secondDisplayName">;
+export type MakePairByYourselfData = Pick<Pair, "firstProfileId" | "secondDisplayName" | "secondAvatarSeed">;
 
 export type PairWithProfiles = {
    id: string;

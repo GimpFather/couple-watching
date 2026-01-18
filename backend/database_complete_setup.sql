@@ -402,6 +402,71 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER
 SET search_path = public;
 
+-- Funkcja do tworzenia pary przez samego użytkownika (status OWNER_ONLY)
+CREATE OR REPLACE FUNCTION public.create_owner_only_pair(
+  p_my_profile_id uuid,
+  p_partner_display_name text,
+  p_partner_avatar_seed text
+)
+RETURNS TABLE (
+  id uuid,
+  created_at timestamptz,
+  owner_profile_id uuid,
+  partner_profile_id uuid,
+  partner_display_name text,
+  status pair_status
+) AS $$
+DECLARE
+  v_existing_pair_id uuid;
+BEGIN
+  -- 1. Walidacja wymaganych parametrów
+  IF p_partner_display_name IS NULL OR trim(p_partner_display_name) = '' THEN
+    RAISE EXCEPTION 'Nazwa partnera jest wymagana' USING ERRCODE = 'P0005';
+  END IF;
+
+  IF p_partner_avatar_seed IS NULL OR trim(p_partner_avatar_seed) = '' THEN
+    RAISE EXCEPTION 'Avatar seed partnera jest wymagany' USING ERRCODE = 'P0007';
+  END IF;
+
+  -- 2. Sprawdź czy użytkownik już ma parę (z FOR UPDATE żeby uniknąć race conditions)
+  SELECT pairs.id INTO v_existing_pair_id
+  FROM public.pairs
+  WHERE pairs.owner_profile_id = p_my_profile_id
+     OR pairs.partner_profile_id = p_my_profile_id
+  FOR UPDATE
+  LIMIT 1;
+
+  IF v_existing_pair_id IS NOT NULL THEN
+    RAISE EXCEPTION 'Masz już parę' USING ERRCODE = 'P0004';
+  END IF;
+
+  -- 3. Utwórz parę (status OWNER_ONLY - bez partnera, ale z danymi partnera)
+  RETURN QUERY
+  INSERT INTO public.pairs (
+    owner_profile_id,
+    partner_profile_id,
+    status,
+    partner_display_name,
+    partner_avatar_seed
+  )
+  VALUES (
+    p_my_profile_id,
+    NULL,
+    'OWNER_ONLY',
+    p_partner_display_name,
+    p_partner_avatar_seed
+  )
+  RETURNING
+    public.pairs.id,
+    public.pairs.created_at,
+    public.pairs.owner_profile_id,
+    public.pairs.partner_profile_id,
+    public.pairs.partner_display_name,
+    public.pairs.status;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER
+SET search_path = public;
+
 -- Funkcja do pobierania pary użytkownika z danymi (z JOINami)
 -- Przyjmuje tylko myProfileId - backend sam znajdzie parę (jeden user = jedna para)
 DROP FUNCTION IF EXISTS public.get_my_pair_with_profiles(uuid);
@@ -786,6 +851,7 @@ GRANT EXECUTE ON FUNCTION public.is_profile_in_pair_with_me(uuid) TO authenticat
 GRANT EXECUTE ON FUNCTION public.generate_personal_code() TO authenticated, anon;
 GRANT EXECUTE ON FUNCTION public.regenerate_personal_code(uuid) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.join_pair_by_code(text, uuid) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.create_owner_only_pair(uuid, text, text) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.get_my_pair() TO authenticated;
 
 -- ======================================
