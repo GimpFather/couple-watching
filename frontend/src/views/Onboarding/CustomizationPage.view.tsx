@@ -62,7 +62,7 @@ const CustomizationPage = () => {
       <form onSubmit={handleSetProfileData}>
          <PhoneContainer>
             <Stack direction="column" gap={2} alignItems="center" sx={{ marginTop: "64px" }}>
-               <AvatarCircle seed={profileData?.avatarSeed ?? avatarSeed} />
+               <AvatarCircle seed={profileData?.avatarSeed ?? avatarSeed} size="96px" borderSize="5px" />
                <Stack direction="column" gap={1} alignItems="center" sx={{ marginBottom: "24px", textAlign: "center" }}>
                   <Typography variant="headingLarge">So... who are you actually?</Typography>
                   <Typography variant="bodyMedium">

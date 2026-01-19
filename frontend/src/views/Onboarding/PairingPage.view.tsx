@@ -32,6 +32,12 @@ const PairingPage = () => {
       }
    }, [pairData, handleNavigationTransition]);
 
+   useEffect(() => {
+      if (!isLoadingProfileData && (!profileData?.avatarSeed || !profileData?.username || !profileData?.personalCode)) {
+         handleNavigationTransition("/customization/profile");
+      }
+   }, [profileData, isLoadingProfileData, handleNavigationTransition]);
+
    const handleJoinPair = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
       mutateHandleJoinPairByCode({ partnerCode, myProfileId: profileData?.id ?? "" }, {
@@ -45,12 +51,12 @@ const PairingPage = () => {
       });
    };
 
+   if (isLoadingProfileData) {
+      return <LoadingPage />;
+   }
+
    if (!profileData?.avatarSeed || !profileData?.username || !profileData?.personalCode) {
-      if (isLoadingProfileData) {
-         return <LoadingPage />;
-      }
-      handleNavigationTransition("/customization/profile");
-      return;
+      return null;
    }
 
    return (

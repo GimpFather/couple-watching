@@ -17,7 +17,7 @@ const AvatarCircle = ({ seed, size, borderSize }: AvatarCircleProps) => {
             <img
                src={generateAvatar(seed)}
                alt="Avatar"
-               style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+               style={{ width: "100%", height: "100%", borderRadius: "50%", position: "relative", zIndex: -1 }}
             />
          ) : (
             <Skeleton variant="circular" width="100%" height="100%" />
