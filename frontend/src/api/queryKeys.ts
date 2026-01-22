@@ -6,6 +6,7 @@ const QUERY_KEYS = {
    DELETE_PAIR: "PAIR.deletePair",
    HANDLE_JOIN_PAIR_BY_CODE: "PAIR.handleJoinPairByCode",
    HANDLE_PAIR_BY_YOURSELF: "PAIR.handlePairByYourself",
+   GET_OMDB_SEARCH_FOR_MOVIES: "OMDB.getOMDbSearchForMovies",
 };
 
 export default QUERY_KEYS;
