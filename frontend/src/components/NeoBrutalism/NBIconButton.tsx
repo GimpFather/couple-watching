@@ -1,0 +1,107 @@
+import { memo } from "react";
+import ButtonBase, { type ButtonBaseProps as ButtonBaseProps } from "@mui/material/ButtonBase";
+import { styled } from "@mui/material/styles";
+import type { CustomColorOptions, CommonColors } from "@mui/material/styles";
+import { motion, useMotionValue, useSpring } from "motion/react";
+import { playSound } from "~/hooks/useSound";
+
+type NBIconButtonProps = Omit<ButtonBaseProps, "color"> & {
+    icon: React.ReactNode;
+    loading?: boolean;
+    color?: CustomColorOptions;
+};
+
+const INITIAL_Y = -4;
+
+const CustomIconButtonBase = styled(ButtonBase)<{ color?: CustomColorOptions }>(({ theme, color }) => {
+    const bodyColor = color ? (theme.palette[color] as CommonColors) : theme.palette.primary;
+    const captionColor =
+        color === "danger" || color === "success" ? theme.palette.common.white : theme.palette.common.dark;
+
+    return {
+        padding: "8px 10px",
+        position: "relative",
+        height: 40,
+        width: 44,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: bodyColor.main,
+        color: captionColor,
+        border: "0.094rem solid",
+        borderColor: theme.palette.common.black,
+        borderRadius: "12px",
+        "&:disabled": {
+            backgroundColor: theme.palette.accent[500],
+            color: theme.palette.accent[200],
+            borderColor: theme.palette.accent[800],
+            cursor: "not-allowed",
+        },
+    };
+});
+
+const BottomLayer = styled(motion.div)<{ color?: CustomColorOptions }>(({ theme, color }) => {
+    const shadowColor = color ? (theme.palette[color] as CommonColors) : theme.palette.primary;
+
+    return {
+        position: "absolute",
+        height: 36,
+        width: 44,
+        backgroundColor: shadowColor.dark,
+        border: "2px solid black",
+        borderRadius: 12,
+    };
+});
+
+const IconContainer = styled("span")(() => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    svg: {
+        width: 24,
+        height: 24,
+    },
+}));
+
+const NBIconButton: React.FC<NBIconButtonProps> = ({ loading, color, icon, disabled, ...props }) => {
+    const y = useMotionValue(INITIAL_Y);
+    const ySpring = useSpring(y, { stiffness: 500, damping: 30 });
+
+    const isEnabled = !disabled;
+
+    return (
+        <motion.div
+            style={{
+                position: "relative",
+                width: 44
+            }}
+        >
+            {isEnabled && <BottomLayer color={color} style={{ y: -INITIAL_Y }} />}
+            <motion.div
+                style={{ y: disabled ? 0 : ySpring }}
+                onTapStart={() => {
+                    y.set(0);
+                }}
+                onTapCancel={() => {
+                    y.set(INITIAL_Y);
+                }}
+                onPointerUp={() => {
+                    y.set(INITIAL_Y);
+                    if (isEnabled) {
+                        playSound("BUTTON_CLICK_END");
+                    }
+                }}
+                onPointerDown={() => {
+                    if (isEnabled) {
+                        playSound("BUTTON_CLICK_START");
+                    }
+                }}
+            >
+                <CustomIconButtonBase disableRipple disabled={loading || disabled} color={color} {...props}>
+                    <IconContainer>{icon}</IconContainer>
+                </CustomIconButtonBase>
+            </motion.div>
+        </motion.div>
+    );
+};
+
+export default memo(NBIconButton);
