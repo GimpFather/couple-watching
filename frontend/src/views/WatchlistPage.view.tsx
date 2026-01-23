@@ -7,10 +7,25 @@ import PhoneContainer from "~/components/Layout/PhoneContainer";
 import NBCard from "~/components/NeoBrutalism/NBCard";
 import NBIconButton from "~/components/NeoBrutalism/NBIconButton";
 import NBSearchBox from "~/components/NeoBrutalism/NBSearchBox";
+import NBChip from "~/components/NeoBrutalism/NBChip";
 
 const LibraryPage = () => {
    const [searchTerm, setSearchTerm] = useState("");
    const { data: omdbSearchData } = useGetOMDbSearchForMovies({ title: searchTerm });
+
+   const [selectedChip, setSelectedChip] = useState(['All']);
+
+   const handleChipClick = (chip: string) => {
+      if (isChipSelected(chip)) {
+         setSelectedChip(selectedChip.filter((c) => c !== chip));
+      } else {
+         setSelectedChip([...selectedChip, chip]);
+      }
+   };
+
+   const isChipSelected = (chip: string) => {
+      return selectedChip.includes(chip);
+   };
 
    return (
       <PhoneContainer>
@@ -20,6 +35,11 @@ const LibraryPage = () => {
                <NBIconButton icon={<PlusCircleIcon />} />
             </Stack>
             <NBSearchBox placeholder="Search in watchlist" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+            <Stack direction="row" gap={2} sx={{ overflowX: "auto" }}>
+               <NBChip label="All" onClick={() => handleChipClick("All")} active={selectedChip.includes("All")} />
+               <NBChip label="Movies" onClick={() => handleChipClick("Movies")} active={selectedChip.includes("Movies")} />
+               <NBChip label="Series" onClick={() => handleChipClick("Series")} active={selectedChip.includes("Series")} />
+            </Stack>
             <Stack direction="column" gap={2}>
                {omdbSearchData?.map((movie) => (
                   <NBCard key={movie.imdbID}>

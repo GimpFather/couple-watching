@@ -110,3 +110,9 @@ declare module "@mui/material/IconButton" {
       common: true;
    }
 }
+
+declare module "@mui/material/Chip" {
+   interface ChipOwnProps {
+     disableRipple?: boolean;
+   }
+ }
