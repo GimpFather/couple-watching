@@ -10,7 +10,7 @@ const MovieCard = ({ movie }: { movie: MovieSearch }) => {
     const optimizedPoster = movie.poster.replace("_SX300.", "_SX600.");
 
     return (
-        <NBCard sx={{ padding: '2.5px', height: 500, width: 344 }}>
+        <NBCard disableShadow sx={{ padding: '2.5px', height: 500, width: 344 }}>
             <Stack direction="column" justifyContent='flex-end' gap={1} sx={{
                 padding: '12px',
                 backgroundImage: `linear-gradient(180deg, rgba(12, 12, 12, 0) 0%, #0C0C0C 95%, #0C0C0C 100%), url(${optimizedPoster})`,

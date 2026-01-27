@@ -5,7 +5,8 @@ import Chip, { type ChipProps } from "@mui/material/Chip";
 const CustomChip = styled(Chip, {
     shouldForwardProp: (prop) => prop !== 'active',
 })<{ active: boolean }>(({ theme, active, icon }) => ({
-    border: active ? `0.094rem solid ${theme.palette.common.black}` : 'none',
+    border: '0.094rem solid',
+    borderColor: active ? theme.palette.common.black : theme.palette.accent[50],
     borderRadius: "12px",
     backgroundColor: active ? theme.palette.accent[100] : theme.palette.accent[50],
     color: active ? theme.palette.common.black : theme.palette.accent[500],

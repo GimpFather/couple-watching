@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { PlusCircleIcon } from "@phosphor-icons/react";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useGetOMDbSearchForMovies } from "~/api/hooks/omdb";
 import PhoneContainer from "~/components/Layout/PhoneContainer";
 import NBIconButton from "~/components/NeoBrutalism/NBIconButton";
@@ -11,10 +11,11 @@ import { playSound } from "~/hooks/useSound";
 import MovieCard from "~/components/WatchlistPage/MovieCard";
 import { motion } from "motion/react";
 import { AnimatePresence } from "motion/react";
+import MovieCardSkeleton from "~/components/WatchlistPage/MovieCardSkeleton";
 
 const WatchlistPage = () => {
-   const [searchTerm, setSearchTerm] = useState("Edgerunners");
-   const { data: omdbSearchData } = useGetOMDbSearchForMovies({ title: searchTerm, });
+   const [searchTerm, setSearchTerm] = useState("");
+   const { data: omdbSearchData, isLoading: isLoadingOMDbSearch } = useGetOMDbSearchForMovies({ title: searchTerm, });
 
    const [selectedChip, setSelectedChip] = useState(['All']);
 
@@ -47,20 +48,34 @@ const WatchlistPage = () => {
             </Stack>
          </Stack>
          <Stack direction="column" gap={2}>
-            <AnimatePresence mode="wait" initial={true}>
-               {omdbSearchData?.map((movie, index) => (
+            <AnimatePresence initial={true}>
+               {isLoadingOMDbSearch ? (
+                  <motion.div
+                     initial={{ opacity: 0, }}
+                     animate={{ opacity: 1, }}
+                     exit={{ opacity: 0, }}
+                     transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
+                  >
+                     <MovieCardSkeleton />
+                  </motion.div>
+               ) : (
                   <>
-                     {movie && (
-                        <motion.div
-                           initial={{ opacity: 0, }}
-                           animate={{ opacity: 1, }}
-                           exit={{ opacity: 0, }}
-                           transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1], delay: index * 0.1 }}
-                        >
-                           <MovieCard key={movie.imdbID} movie={movie} />
-                        </motion.div>
-                     )}</>
-               ))}
+                     {omdbSearchData?.map((movie, index) => (
+                        <Fragment key={index}>
+                           {movie && (
+                              <motion.div
+                                 initial={{ opacity: 0, }}
+                                 animate={{ opacity: 1, }}
+                                 exit={{ opacity: 0, }}
+                                 transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1], delay: index * 0.1 }}
+                              >
+                                 <MovieCard movie={movie} />
+                              </motion.div>
+                           )}
+                        </Fragment>
+                     ))}
+                  </>
+               )}
             </AnimatePresence>
          </Stack>
       </PhoneContainer>
