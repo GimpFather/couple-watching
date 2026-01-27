@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { PlusCircleIcon } from "@phosphor-icons/react";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { useGetOMDbSearchForMovies } from "~/api/hooks/omdb";
 import PhoneContainer from "~/components/Layout/PhoneContainer";
 import NBIconButton from "~/components/NeoBrutalism/NBIconButton";
@@ -9,7 +9,6 @@ import NBSearchBox from "~/components/NeoBrutalism/NBSearchBox";
 import NBChip from "~/components/NeoBrutalism/NBChip";
 import { playSound } from "~/hooks/useSound";
 import MovieCard from "~/components/WatchlistPage/MovieCard";
-import { motion } from "motion/react";
 import { AnimatePresence } from "motion/react";
 import MovieCardSkeleton from "~/components/WatchlistPage/MovieCardSkeleton";
 
@@ -50,29 +49,11 @@ const WatchlistPage = () => {
          <Stack direction="column" gap={2}>
             <AnimatePresence initial={true}>
                {isLoadingOMDbSearch ? (
-                  <motion.div
-                     initial={{ opacity: 0, }}
-                     animate={{ opacity: 1, }}
-                     exit={{ opacity: 0, }}
-                     transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
-                  >
-                     <MovieCardSkeleton />
-                  </motion.div>
+                  <MovieCardSkeleton />
                ) : (
                   <>
-                     {omdbSearchData?.map((movie, index) => (
-                        <Fragment key={index}>
-                           {movie && (
-                              <motion.div
-                                 initial={{ opacity: 0, }}
-                                 animate={{ opacity: 1, }}
-                                 exit={{ opacity: 0, }}
-                                 transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1], delay: index * 0.1 }}
-                              >
-                                 <MovieCard movie={movie} />
-                              </motion.div>
-                           )}
-                        </Fragment>
+                     {omdbSearchData?.map((movie, index) => movie && (
+                        <MovieCard key={index} movie={movie} index={index} />
                      ))}
                   </>
                )}
