@@ -11,9 +11,13 @@ import { playSound } from "~/hooks/useSound";
 import MovieCard from "~/components/WatchlistPage/MovieCard";
 import { AnimatePresence } from "motion/react";
 import MovieCardSkeleton from "~/components/WatchlistPage/MovieCardSkeleton";
+import MarkAsWatchedDialog from "~/components/Dialogs/MarkAsWatchedDialog";
+import type { MarkAsWatchedMovie } from "~/components/Dialogs/dialogs.types";
 
 const WatchlistPage = () => {
    const [searchTerm, setSearchTerm] = useState("");
+   const [selectedMovie, setSelectedMovie] = useState<MarkAsWatchedMovie | null>(null);
+
    const { data: omdbSearchData, isLoading: isLoadingOMDbSearch } = useGetOMDbSearchForMovies({ title: searchTerm, });
 
    const [selectedChip, setSelectedChip] = useState(['All']);
@@ -53,12 +57,17 @@ const WatchlistPage = () => {
                ) : (
                   <>
                      {omdbSearchData?.map((movie, index) => movie && (
-                        <MovieCard key={index} movie={movie} index={index} />
+                        <MovieCard key={index} movie={movie} index={index} onMarkAsWatched={(movie: MarkAsWatchedMovie) => setSelectedMovie(movie)} />
                      ))}
                   </>
                )}
             </AnimatePresence>
          </Stack>
+         <MarkAsWatchedDialog
+            open={!!selectedMovie}
+            onClose={() => setSelectedMovie(null)}
+            selectedMovie={selectedMovie}
+         />
       </PhoneContainer>
    );
 };

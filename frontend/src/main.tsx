@@ -21,6 +21,9 @@ import AuthProvider from "~/context/auth/AuthContext";
 import AppRouting from "~/router/AppRouting";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 initSounds(Object.values(SOUNDS));
 
 const queryClient = new QueryClient();
@@ -30,11 +33,13 @@ createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
          <ThemeProvider theme={getTheme("light", palette)}>
             <QueryClientProvider client={queryClient}>
-               <AuthProvider>
-                  <CssBaseline />
-                  <Toaster position="top-center" />
-                  <AppRouting />
-               </AuthProvider>
+               <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <AuthProvider>
+                     <CssBaseline />
+                     <Toaster position="top-center" />
+                     <AppRouting />
+                  </AuthProvider>
+               </LocalizationProvider>
             </QueryClientProvider>
          </ThemeProvider>
       </BrowserRouter>

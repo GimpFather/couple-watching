@@ -6,8 +6,15 @@ import NBButton from "../NeoBrutalism/NBButton";
 import NBIconButton from "../NeoBrutalism/NBIconButton";
 import { DeviceRotateIcon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
+import type { MarkAsWatchedMovie } from "../Dialogs/dialogs.types";
 
-const MovieCard = ({ movie, index }: { movie: MovieSearch, index: number }) => {
+type MovieCardProps = {
+    movie: MovieSearch;
+    index: number;
+    onMarkAsWatched: (movie: MarkAsWatchedMovie) => void;
+};
+
+const MovieCard = ({ movie, index, onMarkAsWatched }: MovieCardProps) => {
     const optimizedPoster = movie.poster.replace("_SX300.", "_SX600.");
 
     return (
@@ -33,7 +40,7 @@ const MovieCard = ({ movie, index }: { movie: MovieSearch, index: number }) => {
                             {movie.title}
                         </Typography>
                         <Stack direction="row" gap={1}>
-                            <NBButton fullWidth>
+                            <NBButton fullWidth onClick={() => onMarkAsWatched({ id: movie.imdbID, title: movie.title })}>
                                 Add to watchlist
                             </NBButton>
                             <NBIconButton color="accent" icon={<DeviceRotateIcon />} onClick={() => { }} />
