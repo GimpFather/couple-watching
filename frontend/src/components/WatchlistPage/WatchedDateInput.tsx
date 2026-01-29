@@ -83,7 +83,7 @@ const WatchedDateInput = ({ selectedDate, setSelectedDate }: WatchedDateInputPro
                                 <Typography variant="headingSmall" sx={{ marginBottom: '4px' }}>{currentMonth.format('MMMM YYYY')}</Typography>
                                 <NBIconButton onClick={() => handleMonthClick('next')} icon={<CaretRightIcon size={20} />} />
                             </Stack>
-                            <Stack direction="column" sx={{ padding: '0px 12px' }}>
+                            <Stack direction="column" justifyContent='center' alignItems='center' sx={{ padding: '0px 12px' }}>
                                 <Stack direction="row">
                                     {dayjs.weekdaysShort().map(d => (
                                         <Typography variant="headingExtraSmall" key={d} sx={{ width: DAY_SIZE, height: HEADER_HEIGHT, display: 'flex', alignItems: 'center', justifyContent: 'center', color: palette.accent[600], fontWeight: 700, textTransform: 'uppercase' }}>{d}</Typography>
