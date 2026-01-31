@@ -63,7 +63,7 @@ const WatchedDateInput = ({ selectedDate, setSelectedDate }: WatchedDateInputPro
 
     return (
         <>
-            <Box sx={{ border: `1.5px solid ${palette.common.black}`, padding: '11.5px 0px', borderRadius: '16px' }}>
+            <Box sx={{ border: `1.5px solid ${palette.common.black}`, padding: '11.5px 0px', borderRadius: '16px', backgroundColor: palette.accent[50] }}>
                 <Stack direction="row" alignItems="center" justifyContent='space-between' sx={{ padding: '0px 12px' }} onClick={handleExpend}>
                     <Stack direction="row" alignItems="center" gap={1}>
                         <CalendarCheckIcon size={20} />
