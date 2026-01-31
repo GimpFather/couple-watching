@@ -50,7 +50,7 @@ const WatchlistPage = () => {
                <NBChip label="Series" onClick={() => handleChipClick("Series")} active={selectedChip.includes("Series")} />
             </Stack>
          </Stack>
-         <Stack direction="column" gap={2}>
+         <Stack direction="column" gap={2} alignItems='center'>
             <AnimatePresence initial={true}>
                {isLoadingOMDbSearch ? (
                   <MovieCardSkeleton />

@@ -39,7 +39,6 @@ const WatchedDateInput = ({ selectedDate, setSelectedDate }: WatchedDateInputPro
         setIsExpanded(prev => !prev);
     };
 
-
     const handleDateClick = (date: dayjs.Dayjs) => {
         setSelectedDate(date);
         setIsExpanded(prev => !prev);
