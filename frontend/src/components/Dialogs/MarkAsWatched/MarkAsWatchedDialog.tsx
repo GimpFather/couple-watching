@@ -56,14 +56,15 @@ const MarkAsWatchedDialog = ({
 						setCurrentStep(0);
 					},
 				},
-			}
+			},
 		},
 		{
 			content: (
 				<Stack direction="column" gap={2}>
 					<Typography variant="headingLarge">{title}</Typography>
 					<Typography variant="bodyMedium" sx={{ fontStyle: "italic" }}>
-						Let’s add some tags together! They’re optional, but with them you’ll get even cooler stats!
+						Let’s add some tags together! They’re optional, but with them you’ll
+						get even cooler stats!
 					</Typography>
 					<WatchedTags />
 					<WatchedNotes />
@@ -81,7 +82,7 @@ const MarkAsWatchedDialog = ({
 					label: "Go back",
 					onClick: () => setCurrentStep(currentStep - 1),
 				},
-			}
+			},
 		},
 	];
 
@@ -92,9 +93,9 @@ const MarkAsWatchedDialog = ({
 					{steps[currentStep] && (
 						<motion.div
 							key={currentStep}
-							initial={{ opacity: 0, }}
-							animate={{ opacity: 1, }}
-							exit={{ opacity: 0, }}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
 							transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
 						>
 							{steps[currentStep].content}
@@ -102,7 +103,11 @@ const MarkAsWatchedDialog = ({
 					)}
 				</AnimatePresence>
 				<Stack direction="row" gap={1} sx={{ width: "100%" }}>
-					<NBButton color="accent" onClick={steps[currentStep].actions.back.onClick} fullWidth>
+					<NBButton
+						color="accent"
+						onClick={steps[currentStep].actions.back.onClick}
+						fullWidth
+					>
 						{steps[currentStep].actions.back.label}
 					</NBButton>
 					<NBButton onClick={steps[currentStep].actions.next.onClick} fullWidth>
