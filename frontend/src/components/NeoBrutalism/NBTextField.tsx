@@ -4,67 +4,75 @@ import { styled } from "@mui/material/styles";
 import InputBase, { type InputBaseProps } from "@mui/material/InputBase";
 
 const CustomTextField = styled(InputBase)(({ theme }) => ({
-   padding: "9.5px 12px",
-   border: `0.094rem solid ${theme.palette.common.black}`,
-   borderRadius: 12,
-   backgroundColor: theme.palette.accent[50],
-   color: theme.palette.common.black,
-   "& .MuiInputBase-input": {
-      ...theme.typography.emphasizedBodyMedium,
-      padding: 0,
-   },
-   "& .MuiInputBase-input::placeholder": {
-      opacity: 1,
-      color: theme.palette.accent[500],
-   },
+	padding: "9.5px 12px",
+	border: `0.094rem solid ${theme.palette.common.black}`,
+	borderRadius: 12,
+	backgroundColor: theme.palette.accent[50],
+	color: theme.palette.common.black,
+	"& .MuiInputBase-input": {
+		...theme.typography.emphasizedBodyMedium,
+		padding: 0,
+	},
+	"& .MuiInputBase-input::placeholder": {
+		opacity: 1,
+		color: theme.palette.accent[500],
+	},
 }));
 
-const CustomInputAdornment = styled(InputAdornment)(({ theme, position, onClick }) => ({
-   color: theme.palette.common.black,
-   ...(position === "start" && {
-      marginLeft: 0,
-   }),
-   ...(position === "end" && {
-      marginRight: 0,
-   }),
-   ...(onClick && {
-      cursor: "pointer",
-   }),
-}));
+const CustomInputAdornment = styled(InputAdornment)(
+	({ theme, position, onClick }) => ({
+		color: theme.palette.common.black,
+		...(position === "start" && {
+			marginLeft: 0,
+		}),
+		...(position === "end" && {
+			marginRight: 0,
+		}),
+		...(onClick && {
+			cursor: "pointer",
+		}),
+	}),
+);
 
 type Adornment = {
-   position: "start" | "end";
-   icon: React.ReactNode;
-   onClick?: () => void;
+	position: "start" | "end";
+	icon: React.ReactNode;
+	onClick?: () => void;
 };
 
 type NBTextFieldProps = InputBaseProps &
-   InputBaseProps & {
-      adornment?: Adornment;
-   };
+	InputBaseProps & {
+		adornment?: Adornment;
+	};
 
 const NBTextField = ({ adornment, ...props }: NBTextFieldProps) => {
-   return (
-      <CustomTextField
-         {...(adornment && {
-            ...(adornment.position === "start" && {
-               startAdornment: (
-                  <CustomInputAdornment position="start" {...(adornment.onClick && { onClick: adornment.onClick })}>
-                     {adornment.icon}
-                  </CustomInputAdornment>
-               ),
-            }),
-            ...(adornment.position === "end" && {
-               endAdornment: (
-                  <CustomInputAdornment position="end" {...(adornment.onClick && { onClick: adornment.onClick })}>
-                     {adornment.icon}
-                  </CustomInputAdornment>
-               ),
-            }),
-         })}
-         {...props}
-      />
-   );
+	return (
+		<CustomTextField
+			{...(adornment && {
+				...(adornment.position === "start" && {
+					startAdornment: (
+						<CustomInputAdornment
+							position="start"
+							{...(adornment.onClick && { onClick: adornment.onClick })}
+						>
+							{adornment.icon}
+						</CustomInputAdornment>
+					),
+				}),
+				...(adornment.position === "end" && {
+					endAdornment: (
+						<CustomInputAdornment
+							position="end"
+							{...(adornment.onClick && { onClick: adornment.onClick })}
+						>
+							{adornment.icon}
+						</CustomInputAdornment>
+					),
+				}),
+			})}
+			{...props}
+		/>
+	);
 };
 
 export default memo(NBTextField);

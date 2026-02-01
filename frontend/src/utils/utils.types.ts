@@ -1,4 +1,4 @@
 export interface LaunchConfettiOptions {
-   duration?: number;
-   colors?: string[];
+	duration?: number;
+	colors?: string[];
 }

@@ -11,94 +11,139 @@ import AvatarsDuo from "~/components/Avatar/AvatarsDuoPairing";
 import LoadingPage from "~/components/Layout/LoadingPage";
 import { useState, useEffect } from "react";
 import PersonalCodeBlock from "~/components/Profile/PersonalCodeBlock";
-import { useHandleJoinPairByCode, useGetMyPairWithProfiles } from "~/api/hooks/pairs";
+import {
+	useHandleJoinPairByCode,
+	useGetMyPairWithProfiles,
+} from "~/api/hooks/pairs";
 import showToast from "~/components/Toasts/showToast";
 import MakePairByYourselfDialog from "~/components/Dialogs/MakePairByYourselfDialog";
 
 const PairingPage = () => {
-   const { id: authId } = useRequiredAuth();
-   const { data: profileData, isLoading: isLoadingProfileData } = useGetProfileData(authId);
-   const { mutate: mutateHandleJoinPairByCode } = useHandleJoinPairByCode();
-   const { data: pairData } = useGetMyPairWithProfiles(authId);
+	const { id: authId } = useRequiredAuth();
+	const { data: profileData, isLoading: isLoadingProfileData } =
+		useGetProfileData(authId);
+	const { mutate: mutateHandleJoinPairByCode } = useHandleJoinPairByCode();
+	const { data: pairData } = useGetMyPairWithProfiles(authId);
 
-   const handleNavigationTransition = useNavigationTransition();
+	const handleNavigationTransition = useNavigationTransition();
 
-   const [partnerCode, setPartnerCode] = useState("");
-   const [openPairByYourselfDialog, setOpenPairByYourselfDialog] = useState(false);
+	const [partnerCode, setPartnerCode] = useState("");
+	const [openPairByYourselfDialog, setOpenPairByYourselfDialog] =
+		useState(false);
 
-   useEffect(() => {
-      if (pairData) {
-         handleNavigationTransition("/customization/success");
-      }
-   }, [pairData, handleNavigationTransition]);
+	useEffect(() => {
+		if (pairData) {
+			handleNavigationTransition("/customization/success");
+		}
+	}, [pairData, handleNavigationTransition]);
 
-   useEffect(() => {
-      if (!isLoadingProfileData && (!profileData?.avatarSeed || !profileData?.username || !profileData?.personalCode)) {
-         handleNavigationTransition("/customization/profile");
-      }
-   }, [profileData, isLoadingProfileData, handleNavigationTransition]);
+	useEffect(() => {
+		if (
+			!isLoadingProfileData &&
+			(!profileData?.avatarSeed ||
+				!profileData?.username ||
+				!profileData?.personalCode)
+		) {
+			handleNavigationTransition("/customization/profile");
+		}
+	}, [profileData, isLoadingProfileData, handleNavigationTransition]);
 
-   const handleJoinPair = async (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-      mutateHandleJoinPairByCode({ partnerCode, myProfileId: profileData?.id ?? "" }, {
-         onError: (error) => {
-            showToast({
-               title: "🤔 Something went wrong.",
-               color: "danger",
-               description: error.message,
-            });
-         },
-      });
-   };
+	const handleJoinPair = async (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+		mutateHandleJoinPairByCode(
+			{ partnerCode, myProfileId: profileData?.id ?? "" },
+			{
+				onError: (error) => {
+					showToast({
+						title: "🤔 Something went wrong.",
+						color: "danger",
+						description: error.message,
+					});
+				},
+			},
+		);
+	};
 
-   if (isLoadingProfileData) {
-      return <LoadingPage />;
-   }
+	if (isLoadingProfileData) {
+		return <LoadingPage />;
+	}
 
-   if (!profileData?.avatarSeed || !profileData?.username || !profileData?.personalCode) {
-      return null;
-   }
+	if (
+		!profileData?.avatarSeed ||
+		!profileData?.username ||
+		!profileData?.personalCode
+	) {
+		return null;
+	}
 
-   return (
-      <>
-         <PhoneContainer>
-            <Stack direction="column" gap={2} alignItems="center" sx={{ marginTop: "64px" }}>
-               <AvatarsDuo avatarSeedOne={profileData.avatarSeed} />
-               <Stack direction="column" gap={1} alignItems="center" sx={{ marginBottom: "24px", textAlign: "center" }}>
-                  <Stack>
-                     <Typography variant="headingLarge">You look lonely</Typography>
-                     <Typography variant="headingLarge">{`${profileData.username}... Pair up!`}</Typography>
-                  </Stack>
-                  <Stack>
-                     <Typography variant="bodyMedium">Send your personal code to your partner</Typography>
-                     <Typography variant="bodyMedium">or enter your partner’s personal code down below</Typography>
-                  </Stack>
-               </Stack>
-               <PersonalCodeBlock personalCode={profileData.personalCode} />
-               <Stack sx={{ width: "100%", marginBottom: "24px" }}>
-                  <Typography variant="emphasizedBodyMedium">Partner's personal code</Typography>
-                  <NBTextField
-                     placeholder="Enter your partner's personal code"
-                     value={partnerCode}
-                     onChange={(event) => setPartnerCode(event.target.value)}
-                     fullWidth
-                  />
-               </Stack>
-            </Stack>
-         </PhoneContainer>
-         <ActionsBlock>
-            <Stack gap="12px">
-               <NBButton onClick={(event) => handleJoinPair(event)} disabled={!partnerCode} fullWidth>
-                  Continue
-               </NBButton>
-               <NBButton color="accent" onClick={() => setOpenPairByYourselfDialog(true)} fullWidth>
-                  Skip for now
-               </NBButton>
-            </Stack>
-         </ActionsBlock>
-         <MakePairByYourselfDialog open={openPairByYourselfDialog} onClose={() => setOpenPairByYourselfDialog(false)} ownerProfileId={profileData.id} />
-      </>
-   );
+	return (
+		<>
+			<PhoneContainer>
+				<Stack
+					direction="column"
+					gap={2}
+					alignItems="center"
+					sx={{ marginTop: "64px" }}
+				>
+					<AvatarsDuo avatarSeedOne={profileData.avatarSeed} />
+					<Stack
+						direction="column"
+						gap={1}
+						alignItems="center"
+						sx={{ marginBottom: "24px", textAlign: "center" }}
+					>
+						<Stack>
+							<Typography variant="headingLarge">You look lonely</Typography>
+							<Typography variant="headingLarge">{`${profileData.username}... Pair up!`}</Typography>
+						</Stack>
+						<Stack>
+							<Typography variant="bodyMedium">
+								Send your personal code to your partner
+							</Typography>
+							<Typography variant="bodyMedium">
+								or enter your partner’s personal code down below
+							</Typography>
+						</Stack>
+					</Stack>
+					<PersonalCodeBlock personalCode={profileData.personalCode} />
+					<Stack sx={{ width: "100%", marginBottom: "24px" }}>
+						<Typography variant="emphasizedBodyMedium">
+							Partner's personal code
+						</Typography>
+						<NBTextField
+							placeholder="Enter your partner's personal code"
+							value={partnerCode}
+							onChange={(event) => setPartnerCode(event.target.value)}
+							fullWidth
+						/>
+					</Stack>
+				</Stack>
+			</PhoneContainer>
+			<ActionsBlock>
+				<Stack gap="12px">
+					<NBButton
+						onClick={(event) => handleJoinPair(event)}
+						disabled={!partnerCode}
+						fullWidth
+					>
+						Continue
+					</NBButton>
+					<NBButton
+						color="accent"
+						onClick={() => setOpenPairByYourselfDialog(true)}
+						fullWidth
+					>
+						Skip for now
+					</NBButton>
+				</Stack>
+			</ActionsBlock>
+			<MakePairByYourselfDialog
+				open={openPairByYourselfDialog}
+				onClose={() => setOpenPairByYourselfDialog(false)}
+				ownerProfileId={profileData.id}
+			/>
+		</>
+	);
 };
 
 export default PairingPage;

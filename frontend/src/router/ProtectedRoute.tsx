@@ -4,21 +4,23 @@ import LoadingPage from "~/components/Layout/LoadingPage";
 import { useAuth } from "~/context/auth/useAuth";
 
 interface ProtectedRouteProps {
-   redirectTo?: string;
+	redirectTo?: string;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ redirectTo = "/" }) => {
-   const { user, loading } = useAuth();
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+	redirectTo = "/",
+}) => {
+	const { user, loading } = useAuth();
 
-   if (loading) {
-      return <LoadingPage />;
-   }
+	if (loading) {
+		return <LoadingPage />;
+	}
 
-   if (!user) {
-      return <Navigate to={redirectTo} replace />;
-   }
+	if (!user) {
+		return <Navigate to={redirectTo} replace />;
+	}
 
-   return <Outlet />;
+	return <Outlet />;
 };
 
 export default ProtectedRoute;

@@ -5,18 +5,20 @@ import NBCard from "~/components/NeoBrutalism/NBCard";
 import type { ToastProps } from "~/components/Toasts/toasts.types";
 
 const Toast = (props: ToastProps) => {
-   const { title, description, color = "primary" } = props;
+	const { title, description, color = "primary" } = props;
 
-   return (
-      <NBCard sx={{ padding: "8px" }}>
-         <Stack direction="column" gap="4px">
-            <Typography variant="headingMedium" color={color}>
-               {title}
-            </Typography>
-            {description && <Typography variant="bodyMedium">{description}</Typography>}
-         </Stack>
-      </NBCard>
-   );
+	return (
+		<NBCard sx={{ padding: "8px" }}>
+			<Stack direction="column" gap="4px">
+				<Typography variant="headingMedium" color={color}>
+					{title}
+				</Typography>
+				{description && (
+					<Typography variant="bodyMedium">{description}</Typography>
+				)}
+			</Stack>
+		</NBCard>
+	);
 };
 
 export default memo(Toast);

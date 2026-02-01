@@ -26,17 +26,17 @@ initSounds(Object.values(SOUNDS));
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
-   <StrictMode>
-      <BrowserRouter>
-         <ThemeProvider theme={getTheme("light", palette)}>
-            <QueryClientProvider client={queryClient}>
-               <AuthProvider>
-                  <CssBaseline />
-                  <Toaster position="top-center" />
-                  <AppRouting />
-               </AuthProvider>
-            </QueryClientProvider>
-         </ThemeProvider>
-      </BrowserRouter>
-   </StrictMode >
+	<StrictMode>
+		<BrowserRouter>
+			<ThemeProvider theme={getTheme("light", palette)}>
+				<QueryClientProvider client={queryClient}>
+					<AuthProvider>
+						<CssBaseline />
+						<Toaster position="top-center" />
+						<AppRouting />
+					</AuthProvider>
+				</QueryClientProvider>
+			</ThemeProvider>
+		</BrowserRouter>
+	</StrictMode>,
 );

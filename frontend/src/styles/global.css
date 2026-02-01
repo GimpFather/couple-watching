@@ -4,18 +4,27 @@ html {
 }
 ::-webkit-scrollbar {
 	width: 0;
-	background: transparent; 
+	background: transparent;
 }
 
 * {
-    scrollbar-width: none; 
-  }
+	scrollbar-width: none;
+}
 
 .overwrite-toolbar-icon {
-   path:first-child {
-	  opacity: 1;
-   }
-   path:last-child {
-      fill: #292321;
-   }
-}  
+	path:first-child {
+		opacity: 1;
+	}
+	path:last-child {
+		fill: #292321;
+	}
+}
+
+.overwrite-star-icon {
+	path:first-child {
+		opacity: 1;
+	}
+	path:last-child {
+		fill: #292321;
+	}
+}

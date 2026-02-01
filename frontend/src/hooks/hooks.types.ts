@@ -1,16 +1,16 @@
 export type Sound = {
-   name: SoundName;
-   url: string;
-   defaultVolume?: number;
+	name: SoundName;
+	url: string;
+	defaultVolume?: number;
 };
 
 export type SoundName =
-   | "BUTTON_CLICK_START"
-   | "BUTTON_CLICK_END"
-   | "TRANSITION_1"
-   | "NOTIFICATION_BUBBLE_POP"
-   | "MEME_ALERT_WHAT"
-   | "MEME_ALERT_SHINE"
-   | "MEME_ALERT_SHINE_SOFT"
-   | "MEME_ALERT_VIOLIN_SAD"
-   | "MEME_ALERT_VIOLIN_HAPPY";
+	| "BUTTON_CLICK_START"
+	| "BUTTON_CLICK_END"
+	| "TRANSITION_1"
+	| "NOTIFICATION_BUBBLE_POP"
+	| "MEME_ALERT_WHAT"
+	| "MEME_ALERT_SHINE"
+	| "MEME_ALERT_SHINE_SOFT"
+	| "MEME_ALERT_VIOLIN_SAD"
+	| "MEME_ALERT_VIOLIN_HAPPY";

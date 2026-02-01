@@ -1,14 +1,19 @@
 {
-    "theme_color": "#237247",
-    "background_color": "#E4E0DB",
-    "icons": [
-       { "purpose": "any", "sizes": "512x512", "src": "icon512.png", "type": "image/png" }
-    ],
-    "orientation": "any",
-    "display": "standalone",
-    "lang": "en",
-    "name": "Couple's Ultimate Manager",
-    "short_name": "Couple Watching",
-    "start_url": ".",
-    "description": "Couple’s Ultimate Manager: the ultimate tool for duos who do! 🎬💑 Make movie watchlists, track places you wanna visit, and keep tabs on all your shared dreams and schemes. Basically, it’s your relationship’s new BFF. 👫✨"
- }
+	"theme_color": "#237247",
+	"background_color": "#E4E0DB",
+	"icons": [
+		{
+			"purpose": "any",
+			"sizes": "512x512",
+			"src": "icon512.png",
+			"type": "image/png"
+		}
+	],
+	"orientation": "any",
+	"display": "standalone",
+	"lang": "en",
+	"name": "Couple's Ultimate Manager",
+	"short_name": "Couple Watching",
+	"start_url": ".",
+	"description": "Couple’s Ultimate Manager: the ultimate tool for duos who do! 🎬💑 Make movie watchlists, track places you wanna visit, and keep tabs on all your shared dreams and schemes. Basically, it’s your relationship’s new BFF. 👫✨"
+}

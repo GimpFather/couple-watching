@@ -10,41 +10,41 @@ import { useGetMyPairWithProfiles } from "~/api/hooks/pairs";
 import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 
 const HomePage = () => {
-   const { logout } = useAuth();
-   const { id: authId } = useRequiredAuth();
-   const { data: pairData } = useGetMyPairWithProfiles(authId);
+	const { logout } = useAuth();
+	const { id: authId } = useRequiredAuth();
+	const { data: pairData } = useGetMyPairWithProfiles(authId);
 
-   const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-      await logout();
-   };
+	const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+		await logout();
+	};
 
-   const handleYouDidIt = () => {
-      showToast({
-         title: "You did it!",
-         description: "You went through the authentication process successfully!",
-         color: "success",
-         sound: "MEME_ALERT_SHINE",
-      });
-   };
+	const handleYouDidIt = () => {
+		showToast({
+			title: "You did it!",
+			description: "You went through the authentication process successfully!",
+			color: "success",
+			sound: "MEME_ALERT_SHINE",
+		});
+	};
 
-   return (
-      <PhoneContainer>
-         <Stack direction="column" gap={2}>
-            <Typography variant="headingExtraLarge">Home</Typography>
-            <Typography variant="bodyExtraLarge">{`Welcome, ${pairData?.myUsername ?? "Guest"}`}</Typography>
-            <Divider />
-            <Stack direction="row" gap={2}>
-               <NBButton icon={<MaskHappyIcon />} onClick={() => handleYouDidIt()}>
-                  You did it!
-               </NBButton>
-               <NBButton onClick={(event) => handleLogout(event)} color="danger">
-                  Logout
-               </NBButton>
-            </Stack>
-         </Stack>
-      </PhoneContainer>
-   );
+	return (
+		<PhoneContainer>
+			<Stack direction="column" gap={2}>
+				<Typography variant="headingExtraLarge">Home</Typography>
+				<Typography variant="bodyExtraLarge">{`Welcome, ${pairData?.myUsername ?? "Guest"}`}</Typography>
+				<Divider />
+				<Stack direction="row" gap={2}>
+					<NBButton icon={<MaskHappyIcon />} onClick={() => handleYouDidIt()}>
+						You did it!
+					</NBButton>
+					<NBButton onClick={(event) => handleLogout(event)} color="danger">
+						Logout
+					</NBButton>
+				</Stack>
+			</Stack>
+		</PhoneContainer>
+	);
 };
 
 export default HomePage;

@@ -4,18 +4,19 @@ import LoadingPage from "~/components/Layout/LoadingPage";
 import { useRequiredAuth } from "~/context/auth/useRequiredAuth";
 
 const PairRoute = () => {
-    const { id: authId } = useRequiredAuth();
-    const { data: pairData, isLoading: isLoadingPairData } = useGetMyPairWithProfiles(authId);
+	const { id: authId } = useRequiredAuth();
+	const { data: pairData, isLoading: isLoadingPairData } =
+		useGetMyPairWithProfiles(authId);
 
-    if (isLoadingPairData) {
-        return <LoadingPage />;
-    }
+	if (isLoadingPairData) {
+		return <LoadingPage />;
+	}
 
-    if (pairData === null) {
-        return <Navigate to="/customization/pairing" replace />;
-    }
+	if (pairData === null) {
+		return <Navigate to="/customization/pairing" replace />;
+	}
 
-    return <Outlet />;
+	return <Outlet />;
 };
 
 export default PairRoute;

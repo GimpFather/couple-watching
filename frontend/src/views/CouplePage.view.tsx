@@ -14,64 +14,72 @@ import showToast from "~/components/Toasts/showToast";
 // Dont mind redundant code, it's for testing purposes.
 
 const CouplePage = () => {
-   const { id: authId } = useRequiredAuth();
-   const { data: myPairData } = useGetMyPairWithProfiles(authId);
+	const { id: authId } = useRequiredAuth();
+	const { data: myPairData } = useGetMyPairWithProfiles(authId);
 
-   const isPaired = !!myPairData;
+	const isPaired = !!myPairData;
 
-   const [isCustomizeAccountDialogOpen, setIsCustomizeAccountDialogOpen] = useState(false);
+	const [isCustomizeAccountDialogOpen, setIsCustomizeAccountDialogOpen] =
+		useState(false);
 
-   const handleCustomizeAccountButton = () => {
-      setIsCustomizeAccountDialogOpen((prev) => !prev);
-   };
+	const handleCustomizeAccountButton = () => {
+		setIsCustomizeAccountDialogOpen((prev) => !prev);
+	};
 
-   const handleCheckPair = () => {
-      if (myPairData) {
-         console.log(myPairData);
-         const partnerNickname = myPairData.partnerUsername;
-         showToast({
-            title: "🎉 Pair found!",
-            color: "success",
-            description: `You are paired with ${partnerNickname}. More information about your pair can be found in console.`,
-         });
-      }
-   };
+	const handleCheckPair = () => {
+		if (myPairData) {
+			console.log(myPairData);
+			const partnerNickname = myPairData.partnerUsername;
+			showToast({
+				title: "🎉 Pair found!",
+				color: "success",
+				description: `You are paired with ${partnerNickname}. More information about your pair can be found in console.`,
+			});
+		}
+	};
 
-   return (
-      <PhoneContainer>
-         <Stack direction="column" gap={2}>
-            <Typography variant="headingExtraLarge">Couple</Typography>
-            <Typography variant="bodyExtraLarge">It's time to set up your couple! 💑</Typography>
-            <Divider />
-            <Typography variant="bodyMedium">Start with customizing your username . . .</Typography>
-            <NBButton onClick={() => handleCustomizeAccountButton()}>Customize my account details</NBButton>
-            <Divider />
-            <Typography variant="bodyMedium">
-               If everything is set up correctly, buttons below will be enabled, and you can start toodling around the
-               app or delete your pair. Don't worry, you can always set up your couple again. This is purely for testing
-               purposes.
-            </Typography>
-            <Stack direction="row" gap={2}>
-               <NBButton
-                  color="success"
-                  disabled={!isPaired}
-                  onClick={() => handleCheckPair()}
-                  icon={<SealCheckIcon />}
-               >
-                  Check
-               </NBButton>
-               {/* {TODO: There should be a special function for deleting pair - with cascade delete of reviews} */}
-               <NBButton color="danger" disabled={true}>
-                  Delete pair
-               </NBButton>
-            </Stack>
-         </Stack>
-         <CustomizeAcountDialog
-            open={isCustomizeAccountDialogOpen}
-            onClose={() => setIsCustomizeAccountDialogOpen(false)}
-            authId={authId}
-         />
-      </PhoneContainer>
-   );
+	return (
+		<PhoneContainer>
+			<Stack direction="column" gap={2}>
+				<Typography variant="headingExtraLarge">Couple</Typography>
+				<Typography variant="bodyExtraLarge">
+					It's time to set up your couple! 💑
+				</Typography>
+				<Divider />
+				<Typography variant="bodyMedium">
+					Start with customizing your username . . .
+				</Typography>
+				<NBButton onClick={() => handleCustomizeAccountButton()}>
+					Customize my account details
+				</NBButton>
+				<Divider />
+				<Typography variant="bodyMedium">
+					If everything is set up correctly, buttons below will be enabled, and
+					you can start toodling around the app or delete your pair. Don't
+					worry, you can always set up your couple again. This is purely for
+					testing purposes.
+				</Typography>
+				<Stack direction="row" gap={2}>
+					<NBButton
+						color="success"
+						disabled={!isPaired}
+						onClick={() => handleCheckPair()}
+						icon={<SealCheckIcon />}
+					>
+						Check
+					</NBButton>
+					{/* {TODO: There should be a special function for deleting pair - with cascade delete of reviews} */}
+					<NBButton color="danger" disabled={true}>
+						Delete pair
+					</NBButton>
+				</Stack>
+			</Stack>
+			<CustomizeAcountDialog
+				open={isCustomizeAccountDialogOpen}
+				onClose={() => setIsCustomizeAccountDialogOpen(false)}
+				authId={authId}
+			/>
+		</PhoneContainer>
+	);
 };
 export default CouplePage;

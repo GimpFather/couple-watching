@@ -9,25 +9,29 @@ import messages from "~/locales/en.json";
 import { useNavigationTransition } from "~/hooks/useNavigationTransition";
 
 const AuthRegisterPage = () => {
-   const handleNavigationTransition = useNavigationTransition();
-   return (
-      <PhoneContainer>
-         <Stack direction="row" alignItems="center" sx={{ marginBottom: "28px" }}>
-            <ArrowLeftIcon cursor="pointer" size={18} onClick={() => handleNavigationTransition("/")} />
-            <Typography variant="headingSmall" sx={{ margin: "0 auto" }}>
-               {messages["AUTH.REGISTER.TITLE"]}
-            </Typography>
-         </Stack>
-         <Stack gap="12px" sx={{ marginBottom: "20px" }}>
-            <OAuthStack />
-            <Divider sx={{ color: "accent.200" }}>
-               <Typography variant="bodyMedium" color="accent.200">
-                  {messages["COMMON.OR"]}
-               </Typography>
-            </Divider>
-            <AuthForm type="register" />
-         </Stack>
-      </PhoneContainer>
-   );
+	const handleNavigationTransition = useNavigationTransition();
+	return (
+		<PhoneContainer>
+			<Stack direction="row" alignItems="center" sx={{ marginBottom: "28px" }}>
+				<ArrowLeftIcon
+					cursor="pointer"
+					size={18}
+					onClick={() => handleNavigationTransition("/")}
+				/>
+				<Typography variant="headingSmall" sx={{ margin: "0 auto" }}>
+					{messages["AUTH.REGISTER.TITLE"]}
+				</Typography>
+			</Stack>
+			<Stack gap="12px" sx={{ marginBottom: "20px" }}>
+				<OAuthStack />
+				<Divider sx={{ color: "accent.200" }}>
+					<Typography variant="bodyMedium" color="accent.200">
+						{messages["COMMON.OR"]}
+					</Typography>
+				</Divider>
+				<AuthForm type="register" />
+			</Stack>
+		</PhoneContainer>
+	);
 };
 export default AuthRegisterPage;
